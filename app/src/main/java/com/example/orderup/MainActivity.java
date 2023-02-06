@@ -1,6 +1,7 @@
 package com.example.orderup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
-
-                showToast(email);
-                showToast(password);
+                Log.d("this","email " + email + "password " + password);
+                //showToast(email);
+                //showToast(password);
             }
         });
 
