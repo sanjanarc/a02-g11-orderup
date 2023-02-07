@@ -31,12 +31,16 @@ public class UserAccount extends AppCompatActivity {
 
     private int accountBalance;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.user_account);
+        setContentView(R.layout.user_account);
 
         this.email = email;
         this.password = password;
+
+        Log.d("this","email = " + email);
+        Log.d("this","password = " + password);
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);

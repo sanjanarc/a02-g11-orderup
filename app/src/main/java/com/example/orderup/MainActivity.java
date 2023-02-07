@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private String creditCardNum;
     private int accountBalance;
 
-    UserAccount user;
+    //UserAccount user;
 
 
     @Override
