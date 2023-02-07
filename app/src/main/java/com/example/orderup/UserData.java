@@ -12,12 +12,13 @@ public class UserData {
     private String expiry;
     private String address;
 
+    private float accountBalance;
 
     UserData(String email, String password) {
 
         this.email = email;
         this.password = password;
-
+        accountBalance = 0;
     }
 
     void setInfo(String firstname, String lastname, String creditcard,
@@ -40,4 +41,13 @@ public class UserData {
         Log.d("this","expiry " + expiry);
         Log.d("this","address " + address);
     }
+
+    float getBalance() {
+        return this.accountBalance;
+    }
+
+    void addBalance(float amount) {
+        this.accountBalance += amount;
+    }
+
 }

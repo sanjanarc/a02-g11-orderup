@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +30,9 @@ public class UserAccount extends AppCompatActivity {
 
     Button submitButton2;
 
-    private int accountBalance;
+    Button submitButton3;
+
+    //private float accountBalance;
 
     UserData user;
 
@@ -39,11 +42,12 @@ public class UserAccount extends AppCompatActivity {
         setContentView(R.layout.user_account);
 
         Intent intent = getIntent();
-
         this.email = intent.getStringExtra("email");
         this.password = intent.getStringExtra("password");
-
         user = new UserData(this.email,this.password);
+
+        TextView textView = (TextView) findViewById(R.id.accountBalance);
+        textView.setText("$" + user.getBalance());
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
@@ -69,6 +73,28 @@ public class UserAccount extends AppCompatActivity {
                 //showToast(password);
             }
         });
+
+        submitButton3 = (Button) findViewById(R.id.submitButton3);
+        submitButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int rand = (int)Math.floor(Math.random() * (5) + 1);
+                switch(rand) {
+                    case 1: user.addBalance(5.00F);
+                        break;
+                    case 2: user.addBalance(10.00F);
+                        break;
+                    case 3: user.addBalance(20.00F);
+                        break;
+                    case 4: user.addBalance(50.00F);
+                        break;
+                    case 5: user.addBalance(100.00F);
+                        break;
+                }
+                textView.setText("$" + user.getBalance());
+            }
+        });
+
 
     };
 
