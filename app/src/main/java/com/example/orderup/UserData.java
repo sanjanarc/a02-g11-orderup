@@ -37,10 +37,10 @@ public class UserData {
         Log.d("this","firstname = " + firstname);
         Log.d("this","lastname = " + lastname);
         Log.d("this","creditcard = " + creditcard);
-        Log.d("this","csv " + csv);
-        Log.d("this","expiry " + expiry);
-        Log.d("this","address " + address);
-        Log.d("this","account balance: $" + getBalance());
+        Log.d("this","csv = " + csv);
+        Log.d("this","expiry = " + expiry);
+        Log.d("this","address = " + address);
+        Log.d("this","account balance = $" + getBalance());
     }
 
     float getBalance() {
