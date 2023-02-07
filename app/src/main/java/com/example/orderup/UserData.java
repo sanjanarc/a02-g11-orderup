@@ -40,6 +40,7 @@ public class UserData {
         Log.d("this","csv " + csv);
         Log.d("this","expiry " + expiry);
         Log.d("this","address " + address);
+        Log.d("this","account balance: $" + getBalance());
     }
 
     float getBalance() {
