@@ -1,5 +1,6 @@
 package com.example.orderup;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ public class UserAccount extends AppCompatActivity {
     private String csv;
     private String expiry;
     private String address;
+    private String email;
+    private String password;
 
     EditText firstNameInput;
     EditText lastNameInput;
@@ -28,8 +31,12 @@ public class UserAccount extends AppCompatActivity {
 
     private int accountBalance;
 
-    UserAccount() {
-        setContentView(R.layout.user_account);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setContentView(R.layout.user_account);
+
+        this.email = email;
+        this.password = password;
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
@@ -55,12 +62,12 @@ public class UserAccount extends AppCompatActivity {
                 Log.d("this","csv " + csv);
                 Log.d("this","expiry " + expiry);
                 Log.d("this","address " + address);
-                setContentView(R.layout.user_account);
                 //showToast(email);
                 //showToast(password);
             }
         });
-   };
+
+    };
 
 
 }

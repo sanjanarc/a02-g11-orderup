@@ -1,5 +1,6 @@
 package com.example.orderup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private String creditCardNum;
     private int accountBalance;
 
+    UserAccount user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +43,20 @@ public class MainActivity extends AppCompatActivity {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
                 Log.d("this","email " + email + "password " + password);
+                openUserAccount();
+                //user = new UserAccount(email,password);
+
 
                 //showToast(email);
                 //showToast(password);
             }
         });
 
+    }
+
+    public void openUserAccount() {
+        Intent intent = new Intent(this, UserAccount.class);
+        startActivity(intent);
     }
 
     private void showToast(String text){
