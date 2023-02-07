@@ -10,26 +10,29 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="450dp"
         android:text="Sign In:"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="278dp" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="106dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="10dp"
         android:text="Submit"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
     <EditText
         android:id="@+id/passwordInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="266dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="300dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -38,9 +41,9 @@
 
     <EditText
         android:id="@+id/emailInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
+        android:layout_width="267dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="300dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Email"

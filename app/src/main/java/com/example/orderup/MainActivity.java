@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
                 Log.d("this","email " + email + "password " + password);
+
                 //showToast(email);
                 //showToast(password);
             }
