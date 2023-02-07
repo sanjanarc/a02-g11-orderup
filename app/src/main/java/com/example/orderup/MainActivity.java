@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private String creditCardNum;
     private int accountBalance;
 
-    //UserAccount user;
+    //UserData user;
 
 
     @Override
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void openUserAccount() {
         Intent intent = new Intent(this, UserAccount.class);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
         startActivity(intent);
     }
 

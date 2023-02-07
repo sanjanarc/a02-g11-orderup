@@ -1,7 +1,7 @@
 package com.example.orderup;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,16 +31,19 @@ public class UserAccount extends AppCompatActivity {
 
     private int accountBalance;
 
+    UserData user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_account);
 
-        this.email = email;
-        this.password = password;
+        Intent intent = getIntent();
 
-        Log.d("this","email = " + email);
-        Log.d("this","password = " + password);
+        this.email = intent.getStringExtra("email");
+        this.password = intent.getStringExtra("password");
+
+        user = new UserData(this.email,this.password);
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
@@ -60,12 +63,8 @@ public class UserAccount extends AppCompatActivity {
                 expiry = expiryInput.getText().toString();
                 address = addressInput.getText().toString();
 
-                Log.d("this","firstname = " + firstname);
-                Log.d("this","lastname = " + lastname);
-                Log.d("this","creditcard = " + creditcard);
-                Log.d("this","csv " + csv);
-                Log.d("this","expiry " + expiry);
-                Log.d("this","address " + address);
+                user.setInfo(firstname, lastname, creditcard, csv, expiry, address);
+                user.print();
                 //showToast(email);
                 //showToast(password);
             }
