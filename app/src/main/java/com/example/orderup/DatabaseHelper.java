@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "User.db";
-    public static final String TABLE_NAME = "user_table.db";
+    public static final String DATABASE_NAME = "user.db";
+    public static final String TABLE_NAME = "usertable";
 
     public static final String COL_1 = "ID";
     public static final String COL_2 = "EMAIL";
@@ -30,7 +30,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,EMAIL TEXT,PASSWORD TEXT,FIRSTNAME TEXT,LASTNAME TEXT,CREDITCARD TEXT,CSV TEXT,EXPIRY TEXT,ADDRESS TEXT, BALANCE FLOAT)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_2 + " TEXT," + COL_3 + " TEXT," + COL_4 + " TEXT," + COL_5 + " TEXT," + COL_6 + " TEXT," + COL_7 + " TEXT" + COL_8 + " TEXT," + COL_9 + " TEXT," + COL_10 + " FLOAT" + ")");
+    //         sqLiteDatabase.execSQL("CREATE TABLE" + TABLE_NAME + "(" + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_2 + " TEXT" + ,EMAIL TEXT,PASSWORD TEXT,FIRSTNAME TEXT,LASTNAME TEXT,CREDITCARD TEXT,CSV TEXT,EXPIRY TEXT,ADDRESS TEXT, BALANCE FLOAT)");
     }
 
     @Override
