@@ -1,5 +1,6 @@
 package com.example.orderup;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
     }
 
     @Override
@@ -38,5 +39,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    public boolean insertData(String email, String password, String firstname, String lastname, String credit, String csv, String expiry, String address, float balance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2,email);
+        contentValues.put(COL_3,password);
+        contentValues.put(COL_4,firstname);
+        contentValues.put(COL_5,lastname);
+        contentValues.put(COL_6,credit);
+        contentValues.put(COL_7,csv);
+        contentValues.put(COL_8,expiry);
+        contentValues.put(COL_9,address);
+        contentValues.put(COL_10,balance);
+        long result = sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
+        if(result == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

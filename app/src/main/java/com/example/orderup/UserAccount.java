@@ -2,6 +2,7 @@ package com.example.orderup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class UserAccount extends AppCompatActivity {
-
+    DatabaseHelper myDatabase;
 
     private String firstname;
     private String lastname;
@@ -41,6 +42,8 @@ public class UserAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_account);
 
+        myDatabase = new DatabaseHelper(this);
+
         Intent intent = getIntent();
         this.email = intent.getStringExtra("email");
         this.password = intent.getStringExtra("password");
@@ -66,9 +69,15 @@ public class UserAccount extends AppCompatActivity {
                 csv = csvInput.getText().toString();
                 expiry = expiryInput.getText().toString();
                 address = addressInput.getText().toString();
-
                 user.setInfo(firstname, lastname, creditcard, csv, expiry, address);
-                user.print();
+
+                boolean isInserted = myDatabase.insertData(email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
+                if(isInserted) {
+                    Log.d("this","USER DATA SUCCESSFULLY ADDED");
+                    //user.print();
+                } else {
+                    Log.d("this","USER DATA FAILED TO BE ADDED");
+                }
                 //showToast(email);
                 //showToast(password);
             }
