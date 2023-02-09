@@ -14,6 +14,7 @@ import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
 import com.example.orderup.persistance.DatabaseHelper;
 
+//Login UI class.
 public class LoginActivity extends AppCompatActivity
 {
     private Button signInButton, registerButton, viewDB;
@@ -21,8 +22,6 @@ public class LoginActivity extends AppCompatActivity
     private String email, password;
 
     private EditText emailInput, passwordInput;
-
-    private UserVerification verify;
 
     DatabaseHelper myDatabase;
 
@@ -34,35 +33,42 @@ public class LoginActivity extends AppCompatActivity
 
         myDatabase = new DatabaseHelper(this);
 
-        verify=new UserVerification();
-
-        //Get email and password.
+        //Build connection with xml file.
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
 
+        //Event listener of the login button.
         signInButton= (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
+                //Get input data from xml file.
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-
-                if(verify.loginVerification(email, password, LoginActivity.this) || null != searchByEmail(email) && checkPassword(email,password))
+                //Verify the input data with databases. Go to home page if nothing wrong. Will pop up a window if error occurs.
+                String result = UserVerification.loginVerification(email, password);
+                if(result == null || null != searchByEmail(email) && checkPassword(email,password))
                 {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    //Passing email to the main activity class.
                     intent.putExtra("email", email);
 
-                    //Start the main page activity.
+                    //Start the main activity class.
                     startActivity(intent);
 
                     //Remove current activity.
                     finish();
                 }
+                else //Failed to login.
+                {
+                    ErrorPopUp.errorMsg(LoginActivity.this, result);
+                }
             }
         });
 
+        //Event listener of the register button.
         registerButton= (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
