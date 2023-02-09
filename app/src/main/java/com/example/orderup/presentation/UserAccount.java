@@ -1,4 +1,4 @@
-package com.example.orderup;
+package com.example.orderup.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.orderup.persistance.DatabaseHelper;
+import com.example.orderup.R;
+import com.example.orderup.logic.UserData;
 
 public class UserAccount extends AppCompatActivity {
     DatabaseHelper myDatabase;

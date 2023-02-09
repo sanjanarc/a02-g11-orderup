@@ -1,4 +1,4 @@
-package com.example.orderup;
+package com.example.orderup.persistance;
 
 import android.content.ContentValues;
 import android.content.Context;
