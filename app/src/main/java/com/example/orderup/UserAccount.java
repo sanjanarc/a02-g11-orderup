@@ -28,9 +28,7 @@ public class UserAccount extends AppCompatActivity {
     EditText csvInput;
     EditText expiryInput;
     EditText addressInput;
-
     Button submitButton2;
-
     Button submitButton3;
 
     //private float accountBalance;

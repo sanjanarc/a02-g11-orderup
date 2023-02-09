@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void showToast(String text){
+    private void showToast(String text) {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
     }
 }
