@@ -18,7 +18,6 @@ import com.example.orderup.persistance.DatabaseHelper;
 
 public class UserAccount extends AppCompatActivity {
     DatabaseHelper myDatabase;
-
     private String firstname;
     private String lastname;
     private String creditcard;
