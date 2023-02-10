@@ -12,7 +12,10 @@
         android:theme="@style/Theme.OrderUp"
         tools:targetApi="31">
         <activity
-            android:name=".UserRegister"
+            android:name=".UserHome"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.UserRegister"
             android:exported="false" />
         <activity
             android:name=".presentation.UserAccount"
