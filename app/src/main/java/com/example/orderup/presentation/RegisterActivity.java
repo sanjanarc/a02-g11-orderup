@@ -15,28 +15,24 @@ import com.example.orderup.R;
 import com.example.orderup.logic.UserData;
 import com.example.orderup.persistance.DatabaseHelper;
 
-public class UserRegister extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     DatabaseHelper myDatabase;
 
-    private String firstname;
-    private String lastname;
+    //private VerifyService vr;
+
+    private String firstName, lastName, email, password, rePassword;
+
     private String creditcard;
     private String csv;
     private String expiry;
     private String address;
-    private String email;
-    private String password;
 
-    EditText firstNameInput;
-    EditText lastNameInput;
+    EditText firstNameInput, lastNameInput, emailInput, passwordInput, rePasswordInput;
+    Button registerButton, backButton, viewButton;
     EditText cardNumberInput;
     EditText csvInput;
     EditText expiryInput;
     EditText addressInput;
-    Button submitButton2;
-    Button submitButton3;
-
-    Button submitButton4;
 
     //private float accountBalance;
 
@@ -45,7 +41,7 @@ public class UserRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_register);
+        setContentView(R.layout.activity_register);
 
         myDatabase = new DatabaseHelper(this);
 
@@ -57,43 +53,67 @@ public class UserRegister extends AppCompatActivity {
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
-        cardNumberInput = (EditText) findViewById(R.id.cardNumberInput);
-        csvInput = (EditText) findViewById(R.id.csvInput);
-        expiryInput = (EditText) findViewById(R.id.expiryInput);
-        addressInput = (EditText) findViewById(R.id.addressInput);
 
-        submitButton2 = (Button) findViewById(R.id.submitButton2);
-        submitButton2.setOnClickListener(new View.OnClickListener() {
+
+
+        //Do we really need credit card when registering.
+        //cardNumberInput = (EditText) findViewById(R.id.cardNumberInput);
+        //csvInput = (EditText) findViewById(R.id.csvInput);
+        //expiryInput = (EditText) findViewById(R.id.expiryInput);
+        //addressInput = (EditText) findViewById(R.id.addressInput);
+
+        registerButton = (Button) findViewById(R.id.registerButton1);
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstname = firstNameInput.getText().toString();
-                lastname = lastNameInput.getText().toString();
-                creditcard = cardNumberInput.getText().toString();
-                csv = csvInput.getText().toString();
-                expiry = expiryInput.getText().toString();
-                address = addressInput.getText().toString();
-                user.setInfo(firstname, lastname, creditcard, csv, expiry, address);
+                //firstName = firstNameInput.getText().toString();
+                //lastName = lastNameInput.getText().toString();
+                //email= emailInput.getText().toString();
+                //password= passwordInput.getText().toString();
+                //rePassword= rePasswordInput.getText().toString();
 
-                boolean isInserted = myDatabase.insertData(email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
-                if(isInserted) {
+
+                //creditcard = cardNumberInput.getText().toString();
+                //csv = csvInput.getText().toString();
+                //expiry = expiryInput.getText().toString();
+                //address = addressInput.getText().toString();
+                //user.setInfo(firstName, lastName, creditcard, csv, expiry, address);
+
+                //boolean isInserted = myDatabase.insertData(email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
+                if(true) {
+                    //Direct go to main page if register successful.
+                    Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
+                    //intent.putExtra("userID", userID);
+                    startActivity(intent);
+
+                    //Remove this activity.
+                    finish();
                     Log.d("this","USER DATA SUCCESSFULLY ADDED");
-                    //user.print();
                 } else {
+                    //Get msg from verify for why cannot register.
                     Log.d("this","USER DATA FAILED TO BE ADDED");
                 }
-                //showToast(email);
-                //showToast(password);
             }
         });
 
-        submitButton4 = (Button) findViewById(R.id.submitButton4);
-        submitButton4.setOnClickListener(new View.OnClickListener() {
+        //Back to Login page.
+        backButton= (Button) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+
+        //Get a view of Database
+        viewButton = (Button) findViewById(R.id.viewButton);
+        viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 printDatabase();
             }
         });
-
     };
 
     public void showMessage(String title, String Message) {
