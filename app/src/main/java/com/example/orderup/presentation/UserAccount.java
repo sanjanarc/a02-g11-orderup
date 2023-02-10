@@ -1,6 +1,7 @@
 package com.example.orderup.presentation;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,11 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.orderup.persistance.DatabaseHelper;
 import com.example.orderup.R;
 import com.example.orderup.logic.UserData;
+import com.example.orderup.persistance.DatabaseHelper;
 
 public class UserAccount extends AppCompatActivity {
     DatabaseHelper myDatabase;
@@ -76,6 +78,26 @@ public class UserAccount extends AppCompatActivity {
                 boolean isInserted = myDatabase.insertData(email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
                 if(isInserted) {
                     Log.d("this","USER DATA SUCCESSFULLY ADDED");
+
+                    // Print database contents
+                    Cursor res = myDatabase.getAllData();
+                    StringBuffer buffer = new StringBuffer();
+                    while(res.moveToNext()) {
+                        buffer.append("Id :" + res.getString(0) + "\n");
+                        buffer.append("Email :" + res.getString(1) + "\n");
+                        buffer.append("Password :" + res.getString(2) + "\n");
+                        buffer.append("First Name :" + res.getString(3) + "\n");
+                        buffer.append("Last Name :" + res.getString(4) + "\n");
+                        buffer.append("Credit Card :" + res.getString(5) + "\n");
+                        buffer.append("CSV :" + res.getString(6) + "\n");
+                        buffer.append("Expiry :" + res.getString(7) + "\n");
+                        buffer.append("Address :" + res.getString(8) + "\n");
+                        buffer.append("Account Balance :$" + res.getString(9) + "\n\n");
+                    }
+
+                    //Show all data
+                    showMessage("Data",buffer.toString());
+
                     //user.print();
                 } else {
                     Log.d("this","USER DATA FAILED TO BE ADDED");
@@ -109,5 +131,12 @@ public class UserAccount extends AppCompatActivity {
 
     };
 
+    public void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
+    }
 
 }
