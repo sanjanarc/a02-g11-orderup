@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
+import com.example.orderup.logic.UserVerification;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailInput, passwordInput;
 
     private int userId;
-    //private Verify vr=new Verify();
+    private UserVerification verify=new UserVerification();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,11 @@ public class LoginActivity extends AppCompatActivity {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                if(true){
-                    //(userId=vr.verifyAccount(email, password))>=0
+                if(verify.login(email, password) != null){
                     Intent intent=new Intent(LoginActivity.this, MainActivity.class);
 
                     //throw the user id to main_activity to retrieve the user info from database
-                    intent.putExtra("userID", userId);
+                    intent.putExtra("email", email);
                     Log.d("this", "go to main");
                     //activate the main class***
                     startActivity(intent);
