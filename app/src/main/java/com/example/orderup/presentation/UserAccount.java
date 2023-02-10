@@ -37,6 +37,8 @@ public class UserAccount extends AppCompatActivity {
     Button submitButton2;
     Button submitButton3;
 
+    Button submitButton4;
+
     //private float accountBalance;
 
     UserData user;
@@ -78,26 +80,6 @@ public class UserAccount extends AppCompatActivity {
                 boolean isInserted = myDatabase.insertData(email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
                 if(isInserted) {
                     Log.d("this","USER DATA SUCCESSFULLY ADDED");
-
-                    // Print database contents
-                    Cursor res = myDatabase.getAllData();
-                    StringBuffer buffer = new StringBuffer();
-                    while(res.moveToNext()) {
-                        buffer.append("Id :" + res.getString(0) + "\n");
-                        buffer.append("Email :" + res.getString(1) + "\n");
-                        buffer.append("Password :" + res.getString(2) + "\n");
-                        buffer.append("First Name :" + res.getString(3) + "\n");
-                        buffer.append("Last Name :" + res.getString(4) + "\n");
-                        buffer.append("Credit Card :" + res.getString(5) + "\n");
-                        buffer.append("CSV :" + res.getString(6) + "\n");
-                        buffer.append("Expiry :" + res.getString(7) + "\n");
-                        buffer.append("Address :" + res.getString(8) + "\n");
-                        buffer.append("Account Balance :$" + res.getString(9) + "\n\n");
-                    }
-
-                    //Show all data
-                    showMessage("Data",buffer.toString());
-
                     //user.print();
                 } else {
                     Log.d("this","USER DATA FAILED TO BE ADDED");
@@ -126,8 +108,15 @@ public class UserAccount extends AppCompatActivity {
                 }
                 textView.setText("$" + user.getBalance());
             }
-        });
 
+        });
+        submitButton4 = (Button) findViewById(R.id.submitButton4);
+        submitButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                printDatabase();
+            }
+        });
 
     };
 
@@ -137,6 +126,28 @@ public class UserAccount extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
+    }
+
+    public void printDatabase() {
+        // Print database contents
+        Cursor res = myDatabase.getAllData();
+        StringBuffer buffer = new StringBuffer();
+        while(res.moveToNext()) {
+            buffer.append("Id :" + res.getString(0) + "\n");
+            buffer.append("Email :" + res.getString(1) + "\n");
+            buffer.append("Password :" + res.getString(2) + "\n");
+            buffer.append("First Name :" + res.getString(3) + "\n");
+            buffer.append("Last Name :" + res.getString(4) + "\n");
+            buffer.append("Credit Card :" + res.getString(5) + "\n");
+            buffer.append("CSV :" + res.getString(6) + "\n");
+            buffer.append("Expiry :" + res.getString(7) + "\n");
+            buffer.append("Address :" + res.getString(8) + "\n");
+            buffer.append("Account Balance :$" + res.getString(9) + "\n\n");
+        }
+
+        //Show all data
+        showMessage("Data",buffer.toString());
+
     }
 
 }
