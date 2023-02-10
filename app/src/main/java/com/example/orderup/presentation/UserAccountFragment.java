@@ -12,28 +12,35 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.orderup.R;
-import com.example.orderup.persistance.DatabaseHelper;
+import com.example.orderup.logic.Services;
 
 public class UserAccountFragment extends Fragment {
 
-    DatabaseHelper db;
     TextView infoContainer;
-    Button addCardButton, logoutButton;
+    Button addCardButton, logoutButton, addAddress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
-        //db= new DatabaseHelper(this);
+
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
-        infoContainer.setText("Name: ABC"+"\nEmail: ABC@ABC");
-        infoContainer.setTextSize(20);
+        infoContainer.setText(Services.getUserPersistence().getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
+        infoContainer.setTextSize(30);
 
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Pop up a dialog to add credit card.
+            }
+        });
+
+        addAddress= (Button) view.findViewById(R.id.addAddressButton);
+        addAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Pop up a dialog to add address.
             }
         });
 
