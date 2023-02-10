@@ -84,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openRegister() {
-        Intent intent = new Intent(this, UserRegister.class);
-        intent.putExtra("email", email);
-        intent.putExtra("password", password);
-        startActivity(intent);
+        Intent intent2 = new Intent(this, UserRegister.class);
+        intent2.putExtra("email", email);
+        intent2.putExtra("password", password);
+        startActivity(intent2);
     }
 
     private void showToast(String text) {
