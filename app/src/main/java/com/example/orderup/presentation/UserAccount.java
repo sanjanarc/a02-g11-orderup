@@ -3,6 +3,7 @@ package com.example.orderup.presentation;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,8 +78,12 @@ public class UserAccount extends AppCompatActivity {
                 user.setInfo(firstname, lastname, creditcard, csv, expiry, address);
 
                 // Loop through database searching for matching email
-                searchByEmail(email);
-
+                String id = searchByEmail(email);
+                Log.d("this"," " + id);
+                boolean isUpdate = myDatabase.updateData(id,email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
+                if(isUpdate) {
+                    Log.d("this","USER DATA SUCCESSFULLY UPDATED");
+                }
                 //myDatabase.update()
 
                         /*
@@ -157,17 +162,15 @@ public class UserAccount extends AppCompatActivity {
 
     }
 
-    public int searchByEmail(String email) {
-        int currId = -1;
+    public String searchByEmail(String email) {
+        String currId = null;
         boolean found = false;
         Cursor res = myDatabase.getAllData();
         while(res.moveToNext() && found == false) {
             if(email.equals(res.getString(1))) {
                 found = true;
-                currId = Integer.parseInt(res.getString(0));
+                currId = res.getString(0);
             }
-
-
         }
     return currId;
     }
