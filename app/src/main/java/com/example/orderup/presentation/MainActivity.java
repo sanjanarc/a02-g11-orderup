@@ -75,7 +75,13 @@ public class MainActivity extends AppCompatActivity {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
                 Log.d("this","email " + email + "password " + password);
-                openRegister();
+                if(null == searchByEmail(email)) {
+                    openRegister();
+                } else {
+                    Log.d("this","Error - Duplicate Email Address!");
+                }
+
+
                 //user = new UserAccount(email,password);
 
 
