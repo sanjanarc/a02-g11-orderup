@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(verify.registerAccount(email, firstName, lastName, password, rePassword)) {
                     //Direct go to main page if register successful.
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
+                    intent.putExtra("email", email);
                     startActivity(intent);
 
                     //Remove this activity.
