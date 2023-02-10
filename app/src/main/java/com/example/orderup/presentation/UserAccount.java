@@ -48,12 +48,18 @@ public class UserAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_account);
 
+
+
         myDatabase = new DatabaseHelper(this);
 
         Intent intent = getIntent();
         this.email = intent.getStringExtra("email");
         this.password = intent.getStringExtra("password");
         user = new UserData(this.email,this.password);
+
+        // Make sure existing balance stays between logins
+        String currId = searchByEmail(email);
+        user.addBalance(getBalance(currId));
 
         TextView textView = (TextView) findViewById(R.id.accountBalance);
         textView.setText("$" + user.getBalance());
@@ -173,6 +179,19 @@ public class UserAccount extends AppCompatActivity {
             }
         }
     return currId;
+    }
+
+    public float getBalance(String id) {
+        float currBalance = 0;
+        boolean found = false;
+        Cursor res = myDatabase.getAllData();
+        while(res.moveToNext() && found == false) {
+            if(id.equals(res.getString(0))) {
+                found = true;
+                currBalance = Float.parseFloat(res.getString(9));
+            }
+        }
+        return currBalance;
     }
 
 }
