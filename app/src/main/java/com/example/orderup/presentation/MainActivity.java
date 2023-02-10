@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordInput;
 
     Button submitButton;
+    Button registerButton;
 
     private String firstName;
     private String lastName;
@@ -56,10 +57,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                email = emailInput.getText().toString();
+                password = passwordInput.getText().toString();
+                Log.d("this","email " + email + "password " + password);
+                openRegister();
+                //user = new UserAccount(email,password);
+
+
+                //showToast(email);
+                //showToast(password);
+            }
+        });
+
     }
 
     public void openUserAccount() {
         Intent intent = new Intent(this, UserAccount.class);
+        intent.putExtra("email", email);
+        intent.putExtra("password", password);
+        startActivity(intent);
+    }
+
+    public void openRegister() {
+        Intent intent = new Intent(this, UserRegister.class);
         intent.putExtra("email", email);
         intent.putExtra("password", password);
         startActivity(intent);
