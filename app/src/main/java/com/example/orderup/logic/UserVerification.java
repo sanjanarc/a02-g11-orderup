@@ -6,76 +6,154 @@ import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.presentation.ErrorPopUp;
 
-public class UserVerification {
+public class UserVerification
+{
 
     private UserPersistence userPersistence;
 
-    public UserVerification(){
+    //Constructor.
+    public UserVerification()
+    {
         userPersistence= Services.getUserPersistence();
     }
 
-    public String login(String email, String password, Context con1){
-        User tempUser= userPersistence.getUserList().get(email);
+    public boolean loginVerification(String email, String password, Context context)
+    {
+        //Input cannot be empty.
+        if(email.equals("") || password.equals(""))
+        {
+            ErrorPopUp.errorMsg(context, "Email or Password is Empty.");
+        }
+        //Email format must meet standard format.
+        else if(!emailCheck(email))
+        {
+            ErrorPopUp.errorMsg(context, "Incorrect Email Format.");
+        }
+        //Compare the entered password with the account password.
+        else
+        {
+            User tempUser= userPersistence.getUserList().get(email);
 
-        if(tempUser != null){
-            if(tempUser.getPassword().equals(password)){
-
-                return email;
+            //Only true if the email exist in the database.
+            if(tempUser != null)
+            {
+                if(tempUser.getPassword().equals(password))
+                {
+                    return true;
+                }
+                else
+                {
+                    ErrorPopUp.errorMsg(context, "Incorrect Password.");
+                }
             }
-            else {
-                ErrorPopUp er=new ErrorPopUp();
-                er.errorMsg(con1, "Email is empty");
+            else
+            {
+                ErrorPopUp.errorMsg(context, "Email does not exist.");
             }
         }
-        return null;
+        return false;
     }
 
-    public boolean RegistrationVerification(String email, String firstName, String lastName, String password, String rePassword, Context con){
-        User tempUser= userPersistence.getUserList().get(email);
-        //Email doesn't exist, can create account.
+    public boolean registrationVerification(String email, String firstName, String lastName, String password, String rePassword, Context context)
+    {
+        //Inputs cannot be empty.
         if(firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || rePassword.equals(""))
         {
-            ErrorPopUp er = new ErrorPopUp();
-            er.errorMsg(con, "Missing Field: Please check you have entered all fields.");
-        } else if(!EmailCheck(email))
+            ErrorPopUp.errorMsg(context, "Missing Field: Please check you have entered all fields.");
+        }
+        //Email format must meet standard format.
+        else if(!emailCheck(email))
         {
-            ErrorPopUp er = new ErrorPopUp();
-            er.errorMsg(con, "Incorrect Email Format");
-        } else if(tempUser != null)
+            ErrorPopUp.errorMsg(context, "Incorrect Email Format.");
+        }
+        //Password must be the same.
+        else if(!password.equals(rePassword))
         {
-            if (email.equals(tempUser.getEmail()))
+            ErrorPopUp.errorMsg(context, "Password and Re-password do not match.");
+        }
+        //Password must more than 6 character.
+        else if(password.length() < 6)
+        {
+            ErrorPopUp.errorMsg(context, "Password needs to be at least 6 characters long.");
+        }
+        else
+        {
+            User tempUser= userPersistence.getUserList().get(email);
+
+            if(tempUser != null)
             {
-                ErrorPopUp er = new ErrorPopUp();
-                er.errorMsg(con, "Email already in use.");
+                ErrorPopUp.errorMsg(context, "Email already in use.");
             }
-        } else if(password.equals(rePassword))
-        {
-            if (password.length() < 6)
+            else
             {
-                ErrorPopUp er = new ErrorPopUp();
-                er.errorMsg(con, "Password needs to be at least 6 characters long.");
-            } else {
                 userPersistence.addUser(email, new User(firstName, lastName, email, password));
                 return true;
             }
-        } else
-        {
-                //Password do not match.
-                ErrorPopUp er=new ErrorPopUp();
-                er.errorMsg(con, "Passwords do not match");
-                return false;
         }
-            //The email is already exist.
-            return false;
+        return false;
     }
 
+    public boolean creditCardVerification(String cardNum, String cardCvc, String cardExpiry, Context context)
+    {
+        //Inputs cannot be empty.
+        if(!(cardNum.equals("") || cardCvc.equals("") || cardExpiry.equals("")))
+        {
+            if(cardNum.length() != 16)
+            {
+                ErrorPopUp.errorMsg(context, "Error: Incorrect Card Number Format.");
+            }
+            else if(cardNum.charAt(0) != '2' && cardNum.charAt(0) != '3'
+                    && cardNum.charAt(0) != '4' && cardNum.charAt(0) != '5')
+            {
+                ErrorPopUp.errorMsg(context, "Error: Card is not Visa, American Express or Mastercard.");
+            }
+            else if(cardCvc.length() != 3 && cardCvc.length() != 4)
+            {
+                ErrorPopUp.errorMsg(context, "Error: Incorrect CVC length.");
+            }
+            else if(cardExpiry.length() != 5)
+            {
+                ErrorPopUp.errorMsg(context, "Error: Incorrect Expiry date length.");
+            }
+            else if(cardExpiry.charAt(2) != '/' || (cardExpiry.charAt(0) != '0' && cardExpiry.charAt(0) != '1')
+                    || (cardExpiry.charAt(0) == '1' && Character.getNumericValue(cardExpiry.charAt(1)) >= 3))
+            {
+                ErrorPopUp.errorMsg(context, "Error: Incorrect Expiry date.");
+            }
+            else
+            {
+                ErrorPopUp.errorMsg(context, "Credit card added.");
+                return true;
+            }
+        }
+        else
+        {
+            ErrorPopUp.errorMsg(context, "Missing Field: Please check you have entered all fields.");
+        }
+        return false;
+    }
 
+    public boolean addressVerification(String address, Context context)
+    {
+        if(true){
+            ErrorPopUp.errorMsg(context, "Error: Incorrect address format.");
+        }
+        else
+        {
+            ErrorPopUp.errorMsg(context, "Address added.");
+            return true;
+        }
 
-    public boolean EmailCheck(String email)
+        return false;
+    }
+
+    //Make sure the email input contain character "@".
+    public boolean emailCheck(String email)
     {
         boolean flag = false;
         int counter = 1;
         char at = '@';
+
         while(email.length()-1 > counter && !flag)
         {
             if(email.charAt(counter) == at)
@@ -86,6 +164,4 @@ public class UserVerification {
         }
         return flag;
     }
-
-
 }

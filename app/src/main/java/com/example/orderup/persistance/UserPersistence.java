@@ -10,7 +10,7 @@ public interface UserPersistence {
 
     void addUser(String email, User newUser);
 
-    void addCreditCard(String email, int cardNum, int cvc, String expiry);
+    void addCreditCard(String email, String cardNum, String cvc, String expiry);
 
     void updateFirstName(String email, String firstName);
 

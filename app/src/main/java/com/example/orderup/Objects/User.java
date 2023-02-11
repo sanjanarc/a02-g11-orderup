@@ -4,18 +4,21 @@ import java.util.Objects;
 
 public class User {
 
-    private String firstName, lastName, email, password, expiry, address;
-    private int creditCard, cvc;
+    private String firstName, lastName, email, password, expiry, address, creditCard, cvc;
 
-    public User(String firstName, String lastName, String email, String password) {
-
+    public User(String firstName, String lastName, String email, String password)
+    {
         this.firstName= firstName;
         this.lastName= lastName;
         this.email = email;
         this.password = password;
+        this.address="";
+        this.creditCard="";
+        this.cvc="";
+        this.expiry="";
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
@@ -51,13 +54,13 @@ public class User {
         this.address= newAddress;
     }
 
-    public void addCreditCard(int newCreditCard, int newCvc, String newExpiry){
+    public void addCreditCard(String newCreditCard, String newCvc, String newExpiry){
         this.creditCard= newCreditCard;
         this.cvc= newCvc;
         this.expiry= newExpiry;
     }
 
-    public String toString(){
+    public String toString() {
         return String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
