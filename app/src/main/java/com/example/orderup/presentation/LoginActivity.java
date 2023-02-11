@@ -42,8 +42,18 @@ public class LoginActivity extends AppCompatActivity {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                if(verify.login(email, password) != null){
-                    Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+
+                if(email.equals("") || password.equals("")){
+                    ErrorPopUp er = new ErrorPopUp();
+                    er.errorMsg(LoginActivity.this, "Email or Password Is Empty");
+                }
+                else if (!verify.EmailCheck(email)) {
+                    ErrorPopUp er = new ErrorPopUp();
+                    Log.d("this", "email:" +email +"    "+password);
+                    er.errorMsg(LoginActivity.this, "Incorrect Email Format");
+                }
+                else if (verify.login(email, password, LoginActivity.this) != null) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                     //throw the user id to main_activity to retrieve the user info from database
                     intent.putExtra("email", email);
@@ -53,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     //This is to prevent user back to login page using the back button
                     finish();
-                }else {
-                    ErrorPopUp er=new ErrorPopUp();
+                } else {
+                    ErrorPopUp er = new ErrorPopUp();
                     er.errorMsg(LoginActivity.this, "Incorrect Email or Password.");
                     //Get some error msg from verify class and show to user.
                 }

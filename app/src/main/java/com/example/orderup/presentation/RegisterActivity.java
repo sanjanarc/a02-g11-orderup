@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
 
-                if(verify.registerAccount(email, firstName, lastName, password, rePassword)) {
+                if(verify.registerAccount(email, firstName, lastName, password, rePassword, RegisterActivity.this)) {
                     //Direct go to main page if register successful.
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
                     intent.putExtra("email", email);
