@@ -15,8 +15,14 @@ import java.util.Scanner;
 
 public class Search_algorithm {
 
+    String userInput;
 
-    public static void main(String[] args){
+    public Search_algorithm(String userInput) {
+        this.userInput = userInput;
+    }
+
+   // results for restaurants
+    public static ArrayList<String>  searchRestaurant(String userInput) {
 
         RestaurantPersistance p = new RestaurantPersistenceStub();
         List<Restaurant> restaurants = p.getRestaurantSequential(); // want to use method from restaurant interface
@@ -35,37 +41,26 @@ public class Search_algorithm {
 
         }
 
-
-        // prompt user to type something into the search bar
-        Scanner myObj = new Scanner(System.in);
-        String userInput;
+        ArrayList<String> restaurantResults = new ArrayList<String>();
 
 
-        while (true) {
-            System.out.println("Search Restaurants and Cuisines..");
-            userInput = errorCheck(myObj.nextLine());
 
-            if (userInput.equalsIgnoreCase("q")) {
-                break;
+        ArrayList<Integer> results= searchRestaurantKey(errorCheck(userInput), restNames, restCategories); //korean, sushi, nagiri, apple
+        if(results.isEmpty()){
+            System.out.println("Your search does not match any restaurants on OrderUp");
+        }else{
+            for (int j = 0; j < results.size(); j++) {
+                restaurantResults.add(restNames[results.get(j)]);
             }
-
-            ArrayList<Integer> results= searchRestaurant(userInput, restNames, restCategories); //korean, sushi, nagiri, apple
-            if(results.isEmpty()){
-                System.out.println("Your search does not match any restaurants on OrderUp");
-            }else{
-                for (int j = 0; j < results.size(); j++) {
-                    System.out.print(restNames[results.get(j)] + "   ");
-                }
-                System.out.println();
-
-            }
-
 
         }
+        return restaurantResults;
 
-        myObj.close();
 
-    }//end main
+    }
+
+
+
 
     //error check
     public static String errorCheck(String str) {
@@ -85,7 +80,7 @@ public class Search_algorithm {
     // Returns:
     //           ArrayList<Integer>: an ArrayList<Integer> of relevant restaurant's row number
     //------------------------------------------------------
-    public static ArrayList<Integer> searchRestaurant( String user_input, String[] restaurants, String[] categories){
+    public static ArrayList<Integer> searchRestaurantKey( String user_input, String[] restaurants, String[] categories){
         ArrayList<Integer> restaurantFound= new ArrayList<Integer>(); //an array list of restaurant's row number relevant to the user input
 
         //start iteration from 1, as first row is Headings
