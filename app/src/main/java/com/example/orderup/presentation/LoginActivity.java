@@ -1,5 +1,6 @@
 package com.example.orderup.presentation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                     //This is to prevent user back to login page using the back button
                     finish();
                 }else {
+                    ErrorPopUp er=new ErrorPopUp();
+                    er.errorMsg(LoginActivity.this, "Incorrect Email or Password.");
                     //Get some error msg from verify class and show to user.
                 }
             }
