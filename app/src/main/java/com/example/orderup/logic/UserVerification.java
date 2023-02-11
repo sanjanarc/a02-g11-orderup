@@ -2,11 +2,11 @@ package com.example.orderup.logic;
 
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
-import android.app.Activity;
 import com.example.orderup.presentation.ErrorPopUp;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v4.app.INotificationSideChannel;
+import android.util.Log;
+
+import java.util.Locale;
 
 public class UserVerification {
 
@@ -32,39 +32,62 @@ public class UserVerification {
         return null;
     }
 
-    public boolean registerAccount(String email, String firstName, String lastName, String password, String rePassword, Context con){
+    public boolean RegistrationVerification(String email, String firstName, String lastName, String password, String rePassword, Context con){
         User tempUser= userPersistence.getUserList().get(email);
-
         //Email doesn't exist, can create account.
-        if(tempUser== null){
-
-            if(password.equals(rePassword)){
+        if(firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || rePassword.equals(""))
+        {
+            ErrorPopUp er = new ErrorPopUp();
+            er.errorMsg(con, "Missing Field: Please check you have entered all fields.");
+        } else if(!EmailCheck(email))
+        {
+            ErrorPopUp er = new ErrorPopUp();
+            er.errorMsg(con, "Incorrect Email Format");
+        } else if(tempUser != null)
+        {
+            if (email.equals(tempUser.getEmail()))
+            {
+                ErrorPopUp er = new ErrorPopUp();
+                er.errorMsg(con, "Email already in use.");
+            }
+        } else if(password.equals(rePassword))
+        {
+            if (password.length() < 6)
+            {
+                ErrorPopUp er = new ErrorPopUp();
+                er.errorMsg(con, "Password needs to be at least 6 characters long.");
+            } else {
                 userPersistence.addUser(email, new User(firstName, lastName, email, password));
                 return true;
-            }else {
+            }
+        } else
+        {
                 //Password do not match.
                 ErrorPopUp er=new ErrorPopUp();
                 er.errorMsg(con, "Passwords do not match");
                 return false;
-            }
-        }else {
+        }
             //The email is already exist.
             return false;
-        }
-
     }
 
-    public boolean EmailCheck(String email) {
+
+
+    public boolean EmailCheck(String email)
+    {
         boolean flag = false;
         int counter = 1;
         char at = '@';
         while(email.length()-1 > counter && !flag)
         {
-            if(email.charAt(counter) == at) {
+            if(email.charAt(counter) == at)
+            {
               flag = true;
             }
             counter++;
         }
         return flag;
     }
+
+
 }

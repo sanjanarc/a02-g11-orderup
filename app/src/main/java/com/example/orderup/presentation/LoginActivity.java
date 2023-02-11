@@ -41,8 +41,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
-
-
                 if(email.equals("") || password.equals("")){
                     ErrorPopUp er = new ErrorPopUp();
                     er.errorMsg(LoginActivity.this, "Email or Password Is Empty");
