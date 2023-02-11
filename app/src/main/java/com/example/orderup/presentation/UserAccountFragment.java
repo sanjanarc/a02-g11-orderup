@@ -4,15 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
@@ -75,9 +74,50 @@ public class UserAccountFragment extends Fragment {
                 EditText cardCvcInput= (EditText) v.findViewById(R.id.cardCvcInput);
                 EditText cardExpiryInput= (EditText) v.findViewById(R.id.cardExpiryInput);
 
-                int cardNum= Integer.parseInt(cardNumInput.getText().toString());
-                int cardCvc= Integer.parseInt(cardCvcInput.getText().toString());
-                String cardExpiry= cardExpiryInput.getText().toString();
+                int cardNum = 0;
+                int cardCvc = 0;
+                String cardExpiry = cardExpiryInput.getText().toString();
+
+                if(cardNumInput.getText() != null) {
+                    cardNum = Integer.parseInt(cardNumInput.getText().toString());
+                } else {
+                    ErrorPopUp er = new ErrorPopUp();
+                    er.errorMsg(getActivity(), "Missing Field: Please check you have entered all fields.");
+                }
+
+
+                if(cardCvcInput.getText() != null) {
+                    cardCvc = Integer.parseInt(cardCvcInput.getText().toString());
+                } else {
+                    ErrorPopUp er = new ErrorPopUp();
+                    er.errorMsg(getActivity(), "Missing Field: Please check you have entered all fields.");
+                }
+
+                if(Integer.toString(cardNum).length() != 16) {
+                    ErrorPopUp er = new ErrorPopUp();
+                    er.errorMsg(getActivity(), "Error: Incorrect Card Number Format");
+                }
+
+                if(Integer.toString(cardNum).charAt(0) != '2' || Integer.toString(cardNum).charAt(0) != '3'
+                        || Integer.toString(cardNum).charAt(0) != '4' || Integer.toString(cardNum).charAt(0) != '5') {
+                    ErrorPopUp er = new ErrorPopUp();
+                    er.errorMsg(getActivity(), "Error: Card is not Visa, American Express or Mastercard");
+                }
+
+                if(Integer.toString(cardCvc).length() != 3 || Integer.toString(cardCvc).length() != 4) {
+                    ErrorPopUp er = new ErrorPopUp();
+                    er.errorMsg(getActivity(), "Error: Incorrect CVC length");
+                }
+
+                if(cardExpiry.length() != 5) {
+                    if (cardExpiry.charAt(2) != '/' || (cardExpiry.charAt(0) != 0 && (cardExpiry.charAt(0) != 1))
+                    || (cardExpiry.charAt(0) == 1 && Character.getNumericValue(cardExpiry.charAt(1)) >= 3)) {
+                        ErrorPopUp er = new ErrorPopUp();
+                        er.errorMsg(getActivity(), "Error: Incorrect Expiry");
+
+                    }
+                }
+
 
                 userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
             }

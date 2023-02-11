@@ -1,12 +1,10 @@
 package com.example.orderup.logic;
 
+import android.content.Context;
+
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.presentation.ErrorPopUp;
-import android.content.Context;
-import android.util.Log;
-
-import java.util.Locale;
 
 public class UserVerification {
 
