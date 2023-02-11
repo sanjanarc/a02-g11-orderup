@@ -122,7 +122,7 @@ public class UserVerification
             }
             else
             {
-                ErrorPopUp.errorMsg(context, "Credit card added.");
+                ErrorPopUp.errorMsg(context, "Credit Card added.");
                 return true;
             }
         }
