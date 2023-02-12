@@ -137,9 +137,23 @@ public class UserVerification
     {
         if(!address.equals(""))
         {
-            if()
-            {
+            String[] tempAddress= address.split(", ");
 
+            if(tempAddress.length != 4)
+            {
+                ErrorPopUp.errorMsg(context, "Error: Address format incorrect.");
+            }
+            else if(!tempAddress[1].equalsIgnoreCase("Winnipeg"))
+            {
+                ErrorPopUp.errorMsg(context, "Error: City must within Manitoba.");
+            }
+            else if(!tempAddress[2].equalsIgnoreCase("Manitoba"))
+            {
+                ErrorPopUp.errorMsg(context, "Error: Currently does not support other province other than Manitoba.");
+            }
+            else if(false)
+            {
+                //Add postal code error.
             }
             else
             {

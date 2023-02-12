@@ -8,5 +8,5 @@
         android:id="@+id/addressInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Address:" />
+        android:hint="Address: Unit Street Name, City, Province, Postal Code" />
 </RelativeLayout>
