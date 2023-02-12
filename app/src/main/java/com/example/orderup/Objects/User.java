@@ -38,6 +38,18 @@ public class User {
         return address;
     }
 
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public String getCvc() {
+        return cvc;
+    }
+
     public void updateFirstName(String newFirstName){
         this.firstName= newFirstName;
     }

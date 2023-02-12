@@ -1,8 +1,8 @@
 package com.example.orderup.logic;
 
-import android.util.Log;
-
 public class UserData {
+
+
     private String email;
     private String password;
     private String firstname;
@@ -31,18 +31,6 @@ public class UserData {
         this.address = address;
     }
 
-    void print() {
-        Log.d("this","email = " + email);
-        Log.d("this","password = " + password);
-        Log.d("this","firstname = " + firstname);
-        Log.d("this","lastname = " + lastname);
-        Log.d("this","creditcard = " + creditcard);
-        Log.d("this","csv = " + csv);
-        Log.d("this","expiry = " + expiry);
-        Log.d("this","address = " + address);
-        Log.d("this","account balance = $" + getBalance());
-    }
-
     public float getBalance() {
         return this.accountBalance;
     }
@@ -50,5 +38,38 @@ public class UserData {
     public void addBalance(float amount) {
         this.accountBalance += amount;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getCreditcard() {
+        return creditcard;
+    }
+
+    public String getCsv() {
+        return csv;
+    }
+
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
 
 }
