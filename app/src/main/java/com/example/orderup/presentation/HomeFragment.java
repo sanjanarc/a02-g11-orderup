@@ -34,7 +34,8 @@ public class HomeFragment extends Fragment {
         //get ids
         SearchView searchView = rootView.findViewById(R.id.searchView);
         LinearLayout containerText = rootView.findViewById(R.id.textview_container);
-
+        TextView titleTextView = rootView.findViewById(R.id.titleTextView);
+        titleTextView.setText(R.string.home_title);
 
 
 
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment {
                     for (int i = 0; i < results.size(); i++) {
                         TextView textView = new TextView(getActivity());
                         textView.setText(results.get(i));
-                        textView.setTextSize(18);
+                        textView.setTextSize(16);
                         //textView.setTextColor(Color.PURPLE);
                         containerText.addView(textView);
                     }

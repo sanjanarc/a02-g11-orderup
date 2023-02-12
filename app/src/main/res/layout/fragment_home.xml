@@ -6,17 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".presentation.HomeFragment">
 
-    <SearchView
-        android:id="@+id/searchView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="141dp" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/textview_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_container"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-202dp"
+            android:layout_marginEnd="184dp"
+            android:textSize="40sp" />
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="141dp" />
+
+        <LinearLayout
+            android:id="@+id/textview_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:orientation="vertical"></LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
