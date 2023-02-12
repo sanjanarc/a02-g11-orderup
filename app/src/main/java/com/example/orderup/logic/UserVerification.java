@@ -135,12 +135,20 @@ public class UserVerification
 
     public boolean addressVerification(String address, Context context)
     {
-        if(true){
-            ErrorPopUp.errorMsg(context, "Error: Incorrect address format.");
+        if(!address.equals(""))
+        {
+            if()
+            {
+
+            }
+            else
+            {
+                ErrorPopUp.errorMsg(context, "Address been added.");
+            }
         }
         else
         {
-            ErrorPopUp.errorMsg(context, "Address added.");
+            ErrorPopUp.errorMsg(context, "Missing Field: Please fill in the blank.");
             return true;
         }
 
