@@ -13,19 +13,24 @@
 
         <TextView
             android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="122dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_container"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="-202dp"
-            android:layout_marginEnd="184dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="176dp"
+            android:layout_marginBottom="678dp"
             android:textSize="40sp" />
 
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
+            android:queryHint ="@string/home_title"
             tools:layout_editor_absoluteX="20dp"
             tools:layout_editor_absoluteY="141dp" />
 

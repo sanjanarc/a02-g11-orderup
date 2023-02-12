@@ -29,18 +29,16 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_home, container, false);
 
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         //get ids
-        SearchView searchView = rootView.findViewById(R.id.searchView);
-        LinearLayout containerText = rootView.findViewById(R.id.textview_container);
-        TextView titleTextView = rootView.findViewById(R.id.titleTextView);
+        SearchView searchView = view.findViewById(R.id.searchView);
+        LinearLayout containerText = view.findViewById(R.id.textview_container);
+        TextView titleTextView = view.findViewById(R.id.titleTextView);
         titleTextView.setText(R.string.home_title);
 
 
 
         //search bar
-        searchView.setQuery("Search Restaurants and Cuisines..",false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
