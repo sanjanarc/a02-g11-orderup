@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
 
 
         //search bar
+        searchView.setQuery("Search Restaurants and Cuisines..",true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -46,17 +47,17 @@ public class HomeFragment extends Fragment {
                 results = Search_algorithm.searchRestaurant(query);
 
                 if(results.isEmpty()){
-                    String msg = "Your search does not match any restaurants on OrderUp";
                     TextView textView = new TextView(getActivity());
+                    String msg = "Your search does not match any restaurants on OrderUp";
                     textView.setText(msg);
-                    textView.setTextSize(12);
+
                     containerText.addView(textView);
                 }
                 else {
                     for (int i = 0; i < results.size(); i++) {
                         TextView textView = new TextView(getActivity());
                         textView.setText(results.get(i));
-                        textView.setTextSize(16);
+                        textView.setTextSize(40);
                         //textView.setTextColor(Color.PURPLE);
                         containerText.addView(textView);
                     }

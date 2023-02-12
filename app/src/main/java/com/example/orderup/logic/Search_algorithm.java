@@ -21,7 +21,18 @@ public class Search_algorithm {
         this.userInput = userInput;
     }
 
-   // results for restaurants
+    //------------------------------------------------------
+    // searchRestaurant
+    //
+    // PURPOSE:   The method implements a search algorithm. It searches for a restaurant or a restaurant's category that matches user's input.
+    //            It calls a searchRestaurantKey function to get the index of each restaurant recommended from the stub restaurant database.
+    //
+    // PARAMETERS:
+    //            String user_input: user input
+    //
+    // Returns:
+    //           ArrayList<String>: an ArrayList<String> of  restaurant recommendation based on user's search
+    //------------------------------------------------------
     public static ArrayList<String>  searchRestaurant(String userInput) {
 
         RestaurantPersistance p = new RestaurantPersistenceStub();
@@ -69,9 +80,9 @@ public class Search_algorithm {
     }
 
     //------------------------------------------------------
-    // searchRestaurant
+    // searchRestaurantKey
     //
-    // PURPOSE:   The method implements a search algorithm. Its searches for a restaurant or a restaurant's category that matches user's input
+    // PURPOSE:   The method implements a search algorithm. Its searches for a restaurant or a restaurant's category that matches user's input.
     //
     // PARAMETERS:
     //            String user_input: user input

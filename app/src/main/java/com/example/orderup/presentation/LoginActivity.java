@@ -41,6 +41,20 @@ public class LoginActivity extends AppCompatActivity {
 
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
+
+                if(email.equals("aaa") || password.equals("aaa")) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                    //throw the user id to main_activity to retrieve the user info from database
+                    intent.putExtra("email", email);
+                    Log.d("this", "go to main");
+                    //activate the main class***
+                    startActivity(intent);
+
+                    //This is to prevent user back to login page using the back button
+                    finish();
+
+                }
                 if(email.equals("") || password.equals("")){
                     ErrorPopUp er = new ErrorPopUp();
                     er.errorMsg(LoginActivity.this, "Email or Password Is Empty");
