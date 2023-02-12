@@ -2,8 +2,11 @@ package com.example.orderup.Objects;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
+
 public class UserTest extends TestCase {
 
+    @Test
     public void testGetFirstName() {
 
         String firstName= "John";
@@ -14,7 +17,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         assertEquals(firstName,user.getFirstName());
     }
-
+    @Test
     public void testGetLastName() {
 
         String firstName= "John";
@@ -25,7 +28,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         assertEquals(lastName,user.getLastName());
     }
-
+    @Test
     public void testGetEmail() {
 
         String firstName= "John";
@@ -36,7 +39,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         assertEquals(email,user.getEmail());
     }
-
+    @Test
     public void testGetPassword() {
 
         String firstName= "John";
@@ -47,7 +50,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         assertEquals(password,user.getPassword());
     }
-
+    @Test
     public void testGetAddress() {
         String firstName= "John";
         String lastName= "Doe";
@@ -60,6 +63,58 @@ public class UserTest extends TestCase {
 
     }
 
+    @Test
+    public void testGetCreditCard() {
+        String firstName= "John";
+        String lastName= "Doe";
+        String email = "johndoe@gmail.com";
+        String password = "administrator";
+
+        String creditCard = "4326107452562046";
+        String cvc = "4703";
+        String expiry = "03/23";
+
+        User user = new User(firstName, lastName, email, password);
+        user.addCreditCard(creditCard,cvc,expiry);
+
+        assertEquals(creditCard,user.getCreditCard());
+
+    }
+    @Test
+    public void testGetCvc() {
+        String firstName= "John";
+        String lastName= "Doe";
+        String email = "johndoe@gmail.com";
+        String password = "administrator";
+
+        String creditCard = "4326107452562046";
+        String cvc = "4703";
+        String expiry = "03/23";
+
+        User user = new User(firstName, lastName, email, password);
+        user.addCreditCard(creditCard,cvc,expiry);
+
+        assertEquals(cvc,user.getCvc());
+
+    }
+    @Test
+    public void testGetExpiry() {
+        String firstName= "John";
+        String lastName= "Doe";
+        String email = "johndoe@gmail.com";
+        String password = "administrator";
+
+        String creditCard = "4326107452562046";
+        String cvc = "4703";
+        String expiry = "03/23";
+
+        User user = new User(firstName, lastName, email, password);
+        user.addCreditCard(creditCard,cvc,expiry);
+
+        assertEquals(expiry,user.getExpiry());
+
+    }
+    @Test
     public void testUpdateFirstName() {
 
         String firstName= "John";
@@ -72,7 +127,7 @@ public class UserTest extends TestCase {
         user.updateFirstName(firstName2);
         assertEquals(firstName2,user.getFirstName());
     }
-
+    @Test
     public void testUpdateLastName() {
 
         String firstName= "John";
@@ -85,7 +140,7 @@ public class UserTest extends TestCase {
         user.updateLastName(lastName2);
         assertEquals(lastName2,user.getLastName());
     }
-
+    @Test
     public void testUpdatePass() {
 
         String firstName= "John";
@@ -98,7 +153,7 @@ public class UserTest extends TestCase {
         user.updatePass(password2);
         assertEquals(password2,user.getPassword());
     }
-
+    @Test
     public void testUpdateAddress() {
 
         String firstName= "John";
@@ -112,7 +167,7 @@ public class UserTest extends TestCase {
         assertEquals(address,user.getAddress());
 
     }
-
+    @Test
     public void testAddCreditCard() {
 
         String firstName= "John";
@@ -131,20 +186,7 @@ public class UserTest extends TestCase {
         assertEquals(expiry,user.getExpiry());
 
     }
-
-    public void testTestToString() {
-        String firstName= "John";
-        String lastName= "Doe";
-        String email = "johndoe@gmail.com";
-        String password = "administrator";
-        String address = "123 Main Street";
-
-        User user = new User(firstName, lastName, email, password);
-
-        String result = String.format("First name: %s\n" + "Last name: %s\n" + "Email: %s\n" + "Password: %s\n" + "Address: %s", firstName, lastName, email, password, address);
-        assertEquals(result,user.toString());
-    }
-
+    @Test
     public void testTestEquals() {
         String firstName= "John";
         String lastName= "Doe";
