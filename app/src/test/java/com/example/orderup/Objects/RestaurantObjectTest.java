@@ -1,10 +1,12 @@
-package com.example.orderup;
+package com.example.orderup.Objects;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Restaurant;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class RestaurantObjectTest {
     @Test
