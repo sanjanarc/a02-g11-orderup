@@ -3,7 +3,7 @@ package com.example.orderup.persistance;
 import java.util.List;
 import com.example.orderup.Objects.Restaurant;
 
-public interface RestaurantPersistance {
+public interface RestaurantPersistence {
 
 
     List<Restaurant> getRestaurantSequential();

@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.persistance.RestaurantPersistance;
+import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.Objects.FoodItem;
 
-public class RestaurantPersistenceStub implements RestaurantPersistance {
+public class RestaurantPersistenceStub implements RestaurantPersistence {
     private List<Restaurant> restaurants;
 
 

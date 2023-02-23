@@ -6,11 +6,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.persistance.RestaurantPersistance;
+import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
-
-
-import java.util.Scanner;
 
 
 public class Search_algorithm {
@@ -35,7 +32,7 @@ public class Search_algorithm {
     //------------------------------------------------------
     public static ArrayList<String>  searchRestaurant(String userInput) {
 
-        RestaurantPersistance p = new RestaurantPersistenceStub();
+        RestaurantPersistence p = new RestaurantPersistenceStub();
         List<Restaurant> restaurants = p.getRestaurantSequential(); // want to use method from restaurant interface
 
         String[] restNames = new String[50];
