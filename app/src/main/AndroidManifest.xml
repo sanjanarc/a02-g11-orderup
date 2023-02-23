@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderUp"
-        tools:targetApi="23">
+        tools:targetApi="s">
 
         <activity
             android:name=".presentation.LoginActivity"
