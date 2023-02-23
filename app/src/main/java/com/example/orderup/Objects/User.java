@@ -7,12 +7,15 @@ public class User {
     private String firstName, lastName, email, password, expiry, address;
     private int creditCard, cvc;
 
+    private float balance;
+
     public User(String firstName, String lastName, String email, String password) {
 
         this.firstName= firstName;
         this.lastName= lastName;
         this.email = email;
         this.password = password;
+        this.balance = 0.00F;
     }
 
     public String getFirstName(){
@@ -55,6 +58,14 @@ public class User {
         this.creditCard= newCreditCard;
         this.cvc= newCvc;
         this.expiry= newExpiry;
+    }
+
+    public void addBalance(float balance) {
+        this.balance += balance;
+    }
+
+    public String getBalance() {
+        return String.valueOf(this.balance);
     }
 
     public String toString(){

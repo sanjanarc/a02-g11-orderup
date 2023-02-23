@@ -54,4 +54,14 @@ public class UserPersistenceStub implements UserPersistence {
     public void updateAddress(String email, String address){
         userList.get(email).updateAddress(address);
     }
+
+    @Override
+    public String getBalance(String email){
+        return userList.get(email).getBalance();
+    }
+
+    @Override
+    public void addBalance(String email, float balance) {
+        userList.get(email).addBalance(balance);
+    }
 }

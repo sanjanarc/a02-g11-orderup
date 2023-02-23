@@ -19,7 +19,7 @@ import com.example.orderup.persistance.UserPersistence;
 
 public class UserAccountFragment extends Fragment {
 
-    TextView infoContainer;
+    TextView infoContainer, accountBalance;
     Button addCardButton, logoutButton, addAddressButton;
 
     UserPersistence userPersistence= Services.getUserPersistence();
@@ -28,6 +28,9 @@ public class UserAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
+
+        accountBalance = (TextView) view.findViewById(R.id.accountBalance);
+        accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
 
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
         infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
@@ -58,11 +61,25 @@ public class UserAccountFragment extends Fragment {
             }
         });
 
-        Button redeemCardButton = (Button) view.findViewById(R.id.addCardButton);
+        Button redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
         redeemCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCardPopUp();
+                int rand = (int)Math.floor(Math.random() * (5) + 1);
+                switch(rand) {
+                    case 1: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 5.00F);
+                        break;
+                    case 2: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 10.00F);
+                        break;
+                    case 3: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 20.00F);
+                        break;
+                    case 4: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 50.00F);
+                        break;
+                    case 5: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 100.00F);
+                        break;
+                }
+
+                accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
             }
         });
 

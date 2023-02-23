@@ -19,4 +19,8 @@ public interface UserPersistence {
     void updatePassword(String email, String password);
 
     void updateAddress(String email, String address);
+
+    void addBalance(String email, float balance);
+
+    String getBalance(String email);
 }
