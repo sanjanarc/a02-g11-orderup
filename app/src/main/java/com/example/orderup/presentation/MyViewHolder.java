@@ -25,6 +25,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
+            //
             public void onClick(View view) {
                 Log.d("this", ""+position);
             }
