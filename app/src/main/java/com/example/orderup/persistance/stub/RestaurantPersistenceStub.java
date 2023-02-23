@@ -114,4 +114,8 @@ public class RestaurantPersistenceStub implements RestaurantPersistance {
             restaurants.remove(index);
         }
     }
+
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
 }

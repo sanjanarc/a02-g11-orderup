@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     UserAccountFragment userAccountFragment=new UserAccountFragment();
     CustomerSupportFragment customerSupportFragment=new CustomerSupportFragment();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
