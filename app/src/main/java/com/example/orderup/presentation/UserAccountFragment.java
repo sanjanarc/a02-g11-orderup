@@ -58,6 +58,14 @@ public class UserAccountFragment extends Fragment {
             }
         });
 
+        Button redeemCardButton = (Button) view.findViewById(R.id.addCardButton);
+        redeemCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCardPopUp();
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
