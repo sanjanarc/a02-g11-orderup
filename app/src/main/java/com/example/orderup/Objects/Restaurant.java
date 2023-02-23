@@ -1,6 +1,7 @@
 package com.example.orderup.Objects;
-
 import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Restaurant {
 
@@ -12,7 +13,10 @@ public class Restaurant {
     private final int num_ratings;
     private final int average_rating;
     private final String imagesURL;
-    private final String menu_items;
+    private final List <FoodItem> menu; //menu List
+    private final FoodItem item1; //FoodItems in a menu List
+    private final FoodItem item2;
+    private final FoodItem item3;
     private final int num_menu_items;
     private final String location;
 
@@ -26,13 +30,18 @@ public class Restaurant {
         num_ratings= 0;
         average_rating= 0;
         imagesURL= null;
-        menu_items= null;
+        menu= null;
+        item1= null;
+        item2= null;
+        item3= null;
         num_menu_items=0;
         location= null;
     }
 
-    public Restaurant(final String newID, final String newRestaurantName, final String newCategory, final String description, final int num_ratings, final int average_rating, final String imagesURL, final String menu_items, final int num_menu_items, final String location )
+    public Restaurant(final String newID, final String newRestaurantName, final String newCategory, final String description, final int num_ratings, final int average_rating, final String imagesURL, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
     {
+        this.menu =  new ArrayList<>();
+
         restaurantID = newID;
         restaurantName = newRestaurantName;
         this.newCategory= newCategory;
@@ -40,9 +49,17 @@ public class Restaurant {
         this.num_ratings= num_ratings;
         this.average_rating= average_rating;
         this.imagesURL= imagesURL;
-        this.menu_items= menu_items;
+        this.item1= item1;
+        this.item2= item2;
+        this.item3= item3;
+
         this.num_menu_items=num_menu_items;
         this.location= location;
+
+        //add the FoodItems to menu List
+        menu.add(item1);
+        menu.add(item2);
+        menu.add(item3);
 
     }
     public String getRestaurantCategory(){
@@ -61,9 +78,20 @@ public class Restaurant {
     public String getFood_imageURL(){
         return (imagesURL);
     }
-    public String getMenuItems(){
-        return(menu_items);
+
+    public List<FoodItem> getMenuItems(){
+        return(menu);
     }
+    public FoodItem getItem1(){
+        return item1;
+    }
+    public FoodItem getItem2(){
+        return item2;
+    }
+    public FoodItem getItem3() {
+        return item3;
+    }
+
     public int getNum_menuItems(){
         return(num_menu_items);
     }

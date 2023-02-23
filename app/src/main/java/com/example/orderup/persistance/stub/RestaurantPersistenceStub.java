@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.persistance.RestaurantPersistance;
+import com.example.orderup.Objects.FoodItem;
 
 public class RestaurantPersistenceStub implements RestaurantPersistance {
     private List<Restaurant> restaurants;
@@ -14,7 +15,8 @@ public class RestaurantPersistenceStub implements RestaurantPersistance {
     public RestaurantPersistenceStub() {
         this.restaurants = new ArrayList<>();
 
-        restaurants.add(new Restaurant("Restaurant 1", "Indian Food Corner","Tandoori,Indian, Chicken", "Traditional Indian dishes from butter chicken to chicken biryani.", 0, 0, "","", 0,""));
+        restaurants.add(new Restaurant("Restaurant 1", "Indian Food Corner","Tandoori,Indian, Chicken", "Traditional Indian dishes from butter chicken to chicken biryani.", 0, 0, "", new FoodItem("IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem("Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem("Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
+        /*
         restaurants.add(new Restaurant("Restaurant 2", "Baked Expectations", "Pie,Dessert,Sweet,Cake,Cookies,Cupcakes", "", 0, 0, "","", 0,""));
         restaurants.add(new Restaurant("Restaurant 3", "Banh Mi King", "Vietnamese,Savory,Sandwiches,Phom Poutine", "", 0, 0, "","", 0,""));
         restaurants.add(new Restaurant("Restaurant 4", "Jollibee", "Fried Chicken,Philippines,Filipino Fast Food", "", 0, 0, "","", 0,""));
@@ -64,7 +66,7 @@ public class RestaurantPersistenceStub implements RestaurantPersistance {
         restaurants.add(new Restaurant("Restaurant 48", "Clay Oven", "Indian,Tandoori, Curry", "", 0, 0, "","", 0,""));
         restaurants.add(new Restaurant("Restaurant 49", "Kimbaek Restaurant", "Korean", "", 0, 0, "","", 0,""));
         restaurants.add(new Restaurant("Restaurant 50", "New York Fries", "Fries,Hot Dogs,Poutine,Canadian", "", 0, 0, "","", 0,""));
-
+        */
     }
 
     @Override
