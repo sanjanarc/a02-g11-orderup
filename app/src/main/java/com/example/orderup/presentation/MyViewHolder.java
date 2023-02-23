@@ -1,5 +1,6 @@
 package com.example.orderup.presentation;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
@@ -25,8 +26,9 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            //
             public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RestaurantActivity.class);
+                view.getContext().startActivity(intent);
                 Log.d("this", ""+position);
             }
         });
