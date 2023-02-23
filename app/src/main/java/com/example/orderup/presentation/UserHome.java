@@ -25,7 +25,7 @@ public class UserHome extends AppCompatActivity {
 
         RestaurantPersistenceStub restaurants = new RestaurantPersistenceStub() ;
         List<Restaurant> restaurantsList = restaurants.getRestaurants();
-        recyclerView.setAdapter(new MyAdapter(getApplicationContext(), restaurantsList));
+        recyclerView.setAdapter(new MyAdapter(restaurantsList));
 
     }
 }

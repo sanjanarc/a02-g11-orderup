@@ -1,6 +1,5 @@
 package com.example.orderup.presentation;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,20 +13,18 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    Context context;
     List<Restaurant> restaurants;
 
 
-    MyAdapter(Context context, List<Restaurant> restaurants)
+    MyAdapter(List<Restaurant> restaurants)
     {
-        this.context = context;
         this.restaurants = restaurants;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.itemview,parent,false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview,parent,false));
     }
 
     @Override

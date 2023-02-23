@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new MyAdapter(view.getContext(), restaurantPersistence.getRestaurantSequential()));
+        recyclerView.setAdapter(new MyAdapter(restaurantPersistence.getRestaurantSequential()));
         /*
         //get ids
         SearchView searchView = view.findViewById(R.id.searchView);
