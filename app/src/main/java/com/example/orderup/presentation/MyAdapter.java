@@ -13,13 +13,13 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
+    MyAdapter myAdapter;
     List<Restaurant> restaurants;
-
-
     MyAdapter(List<Restaurant> restaurants)
     {
         this.restaurants = restaurants;
     }
+
 
     @NonNull
     @Override

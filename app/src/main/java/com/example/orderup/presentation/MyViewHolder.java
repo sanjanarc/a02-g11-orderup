@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
@@ -32,6 +33,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 view.getContext().startActivity(intent);
                 Log.d("this", ""+position);
             }
+
         });
     }
 }
