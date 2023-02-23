@@ -28,6 +28,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RestaurantActivity.class);
+                intent.putExtra("position", position);
                 view.getContext().startActivity(intent);
                 Log.d("this", ""+position);
             }
