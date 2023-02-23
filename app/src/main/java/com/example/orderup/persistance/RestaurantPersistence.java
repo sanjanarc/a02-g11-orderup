@@ -15,4 +15,6 @@ public interface RestaurantPersistence {
     Restaurant updateRestaurant(Restaurant currentRestaurant);
 
     void deleteRestaurant(Restaurant currentRestaurant);
+
+    int getImg(Restaurant currentRestaurant);
 }

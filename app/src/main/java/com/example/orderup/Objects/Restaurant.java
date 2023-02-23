@@ -12,7 +12,8 @@ public class Restaurant {
     private final String description;
     private final int num_ratings;
     private final int average_rating;
-    private final String imagesURL;
+
+    private final int imagesURL;
     private final List <FoodItem> menu; //menu List
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
@@ -29,7 +30,7 @@ public class Restaurant {
         description= null;
         num_ratings= 0;
         average_rating= 0;
-        imagesURL= null;
+        imagesURL= 0;
         menu= null;
         item1= null;
         item2= null;
@@ -38,7 +39,7 @@ public class Restaurant {
         location= null;
     }
 
-    public Restaurant(final String newID, final String newRestaurantName, final String newCategory, final String description, final int num_ratings, final int average_rating, final String imagesURL, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
+    public Restaurant(final String newID, final String newRestaurantName, final String newCategory, final String description, final int num_ratings, final int average_rating, final int imagesURL, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
     {
         this.menu =  new ArrayList<>();
 
@@ -76,7 +77,7 @@ public class Restaurant {
         return(average_rating);
     }
     public String getFood_imageURL(){
-        return (imagesURL);
+        return (null);
     }
 
     public List<FoodItem> getMenuItems(){
@@ -129,4 +130,9 @@ public class Restaurant {
 
         return equals;
     }
+
+    public int getImagesURL() {
+        return imagesURL;
+    }
+
 }
