@@ -1,6 +1,5 @@
 package com.example.orderup.presentation;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,10 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.persistance.RestaurantPersistance;
-import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {

@@ -4,32 +4,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.LinearLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.appcompat.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import com.example.orderup.R;
-import com.example.orderup.logic.Search_algorithm;
-
-
+import com.example.orderup.logic.Services;
+import com.example.orderup.persistance.RestaurantPersistence;
 
 
 public class HomeFragment extends Fragment {
 
-
+    private RecyclerView recyclerView;
+    private RestaurantPersistence restaurantPersistence = Services.getRestaurantPersistence();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_home, container, false);
+        View view= inflater.inflate(R.layout.user_home, container, false);
 
-
+        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(new MyAdapter(view.getContext(), restaurantPersistence.getRestaurantSequential()));
+        /*
         //get ids
         SearchView searchView = view.findViewById(R.id.searchView);
         LinearLayout containerText = view.findViewById(R.id.textview_container);
@@ -73,7 +72,7 @@ public class HomeFragment extends Fragment {
                 return true;
             }
         });
-
+*/
         // Inflate the layout for this fragment
         return view;
     }

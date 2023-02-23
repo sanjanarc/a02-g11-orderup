@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
-import com.example.orderup.persistance.RestaurantPersistance;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserHome extends AppCompatActivity {
