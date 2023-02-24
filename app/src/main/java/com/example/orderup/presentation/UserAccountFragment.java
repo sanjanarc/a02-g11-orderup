@@ -3,6 +3,7 @@ package com.example.orderup.presentation;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -148,7 +149,8 @@ public class UserAccountFragment extends Fragment {
                     }
                 }
 
-                boolean isUpdate = myDatabase.updateData(id,null, null, null,null,cardNum,cardCvc,cardExpiry,null, -1.00F);
+                boolean isUpdate = myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null, null, null,null,
+                        Integer.toString(cardNum),Integer.toString(cardCvc),cardExpiry,null, -1.00F);
                 if(isUpdate) {
                     Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
                 }
@@ -178,5 +180,16 @@ public class UserAccountFragment extends Fragment {
         builder.show();
     }
 
-    // Search by Email or GetID
+    public String searchByEmail(String email) {
+        String currId = null;
+        boolean found = false;
+        Cursor res = myDatabase.getAllData();
+        while(res.moveToNext() && found == false) {
+            if(email.equals(res.getString(1))) {
+                found = true;
+                currId = res.getString(0);
+            }
+        }
+        return currId;
+    }
 }
