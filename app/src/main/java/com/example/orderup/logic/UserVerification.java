@@ -1,7 +1,6 @@
 package com.example.orderup.logic;
 
 import android.content.Context;
-import android.database.Cursor;
 
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.DatabaseHelper;
@@ -91,18 +90,7 @@ public class UserVerification {
         return flag;
     }
 
-    public String searchByEmail(String email) {
-        String currId = null;
-        boolean found = false;
-        Cursor res = myDatabase.getAllData();
-        while(res.moveToNext() && found == false) {
-            if(email.equals(res.getString(1))) {
-                found = true;
-                currId = res.getString(0);
-            }
-        }
-        return currId;
-    }
+
 
 
 }

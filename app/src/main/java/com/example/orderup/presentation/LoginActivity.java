@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        myDatabase = new DatabaseHelper(this);
 
         //Get email and password.
         emailInput = (EditText) findViewById(R.id.emailInput);
@@ -50,12 +51,12 @@ public class LoginActivity extends AppCompatActivity {
                     ErrorPopUp er = new ErrorPopUp();
                     er.errorMsg(LoginActivity.this, "Email or Password Is Empty");
                 }
-                else if (!verify.EmailCheck(email) || null != verify.searchByEmail(email)) {
+                else if (!verify.EmailCheck(email)) {
                     ErrorPopUp er = new ErrorPopUp();
                     Log.d("this", "email:" +email +"    "+password);
                     er.errorMsg(LoginActivity.this, "Incorrect Email Format");
                 }
-                else if (verify.login(email, password, LoginActivity.this) != null) {
+                else if (verify.login(email, password, LoginActivity.this) != null || (null != searchByEmail(email) && checkPassword(email,password))) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                     //throw the user id to main_activity to retrieve the user info from database
@@ -121,6 +122,37 @@ public class LoginActivity extends AppCompatActivity {
         //Show all data
         showMessage("Data",buffer.toString());
 
+    }
+
+    // VV MOVE THESE TWO TO VERIFICATION VV
+    public String searchByEmail(String email) {
+        String currId = null;
+        boolean found = false;
+        Cursor res = myDatabase.getAllData();
+        while(res.moveToNext() && found == false) {
+            if(email.equals(res.getString(1))) {
+                found = true;
+                currId = res.getString(0);
+            }
+        }
+        return currId;
+    }
+
+    public boolean checkPassword(String email, String password) {
+        //String currId = null;
+        boolean match = false;
+        boolean found = false;
+        Cursor res = myDatabase.getAllData();
+        while(res.moveToNext() && found == false) {
+            if(email.equals(res.getString(1))) {
+                found = true;
+                //currId = res.getString(0);
+                if(res.getString(2).equals(password)) {
+                    match = true;
+                }
+            }
+        }
+        return match;
     }
 
 }
