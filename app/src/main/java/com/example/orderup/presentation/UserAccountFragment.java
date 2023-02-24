@@ -31,13 +31,18 @@ public class UserAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        myDatabase = new DatabaseHelper(getActivity());
+
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
         accountBalance = (TextView) view.findViewById(R.id.accountBalance);
-        accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
+        Cursor res = myDatabase.getAllData();
+        accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
+        //accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
 
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
-        infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
-        infoContainer.setTextSize(30);
+        // ADD THIS BACK USING USER DATABASE NOTE PERSISTENCE
+        //infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
+        //infoContainer.setTextSize(30);
 
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
         addCardButton.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +186,8 @@ public class UserAccountFragment extends Fragment {
     }
 
     public String searchByEmail(String email) {
+        myDatabase = new DatabaseHelper(getActivity());
+
         String currId = null;
         boolean found = false;
         Cursor res = myDatabase.getAllData();
@@ -191,5 +198,20 @@ public class UserAccountFragment extends Fragment {
             }
         }
         return currId;
+    }
+
+    public String getBalance(String email) {
+        myDatabase = new DatabaseHelper(getActivity());
+
+        String currBal = null;
+        boolean found = false;
+        Cursor res = myDatabase.getAllData();
+        while(res.moveToNext() && found == false) {
+            if(email.equals(res.getString(1))) {
+                found = true;
+                currBal = res.getString(9);
+            }
+        }
+        return currBal;
     }
 }
