@@ -1,14 +1,18 @@
 package com.example.orderup.logic;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.example.orderup.Objects.User;
+import com.example.orderup.persistance.DatabaseHelper;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.presentation.ErrorPopUp;
 
 public class UserVerification {
 
     private UserPersistence userPersistence;
+
+    DatabaseHelper myDatabase;
 
     public UserVerification(){
         userPersistence= Services.getUserPersistence();
@@ -85,6 +89,19 @@ public class UserVerification {
             counter++;
         }
         return flag;
+    }
+
+    public String searchByEmail(String email) {
+        String currId = null;
+        boolean found = false;
+        Cursor res = myDatabase.getAllData();
+        while(res.moveToNext() && found == false) {
+            if(email.equals(res.getString(1))) {
+                found = true;
+                currId = res.getString(0);
+            }
+        }
+        return currId;
     }
 
 

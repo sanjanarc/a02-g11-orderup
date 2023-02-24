@@ -1,6 +1,5 @@
 package com.example.orderup.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
+import com.example.orderup.persistance.DatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private int userId;
     private UserVerification verify=new UserVerification();
+
+    DatabaseHelper myDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     ErrorPopUp er = new ErrorPopUp();
                     er.errorMsg(LoginActivity.this, "Email or Password Is Empty");
                 }
-                else if (!verify.EmailCheck(email)) {
+                else if (!verify.EmailCheck(email) || null != verify.searchByEmail(email)) {
                     ErrorPopUp er = new ErrorPopUp();
                     Log.d("this", "email:" +email +"    "+password);
                     er.errorMsg(LoginActivity.this, "Incorrect Email Format");
@@ -81,4 +83,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
