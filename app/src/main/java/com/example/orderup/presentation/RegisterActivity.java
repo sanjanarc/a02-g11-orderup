@@ -48,12 +48,18 @@ public class RegisterActivity extends AppCompatActivity {
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
 
-                boolean isUpdate = myDatabase.updateData(id,email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
-                if(isUpdate) {
-                    Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
-                }
 
                 if(verify.RegistrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this)) {
+
+                    // Add User to Database if registration was successful
+                    boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);
+                    if(isInserted) {
+                        Log.d("this","USER DATA SUCCESSFULLY ADDED TO DATABASE");
+                        //user.print();
+                    } else {
+                        Log.d("this","USER DATA FAILED TO BE ADDED TO DATABASE");
+                    }
+
                     //Direct go to main page if register successful.
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
                     intent.putExtra("email", email);

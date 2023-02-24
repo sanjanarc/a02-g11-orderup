@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
+import com.example.orderup.persistance.DatabaseHelper;
 import com.example.orderup.persistance.UserPersistence;
 
 public class UserAccountFragment extends Fragment {
@@ -23,7 +25,7 @@ public class UserAccountFragment extends Fragment {
     Button addCardButton, logoutButton, addAddressButton;
 
     UserPersistence userPersistence= Services.getUserPersistence();
-
+    DatabaseHelper myDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +90,9 @@ public class UserAccountFragment extends Fragment {
     }
 
     private void addCardPopUp(){
+
+        myDatabase = new DatabaseHelper(getActivity());
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter your Credit Card Info:");
         View v = getLayoutInflater().inflate(R.layout.popup_add_credit_card, null);
@@ -143,7 +148,10 @@ public class UserAccountFragment extends Fragment {
                     }
                 }
 
-
+                boolean isUpdate = myDatabase.updateData(id,email,password,firstname,lastname,cardNum,cardCvc,cardExpiry,address,user.getBalance());
+                if(isUpdate) {
+                    Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
+                }
                 userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
             }
         });
@@ -169,4 +177,6 @@ public class UserAccountFragment extends Fragment {
 
         builder.show();
     }
+
+    // Search by Email or GetID
 }
