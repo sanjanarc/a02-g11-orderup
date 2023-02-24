@@ -24,11 +24,11 @@ public class UserAccountFragment extends Fragment {
 
     UserPersistence userPersistence= Services.getUserPersistence();
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
-
         accountBalance = (TextView) view.findViewById(R.id.accountBalance);
         accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
 

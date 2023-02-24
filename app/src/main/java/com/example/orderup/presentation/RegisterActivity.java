@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
+import com.example.orderup.persistance.DatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,11 +21,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText firstNameInput, lastNameInput, emailInput, passwordInput, rePasswordInput;
     Button registerButton, backButton;
+    DatabaseHelper myDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        myDatabase = new DatabaseHelper(this);
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
@@ -43,6 +47,11 @@ public class RegisterActivity extends AppCompatActivity {
                 email= emailInput.getText().toString();
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
+
+                boolean isUpdate = myDatabase.updateData(id,email,password,firstname,lastname,creditcard,csv,expiry,address,user.getBalance());
+                if(isUpdate) {
+                    Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
+                }
 
                 if(verify.RegistrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this)) {
                     //Direct go to main page if register successful.
