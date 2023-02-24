@@ -148,7 +148,7 @@ public class UserAccountFragment extends Fragment {
                     }
                 }
 
-                boolean isUpdate = myDatabase.updateData(id,email,password,firstname,lastname,cardNum,cardCvc,cardExpiry,address,user.getBalance());
+                boolean isUpdate = myDatabase.updateData(id,null, null, null,null,cardNum,cardCvc,cardExpiry,null, -1.00F);
                 if(isUpdate) {
                     Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
                 }

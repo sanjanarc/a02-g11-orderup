@@ -45,15 +45,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertData(String email, String password, String firstname, String lastname, String credit, String csv, String expiry, String address, float balance) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2,email);
-        contentValues.put(COL_3,password);
-        contentValues.put(COL_4,firstname);
-        contentValues.put(COL_5,lastname);
-        contentValues.put(COL_6,credit);
-        contentValues.put(COL_7,csv);
-        contentValues.put(COL_8,expiry);
-        contentValues.put(COL_9,address);
-        contentValues.put(COL_10,balance);
+
+        if(null != email) {
+            contentValues.put(COL_2, email);
+        }
+
+        if(null != password) {
+            contentValues.put(COL_3, password);
+        }
+
+        if(null != firstname) {
+            contentValues.put(COL_4, firstname);
+        }
+
+        if(null != lastname) {
+            contentValues.put(COL_5, lastname);
+        }
+
+        if(null != credit) {
+            contentValues.put(COL_6, credit);
+        }
+
+        if(null != csv) {
+            contentValues.put(COL_7, csv);
+        }
+
+        if(null != expiry) {
+            contentValues.put(COL_8, expiry);
+        }
+
+        if(null != address) {
+            contentValues.put(COL_9, address);
+        }
+
+        if(balance >= 0.00F) {
+            contentValues.put(COL_10, balance);
+        }
+
         long result = sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
         if(result == -1) {
             return false;
