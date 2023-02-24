@@ -15,7 +15,7 @@ import com.example.orderup.persistance.DatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button signInButton, registerButton;
+    private Button signInButton, registerButton, viewDB;
 
     private String email, password;
 
@@ -80,6 +80,14 @@ public class LoginActivity extends AppCompatActivity {
                 //Go to Register page.
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
+            }
+        });
+
+        viewDB = (Button) findViewById(R.id.viewDB);
+        viewDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                printDatabase();
             }
         });
     }
