@@ -42,7 +42,7 @@ public class UserAccountFragment extends Fragment
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
         accountBalance = (TextView) view.findViewById(R.id.accountBalance);
         Cursor res = myDatabase.getAllData();
-        //accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
+        accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
 
         //Display the user info.
