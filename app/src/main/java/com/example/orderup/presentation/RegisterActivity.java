@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        myDatabase = new DatabaseHelper(this);
         verify= new UserVerification();
 
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
@@ -44,14 +44,12 @@ public class RegisterActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-
                 firstName = firstNameInput.getText().toString();
                 lastName = lastNameInput.getText().toString();
                 email= emailInput.getText().toString();
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
 
-                myDatabase = new DatabaseHelper(this.getActivity());
 
                 if(verify.registrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this))
                 {
