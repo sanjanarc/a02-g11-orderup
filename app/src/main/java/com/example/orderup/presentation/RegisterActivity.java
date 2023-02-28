@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                 rePassword= rePasswordInput.getText().toString();
 
 
-                if(verify.RegistrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this)) {
+                if(verify.registrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this)) {
 
                     // Add User to Database if registration was successful
                     boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);

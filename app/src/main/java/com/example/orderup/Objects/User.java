@@ -5,7 +5,7 @@ import java.util.Objects;
 public class User {
 
     private String firstName, lastName, email, password, expiry, address;
-    private int creditCard, cvc;
+    private String creditCard, cvc;
 
     private float balance;
 
@@ -54,7 +54,7 @@ public class User {
         this.address= newAddress;
     }
 
-    public void addCreditCard(int newCreditCard, int newCvc, String newExpiry){
+    public void addCreditCard(String newCreditCard, String newCvc, String newExpiry){
         this.creditCard= newCreditCard;
         this.cvc= newCvc;
         this.expiry= newExpiry;

@@ -31,7 +31,7 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
     @Override
-    public void addCreditCard(String email, int cardNum, int cvc, String expiry){
+    public void addCreditCard(String email, String cardNum, String cvc, String expiry){
         userList.get(email).addCreditCard(cardNum, cvc, expiry);
     }
 

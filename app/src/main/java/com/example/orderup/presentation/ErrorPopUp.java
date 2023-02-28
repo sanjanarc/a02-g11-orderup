@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 
 public class ErrorPopUp {
 
-    public void errorMsg(Context context, String msg){
+    public static void errorMsg(Context context, String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(msg);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

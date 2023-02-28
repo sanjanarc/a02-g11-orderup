@@ -1,87 +1,77 @@
 package com.example.orderup.presentation;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
 import com.example.orderup.persistance.DatabaseHelper;
 
-public class LoginActivity extends AppCompatActivity {
-
+public class LoginActivity extends AppCompatActivity
+{
     private Button signInButton, registerButton, viewDB;
 
     private String email, password;
 
     private EditText emailInput, passwordInput;
 
-    private int userId;
-    private UserVerification verify=new UserVerification();
+    private UserVerification verify;
 
     DatabaseHelper myDatabase;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         myDatabase = new DatabaseHelper(this);
+
+        verify=new UserVerification();
 
         //Get email and password.
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
 
-        //Response of Sign in button.
         signInButton= (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                if(email.equals("") || password.equals("")){
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(LoginActivity.this, "Email or Password Is Empty");
-                }
-                else if (!verify.EmailCheck(email)) {
-                    ErrorPopUp er = new ErrorPopUp();
-                    Log.d("this", "email:" +email +"    "+password);
-                    er.errorMsg(LoginActivity.this, "Incorrect Email Format");
-                }
-                else if (verify.login(email, password, LoginActivity.this) != null || (null != searchByEmail(email) && checkPassword(email,password))) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                    //throw the user id to main_activity to retrieve the user info from database
+                if(verify.loginVerification(email, password, LoginActivity.this) || null != searchByEmail(email) && checkPassword(email,password))
+                {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("email", email);
-                    Log.d("this", "go to main");
-                    //activate the main class***
+
+                    //Start the main page activity.
                     startActivity(intent);
 
-                    //This is to prevent user back to login page using the back button
+                    //Remove current activity.
                     finish();
-                } else {
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(LoginActivity.this, "Incorrect Email or Password.");
-                    //Get some error msg from verify class and show to user.
                 }
             }
         });
 
-        //Response of Register button
         registerButton= (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //Go to Register page.
+            public void onClick(View view)
+            {
+                //Start the register page activity.
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+
+                //Remove current activity.
                 finish();
             }
         });
@@ -94,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -123,8 +114,6 @@ public class LoginActivity extends AppCompatActivity {
         showMessage("Data",buffer.toString());
 
     }
-
-    // VV MOVE THESE TWO TO VERIFICATION VV
     public String searchByEmail(String email) {
         String currId = null;
         boolean found = false;
@@ -154,5 +143,5 @@ public class LoginActivity extends AppCompatActivity {
         }
         return match;
     }
-
 }
+

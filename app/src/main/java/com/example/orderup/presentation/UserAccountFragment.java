@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,31 +16,39 @@ import androidx.fragment.app.Fragment;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
+import com.example.orderup.logic.UserVerification;
 import com.example.orderup.persistance.DatabaseHelper;
 import com.example.orderup.persistance.UserPersistence;
 
-public class UserAccountFragment extends Fragment {
+public class UserAccountFragment extends Fragment
+{
 
     TextView infoContainer, accountBalance;
+
     Button addCardButton, logoutButton, addAddressButton;
 
     UserPersistence userPersistence= Services.getUserPersistence();
+
+    UserVerification verify = new UserVerification();
+
     DatabaseHelper myDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         myDatabase = new DatabaseHelper(getActivity());
 
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
         accountBalance = (TextView) view.findViewById(R.id.accountBalance);
         Cursor res = myDatabase.getAllData();
-        accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
-        //accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
-
+        //accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
-        // ADD THIS BACK USING USER DATABASE NOTE PERSISTENCE
+
+        //Display the user info.
         //infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
+
+        //Set the text size.
         //infoContainer.setTextSize(30);
 
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
@@ -65,6 +72,8 @@ public class UserAccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
+
+                //Remove current activity.
                 getActivity().finish();
             }
         });
@@ -95,90 +104,51 @@ public class UserAccountFragment extends Fragment {
         return view;
     }
 
-    private void addCardPopUp(){
-
-        myDatabase = new DatabaseHelper(getActivity());
-
+    private void addCardPopUp()
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter your Credit Card Info:");
         View v = getLayoutInflater().inflate(R.layout.popup_add_credit_card, null);
         builder.setView(v);
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 EditText cardNumInput= (EditText) v.findViewById(R.id.cardNumberInput);
                 EditText cardCvcInput= (EditText) v.findViewById(R.id.cardCvcInput);
                 EditText cardExpiryInput= (EditText) v.findViewById(R.id.cardExpiryInput);
 
-                int cardNum = 0;
-                int cardCvc = 0;
+                String cardNum = cardNumInput.getText().toString();
+                String cardCvc = cardCvcInput.getText().toString();
                 String cardExpiry = cardExpiryInput.getText().toString();
 
-                if(cardNumInput.getText() != null) {
-                    cardNum = Integer.parseInt(cardNumInput.getText().toString());
-                } else {
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(getActivity(), "Missing Field: Please check you have entered all fields.");
+                if(verify.creditCardVerification(cardNum, cardCvc, cardExpiry, getActivity()))
+                {
+                    userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
                 }
-
-
-                if(cardCvcInput.getText() != null) {
-                    cardCvc = Integer.parseInt(cardCvcInput.getText().toString());
-                } else {
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(getActivity(), "Missing Field: Please check you have entered all fields.");
-                }
-
-                if(Integer.toString(cardNum).length() != 16) {
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(getActivity(), "Error: Incorrect Card Number Format");
-                }
-
-                if(Integer.toString(cardNum).charAt(0) != '2' || Integer.toString(cardNum).charAt(0) != '3'
-                        || Integer.toString(cardNum).charAt(0) != '4' || Integer.toString(cardNum).charAt(0) != '5') {
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(getActivity(), "Error: Card is not Visa, American Express or Mastercard");
-                }
-
-                if(Integer.toString(cardCvc).length() != 3 || Integer.toString(cardCvc).length() != 4) {
-                    ErrorPopUp er = new ErrorPopUp();
-                    er.errorMsg(getActivity(), "Error: Incorrect CVC length");
-                }
-
-                if(cardExpiry.length() != 5) {
-                    if (cardExpiry.charAt(2) != '/' || (cardExpiry.charAt(0) != 0 && (cardExpiry.charAt(0) != 1))
-                    || (cardExpiry.charAt(0) == 1 && Character.getNumericValue(cardExpiry.charAt(1)) >= 3)) {
-                        ErrorPopUp er = new ErrorPopUp();
-                        er.errorMsg(getActivity(), "Error: Incorrect Expiry");
-
-                    }
-                }
-
-                boolean isUpdate = myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null, null, null,null,
-                        Integer.toString(cardNum),Integer.toString(cardCvc),cardExpiry,null, -1.00F);
-                if(isUpdate) {
-                    Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
-                }
-                userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
             }
         });
-
         builder.show();
     }
 
-    private void addAddressPopUp(){
+    private void addAddressPopUp()
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter your Address:");
         View v = getLayoutInflater().inflate(R.layout.popup_add_address, null);
         builder.setView(v);
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 EditText addressInput= (EditText) v.findViewById(R.id.addressInput);
 
                 String address= addressInput.getText().toString();
 
-                userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
+                if(verify.addressVerification(address, getActivity()))
+                {
+                    userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
+                }
             }
         });
 
