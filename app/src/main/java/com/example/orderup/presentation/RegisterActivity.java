@@ -2,6 +2,7 @@ package com.example.orderup.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
+import com.example.orderup.persistance.DatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity
 {
@@ -20,6 +22,8 @@ public class RegisterActivity extends AppCompatActivity
     private EditText firstNameInput, lastNameInput, emailInput, passwordInput, rePasswordInput;
 
     private Button registerButton, backButton;
+
+    DatabaseHelper myDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,14 +44,25 @@ public class RegisterActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+
                 firstName = firstNameInput.getText().toString();
                 lastName = lastNameInput.getText().toString();
                 email= emailInput.getText().toString();
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
 
+                myDatabase = new DatabaseHelper(this.getActivity());
+
                 if(verify.registrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this))
                 {
+                    boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);
+                    if(isInserted) {
+                        Log.d("this","USER DATA SUCCESSFULLY ADDED TO DATABASE");
+                        //user.print();
+                    } else {
+                        Log.d("this","USER DATA FAILED TO BE ADDED TO DATABASE");
+                    }
+
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
                     intent.putExtra("email", email);
 
