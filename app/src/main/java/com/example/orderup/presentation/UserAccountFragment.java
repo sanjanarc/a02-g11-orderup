@@ -129,9 +129,10 @@ public class UserAccountFragment extends Fragment
                     Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
                 }
 
-                if(verify.creditCardVerification(cardNum, cardCvc, cardExpiry, getActivity()))
-                {
-                    userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
+                if(userPersistence != null) {
+                    if (verify.creditCardVerification(cardNum, cardCvc, cardExpiry, getActivity())) {
+                        userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
+                    }
                 }
             }
         });
