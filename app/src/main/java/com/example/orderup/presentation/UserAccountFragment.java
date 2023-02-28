@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +122,12 @@ public class UserAccountFragment extends Fragment
                 String cardNum = cardNumInput.getText().toString();
                 String cardCvc = cardCvcInput.getText().toString();
                 String cardExpiry = cardExpiryInput.getText().toString();
+
+                boolean isUpdate = myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null, null, null,null,
+                        cardNum,cardCvc,cardExpiry,null, -1.00F);
+                if(isUpdate) {
+                    Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
+                }
 
                 if(verify.creditCardVerification(cardNum, cardCvc, cardExpiry, getActivity()))
                 {
