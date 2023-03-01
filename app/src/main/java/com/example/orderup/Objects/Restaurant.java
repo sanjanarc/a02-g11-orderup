@@ -115,7 +115,9 @@ public class Restaurant {
 
     public String toString()
     {
-        return String.format("Restauant id: %s, Restaurant name: %s", restaurantID, restaurantName);
+        String str = "";
+        str += restaurantName + "\n" + getRestaurantDescription();
+        return str;
     }
 
     public boolean equals(Object other)

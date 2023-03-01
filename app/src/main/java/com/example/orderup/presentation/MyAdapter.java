@@ -13,13 +13,13 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
+    MyAdapter myAdapter;
     List<Restaurant> restaurants;
-
-
     MyAdapter(List<Restaurant> restaurants)
     {
         this.restaurants = restaurants;
     }
+
 
     @NonNull
     @Override
@@ -32,6 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.nameview.setText(restaurants.get(position).getRestaurantName());
         holder.descriptionview.setText(restaurants.get(position).getRestaurantDescription());
         holder.imageview.setImageResource(restaurants.get(position).getImagesURL());
+        holder.position = holder.getAdapterPosition();
     }
 
     @Override
