@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/csvInput" />
 
     <EditText
-        android:id="@+id/addressInput"
+        android:id="@+id/streetInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -80,8 +80,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:text="Update"
-        app:layout_constraintStart_toStartOf="@id/addressInput"
-        app:layout_constraintTop_toBottomOf="@+id/addressInput" />
+        app:layout_constraintStart_toStartOf="@id/streetInput"
+        app:layout_constraintTop_toBottomOf="@+id/streetInput" />
 
     <TextView
         android:id="@+id/textView2"

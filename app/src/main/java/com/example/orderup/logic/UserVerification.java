@@ -1,6 +1,7 @@
 package com.example.orderup.logic;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
@@ -133,6 +134,7 @@ public class UserVerification
         return false;
     }
 
+    /* old address verification
     public boolean addressVerification(String address, Context context)
     {
         if(!address.equals(""))
@@ -168,6 +170,46 @@ public class UserVerification
 
         return false;
     }
+*/
+    public boolean addressVerification(String address, String city, String province, String postal, Context context)
+    {
+        return (streetVerification(address, context) && cityVerification(city, context) && provinceVerification(province, context) && postalVerification(postal, context));
+    }
+
+    public boolean streetVerification(String address, Context context) {
+
+        if(address == "" || address == null) {
+            ErrorPopUp.errorMsg(context, "Error: Address format incorrect.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean cityVerification(String city, Context context) {
+        Log.d("this","city = " + city);
+        if(!city.equalsIgnoreCase("Winnipeg")) {
+            ErrorPopUp.errorMsg(context, "Error: The city you entered must be located within Manitoba.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean provinceVerification(String province, Context context) {
+        if(!province.equalsIgnoreCase("Manitoba")) {
+            ErrorPopUp.errorMsg(context, "Error: Currently does not support other province other than Manitoba.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean postalVerification(String province, Context context) {
+    // change later
+    return true;
+    }
+
 
     //Make sure the email input contain character "@".
     public boolean emailCheck(String email)

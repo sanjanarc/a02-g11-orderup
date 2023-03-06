@@ -149,14 +149,22 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                EditText addressInput= (EditText) v.findViewById(R.id.addressInput);
+                EditText streetInput= (EditText) v.findViewById(R.id.streetInput);
+                EditText cityInput= (EditText) v.findViewById(R.id.cityInput);
+                EditText provinceInput= (EditText) v.findViewById(R.id.provinceInput);
+                EditText postalInput= (EditText) v.findViewById(R.id.postalInput);
 
-                String address= addressInput.getText().toString();
+                String street= streetInput.getText().toString();
+                String city= cityInput.getText().toString();
+                String province= provinceInput.getText().toString();
+                String postal= postalInput.getText().toString();
+                String address = street + ", " + city + ", " + province + ", " + postal;
 
-                if(verify.addressVerification(address, getActivity()))
+                if(verify.addressVerification(street, city, province, postal, getActivity()))
                 {
-                    //myDatabase.updateData(null,null,null,null,null,null,null,null, address, -1.00F);
-                    userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
+                    myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null,null,null,null,null,null,null, address, -1.00F);
+                    //add back later
+                    //userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
                 }
             }
         });
