@@ -231,7 +231,7 @@ public class UserVerification
 
 
     //Make sure the email input contain character "@".
-    public boolean emailCheck(String email)
+    public static boolean emailCheck(String email)
     {
         boolean flag = false;
         int counter = 1;
