@@ -30,8 +30,6 @@ public class UserAccountFragment extends Fragment
 
     UserPersistence userPersistence= Services.getUserPersistence();
 
-    UserVerification verify = new UserVerification();
-
     DatabaseHelper myDatabase;
 
     @Override
@@ -52,6 +50,7 @@ public class UserAccountFragment extends Fragment
         //Set the text size.
         //infoContainer.setTextSize(30);
 
+        //Event listener of the add card button.
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +59,7 @@ public class UserAccountFragment extends Fragment
             }
         });
 
+        //Event listener of the add address button.
         addAddressButton= (Button) view.findViewById(R.id.addAddressButton);
         addAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +68,7 @@ public class UserAccountFragment extends Fragment
             }
         });
 
+        //Event listener of the logout button.
         logoutButton= (Button) view.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,10 +116,12 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                //Connect to the xml file.
                 EditText cardNumInput= (EditText) v.findViewById(R.id.cardNumberInput);
                 EditText cardCvcInput= (EditText) v.findViewById(R.id.cardCvcInput);
                 EditText cardExpiryInput= (EditText) v.findViewById(R.id.cardExpiryInput);
 
+                //Get input data from xml file.
                 String cardNum = cardNumInput.getText().toString();
                 String cardCvc = cardCvcInput.getText().toString();
                 String cardExpiry = cardExpiryInput.getText().toString();
@@ -129,10 +132,13 @@ public class UserAccountFragment extends Fragment
                     Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
                 }
 
-                if(userPersistence != null) {
-                    if (verify.creditCardVerification(cardNum, cardCvc, cardExpiry, getActivity())) {
-                        userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
-                    }
+                String result = UserVerification.creditCardVerification(cardNum, cardCvc, cardExpiry);
+
+                if(result == null){
+                    userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
+                    ErrorPopUp.errorMsg(getActivity(), "Card added.");
+                }else{
+                    ErrorPopUp.errorMsg(getActivity(), result);
                 }
             }
         });
@@ -149,13 +155,20 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                //Connect to the xml file.
                 EditText addressInput= (EditText) v.findViewById(R.id.addressInput);
 
+                //Get input data from xml file.
                 String address= addressInput.getText().toString();
 
-                if(verify.addressVerification(address, getActivity()))
+                String result = UserVerification.addressVerification(address);
+
+                if(result == null)
                 {
                     userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
+                    ErrorPopUp.errorMsg(getActivity(), "Address added.");
+                }else {
+                    ErrorPopUp.errorMsg(getActivity(), result);
                 }
             }
         });

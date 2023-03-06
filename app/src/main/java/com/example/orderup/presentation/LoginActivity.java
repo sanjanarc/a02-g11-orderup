@@ -22,8 +22,6 @@ public class LoginActivity extends AppCompatActivity
 
     private EditText emailInput, passwordInput;
 
-    private UserVerification verify;
-
     DatabaseHelper myDatabase;
 
     @Override
@@ -34,22 +32,24 @@ public class LoginActivity extends AppCompatActivity
 
         myDatabase = new DatabaseHelper(this);
 
-        verify=new UserVerification();
-
-        //Get email and password.
+        //Build connection with xml file.
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
 
+        //Event listener of the login button.
         signInButton= (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
+                //Get input data from xml file.
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
+                //Check the input message with databases.
+                String result = UserVerification.loginVerification(email, password);
 
-                if(verify.loginVerification(email, password, LoginActivity.this) || null != searchByEmail(email) && checkPassword(email,password))
+                if(result == null || null != searchByEmail(email) && checkPassword(email,password))
                 {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("email", email);
@@ -60,9 +60,14 @@ public class LoginActivity extends AppCompatActivity
                     //Remove current activity.
                     finish();
                 }
+                else //Failed to login.
+                {
+                    ErrorPopUp.errorMsg(LoginActivity.this, result);
+                }
             }
         });
 
+        //Event listener of the register button.
         registerButton= (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
