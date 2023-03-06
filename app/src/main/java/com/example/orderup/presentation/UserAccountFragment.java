@@ -132,10 +132,10 @@ public class UserAccountFragment extends Fragment
                     Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
                 }
 
-                String result = UserVerification.creditCardVerification(cardNum, cardCvc, cardExpiry);
+                //Verify and add card to persistence.
+                String result = UserVerification.creditCardVerification(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
 
                 if(result == null){
-                    userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
                     ErrorPopUp.errorMsg(getActivity(), "Card added.");
                 }else{
                     ErrorPopUp.errorMsg(getActivity(), result);
@@ -161,11 +161,11 @@ public class UserAccountFragment extends Fragment
                 //Get input data from xml file.
                 String address= addressInput.getText().toString();
 
-                String result = UserVerification.addressVerification(address);
+                //Verify and update address.
+                String result = UserVerification.addressVerification(getActivity().getIntent().getStringExtra("email"), address);
 
                 if(result == null)
                 {
-                    userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
                     ErrorPopUp.errorMsg(getActivity(), "Address added.");
                 }else {
                     ErrorPopUp.errorMsg(getActivity(), result);

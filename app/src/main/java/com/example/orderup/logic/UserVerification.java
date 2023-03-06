@@ -93,7 +93,7 @@ public class UserVerification
         return msg;
     }
 
-    public static String creditCardVerification(String cardNum, String cardCvc, String cardExpiry)
+    public static String creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry)
     {
         //Store the message going to return to presentation layer.
         String msg;
@@ -125,6 +125,7 @@ public class UserVerification
             }
             else
             {
+                userPersistence.addCreditCard(email, cardNum, cardCvc, cardExpiry);
                 msg = null; //Card added successful.
             }
         }
@@ -135,7 +136,7 @@ public class UserVerification
         return msg;
     }
 
-    public static String addressVerification(String address)
+    public static String addressVerification(String email, String address)
     {
         //Store the message going to return to presentation layer.
         String msg;
@@ -162,6 +163,7 @@ public class UserVerification
             }
             else
             {
+                userPersistence.updateAddress(email, address);
                 msg = null; //Address added successful.
             }
         }
