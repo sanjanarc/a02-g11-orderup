@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
@@ -34,23 +35,30 @@ public class UserAccountFragment extends Fragment
 
     DatabaseHelper myDatabase;
 
+    User temp;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         myDatabase = new DatabaseHelper(getActivity());
-
+        temp = userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email"));
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
         accountBalance = (TextView) view.findViewById(R.id.accountBalance);
         Cursor res = myDatabase.getAllData();
         accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
-
+        String info;
         //Display the user info.
-        //infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
+        String.format("First name: %s\n" +
+                "Last name: %s\n" +
+                "Email: %s\n" +
+                "Password: %s\n" +
+                "Address: %s", temp.getFirstName(), temp.getLastName(), temp.getEmail(), temp.getPassword(), temp.getAddress());
+
+        infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
 
         //Set the text size.
-        //infoContainer.setTextSize(30);
+        infoContainer.setTextSize(30);
 
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
         addCardButton.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +138,7 @@ public class UserAccountFragment extends Fragment
                 }
 
                 if(userPersistence != null) {
-                    if (verify.creditCardVerification(cardNum, cardCvc, cardExpiry, getActivity())) {
+                    if (null == verify.creditCardVerification(cardNum, cardCvc, cardExpiry)) {
                         userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
                     }
                 }

@@ -13,6 +13,7 @@
         tools:targetApi="s">
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".presentation.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -22,12 +23,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".presentation.MainActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".presentation.RegisterActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".presentation.RestaurantActivity"
             android:exported="false" />
     </application>
