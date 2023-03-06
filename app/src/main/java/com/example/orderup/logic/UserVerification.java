@@ -137,7 +137,7 @@ public class UserVerification
     {
         if(!address.equals(""))
         {
-            String[] tempAddress= address.split(", ");
+            String[] tempAddress= address.split(",| ");
 
             if(tempAddress.length != 4)
             {
