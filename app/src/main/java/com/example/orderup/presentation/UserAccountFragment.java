@@ -172,7 +172,7 @@ public class UserAccountFragment extends Fragment
                 {
                     myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null,null,null,null,null,null,null, address, -1.00F);
                     //add back later
-                    //userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
+                    userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
                 }
             }
         });
