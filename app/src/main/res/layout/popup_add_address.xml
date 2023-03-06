@@ -9,25 +9,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/provinceInput"
-        android:hint="Postal Code:" />
+        android:layout_marginTop="1dp"
+        android:hint="Postal Code:"
+        android:maxLength="15" />
 
     <EditText
         android:id="@+id/provinceInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cityInput"
-        android:hint="Province:" />
+        android:layout_marginTop="1dp"
+        android:hint="Province:"
+        android:maxLength="20" />
 
     <EditText
         android:id="@+id/cityInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/streetInput"
-        android:hint="City:" />
+        android:hint="City:"
+        android:maxLength="20" />
 
     <EditText
         android:id="@+id/streetInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Street:" />
+        android:hint="Street:"
+        android:maxLength="20" />
 </RelativeLayout>
