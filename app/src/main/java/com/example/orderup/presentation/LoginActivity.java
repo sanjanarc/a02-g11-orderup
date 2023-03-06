@@ -14,6 +14,7 @@ import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
 import com.example.orderup.persistance.DatabaseHelper;
 
+//Login UI class.
 public class LoginActivity extends AppCompatActivity
 {
     private Button signInButton, registerButton, viewDB;
@@ -46,15 +47,15 @@ public class LoginActivity extends AppCompatActivity
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                //Check the input message with databases.
+                //Verify the input data with databases. Go to home page if nothing wrong. Will pop up a window if error occurs.
                 String result = UserVerification.loginVerification(email, password);
-
                 if(result == null || null != searchByEmail(email) && checkPassword(email,password))
                 {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    //Passing email to the main activity class.
                     intent.putExtra("email", email);
 
-                    //Start the main page activity.
+                    //Start the main activity class.
                     startActivity(intent);
 
                     //Remove current activity.

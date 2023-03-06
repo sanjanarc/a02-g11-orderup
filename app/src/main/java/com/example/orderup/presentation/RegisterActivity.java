@@ -13,6 +13,7 @@ import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
 import com.example.orderup.persistance.DatabaseHelper;
 
+//Register UI class.
 public class RegisterActivity extends AppCompatActivity
 {
     private String firstName, lastName, email, password, rePassword;
@@ -30,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity
         setContentView(R.layout.activity_register);
         myDatabase = new DatabaseHelper(this);
 
-        //Build the connection with the xml file.
+        //Connect to the xml file.
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
         emailInput= (EditText) findViewById(R.id.emailInput);
@@ -50,10 +51,9 @@ public class RegisterActivity extends AppCompatActivity
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
 
-                //Verify the formatting of the input data.
+                //Verify the input data with databases. Will add the account to databases and login the application if input data are correct.
                 String result = UserVerification.registrationVerification(email, firstName, lastName, password, rePassword);
-
-                if(result == null)
+                if(result == null) //Account created successful.
                 {
                     boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);
                     if(isInserted) {
@@ -64,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity
                     }
 
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
+                    //Passing the email to main activity class.
                     intent.putExtra("email", email);
 
                     //Start the main activity.
@@ -71,7 +72,10 @@ public class RegisterActivity extends AppCompatActivity
 
                     //Remove current activity.
                     finish();
-                }else{ //Warning user something went wrong.
+                }
+                else
+                {
+                    //Warning user something went wrong.
                     ErrorPopUp.errorMsg(RegisterActivity.this, result);
                 }
             }
