@@ -153,7 +153,7 @@ public class UserVerification
             }
             else if(false)
             {
-                //Add postal code error.
+                //Add postal code error .
             }
             else
             {
