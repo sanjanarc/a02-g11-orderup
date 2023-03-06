@@ -155,6 +155,7 @@ public class UserAccountFragment extends Fragment
 
                 if(verify.addressVerification(address, getActivity()))
                 {
+                    //myDatabase.updateData(null,null,null,null,null,null,null,null, address, -1.00F);
                     userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
                 }
             }

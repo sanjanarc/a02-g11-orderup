@@ -145,7 +145,7 @@ public class UserVerification
             }
             else if(!tempAddress[1].equalsIgnoreCase("Winnipeg"))
             {
-                ErrorPopUp.errorMsg(context, "Error: City must within Manitoba.");
+                ErrorPopUp.errorMsg(context, "Error: The city you entered must be located within Manitoba.");
             }
             else if(!tempAddress[2].equalsIgnoreCase("Manitoba"))
             {
