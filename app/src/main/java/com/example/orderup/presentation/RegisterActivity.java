@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity
                 String result = UserVerification.registrationVerification(email, firstName, lastName, password, rePassword);
                 if(result == null) //Account created successful.
                 {
+                    //Move this to userverify file
                     boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);
                     if(isInserted) {
                         Log.d("this","USER DATA SUCCESSFULLY ADDED TO DATABASE");

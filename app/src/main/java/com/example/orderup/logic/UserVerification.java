@@ -9,30 +9,31 @@ import com.example.orderup.presentation.ErrorPopUp;
 
 public class UserVerification
 {
+    private static UserPersistence userPersistence;
 
-    private UserPersistence userPersistence;
-
-    //Constructor.
-    public UserVerification()
+    //Verify the input email and password from databases. Return null if input data are correct, return error message, otherwise.
+    public static String loginVerification(String email, String password)
     {
-        userPersistence= Services.getUserPersistence();
-    }
+        //Get the database.
+        userPersistence = Services.getUserPersistence();
 
-    public boolean loginVerification(String email, String password, Context context)
-    {
+        //Store message that going to return to presentation layer.
+        String msg;
+
         //Input cannot be empty.
         if(email.equals("") || password.equals(""))
         {
-            ErrorPopUp.errorMsg(context, "Email or Password is Empty.");
+            msg = "Email or Password is Empty.";
         }
         //Email format must meet standard format.
         else if(!emailCheck(email))
         {
-            ErrorPopUp.errorMsg(context, "Incorrect Email Format.");
+            msg = "Incorrect Email Format.";
         }
         //Compare the entered password with the account password.
         else
         {
+            //Search the input email from database.
             User tempUser= userPersistence.getUserList().get(email);
 
             //Only true if the email exist in the database.
@@ -40,62 +41,80 @@ public class UserVerification
             {
                 if(tempUser.getPassword().equals(password))
                 {
-                    return true;
+                    //Return null mean user exists and the password correct.
+                    msg = null;
                 }
                 else
                 {
-                    ErrorPopUp.errorMsg(context, "Incorrect Password.");
+                    msg = "Incorrect Password.";
                 }
             }
             else
             {
-                ErrorPopUp.errorMsg(context, "Email does not exist.");
+                msg = "Email does not exist.";
             }
         }
-        return false;
+        return msg;
     }
 
-    public boolean registrationVerification(String email, String firstName, String lastName, String password, String rePassword, Context context)
+    //Verify the input data's format and create an account if the data is correct. Return error message if data format is incorrect.
+    public static String registrationVerification(String email, String firstName, String lastName, String password, String rePassword)
     {
+        //Get the database.
+        userPersistence = Services.getUserPersistence();
+
+        //Store message that going to return to presentation layer.
+        String msg;
+
         //Inputs cannot be empty.
         if(firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || rePassword.equals(""))
         {
-            ErrorPopUp.errorMsg(context, "Missing Field: Please check you have entered all fields.");
+            msg = "Missing Field: Please check you have entered all fields.";
         }
         //Email format must meet standard format.
         else if(!emailCheck(email))
         {
-            ErrorPopUp.errorMsg(context, "Incorrect Email Format.");
+            msg = "Incorrect Email Format.";
         }
         //Password must be the same.
         else if(!password.equals(rePassword))
         {
-            ErrorPopUp.errorMsg(context, "Password and Re-password do not match.");
+            msg = "Password and Re-password do not match.";
         }
         //Password must more than 6 character.
         else if(password.length() < 6)
         {
-            ErrorPopUp.errorMsg(context, "Password needs to be at least 6 characters long.");
+            msg = "Password needs to be at least 6 characters long.";
         }
         else
         {
+            //Search the input email from database.
             User tempUser= userPersistence.getUserList().get(email);
 
-            if(tempUser != null)
+            if(tempUser != null) //Registered email is already exist in the database and cannot be used again.
             {
-                ErrorPopUp.errorMsg(context, "Email already in use.");
+                msg = "Email already in use.";
             }
             else
             {
+                //Create a user to stub or database.
                 userPersistence.addUser(email, new User(firstName, lastName, email, password));
-                return true;
+
+                msg = null;
             }
         }
-        return false;
+        return msg;
     }
 
-    public boolean creditCardVerification(String cardNum, String cardCvc, String cardExpiry, Context context)
+    //Verify the input credit card format.
+    public static String creditCardVerification(String cardNum, String cardCvc, String cardExpiry)
     {
+        //Get the database.
+        userPersistence = Services.getUserPersistence();
+
+        //Store message that going to return to presentation layer.
+        String msg;
+
         //Inputs cannot be empty.
         if(!(cardNum.equals("") || cardCvc.equals("") || cardExpiry.equals("")))
         {
