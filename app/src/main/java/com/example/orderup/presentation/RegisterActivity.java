@@ -13,10 +13,9 @@ import com.example.orderup.R;
 import com.example.orderup.logic.UserVerification;
 import com.example.orderup.persistance.DatabaseHelper;
 
+//Register UI class.
 public class RegisterActivity extends AppCompatActivity
 {
-    private UserVerification verify;
-
     private String firstName, lastName, email, password, rePassword;
 
     private EditText firstNameInput, lastNameInput, emailInput, passwordInput, rePasswordInput;
@@ -31,27 +30,30 @@ public class RegisterActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         myDatabase = new DatabaseHelper(this);
-        verify= new UserVerification();
 
+        //Connect to the xml file.
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
         lastNameInput = (EditText) findViewById(R.id.lastNameInput);
         emailInput= (EditText) findViewById(R.id.emailInput);
         passwordInput= (EditText) findViewById(R.id.passwordInput);
         rePasswordInput= (EditText) findViewById(R.id.rePasswordInput);
 
+        //Event listener of the register button.
         registerButton = (Button) findViewById(R.id.registerButton1);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
+                //Get input data from xml file.
                 firstName = firstNameInput.getText().toString();
                 lastName = lastNameInput.getText().toString();
                 email= emailInput.getText().toString();
                 password= passwordInput.getText().toString();
                 rePassword= rePasswordInput.getText().toString();
 
-
-                if(verify.registrationVerification(email, firstName, lastName, password, rePassword, RegisterActivity.this))
+                //Verify the input data with databases. Will add the account to databases and login the application if input data are correct.
+                String result = UserVerification.registrationVerification(email, firstName, lastName, password, rePassword);
+                if(result == null) //Account created successful.
                 {
                     boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);
                     if(isInserted) {
@@ -62,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity
                     }
 
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
+                    //Passing the email to main activity class.
                     intent.putExtra("email", email);
 
                     //Start the main activity.
@@ -70,15 +73,21 @@ public class RegisterActivity extends AppCompatActivity
                     //Remove current activity.
                     finish();
                 }
+                else
+                {
+                    //Warning user something went wrong.
+                    ErrorPopUp.errorMsg(RegisterActivity.this, result);
+                }
             }
         });
 
-        //Back to Login page.
+        //Event listener of the back button.
         backButton= (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
+                //Close this activity and back to login activity.
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
                 //Remove current activity.
