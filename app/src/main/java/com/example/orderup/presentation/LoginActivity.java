@@ -1,8 +1,6 @@
 package com.example.orderup.presentation;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +9,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
+import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
-import com.example.orderup.persistance.DatabaseHelper;
 
 //Login UI class.
 public class LoginActivity extends AppCompatActivity
@@ -23,15 +21,11 @@ public class LoginActivity extends AppCompatActivity
 
     private EditText emailInput, passwordInput;
 
-    DatabaseHelper myDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        myDatabase = new DatabaseHelper(this);
 
         //Build connection with xml file.
         emailInput = (EditText) findViewById(R.id.emailInput);
@@ -49,11 +43,12 @@ public class LoginActivity extends AppCompatActivity
 
                 //Verify the input data with databases. Go to home page if nothing wrong. Will pop up a window if error occurs.
                 String result = UserVerification.loginVerification(email, password);
-                if(result == null || null != searchByEmail(email) && checkPassword(email,password))
+                if(result == null)
                 {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    //Passing email to the main activity class.
-                    intent.putExtra("email", email);
+
+                    //Tell the system who is the current user.
+                    Services.setCurrentUser(email);
 
                     //Start the main activity class.
                     startActivity(intent);
@@ -81,16 +76,16 @@ public class LoginActivity extends AppCompatActivity
                 finish();
             }
         });
-
+/*
         viewDB = (Button) findViewById(R.id.viewDB);
         viewDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 printDatabase();
             }
-        });
+        });*/
     }
-
+/*
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -148,6 +143,6 @@ public class LoginActivity extends AppCompatActivity
             }
         }
         return match;
-    }
+    }*/
 }
 

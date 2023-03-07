@@ -6,7 +6,7 @@ import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
 import com.example.orderup.persistance.stub.UserPersistenceStub;
 
 public class Services {
-
+    private static String currentUser = null;
     private static UserPersistence userPersistence= null;
     private static RestaurantPersistence restaurantPersistence= null;
 
@@ -26,5 +26,13 @@ public class Services {
         }
 
         return restaurantPersistence;
+    }
+
+    public static void setCurrentUser(String email){
+        currentUser = email;
+    }
+
+    public static String getCurrentUser(){
+        return currentUser;
     }
 }

@@ -8,7 +8,7 @@ public interface UserPersistence {
 
     HashMap<String, User> getUserList();
 
-    void addUser(String email, User newUser);
+    void addUser(String email, String firstName, String lastName, String password);
 
     void addCreditCard(String email, String cardNum, String cvc, String expiry);
 

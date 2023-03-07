@@ -1,11 +1,7 @@
 package com.example.orderup.logic;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
-import com.example.orderup.presentation.ErrorPopUp;
 
 public class UserVerification
 {
@@ -98,8 +94,7 @@ public class UserVerification
             else
             {
                 //Create a user to stub or database.
-                userPersistence.addUser(email, new User(firstName, lastName, email, password));
-
+                userPersistence.addUser(email, firstName, lastName, password);
                 msg = null;
             }
         }
@@ -107,7 +102,7 @@ public class UserVerification
     }
 
     //Verify the input credit card format.
-    public static String creditCardVerification(String cardNum, String cardCvc, String cardExpiry)
+    public static String creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry)
     {
         //Get the database.
         userPersistence = Services.getUserPersistence();
@@ -120,37 +115,38 @@ public class UserVerification
         {
             if(cardNum.length() != 16)
             {
-                ErrorPopUp.errorMsg(context, "Error: Incorrect Card Number Format.");
+                msg = "Error: Incorrect Card Number Format.";
             }
             else if(cardNum.charAt(0) != '2' && cardNum.charAt(0) != '3'
                     && cardNum.charAt(0) != '4' && cardNum.charAt(0) != '5')
             {
-                ErrorPopUp.errorMsg(context, "Error: Card is not Visa, American Express or Mastercard.");
+                msg = "Error: Card is not Visa, American Express or Mastercard.";
             }
             else if(cardCvc.length() != 3 && cardCvc.length() != 4)
             {
-                ErrorPopUp.errorMsg(context, "Error: Incorrect CVC length.");
+                msg = "Error: Incorrect CVC length.";
             }
             else if(cardExpiry.length() != 5)
             {
-                ErrorPopUp.errorMsg(context, "Error: Incorrect Expiry date length.");
+                msg = "Error: Incorrect Expiry date length.";
             }
             else if(cardExpiry.charAt(2) != '/' || (cardExpiry.charAt(0) != '0' && cardExpiry.charAt(0) != '1')
                     || (cardExpiry.charAt(0) == '1' && Character.getNumericValue(cardExpiry.charAt(1)) >= 3))
             {
-                ErrorPopUp.errorMsg(context, "Error: Incorrect Expiry date.");
+                msg = "Error: Incorrect Expiry date.";
             }
             else
             {
-                ErrorPopUp.errorMsg(context, "Credit Card added.");
-                return true;
+                //Add the credit card to the database.
+                userPersistence.addCreditCard(email, cardNum, cardCvc, cardExpiry);
+                msg = "Credit Card added.";
             }
         }
         else
         {
-            ErrorPopUp.errorMsg(context, "Missing Field: Please check you have entered all fields.");
+            msg = "Missing Field: Please check you have entered all fields.";
         }
-        return false;
+        return msg;
     }
 
     /* old address verification
@@ -190,43 +186,67 @@ public class UserVerification
         return false;
     }
 */
-    public boolean addressVerification(String address, String city, String province, String postal, Context context)
+    //Verity the input address format and return the message to user.
+    public static String addressVerification(String street, String city, String province, String postal, String email, String address)
     {
-        return (streetVerification(address, context) && cityVerification(city, context) && provinceVerification(province, context) && postalVerification(postal, context));
-    }
+        userPersistence = Services.getUserPersistence();
 
-    public boolean streetVerification(String address, Context context) {
-
-        if(address == "" || address == null) {
-            ErrorPopUp.errorMsg(context, "Error: Address format incorrect.");
-            return false;
+        String result = streetVerification(street) + cityVerification(city) + provinceVerification(province) + postalVerification(postal);
+        if(result == "")
+        {
+            //No error occur than add the address to database.
+            userPersistence.updateAddress(email, address);
+            return "Address added.";
         }
-
-        return true;
-    }
-
-    public boolean cityVerification(String city, Context context) {
-        Log.d("this","city = " + city);
-        if(!city.equalsIgnoreCase("Winnipeg")) {
-            ErrorPopUp.errorMsg(context, "Error: The city you entered must be located within Manitoba.");
-            return false;
+        else
+        {
+            return result;
         }
-
-        return true;
     }
 
-    public boolean provinceVerification(String province, Context context) {
-        if(!province.equalsIgnoreCase("Manitoba")) {
-            ErrorPopUp.errorMsg(context, "Error: Currently does not support other province other than Manitoba.");
-            return false;
+    //Check the street section of the address.
+    private static String streetVerification(String street) {
+
+        if(street == "" || street == null)
+        {
+            return  "Error: Address format incorrect.\n";
         }
-
-        return true;
+        else
+        {
+            return "";
+        }
     }
 
-    public boolean postalVerification(String province, Context context) {
+    //Check the city is Winnipeg or not.
+    private static String cityVerification(String city) {
+
+        if(!city.equalsIgnoreCase("Winnipeg"))
+        {
+            return "Error: The city you entered must be located within Manitoba.\n";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    //Check the province is Manitoba or other province.
+    private static String provinceVerification(String province) {
+
+        if(!province.equalsIgnoreCase("Manitoba"))
+        {
+            return  "Error: Currently does not support other province other than Manitoba.\n";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    //Check the format of the postal code.
+    private static String postalVerification(String postal) {
     // change later
-    return true;
+        return "";
     }
 
 

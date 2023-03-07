@@ -10,8 +10,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
+import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
-import com.example.orderup.persistance.DatabaseHelper;
 
 //Register UI class.
 public class RegisterActivity extends AppCompatActivity
@@ -22,14 +22,11 @@ public class RegisterActivity extends AppCompatActivity
 
     private Button registerButton, backButton;
 
-    DatabaseHelper myDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        myDatabase = new DatabaseHelper(this);
 
         //Connect to the xml file.
         firstNameInput = (EditText) findViewById(R.id.firstNameInput);
@@ -55,18 +52,10 @@ public class RegisterActivity extends AppCompatActivity
                 String result = UserVerification.registrationVerification(email, firstName, lastName, password, rePassword);
                 if(result == null) //Account created successful.
                 {
-                    //Move this to userverify file
-                    boolean isInserted = myDatabase.insertData(email,password,firstName,lastName, null, null, null, null, 0.00F);
-                    if(isInserted) {
-                        Log.d("this","USER DATA SUCCESSFULLY ADDED TO DATABASE");
-                        //user.print();
-                    } else {
-                        Log.d("this","USER DATA FAILED TO BE ADDED TO DATABASE");
-                    }
-
                     Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
-                    //Passing the email to main activity class.
-                    intent.putExtra("email", email);
+
+                    //Tell the system who is the current user.
+                    Services.setCurrentUser(email);
 
                     //Start the main activity.
                     startActivity(intent);

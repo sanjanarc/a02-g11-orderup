@@ -3,9 +3,7 @@ package com.example.orderup.presentation;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,47 +17,39 @@ import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
-import com.example.orderup.persistance.DatabaseHelper;
-import com.example.orderup.persistance.UserPersistence;
 
+//This is the User page UI class.
 public class UserAccountFragment extends Fragment
 {
-
-    TextView infoContainer, accountBalance;
+    TextView infoContainer;
 
     Button addCardButton, logoutButton, addAddressButton;
 
-    UserPersistence userPersistence= Services.getUserPersistence();
+    String userEmail = Services.getCurrentUser();
 
-    UserVerification verify = new UserVerification();
+    User user;
 
-    DatabaseHelper myDatabase;
-
-    User temp;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        myDatabase = new DatabaseHelper(getActivity());
-        temp = userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email"));
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
-        accountBalance = (TextView) view.findViewById(R.id.accountBalance);
-        Cursor res = myDatabase.getAllData();
-        accountBalance.setText("$" + getBalance(getActivity().getIntent().getStringExtra("email")));
-        infoContainer= (TextView) view.findViewById(R.id.infoContainer);
-        String info;
-        //Display the user info.
-        String.format("First name: %s\n" +
+
+        //Organized the user info.
+        String display = String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
                 "Password: %s\n" +
-                "Address: %s", temp.getFirstName(), temp.getLastName(), temp.getEmail(), temp.getPassword(), temp.getAddress());
+                "Address: %s", userEmail, userEmail, userEmail, userEmail, userEmail); //This need to be change.
 
-        infoContainer.setText(userPersistence.getUserList().get(getActivity().getIntent().getStringExtra("email")).toString());
+        //Connect to xml file.
+        infoContainer= (TextView) view.findViewById(R.id.infoContainer);
 
-        //Set the text size.
+        //Display the message to user.
+        infoContainer.setText(display);
         infoContainer.setTextSize(30);
 
+        //Event listener of the add credit card button.
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +58,7 @@ public class UserAccountFragment extends Fragment
             }
         });
 
+        //Event listener of the add address button.
         addAddressButton= (Button) view.findViewById(R.id.addAddressButton);
         addAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,21 +67,30 @@ public class UserAccountFragment extends Fragment
             }
         });
 
+        //Event listener of the logout button.
         logoutButton= (Button) view.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                //Change the activity to login page.
                 startActivity(new Intent(getActivity(), LoginActivity.class));
+
+                //Tell the system that the current user is logged out.
+                Services.setCurrentUser(null);
 
                 //Remove current activity.
                 getActivity().finish();
             }
         });
 
+        //Event listener of the redeem button.
         Button redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
         redeemCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                /*
                 int rand = (int)Math.floor(Math.random() * (5) + 1);
                 switch(rand) {
                     case 1: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 5.00F);
@@ -106,6 +106,8 @@ public class UserAccountFragment extends Fragment
                 }
 
                 accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
+                 */
+                //addCardBalance();
             }
         });
 
@@ -113,6 +115,7 @@ public class UserAccountFragment extends Fragment
         return view;
     }
 
+    //This method will pop up a window to prompt user to enter credit card info.
     private void addCardPopUp()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -123,30 +126,27 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                //Connect to xml file.
                 EditText cardNumInput= (EditText) v.findViewById(R.id.cardNumberInput);
                 EditText cardCvcInput= (EditText) v.findViewById(R.id.cardCvcInput);
                 EditText cardExpiryInput= (EditText) v.findViewById(R.id.cardExpiryInput);
 
+                //Get input data from xml file.
                 String cardNum = cardNumInput.getText().toString();
                 String cardCvc = cardCvcInput.getText().toString();
                 String cardExpiry = cardExpiryInput.getText().toString();
 
-                boolean isUpdate = myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null, null, null,null,
-                        cardNum,cardCvc,cardExpiry,null, -1.00F);
-                if(isUpdate) {
-                    Log.d("this", "USER DATA SUCCESSFULLY UPDATED");
-                }
+                //Verify and add credit card to database.
+                String result = UserVerification.creditCardVerification(userEmail, cardNum, cardCvc, cardExpiry);
 
-                if(userPersistence != null) {
-                    if (null == verify.creditCardVerification(cardNum, cardCvc, cardExpiry)) {
-                        userPersistence.addCreditCard(getActivity().getIntent().getStringExtra("email"), cardNum, cardCvc, cardExpiry);
-                    }
-                }
+                //Display the result to user.
+                ErrorPopUp.errorMsg(getActivity(), result);
             }
         });
         builder.show();
     }
 
+    //This method will pop up a window to prompt user to enter their address.
     private void addAddressPopUp()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -157,56 +157,26 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                //Connect to xml file.
                 EditText streetInput= (EditText) v.findViewById(R.id.streetInput);
                 EditText cityInput= (EditText) v.findViewById(R.id.cityInput);
                 EditText provinceInput= (EditText) v.findViewById(R.id.provinceInput);
                 EditText postalInput= (EditText) v.findViewById(R.id.postalInput);
 
+                //Get input data from xml file.
                 String street= streetInput.getText().toString();
                 String city= cityInput.getText().toString();
                 String province= provinceInput.getText().toString();
                 String postal= postalInput.getText().toString();
                 String address = street + ", " + city + ", " + province + ", " + postal;
 
-                if(verify.addressVerification(street, city, province, postal, getActivity()))
-                {
-                    myDatabase.updateData(searchByEmail(getActivity().getIntent().getStringExtra("email")),null,null,null,null,null,null,null, address, -1.00F);
-                    //add back later
-                    userPersistence.updateAddress(getActivity().getIntent().getStringExtra("email"), address);
-                }
+                //Verify the input address and add to the database.
+                String result = UserVerification.addressVerification(street, city, province, postal, userEmail, address);
+
+                //Display the result to user.
+                ErrorPopUp.errorMsg(getActivity(), result);
             }
         });
-
         builder.show();
-    }
-
-    public String searchByEmail(String email) {
-        myDatabase = new DatabaseHelper(getActivity());
-
-        String currId = null;
-        boolean found = false;
-        Cursor res = myDatabase.getAllData();
-        while(res.moveToNext() && found == false) {
-            if(email.equals(res.getString(1))) {
-                found = true;
-                currId = res.getString(0);
-            }
-        }
-        return currId;
-    }
-
-    public String getBalance(String email) {
-        myDatabase = new DatabaseHelper(getActivity());
-
-        String currBal = null;
-        boolean found = false;
-        Cursor res = myDatabase.getAllData();
-        while(res.moveToNext() && found == false) {
-            if(email.equals(res.getString(1))) {
-                found = true;
-                currBal = res.getString(9);
-            }
-        }
-        return currBal;
     }
 }

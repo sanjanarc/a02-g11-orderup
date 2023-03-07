@@ -26,8 +26,8 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
     @Override
-    public void addUser(String email, User newUser){
-        userList.put(email, newUser);
+    public void addUser(String email, String first, String last, String pass){
+        userList.put(email, new User(first, last, email, pass));
     }
 
     @Override

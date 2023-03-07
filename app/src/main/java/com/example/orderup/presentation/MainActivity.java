@@ -9,7 +9,9 @@ import com.example.orderup.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity {
+//This class holds the navigation bar function and allow three fragment to switch.
+public class MainActivity extends AppCompatActivity
+{
 
     BottomNavigationView bottomNavigationView;
 
@@ -19,18 +21,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()){
+            public boolean onNavigationItemSelected(MenuItem item)
+            {
+                //Get data from parameter to see which tab/fragment user want to switch to.
+                switch (item.getItemId())
+                {
                     case R.id.home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
                         return true;
