@@ -82,6 +82,16 @@ public class UserVerification
         {
             msg = "Password needs to be at least 6 characters long.";
         }
+        //First name cannot more than 7 character.
+        else if(firstName.length() > 7)
+        {
+            msg = "Your first name is more than 7 character.";
+        }
+        //Last name cannot more than 7 character.
+        else if(lastName.length() > 7)
+        {
+            msg = "Your last name is more than 7 character.";
+        }
         else
         {
             //Search the input email from database.
