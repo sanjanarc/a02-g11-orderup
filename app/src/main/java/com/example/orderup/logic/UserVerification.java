@@ -254,17 +254,26 @@ public class UserVerification
     public static boolean emailCheck(String email)
     {
         boolean flag = false;
+        boolean checkPeriod = false;
+        boolean multiplesAts = false;
         int counter = 1;
         char at = '@';
 
-        while(email.length()-1 > counter && !flag)
+        while(email.length()-1 > counter)
         {
-            if(email.charAt(counter) == at)
+            if(email.charAt(counter) == at && !flag)
             {
                 flag = true;
+            } else if(email.charAt(counter) == at && flag) {
+                multiplesAts = true;
             }
+
+            if(flag && email.charAt(counter) == '.' && counter < email.length()-1) {
+                checkPeriod = true;
+            }
+
             counter++;
         }
-        return flag;
+        return flag && checkPeriod && !multiplesAts;
     }
 }
