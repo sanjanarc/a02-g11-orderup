@@ -15,7 +15,7 @@ import com.example.orderup.logic.UserVerification;
 //Login UI class.
 public class LoginActivity extends AppCompatActivity
 {
-    private Button signInButton, registerButton, viewDB;
+    private Button signInButton, registerButton;
 
     private String email, password;
 

@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
+import com.example.orderup.logic.UserServices;
 import com.example.orderup.logic.UserVerification;
 
 //This is the User page UI class.
@@ -27,8 +27,6 @@ public class UserAccountFragment extends Fragment
 
     String userEmail = Services.getCurrentUser();
 
-    User user;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -39,8 +37,7 @@ public class UserAccountFragment extends Fragment
         String display = String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
-                "Password: %s\n" +
-                "Address: %s", userEmail, userEmail, userEmail, userEmail, userEmail); //This need to be change.
+                "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
 
         //Connect to xml file.
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
