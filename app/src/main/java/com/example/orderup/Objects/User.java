@@ -7,6 +7,8 @@ public class User {
     private String firstName, lastName, email, password, expiry, address;
     private String creditCard, cvc;
 
+    private int id;
+
     private float balance;
 
     public User(String firstName, String lastName, String email, String password) {
@@ -16,6 +18,19 @@ public class User {
         this.email = email;
         this.password = password;
         this.balance = 0.00F;
+    }
+
+    public User(int id, String email, String password, String firstName, String lastName, String creditcard, String csv, String expiry, String address, String balance) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName= firstName;
+        this.lastName= lastName;
+        this.creditCard = creditcard;
+        this.cvc = csv;
+        this.expiry = expiry;
+        this.address = address;
+        this.balance = Float.parseFloat(balance);
     }
 
     public String getFirstName(){
