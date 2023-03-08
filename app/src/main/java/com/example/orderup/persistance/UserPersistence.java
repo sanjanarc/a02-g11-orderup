@@ -24,6 +24,8 @@ public interface UserPersistence {
 
     String getBalance(String email);
 
+    User insertUser(User currentUser);
+
     User updateUser(final User currentUser);
 
     void deleteUser(final User currentUser);

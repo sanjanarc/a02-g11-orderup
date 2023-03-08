@@ -61,6 +61,16 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
     @Override
+    public User updateUser(User currentUser) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(User currentUser) {
+
+    }
+
+    @Override
     public void addBalance(String email, float balance) {
         userList.get(email).addBalance(balance);
     }
