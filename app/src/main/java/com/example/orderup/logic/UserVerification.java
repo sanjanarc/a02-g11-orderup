@@ -104,7 +104,7 @@ public class UserVerification
             else
             {
                 //Create a user to stub or database.
-                userPersistence.addUser(email, firstName, lastName, password);
+                userPersistence.addUser(email, password, firstName, lastName);
                 msg = null;
             }
         }
