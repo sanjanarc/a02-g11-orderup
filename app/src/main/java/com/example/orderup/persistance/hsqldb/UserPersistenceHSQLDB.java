@@ -41,6 +41,27 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         return new User(id,email,password,firstname,lastname,creditcard,csv,expiry,address,balance);
     }
 
+    /*
+    method returns a list of Restaurant objects in the database
+     */
+    @Override
+    public List<Restaurant> getUserSequential() {
+        final List<Restaurant> restaurants = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final Statement st = c.createStatement();
+            final ResultSet rs = st.executeQuery("SELECT * FROM restaurants");
+            while (rs.next()) {
+                final Restaurant restaurant = fromResultSet(rs);
+                restaurants.add(restaurant);
+            }
+            rs.close();
+            st.close();
+
+            return restaurants;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 
     @Override
     public HashMap<String, User> getUserList() {
