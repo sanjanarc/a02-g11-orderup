@@ -2,84 +2,104 @@ package com.example.orderup.Objects;
 
 import java.util.Objects;
 
-public class User {
-
-    private String firstName, lastName, email, password, expiry, address;
-    private String creditCard, cvc;
-
-    private int id;
-
+public class User
+{
+    private String firstName;
+    private String lastName;
+    private final String email;
+    private String password;
+    private String expiry;
+    private String address;
+    private String creditCard;
+    private String cvc;
     private float balance;
 
-    public User(String firstName, String lastName, String email, String password) {
-
-        this.firstName= firstName;
-        this.lastName= lastName;
+    public User(String email, String password, String firstName, String lastName)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.creditCard = "";
+        this.cvc = "";
+        this.expiry = "";
         this.balance = 0.00F;
     }
 
-    public User(int id, String email, String password, String firstName, String lastName, String creditcard, String csv, String expiry, String address, String balance) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.firstName= firstName;
-        this.lastName= lastName;
-        this.creditCard = creditcard;
-        this.cvc = csv;
-        this.expiry = expiry;
-        this.address = address;
-        this.balance = Float.parseFloat(balance);
-    }
-
-    public String getFirstName(){
-        return firstName;
-    }
-
-    public String getLastName(){
-        return lastName;
-    }
-
-    public String getEmail(){
+    public String getEmail()
+    {
         return email;
     }
 
-    public String getPassword(){
+    public String getPassword()
+    {
         return password;
     }
 
-    public String getAddress(){
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public String getCreditCard()
+    {
+        return creditCard;
+    }
+
+    public String getCvc()
+    {
+        return cvc;
+    }
+
+    public String getExpiry()
+    {
+        return expiry;
+    }
+
+    public String getAddress()
+    {
         return address;
     }
 
-    public void updateFirstName(String newFirstName){
+    public void updateFirstName(String newFirstName)
+    {
         this.firstName= newFirstName;
     }
 
-    public void updateLastName(String newLastName){
+    public void updateLastName(String newLastName)
+    {
         this.lastName= newLastName;
     }
 
-    public void updatePass(String newPassword){
+    public void updatePass(String newPassword)
+    {
         this.password= newPassword;
     }
 
-    public void updateAddress(String newAddress){
+    public void updateAddress(String newAddress)
+    {
         this.address= newAddress;
     }
 
-    public void addCreditCard(String newCreditCard, String newCvc, String newExpiry){
-        this.creditCard= newCreditCard;
-        this.cvc= newCvc;
-        this.expiry= newExpiry;
+    public void addCreditCard(String newCreditCard, String newCvc, String newExpiry)
+    {
+        this.creditCard = newCreditCard;
+        this.cvc = newCvc;
+        this.expiry = newExpiry;
     }
 
-    public void addBalance(float balance) {
+    public void modifyBalance(float balance)
+    {
         this.balance += balance;
     }
 
-    public String getBalance() {
+    public String getBalance()
+    {
         return String.valueOf(this.balance);
     }
 

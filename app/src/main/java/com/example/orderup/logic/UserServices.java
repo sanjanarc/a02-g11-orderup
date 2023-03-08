@@ -11,7 +11,7 @@ public class UserServices
     //Return the first name of the given email.
     public static String getFirstName(String email)
     {
-        User user = userPersistence.getUserList().get(email);
+        User user = userPersistence.getUserTable().get(email);
 
         if(user != null)
         {
@@ -25,7 +25,7 @@ public class UserServices
     //Return the last name of the given email.
     public static String getLastName(String email)
     {
-        User user = userPersistence.getUserList().get(email);
+        User user = userPersistence.getUserTable().get(email);
 
         if(user != null)
         {
@@ -39,7 +39,7 @@ public class UserServices
     //Return the Address of the given email.
     public static String getAddress(String email)
     {
-        User user = userPersistence.getUserList().get(email);
+        User user = userPersistence.getUserTable().get(email);
 
         if(user != null)
         {

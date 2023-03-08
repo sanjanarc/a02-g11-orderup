@@ -30,7 +30,7 @@ public class UserVerification
         else
         {
             //Search the input email from database.
-            User tempUser= userPersistence.getUserList().get(email);
+            User tempUser= userPersistence.getUserTable().get(email);
 
             //Only true if the email exist in the database.
             if(tempUser != null)
@@ -95,7 +95,7 @@ public class UserVerification
         else
         {
             //Search the input email from database.
-            User tempUser= userPersistence.getUserList().get(email);
+            User tempUser= userPersistence.getUserTable().get(email);
 
             if(tempUser != null) //Registered email is already exist in the database and cannot be used again.
             {

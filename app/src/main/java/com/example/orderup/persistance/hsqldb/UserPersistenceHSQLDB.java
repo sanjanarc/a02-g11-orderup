@@ -7,107 +7,172 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
-//public class UserPersistenceHSQLDB implements RestaurantPersistence  {
-public class UserPersistenceHSQLDB implements UserPersistence {
+//This class is the interface of the user database.
+public class UserPersistenceHSQLDB implements UserPersistence
+{
     private final String dbPath;
 
-    public UserPersistenceHSQLDB(final String dbPath) {
+    //Store the given database path.
+    public UserPersistenceHSQLDB(final String dbPath)
+    {
         this.dbPath = dbPath;
     }
 
-    private Connection connection() throws SQLException {
+    //Ask the Device to load and run the database script.
+    private Connection connection() throws SQLException
+    {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
-    /*
-    called in getRestaurantSequential()
-    returns a Restaurant object
-     */
 
-    private User fromResultSet(final ResultSet rs) throws SQLException {
-
-        final int id = rs.getInt("ID");
+    //Create each user object from the given user database table.
+    private User fromResultSet(final ResultSet rs) throws SQLException
+    {
+        //Getting data from the table.
         final String email = rs.getString("EMAIL");
         final String password = rs.getString("PASSWORD");
         final String firstname = rs.getString("FIRSTNAME");
         final String lastname = rs.getString("LASTNAME");
         final String creditcard = rs.getString("CREDITCARD");
-        final String csv = rs.getString("CSV");
+        final String cvc = rs.getString("CVC");
         final String expiry = rs.getString("EXPIRY");
         final String address = rs.getString("ADDRESS");
         final String balance = rs.getString("BALANCE");
 
-        return new User(id,email,password,firstname,lastname,creditcard,csv,expiry,address,balance);
+        //Return a user object with filled data.
+        return new User(email,password,firstname,lastname,creditcard,cvc,expiry,address,balance);
     }
 
-    /*
-    method returns a list of Restaurant objects in the database
-     */
+    //Build a user hash map from database and return the user table.
     @Override
-    public List<Restaurant> getUserSequential() {
-        final List<Restaurant> restaurants = new ArrayList<>();
-        try (final Connection c = connection()) {
+    public HashMap<String, User> getUserTable()
+    {
+        final HashMap<String, User> userList = new HashMap<>();
+
+        try (final Connection c = connection())
+        {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM restaurants");
+            final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
             while (rs.next()) {
-                final Restaurant restaurant = fromResultSet(rs);
-                restaurants.add(restaurant);
+                User user = fromResultSet(rs);
+                userList.put(user.getEmail(), user);
             }
             rs.close();
             st.close();
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
 
-            return restaurants;
-        } catch (final SQLException e) {
+        return userList;
+    }
+
+    //Add new user object to the table.
+    @Override
+    public void addUser(String email, String password, String firstName, String lastName)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("INSERT INTO USERS VALUES (" + email + "," + password + "," + firstName + "," + lastName + "," + null + "," + null + "," + null + "," + null + "," + null + ")");
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    //Add credit card info to user table.
+    @Override
+    public void addCreditCard(String email, String cardNum, String cvc, String expiry)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("UPDATE USERS SET CREDITCARD = " + cardNum + ", CVC = " + cvc + ", EXPIRY = " + expiry + " WHERE EMAIL = " + email);
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    //Renaming the user.
+    @Override
+    public void updateFirstName(String email, String firstName)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("UPDATE USERS SET FIRSTNAME = " + firstName + " WHERE EMAIL = " + email);
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    //Renaming the user.
+    @Override
+    public void updateLastName(String email, String lastName)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("UPDATE USERS SET LASTNAME = " + lastName + " WHERE EMAIL = " + email);
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    //Reset the user password.
+    @Override
+    public void updatePassword(String email, String password)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("UPDATE USERS SET PASSWORD = " + password + " WHERE EMAIL = " + email);
+        }
+        catch (SQLException e)
+        {
             throw new PersistenceException(e);
         }
     }
 
     @Override
-    public HashMap<String, User> getUserList() {
-        return null;
+    public void updateAddress(String email, String address)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("UPDATE USERS SET ADDRESS = " + address + " WHERE EMAIL = " + email);
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
-    public void addUser(String email, String firstName, String lastName, String password) {
-
+    public void modifyBalance(String email, float balance)
+    {
+        try(Connection c = connection())
+        {
+            Statement st = c.createStatement();
+            st.executeQuery("UPDATE USERS SET BALANCE = " + balance + " WHERE EMAIL = " + email);
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
-
-    @Override
-    public void addCreditCard(String email, String cardNum, String cvc, String expiry) {
-
-    }
-
-    @Override
-    public void updateFirstName(String email, String firstName) {
-
-    }
-
-    @Override
-    public void updateLastName(String email, String lastName) {
-
-    }
-
-    @Override
-    public void updatePassword(String email, String password) {
-
-    }
-
-    @Override
-    public void updateAddress(String email, String address) {
-
-    }
-
-    @Override
-    public void addBalance(String email, float balance) {
-
-    }
-
-    @Override
-    public String getBalance(String email) {
-        return null;
-    }
-
+    /* Do we really need these method?
     @Override
     public User insertUser(User currentUser) {
         return null;
@@ -121,5 +186,5 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     @Override
     public void deleteUser(User currentUser) {
 
-    }
+    }*/
 }
