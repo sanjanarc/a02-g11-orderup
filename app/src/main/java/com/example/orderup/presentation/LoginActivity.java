@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity
     }*/
     private void copyDatabaseToDevice()
     {
-        final String DB_PATH = "db";
+        final String DB_PATH = "assets";
 
         String[] assetNames;
         Context context = getApplicationContext();
@@ -173,8 +173,8 @@ public class LoginActivity extends AppCompatActivity
             }
 
             copyAssetsToDirectory(assetNames, dataDirectory);
-
-            Services.setDBPathName(dataDirectory.toString() + "/" + Services.getDBPathName());
+            Log.d("Here------------->", assetNames+"");
+            Services.setDBPathName(dataDirectory.toString() + "/" + "UserDB");
 
         }
         catch (final IOException ioe)
@@ -186,18 +186,18 @@ public class LoginActivity extends AppCompatActivity
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException
     {
         AssetManager assetManager = getAssets();
-
+        Log.d("Here------------->", "helloe");
         for (String asset : assets)
         {
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
-
+            Log.d("Here------------->", "in for");
             char[] buffer = new char[1024];
             int count;
 
             File outFile = new File(copyPath);
 
-            if (!outFile.exists())
+            if (outFile.exists())
             {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);

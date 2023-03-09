@@ -6,6 +6,8 @@ import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
+import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
+
 
 import java.util.Arrays;
 
@@ -43,7 +45,7 @@ public class Services
     {
         if (restaurantPersistence == null)
         {
-            restaurantPersistence = new RestaurantPersistenceStub();
+            restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
         }
 
         return restaurantPersistence;
@@ -80,7 +82,7 @@ public class Services
         {
             e.printStackTrace();
         }
-        //dbPath = name;
+        dbPath = name;
     }
 
     public static String getDBPathName()
