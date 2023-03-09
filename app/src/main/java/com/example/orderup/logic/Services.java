@@ -4,9 +4,9 @@ import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
-import com.example.orderup.persistance.stub.UserPersistenceStub;
 
 public class Services {
+    private static String dbName = "UserDB";
     private static String currentUser = null;
     private static UserPersistence userPersistence= null;
     private static RestaurantPersistence restaurantPersistence= null;
@@ -14,15 +14,17 @@ public class Services {
     private static String dbPath;
 
     public static synchronized UserPersistence getUserPersistence(){
-
+        setDBPathName(dbName);
         if(userPersistence== null){
-            userPersistence= new UserPersistenceStub();
+            //userPersistence= new UserPersistenceStub();
+            userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
 
         return userPersistence;
     }
 
     public static synchronized UserPersistence getUserPersistenceDB() {
+        setDBPathName(dbName);
         if(userPersistence== null){
             userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }

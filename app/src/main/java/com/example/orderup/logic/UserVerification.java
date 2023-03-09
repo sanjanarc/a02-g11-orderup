@@ -6,6 +6,7 @@ import com.example.orderup.persistance.UserPersistence;
 public class UserVerification
 {
     private static UserPersistence userPersistence;
+    private static UserPersistence userPersistence2;
 
     //Verify the input email and password from databases. Return null if input data are correct, return error message, otherwise.
     public static String loginVerification(String email, String password)
@@ -13,7 +14,7 @@ public class UserVerification
         //Get the database.
         userPersistence = Services.getUserPersistence();
 
-
+        //userPersistence2 = Services.getUserPersistenceDB();
 
         //Store message that going to return to presentation layer.
         String msg;
@@ -32,8 +33,8 @@ public class UserVerification
         else
         {
             //Search the input email from database.
-            User tempUser= userPersistence.getUserTable().get(email);
-
+            User tempUser = userPersistence.getUserTable().get(email);
+            //User tempUser2 = userPersistence2.getUserTable().get(email);
             //Only true if the email exist in the database.
             if(tempUser != null)
             {

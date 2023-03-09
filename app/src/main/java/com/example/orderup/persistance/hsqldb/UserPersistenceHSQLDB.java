@@ -1,5 +1,7 @@
 package com.example.orderup.persistance.hsqldb;
 
+import android.util.Log;
+
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
@@ -9,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+
 
 //This class is the interface of the user database.
 public class UserPersistenceHSQLDB implements UserPersistence
@@ -24,6 +27,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
     //Ask the Device to load and run the database script.
     private Connection connection() throws SQLException
     {
+        Log.d("this",dbPath);
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
@@ -53,12 +57,16 @@ public class UserPersistenceHSQLDB implements UserPersistence
 
         try (final Connection c = connection())
         {
+            Log.d("this","1 line");
             final Statement st = c.createStatement();
+            Log.d("this","2 line");
             final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
+            Log.d("this","3 line");
             while (rs.next()) {
                 User user = fromResultSet(rs);
                 userList.put(user.getEmail(), user);
             }
+            Log.d("this","4 line");
             rs.close();
             st.close();
         }
