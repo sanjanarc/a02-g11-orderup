@@ -28,7 +28,8 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         //Log.d("path",dbPath);
         String path ="jdbc:hsqldb:file:" + dbPath + ";shutdown=true";
-        Log.d("this",path);
+        Log.d("Here------------->", "Now inside connection");
+        Log.d("Here----->Let see what path-------->",path);
         return DriverManager.getConnection(path, "SA", "");
     }
 
