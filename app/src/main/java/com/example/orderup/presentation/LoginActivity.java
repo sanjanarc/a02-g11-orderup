@@ -199,8 +199,8 @@ public class LoginActivity extends AppCompatActivity
 
             File outFile = new File(copyPath);
             Log.d("Here------------->", "ready to creating");
-
-            if (outFile.exists())
+            //outFile.exists()
+            if (true)
             {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
