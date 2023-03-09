@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 //Login UI class.
 public class LoginActivity extends AppCompatActivity
@@ -153,15 +154,15 @@ public class LoginActivity extends AppCompatActivity
         return match;
     }*/
     private void copyDatabaseToDevice() {
-        final String DB_PATH = "UserDB";
-        Log.d("HERE","HERE");
+        final String DB_PATH = "db";
+
         String[] assetNames;
         Context context = getApplicationContext();
         File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
         AssetManager assetManager = getAssets();
 
         try {
-            Log.d("HERE2","HERE2");
+
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
@@ -183,16 +184,16 @@ public class LoginActivity extends AppCompatActivity
         for (String asset : assets) {
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
-            Log.d("copyPath",copyPath);
+
             char[] buffer = new char[1024];
             int count;
 
             File outFile = new File(copyPath);
 
-            if (!outFile.exists()) {
+            if (outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
-
+                Log.d("Here------------->", "inside Creating");
                 count = in.read(buffer);
                 while (count != -1) {
                     out.write(buffer, 0, count);

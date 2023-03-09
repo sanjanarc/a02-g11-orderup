@@ -27,7 +27,9 @@ public class UserPersistenceHSQLDB implements UserPersistence
     private Connection connection() throws SQLException
     {
         //Log.d("path",dbPath);
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+        String path ="jdbc:hsqldb:file:" + dbPath + ";shutdown=true";
+        Log.d("this",path);
+        return DriverManager.getConnection(path, "SA", "");
     }
 
     //Create each user object from the given user database table.
@@ -59,7 +61,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
             Log.d("this","1 line");
             final Statement st = c.createStatement();
             Log.d("this","2 line");
-            final ResultSet rs = st.executeQuery("SELECT * FROM users");
+            final ResultSet rs = st.executeQuery("SELECT * FROM USER");
             Log.d("this","3 line");
             while (rs.next()) {
                 User user = fromResultSet(rs);

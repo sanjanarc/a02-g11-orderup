@@ -1,9 +1,13 @@
 package com.example.orderup.logic;
 
+import android.util.Log;
+
 import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
+
+import java.util.Arrays;
 
 public class Services {
     //private static String dbName = "UserDB";
@@ -17,6 +21,8 @@ public class Services {
         //setDBPathName(dbName);
         if(userPersistence== null){
             //userPersistence= new UserPersistenceStub();
+            Log.d("Here------------->", "Getting");
+            Log.d("Here------------->", getDBPathName());
             userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
 
@@ -50,6 +56,7 @@ public class Services {
 
     public static void setDBPathName(final String name)
     {
+        Log.d("Here------------->", name);
         try
         {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
