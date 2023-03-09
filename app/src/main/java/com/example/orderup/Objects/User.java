@@ -26,6 +26,18 @@ public class User
         this.balance = 0.00F;
     }
 
+    public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.creditCard = creditCard;
+        this.cvc = cvc;
+        this.expiry = expiry;
+        this.balance = Float.parseFloat(balance);
+    }
+
     public String getEmail()
     {
         return email;

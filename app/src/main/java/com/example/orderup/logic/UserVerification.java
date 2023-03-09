@@ -13,6 +13,8 @@ public class UserVerification
         //Get the database.
         userPersistence = Services.getUserPersistence();
 
+
+
         //Store message that going to return to presentation layer.
         String msg;
 
