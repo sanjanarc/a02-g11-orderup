@@ -17,7 +17,7 @@ public class Services
     private static String currentUser = null;
     private static UserPersistence userPersistence= null;
     private static RestaurantPersistence restaurantPersistence= null;
-    private static String dbPath;
+    private static String dbPath = "UserDB";
 
     //Get the User database setup and ready to use.
     public static synchronized UserPersistence getUserPersistence()
@@ -65,7 +65,7 @@ public class Services
 
     public static void setDBPathName(final String name)
     {
-        Log.d("Here------------->", name);
+        Log.d("Set dbpath to ----------->", name);
         try
         {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
