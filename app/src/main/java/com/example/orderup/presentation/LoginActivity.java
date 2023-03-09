@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -152,15 +153,15 @@ public class LoginActivity extends AppCompatActivity
         return match;
     }*/
     private void copyDatabaseToDevice() {
-        final String DB_PATH = "db";
-
+        final String DB_PATH = "UserDB";
+        Log.d("HERE","HERE");
         String[] assetNames;
         Context context = getApplicationContext();
         File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
         AssetManager assetManager = getAssets();
 
         try {
-
+            Log.d("HERE2","HERE2");
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
@@ -182,7 +183,7 @@ public class LoginActivity extends AppCompatActivity
         for (String asset : assets) {
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
-
+            Log.d("copyPath",copyPath);
             char[] buffer = new char[1024];
             int count;
 

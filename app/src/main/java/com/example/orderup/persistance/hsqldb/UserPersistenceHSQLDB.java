@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-
 //This class is the interface of the user database.
 public class UserPersistenceHSQLDB implements UserPersistence
 {
@@ -27,7 +26,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
     //Ask the Device to load and run the database script.
     private Connection connection() throws SQLException
     {
-        Log.d("this",dbPath);
+        //Log.d("path",dbPath);
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 

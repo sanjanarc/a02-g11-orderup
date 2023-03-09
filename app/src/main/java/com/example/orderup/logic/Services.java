@@ -66,7 +66,7 @@ public class Services {
         {
             e.printStackTrace();
         }
-        dbPath = name;
+        //dbPath = name;
     }
 
     public static String getDBPathName()
