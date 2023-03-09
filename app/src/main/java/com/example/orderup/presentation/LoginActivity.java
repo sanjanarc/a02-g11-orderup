@@ -166,15 +166,17 @@ public class LoginActivity extends AppCompatActivity
 
         try
         {
+            Log.d("Here------------->", "Starting here");
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++)
             {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
             }
-
+            Log.d("Here------------->", "Before creating to emulator");
             copyAssetsToDirectory(assetNames, dataDirectory);
-
-            Services.setDBPathName(dataDirectory.toString() + "/" + "UserDB");
+            Log.d("Here------------->", "After creating to emulator");
+            Services.setDBPathName(dataDirectory.toString() + "/" + Services.getDBPathName());
+            Log.d("Here-------------> See what path right now --------->", Services.getDBPathName());
 
         }
         catch (final IOException ioe)
@@ -186,7 +188,7 @@ public class LoginActivity extends AppCompatActivity
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException
     {
         AssetManager assetManager = getAssets();
-
+        Log.d("Here------------->", "inside and before creating");
         for (String asset : assets)
         {
             String[] components = asset.split("/");
@@ -196,12 +198,13 @@ public class LoginActivity extends AppCompatActivity
             int count;
 
             File outFile = new File(copyPath);
+            Log.d("Here------------->", "ready to creating");
 
             if (outFile.exists())
             {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
-                Log.d("Here------------->", "inside Creating");
+                Log.d("Here------------->", "now is Creating");
                 count = in.read(buffer);
                 while (count != -1)
                 {
