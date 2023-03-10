@@ -23,5 +23,4 @@ import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDBTest;
 })
 public class AllTests
 {
-
 }

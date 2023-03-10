@@ -4,12 +4,9 @@ import com.example.orderup.logic.Services;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.After;
-import org.junit.AfterClass;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,14 +21,14 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-
+/*
+Test class for RestaurantPersistenceHSQLDBTest
+ */
 
 public class RestaurantPersistenceHSQLDBTest {
-
     @Test
     public void testRestaurantInsertion() {
         RestaurantPersistence restaurantPersistence = new RestaurantPersistenceHSQLDB(Services.getDBPathName());
         Assert.assertNotNull("Successful datapath established.", restaurantPersistence);
-        //Assert.assertTrue("Restaurant added to stub, should be a successfully insertion(True):"));
     }
 }

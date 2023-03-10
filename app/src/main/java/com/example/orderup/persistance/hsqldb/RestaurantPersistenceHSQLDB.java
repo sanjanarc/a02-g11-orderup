@@ -113,7 +113,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
 
     public int get_image() throws SQLException {
         Connection conn = connection();
-// Query the database for the resource ID of the image
+        // Query the database for the resource ID of the image
         PreparedStatement stmt = conn.prepareStatement("SELECT IMAGE FROM RESTAURANTS WHERE id = ?");
         stmt.setInt(1, 1);
         ResultSet rs = stmt.executeQuery();
@@ -125,19 +125,125 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         stmt.close();
         return resourceId;
     }
+
+
+    /*
+    Methods below are for testing:
+     */
+
+    /*
+    Insert a restaurant to the database along with its menu
+     */
     public boolean insertRestaurant(Restaurant currentRestaurant) {
-        return false;
+        try (final Connection c = connection();){
+            PreparedStatement st = c.prepareStatement("INSERT INTO RESTAURANTS VALUES(?,?,?,?,?,?,?,?)");
+            st.setInt(1, currentRestaurant.getRestaurantID());
+            st.setString(2, currentRestaurant.getRestaurantName());
+            st.setString(3, currentRestaurant.getRestaurantCategory());
+            st.setString(4, currentRestaurant.getCityName());
+            st.setString(5, currentRestaurant.getRestaurantDescription());
+            st.setInt(6, currentRestaurant.getNum_menuItem());
+            st.setString(7, currentRestaurant.getRestaurant_location());
+            st.setString(8,currentRestaurant.getImagesURL());
+            st.executeUpdate();
+
+            PreparedStatement mt= c.prepareStatement("INSERT INTO FOODITEM VALUES(?, ?, ?, ?, ?, ?)");
+            //add food item 1
+            mt.setInt(1,currentRestaurant.getRestaurantID());
+            mt.setInt(2,currentRestaurant.getItem1().getItem_id());
+            mt.setString(3,currentRestaurant.getItem1().getItemName());
+            mt.setDouble(4, currentRestaurant.getItem1().getItemPrice());
+            mt.setString(5, currentRestaurant.getItem1().getImageUrl());
+            mt.setString(6,currentRestaurant.getItem1().getItemDescription());
+            mt.executeUpdate();
+
+            //add food item 2
+            mt.setInt(1,currentRestaurant.getRestaurantID());
+            mt.setInt(2,currentRestaurant.getItem2().getItem_id());
+            mt.setString(3,currentRestaurant.getItem2().getItemName());
+            mt.setDouble(4, currentRestaurant.getItem2().getItemPrice());
+            mt.setString(5, currentRestaurant.getItem2().getImageUrl());
+            mt.setString(6,currentRestaurant.getItem2().getItemDescription());
+            mt.executeUpdate();
+
+            //add food item 3
+            mt.setInt(1,currentRestaurant.getRestaurantID());
+            mt.setInt(2,currentRestaurant.getItem3().getItem_id());
+            mt.setString(3,currentRestaurant.getItem3().getItemName());
+            mt.setDouble(4, currentRestaurant.getItem3().getItemPrice());
+            mt.setString(5, currentRestaurant.getItem3().getImageUrl());
+            mt.setString(6,currentRestaurant.getItem3().getItemDescription());
+            mt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
-
+    /*
+    Method used to Find a restaurant by its restaurant ID passed as parameter
+     */
     public boolean findRestaurant(int restNum) {
-        return false;
+        boolean restaurantFound=false;
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM RESTAURANT WHERE ID=?");
+            st.setInt(1, restNum);
+            final ResultSet rs = st.executeQuery();
+            Restaurant rest;
+            if (rs.next()) {
+                rest = fromResultSet(rs);
+            } else {
+                rest = null;
+            }
+            rs.close();
+            st.close();
+            if(rest!=null){
+                restaurantFound= true;
+            }
+        }
+        catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+        return restaurantFound;
+
+
+
     }
 
+    /*
+    Method updates properties of a restaurant
+     */
     public void updateRestaurant(Restaurant currentRestaurant) {
+        try (final Connection c = connection()) {
+
+            final PreparedStatement st = c.prepareStatement("UPDATE RESTAURANTS SET ID = ?, NAME = ?,CATEGORY = ?, CITY = ?,DESCRIPTION = ?, NUM_ITEMS = ?, LOCATION= ?, IMAGES= ?, WHERE prodID = ?");
+            st.setInt(1, currentRestaurant.getRestaurantID());
+            st.setString(2, currentRestaurant.getRestaurantName());
+            st.setString(3, currentRestaurant.getRestaurantCategory());
+            st.setString(4, currentRestaurant.getCityName());
+            st.setString(5, currentRestaurant.getRestaurantDescription());
+            st.setInt(6, currentRestaurant.getNum_menuItem());
+            st.setString(7, currentRestaurant.getRestaurant_location());
+            st.setInt(9, currentRestaurant.getRestaurantID());
+
+            st.executeUpdate();
+            st.close();
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+
 
     }
     public void deleteRestaurant(int currentRestaurantNum) {
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("DELETE FROM RESTAURANTS WHERE ID = ?");
+            st.setInt(1, currentRestaurantNum);
+            st.executeUpdate();
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
 
     }
 
