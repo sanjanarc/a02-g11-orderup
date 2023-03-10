@@ -16,123 +16,84 @@ public class RestaurantPersistenceStub implements RestaurantPersistence {
     public RestaurantPersistenceStub() {
         this.restaurants = new ArrayList<>();
 
-        restaurants.add(new Restaurant(1, "Indian Food Corner","Tandoori,Indian, Chicken", "Winnipeg","Traditional Indian dishes from butter chicken to chicken biryani.",new FoodItem(1,1, "IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem(1,1,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,1,"Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
-        restaurants.add(new Restaurant(1, "Indian Food Corner","Tandoori,Indian, Chicken", "Winnipeg","Traditional Indian dishes from butter chicken to chicken biryani.",new FoodItem(1,1, "IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem(1,1,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,1,"Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
-        restaurants.add(new Restaurant(1, "Indian Food Corner","Tandoori,Indian, Chicken", "Winnipeg","Traditional Indian dishes from butter chicken to chicken biryani.",new FoodItem(1,1, "IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem(1,1,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,1,"Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
-        restaurants.add(new Restaurant(1, "Indian Food Corner","Tandoori,Indian, Chicken", "Winnipeg","Traditional Indian dishes from butter chicken to chicken biryani.",new FoodItem(1,1, "IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem(1,1,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,1,"Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
-        restaurants.add(new Restaurant(1, "Indian Food Corner","Tandoori,Indian, Chicken", "Winnipeg","Traditional Indian dishes from butter chicken to chicken biryani.",new FoodItem(1,1, "IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem(1,1,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,1,"Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
-
-        /*
-        restaurants.add(new Restaurant("Restaurant 2", "Baked Expectations", "Pie,Dessert,Sweet,Cake,Cookies,Cupcakes", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 3", "Banh Mi King", "Vietnamese,Savory,Sandwiches,Phom Poutine", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 4", "Jollibee", "Fried Chicken,Philippines,Filipino Fast Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 5", "JOEY Restaurants", "Burgers,Canadian,Pasta,Sandwiches,Fries", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 6", "Mar's Sisig", "Filipino,Philippines,Pho", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 7", "Aroma Bistro", "KWB,Chinese,Hong Kong,Sichuan,Savory,China", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 8", "LOCAL Public Eatery", "Burgers,Neighbourhood,Drinks,Bar", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 9", "Earls Kitchen + Bar", "Pizza,Canadian,Drinks,Burgers,Pasta", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 10", "Korean Garden", "Korean", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 11", "Nuburger", "Burgers,Fast Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 12", "Wendy's", "Burgers,Fast Food, Milk Shakes", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 13", "Popeyes Louisiana Kitchen", "Halal,Chicken,Fast Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 14", "PC Express™ Rapid Delivery", "Convenience,Fast,Superstore,No Frills", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 15", "Wako Sushi Cafe", "Sushi,Japanese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 16", "Logan Corner Restaurant", "Chicken,Chinese,China", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 17", "Happy Lemon", "Bubble Tea, Drinks", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 18", "Little Viet", "Bubble Tea,Vietnamese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 19", "Mama Nors Kitchen", "Filipino,Philippines,Catering", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 20", "Poke Mono", "Poke,Hawaiian,Bowls,Chicken", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 21", "Leopold's Tavern", "Burgers,Pub,Drinks,Fries", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 22", "Harvey's", "Burgers,Fast Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 23", "Tim Hortons", "Coffee,Donuts,Fast Food,Drinks,Sandwiches,Canadian", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 24", "Naru Sushi Japanese Restaurant", "Sushi,Japanese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 25", "Stella's", "Breakfast,Bakery,Cafe,Brunch", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 26", "Lamar Donair & Burgers", "Wraps,Shwarma, Falafel, Middle Eastern", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 27", "Magic Sushi & Wok", "Sushi,Japanese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 28", "Honu Poke", "Poke, Hawaiian", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 29", "Thida's Thai Restaurant", "Thai", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 30", "Burrito del Rio", "Burritos, South American, Mexican", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 31", "St. James Burger and Chip", "Burgers,Fries", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 32", "Flying Pizza", "Pizza,Italian", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 33", "Dim Sum Kingdom Restaurant", "Chinese,Dim Sum,Soup", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 34", "Hao Hao Chinese Restaurant", "Chinese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 35", "Junior's Restaurant", "Burgers,Fast Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 36", "Gongcha", "Bubble Tea, Drinks", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 37", "The Cheesecake Factory", "Cheesecake,Dessert,Comfort Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 38", "McDonald's", "Burgers,Fast Food", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 39", "Juvian's Restaurant", "Filipino,Philippines,Sisig,Kare-Kare,Adobo", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 40", "Les Saj Restaurant", "Lebanese,Middle Eastern,Shawarma,Falafel", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 41", "Sushi Hon", "Sushi,Japanese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 42", "Little Korea", "Korean", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 43", "Smoke's Poutinerie", "Poutine,Canadian", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 44", "Kawaii Crepe", "Crepe,Japanese", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 45", "Cilantro's Modern Indian Cuisine", "Indian,Modern, Curry", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 46", "Sargent Taco Shop", "Mexican,Tacos,Burritos", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 47", "Siam Authentic Thai Cuisine", "Thai,Curry,Pad Thai", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 48", "Clay Oven", "Indian,Tandoori, Curry", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 49", "Kimbaek Restaurant", "Korean", "", 0, 0, "","", 0,""));
-        restaurants.add(new Restaurant("Restaurant 50", "New York Fries", "Fries,Hot Dogs,Poutine,Canadian", "", 0, 0, "","", 0,""));
-        */
-    }
+        restaurants.add(new Restaurant(1, "Indian Food Corner","Tandoori,Indian, Chicken", "Winnipeg","Traditional Indian dishes from butter chicken to chicken biryani.",new FoodItem(1,1, "IFC Spl Saag & Makki Di Roti Meal", 9.99, "https://cdn.doordash.com/media/photos/ee8a25ab-0457-4410-993d-670d73bffb42-retina-large-jpeg", "Saag and two makki di rotis with salted lassi."), new FoodItem(1,2,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg", "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,3,"Pani Puri", 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg", "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null));
+        restaurants.add(new Restaurant(3,"Banh Mi King","Vietnamese,Savory,Sandwiches,Phom Poutine","Winnipeg","Choose from an incredible selection of appetizing rice dishes, Vietnamese salads, pho, Viet subs, baoger and more.",new FoodItem(3,1, "Pork Belly Baoger",7.79,"https://cdn.doordash.com/media/photos/3ccb98e4-3e03-411b-ae5d-4c7487db481f-retina-large.jpg","Slow-braised pork belly cooked in a hot oven and served on a steamed bun with cheese, pickled daikons, red onions, and lettuce."),new FoodItem(3,2,"Beef Baoger",7.99,"https://cdn.doordash.com/media/photos/ffa52860-4211-47aa-bfdb-f72653cd313c-retina-large.jpg","Homemade beef patties, steamed bun, cheese, pickled daikons, red onions, and lettuce."),new FoodItem(3,3, "Deluxe Beef Pho",11.29,"https://cdn.doordash.com/media/photos/8a2be946-c47b-4055-a8ce-1d6f531a68f3-retina-large.jpg","Gluten friendly. Sliced top sirloin raw beef, beef brisket, and beef balls with your choice of broth served with a side of bean sprouts and basil."),3,"510 Portage Ave Winnipeg MB R3C 0G2"));
 
 
-    public List<Restaurant> getRestaurantSequential() {
-        return Collections.unmodifiableList(restaurants); //not using collection
     }
 
     /*
-    @Override
-    public List<Restaurant> getRestaurantRandom(Restaurant currentRestaurant) {
-        List<Restaurant> newRestaurants = new ArrayList<>();
-        int index;
+    Inserts the passed restaurant to a restaurant list and checks if the restaurant has been inserted successfully
+     */
+    public boolean insertRestaurant(Restaurant currentRest) {
+        boolean insertSuccess=false;
 
-        index = restaurants.indexOf(currentRestaurant);
-        if (index >= 0)
-        {
-            newRestaurants.add(restaurants.get(index));
+        if(currentRest!=null) {
+            restaurants.add(currentRest);
         }
-        return newRestaurants;
+        //check if the restaurant has been inserted successfully
+        if(findRestaurant(currentRest.getRestaurantID())){
+
+            insertSuccess=true;
+
+        }
+
+        return insertSuccess;
+    }
+    /*
+    method called in insertRestaurant
+    searches for restaurantID in the list of restaurants
+     */
+    public boolean findRestaurant(int checkID){
+        boolean restaurantFound=false;
+
+        for(Restaurant rest : restaurants){
+            if(rest.getRestaurantID()==checkID && !restaurantFound){
+                restaurantFound=true;
+            }
+        }
+        return restaurantFound;
     }
 
-    @Override
-    public Restaurant insertRestaurant(Restaurant currentRest) {
-        // don't bother checking for duplicates
-        restaurants.add(currentRest);
-        return currentRest;
-    }
-
-    @Override
-    public Restaurant updateRestaurant(Restaurant currentRest) {
+    /*
+    Update restaurant with new restaurant passed in parameter
+     */
+    public void updateRestaurant(Restaurant currentRest) {
         int index;
 
         index = restaurants.indexOf(currentRest);
         if (index >= 0)
         {
             restaurants.set(index, currentRest);
+        };
+    }
+
+    /*
+    Delete restaurant with id passed in the parameter
+     */
+    public void deleteRestaurant(int restaurantNum) {
+        boolean restFound=false;
+        Restaurant restToDelete=null;
+
+        if(restaurantNum>=0){
+            for(Restaurant rest: restaurants){
+                if(rest.getRestaurantID()==restaurantNum & !restFound){
+                    restToDelete= rest;
+                    restFound=true;
+                }
+            }
         }
-        return currentRest;
-    }
-
-    @Override
-    public void deleteRestaurant(Restaurant currentRest) {
-        int index;
-
-        index = restaurants.indexOf(currentRest);
-        if (index >= 0)
-        {
-            restaurants.remove(index);
+        if(restToDelete!=null){
+            restaurants.remove(restToDelete);
         }
     }
 
-    @Override
-    public int getImg(Restaurant currentRestaurant) {
-        return currentRestaurant.getImagesURL();
-    }
-
-
-    public List<Restaurant> getRestaurants() {
+    /*
+    return list of all current restaurants
+     */
+    public List<Restaurant> getRestaurantSequential() {
         return restaurants;
     }
 
-     */
+
 }

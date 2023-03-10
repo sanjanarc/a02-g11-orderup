@@ -9,14 +9,11 @@ public interface RestaurantPersistence {
 
 
     List<Restaurant> getRestaurantSequential();
+    boolean insertRestaurant(Restaurant currentRestaurant);
+    boolean findRestaurant(int restNum);
 
-   // List<Restaurant> getRestaurantRandom(Restaurant currentRestaurant); //********TO REMOVE********
-
-   // Restaurant insertRestaurant(Restaurant currentRestaurant);
-
-    //Restaurant updateRestaurant(Restaurant currentRestaurant); //to be used to update ratings or send comments
-
-   // void deleteRestaurant(Restaurant currentRestaurant);
+    void updateRestaurant(Restaurant currentRestaurant); //to be used to update ratings or send comments
+    void deleteRestaurant(int currentRestaurantNum);
 
     //int getImg(Restaurant currentRestaurant);
 }
