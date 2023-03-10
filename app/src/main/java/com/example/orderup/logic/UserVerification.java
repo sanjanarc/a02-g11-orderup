@@ -1,5 +1,8 @@
 package com.example.orderup.logic;
 
+import android.util.Log;
+
+import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
@@ -237,8 +240,30 @@ public class UserVerification
     }
 
     public static String giftCardVerification(String email, String card) {
+        Giftcard[] cardList = userPersistence.getGiftcards();
         Float amount = 0.00F;
         String msg = "";
+        boolean found = false;
+
+        for(int i = 0; i < 5; i++) {
+            if(card.equals(cardList[i].getNumber())) {
+                Log.d("stored", cardList[i].getNumber());
+                Log.d("entered", card);
+                amount = cardList[i].getAmount();
+                found = true;
+            }
+        }
+
+        if (card.length() != 16) {
+            msg = "Error: Invalid gift card format, must be 16 digits.";
+        } else if(!found) {
+            msg = "Error: Gift card not found in our system.";
+        } else if(found) {
+            msg = "";
+            userPersistence.modifyBalance(email, amount);
+        }
+
+        /*
         if (card.length() != 16) {
             msg = "Error: Invalid gift card format, must be 16 digits.";
         } else {
@@ -262,7 +287,7 @@ public class UserVerification
         }
             userPersistence.modifyBalance(email, amount);
     }
-
+*/
         return msg;
     }
 
