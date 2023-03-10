@@ -219,8 +219,20 @@ public class UserVerification
     //Check the format of the postal code.
     private static String postalVerification(String postal)
     {
-    // change later
-        return "";
+        String msg;
+
+        if(postal.length() != 6) {
+            msg = "Error: Invalid postal code length.\n";
+        } else if(Character.toUpperCase(postal.charAt(0)) != 'R') {
+            msg = "Error: Postal Code not located in Manitoba.\n";
+        } else if(!Character.isLetter(postal.charAt(0)) || !Character.isDigit(postal.charAt(1)) || !Character.isLetter(postal.charAt(2)) || !Character.isDigit(postal.charAt(3))
+        || !Character.isLetter(postal.charAt(4)) || !Character.isDigit(postal.charAt(5))) {
+            msg = "Error: Invalid postal code format.\n";
+        } else {
+            msg = "";
+        }
+
+        return msg;
     }
 
     public static String giftCardVerification(String email) {
