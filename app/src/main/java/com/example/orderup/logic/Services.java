@@ -31,15 +31,6 @@ public class Services
         return userPersistence;
     }
 
-    public static synchronized UserPersistence getUserPersistenceDB()
-    {
-        if(userPersistence== null)
-        {
-            userPersistence = new UserPersistenceHSQLDB(getDBPathName());
-        }
-        return userPersistence;
-    }
-
     //Get the Restaurant database setup and ready for use.
     public static synchronized RestaurantPersistence getRestaurantPersistence()
     {
@@ -85,6 +76,7 @@ public class Services
         dbPath = name;
     }
 
+    //Return the database path.
     public static String getDBPathName()
     {
         return dbPath;
