@@ -1,5 +1,7 @@
 package com.example.orderup.persistance.hsqldb;
 
+import static java.security.AccessController.getContext;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ import java.util.List;
 
 import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Restaurant;
+import com.example.orderup.logic.Services;
 import com.example.orderup.persistance.RestaurantPersistence;
 
 public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
@@ -38,7 +41,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final String description = rs.getString("DESCRIPTION");
 //        final int num_ratings = rs.getInt("NUM_RATINGS");
 //        final int average_rating = rs.getInt("AVERAGE_RATING");
-        final int image = rs.getInt("IMAGE");
+        final String image = rs.getString("IMAGE");
         //final int location = rs.getArray("LOCATION"); //idk why this is an error// Hence, only using 1 location for now
         final String location= rs.getString("LOCATION");
 
@@ -46,7 +49,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final FoodItem item2 = getFoodById(id,2);
         final FoodItem item3 = getFoodById(id,3);
 
-        return new Restaurant(id,name,category,city,description,item1,item2, item3,location);
+        return new Restaurant(id,name,category,city,description,item1,item2, item3,location,image);
     }
 
 
@@ -109,63 +112,19 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         }
     }
 
-
-    /*
-    private Restaurant fromResultSet(final ResultSet rs) throws SQLException {
-        final String rsRestaurantID = rs.getString("ID");
-        final String rsRestaurantName = rs.getString("NAME");
-        final String rsRestaurantCategory = rs.getString("CATEGORY");
-        final String rsRestaurantCity = rs.getString("CITY");
-        final String rsRestaurantDescription = rs.getString("DESCRIPTION");
-        final int rsRestaurantNUMRating = 0;
-        final int rsRestaurantAVGRATING = 0;
-        final int rsRestaurantNUMITEMS = 0;
-        final String rsRestaurantLOCATION = rs.getString("LOCATION");
-        final int rsRestaurantImage = rs.getInt("IMAGE");
-
-//        final String FoodItemName = rs.getString("ITEM_NAME");
-//        final int FoodItemPrice = rs.getInt("ITEM_PRICE");
-//        final String FoodItemImage = rs.getString("ITEM_IMAGE_URL");
-//        final String FoodItemDescription = rs.getString("ITEM_DESC");
-
-//        final FoodItem Food = new FoodItem(FoodItemName,FoodItemPrice,FoodItemImage,FoodItemDescription);
-//        final FoodItem Food1 = new FoodItem(FoodItemName,FoodItemPrice,FoodItemImage,FoodItemDescription);
-//        final FoodItem Food2 = new FoodItem(FoodItemName,FoodItemPrice,FoodItemImage,FoodItemDescription);
-
-        return new Restaurant(rsRestaurantID,rsRestaurantName,rsRestaurantCategory,
-                rsRestaurantDescription,rsRestaurantNUMRating, rsRestaurantAVGRATING,
-                rsRestaurantImage,null,null,null,rsRestaurantNUMITEMS,
-                rsRestaurantLOCATION);
-
-    }
-
-    /*
-    @Override
-    public List<Restaurant> getRestaurantRandom(Restaurant currentRestaurant) {
-        final List<Restaurant> restaurants = new ArrayList<>();
-        try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM RESTAURANTS WHERE restaurantID = ?");
-            st.setString(1, currentRestaurant.getRestaurantID());
-
-            final ResultSet rs = st.executeQuery();
-            while(rs.next()) {
-                final Restaurant restaurant = fromResultSet(rs);
-                restaurants.add(restaurant);
-            }
-
-            rs.close();
-            st.close();
-
-            return restaurants;
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
+    public int get_image() throws SQLException {
+        Connection conn = connection();
+// Query the database for the resource ID of the image
+        PreparedStatement stmt = conn.prepareStatement("SELECT IMAGE FROM RESTAURANTS WHERE id = ?");
+        stmt.setInt(1, 1);
+        ResultSet rs = stmt.executeQuery();
+        int resourceId = 0;
+        if (rs.next()) {
+            resourceId = rs.getInt("resource_id");
         }
-
+        rs.close();
+        stmt.close();
+       return resourceId;
     }
-
-     */
-
-
-
 
 }

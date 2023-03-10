@@ -13,7 +13,7 @@ public class Restaurant {
     private int num_ratings = 0;
     private int average_rating = 0;
 
-    private  int imagesURL;
+    private  String imagesURL;
 
     //private final String imagesURL;
     private final List <FoodItem> menu; //menu List
@@ -70,7 +70,8 @@ public class Restaurant {
     }
 
     // the one in use
-    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, final FoodItem item1, final FoodItem item2, final FoodItem item3, final String location)
+    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description,
+                      final FoodItem item1, final FoodItem item2, final FoodItem item3, final String location, final String image)
     {
         this.menu =  new ArrayList<>();
 
@@ -81,7 +82,7 @@ public class Restaurant {
         this.description= description;
 //        this.num_ratings= num_ratings;
 //        this.average_rating= average_rating;
-        this.imagesURL= imagesURL;
+        this.imagesURL= image;
         this.item1= item1;
         this.item2= item2;
         this.item3= item3;
@@ -168,7 +169,7 @@ public class Restaurant {
         return equals;
     }
 
-    public int getImagesURL() {
+    public String getImagesURL() {
         return imagesURL;
     }
 
