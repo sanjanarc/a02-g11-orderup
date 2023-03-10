@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 //Login UI class.
 public class LoginActivity extends AppCompatActivity
@@ -36,6 +35,7 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         copyDatabaseToDevice();
+
         //Build connection with xml file.
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
@@ -87,74 +87,8 @@ public class LoginActivity extends AppCompatActivity
                 finish();
             }
         });
-/*
-        viewDB = (Button) findViewById(R.id.viewDB);
-        viewDB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                printDatabase();
-            }
-        });*/
-    }
-/*
-    public void showMessage(String title, String Message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
     }
 
-    public void printDatabase() {
-        // Print database contents
-        Cursor res = myDatabase.getAllData();
-        StringBuffer buffer = new StringBuffer();
-        while(res.moveToNext()) {
-            buffer.append("Id :" + res.getString(0) + "\n");
-            buffer.append("Email :" + res.getString(1) + "\n");
-            buffer.append("Password :" + res.getString(2) + "\n");
-            buffer.append("First Name :" + res.getString(3) + "\n");
-            buffer.append("Last Name :" + res.getString(4) + "\n");
-            buffer.append("Credit Card :" + res.getString(5) + "\n");
-            buffer.append("CSV :" + res.getString(6) + "\n");
-            buffer.append("Expiry :" + res.getString(7) + "\n");
-            buffer.append("Address :" + res.getString(8) + "\n");
-            buffer.append("Account Balance :$" + res.getString(9) + "\n\n");
-        }
-
-        //Show all data
-        showMessage("Data",buffer.toString());
-
-    }
-    public String searchByEmail(String email) {
-        String currId = null;
-        boolean found = false;
-        Cursor res = myDatabase.getAllData();
-        while(res.moveToNext() && found == false) {
-            if(email.equals(res.getString(1))) {
-                found = true;
-                currId = res.getString(0);
-            }
-        }
-        return currId;
-    }
-
-    public boolean checkPassword(String email, String password) {
-        //String currId = null;
-        boolean match = false;
-        boolean found = false;
-        Cursor res = myDatabase.getAllData();
-        while(res.moveToNext() && found == false) {
-            if(email.equals(res.getString(1))) {
-                found = true;
-                //currId = res.getString(0);
-                if(res.getString(2).equals(password)) {
-                    match = true;
-                }
-            }
-        }
-        return match;
-    }*/
     private void copyDatabaseToDevice()
     {
         final String DB_PATH = "db";
@@ -166,29 +100,25 @@ public class LoginActivity extends AppCompatActivity
 
         try
         {
-            Log.d("Here------------->", "Starting here");
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++)
             {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
             }
-            Log.d("Here------------->", "Before creating to emulator");
             copyAssetsToDirectory(assetNames, dataDirectory);
-            Log.d("Here------------->", "After creating to emulator");
             Services.setDBPathName(dataDirectory.toString() + "/" + Services.getDBPathName());
-            Log.d("Here-------------> See what path right now --------->", Services.getDBPathName());
 
         }
         catch (final IOException ioe)
         {
-            //Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
+            ErrorPopUp.errorMsg(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
 
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException
     {
         AssetManager assetManager = getAssets();
-        Log.d("Here------------->", "inside and before creating");
+
         for (String asset : assets)
         {
             String[] components = asset.split("/");
@@ -198,13 +128,13 @@ public class LoginActivity extends AppCompatActivity
             int count;
 
             File outFile = new File(copyPath);
-            Log.d("Here------------->", "ready to creating");
+
             //outFile.exists()
             if (true)
             {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
-                Log.d("Here------------->", "now is Creating");
+
                 count = in.read(buffer);
                 while (count != -1)
                 {
@@ -218,4 +148,3 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 }
-

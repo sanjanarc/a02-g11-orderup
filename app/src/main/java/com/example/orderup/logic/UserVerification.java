@@ -6,15 +6,12 @@ import com.example.orderup.persistance.UserPersistence;
 public class UserVerification
 {
     private static UserPersistence userPersistence;
-    private static UserPersistence userPersistence2;
 
     //Verify the input email and password from databases. Return null if input data are correct, return error message, otherwise.
     public static String loginVerification(String email, String password)
     {
         //Get the database.
         userPersistence = Services.getUserPersistence();
-
-        //userPersistence2 = Services.getUserPersistenceDB();
 
         //Store message that going to return to presentation layer.
         String msg;
@@ -34,7 +31,7 @@ public class UserVerification
         {
             //Search the input email from database.
             User tempUser = userPersistence.getUserTable().get(email);
-            //User tempUser2 = userPersistence2.getUserTable().get(email);
+
             //Only true if the email exist in the database.
             if(tempUser != null)
             {
@@ -162,50 +159,13 @@ public class UserVerification
         return msg;
     }
 
-    /* old address verification
-    public boolean addressVerification(String address, Context context)
-    {
-        if(!address.equals(""))
-        {
-            String[] tempAddress= address.split(",| ");
-
-            if(tempAddress.length != 4)
-            {
-                ErrorPopUp.errorMsg(context, "Error: Address format incorrect.");
-            }
-            else if(!tempAddress[1].equalsIgnoreCase("Winnipeg"))
-            {
-                ErrorPopUp.errorMsg(context, "Error: The city you entered must be located within Manitoba.");
-            }
-            else if(!tempAddress[2].equalsIgnoreCase("Manitoba"))
-            {
-                ErrorPopUp.errorMsg(context, "Error: Currently does not support other province other than Manitoba.");
-            }
-            else if(false)
-            {
-                //Add postal code error .
-            }
-            else
-            {
-                ErrorPopUp.errorMsg(context, "Address been added.");
-            }
-        }
-        else
-        {
-            ErrorPopUp.errorMsg(context, "Missing Field: Please fill in the blank.");
-            return true;
-        }
-
-        return false;
-    }
-*/
     //Verity the input address format and return the message to user.
     public static String addressVerification(String street, String city, String province, String postal, String email, String address)
     {
         userPersistence = Services.getUserPersistence();
 
         String result = streetVerification(street) + cityVerification(city) + provinceVerification(province) + postalVerification(postal);
-        if(result == "")
+        if(result.equals(""))
         {
             //No error occur than add the address to database.
             userPersistence.updateAddress(email, address);
@@ -218,9 +178,9 @@ public class UserVerification
     }
 
     //Check the street section of the address.
-    private static String streetVerification(String street) {
-
-        if(street == "" || street == null)
+    private static String streetVerification(String street)
+    {
+        if(street == null || street.equals(""))
         {
             return  "Error: Address format incorrect.\n";
         }
@@ -231,8 +191,8 @@ public class UserVerification
     }
 
     //Check the city is Winnipeg or not.
-    private static String cityVerification(String city) {
-
+    private static String cityVerification(String city)
+    {
         if(!city.equalsIgnoreCase("Winnipeg"))
         {
             return "Error: The city you entered must be located within Manitoba.\n";
@@ -244,8 +204,8 @@ public class UserVerification
     }
 
     //Check the province is Manitoba or other province.
-    private static String provinceVerification(String province) {
-
+    private static String provinceVerification(String province)
+    {
         if(!province.equalsIgnoreCase("Manitoba"))
         {
             return  "Error: Currently does not support other province other than Manitoba.\n";
@@ -257,11 +217,11 @@ public class UserVerification
     }
 
     //Check the format of the postal code.
-    private static String postalVerification(String postal) {
+    private static String postalVerification(String postal)
+    {
     // change later
         return "";
     }
-
 
     //Make sure the email input contain character "@".
     public static boolean emailCheck(String email)
@@ -277,11 +237,13 @@ public class UserVerification
             if(email.charAt(counter) == at && !flag)
             {
                 flag = true;
-            } else if(email.charAt(counter) == at && flag) {
+            } else if(email.charAt(counter) == at && flag)
+            {
                 multiplesAts = true;
             }
 
-            if(flag && email.charAt(counter) == '.' && counter < email.length()-1) {
+            if(flag && email.charAt(counter) == '.' && counter < email.length()-1)
+            {
                 checkPeriod = true;
             }
 
