@@ -14,7 +14,7 @@ public class User
     private String cvc;
     private float balance;
 
-    public User(String email, String password, String firstName, String lastName)
+    public User(String firstName, String lastName, String email, String password)
     {
         this.firstName = firstName;
         this.lastName = lastName;

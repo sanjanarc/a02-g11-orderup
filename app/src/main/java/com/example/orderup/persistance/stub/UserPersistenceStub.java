@@ -45,21 +45,21 @@ public class UserPersistenceStub implements UserPersistence
     }
 
     //Rename the user object.
-    @Override
+
     public void updateFirstName(String email, String firstName)
     {
         userTable.get(email).updateFirstName(firstName);
     }
 
     //Rename the user object.
-    @Override
+
     public void updateLastName(String email, String lastName)
     {
         userTable.get(email).updateLastName(lastName);
     }
 
     //Reset the user account password.
-    @Override
+
     public void updatePassword(String email, String password)
     {
         userTable.get(email).updatePass(password);
