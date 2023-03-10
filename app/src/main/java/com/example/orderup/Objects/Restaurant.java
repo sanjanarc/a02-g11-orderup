@@ -5,32 +5,34 @@ import java.util.ArrayList;
 
 public class Restaurant {
 
-    private final String restaurantID;
+    private final int restaurantID;
     private final String restaurantName;
-    private static final String cityName= "Winnipeg";
+    private final String cityName;
     private final String newCategory;
     private final String description;
     private final int num_ratings;
     private final int average_rating;
 
-    private final int imagesURL;
+    //private final String imagesURL;
     private final List <FoodItem> menu; //menu List
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
     private final FoodItem item3;
     private final int num_menu_items;
+    //private ArrayList<String> location'
     private final String location;
 
 
-    public Restaurant(final String newID)
+    public Restaurant(final int newID)
     {
         restaurantID = newID;
         restaurantName = null;
         newCategory= null;
+        cityName=null;
         description= null;
         num_ratings= 0;
         average_rating= 0;
-        imagesURL= 0;
+        //imagesURL= null;
         menu= null;
         item1= null;
         item2= null;
@@ -39,17 +41,18 @@ public class Restaurant {
         location= null;
     }
 
-    public Restaurant(final String newID, final String newRestaurantName, final String newCategory, final String description, final int num_ratings, final int average_rating, final int imagesURL, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
+    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, int num_ratings, int average_rating, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
     {
         this.menu =  new ArrayList<>();
 
         restaurantID = newID;
         restaurantName = newRestaurantName;
         this.newCategory= newCategory;
+        this.cityName= cityName;
         this.description= description;
         this.num_ratings= num_ratings;
         this.average_rating= average_rating;
-        this.imagesURL= imagesURL;
+        //this.imagesURL= imagesURL;
         this.item1= item1;
         this.item2= item2;
         this.item3= item3;
@@ -63,6 +66,8 @@ public class Restaurant {
         menu.add(item3);
 
     }
+
+
     public String getRestaurantCategory(){
         return(newCategory);
     }
@@ -76,9 +81,13 @@ public class Restaurant {
     public int getRestaurant_avgRatings(){
         return(average_rating);
     }
-    public String getFood_imageURL(){
+
+
+    //access the food's image from foodItem object class
+    /*public String getFood_imageURL(){
         return (null);
     }
+     */
 
     public List<FoodItem> getMenuItems(){
         return(menu);
@@ -103,7 +112,7 @@ public class Restaurant {
         return(cityName);
     }
 
-    public String getRestaurantID()
+    public int getRestaurantID()
     {
         return (restaurantID);
     }
@@ -115,9 +124,7 @@ public class Restaurant {
 
     public String toString()
     {
-        String str = "";
-        str += restaurantName + "\n" + getRestaurantDescription();
-        return str;
+        return String.format("Restaurant id: %d, Restaurant name: %s", restaurantID, restaurantName);
     }
 
     public boolean equals(Object other)
@@ -132,9 +139,11 @@ public class Restaurant {
 
         return equals;
     }
-
+ /*
     public int getImagesURL() {
         return imagesURL;
     }
+
+  */
 
 }
