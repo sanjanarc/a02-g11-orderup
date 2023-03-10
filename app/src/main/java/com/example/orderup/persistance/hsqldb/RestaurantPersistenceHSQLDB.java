@@ -36,10 +36,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final String category = rs.getString("CATEGORY");
         final String city = rs.getString("CITY");
         final String description = rs.getString("DESCRIPTION");
-//        final int num_ratings = rs.getInt("NUM_RATINGS");
-//        final int average_rating = rs.getInt("AVERAGE_RATING");
         final String image = rs.getString("IMAGE");
-        //final int location = rs.getArray("LOCATION"); //idk why this is an error// Hence, only using 1 location for now
         final String location= rs.getString("LOCATION");
         final int num_items= rs.getInt("NUM_ITEMS");
         System.out.println("before food1");
@@ -77,7 +74,6 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
     returns FoodItem from specified query
      */
     private FoodItem fromMenuResultSet(final ResultSet rs) throws SQLException {
-        //ID ,ITEM_ID,ITEM_NAME,ITEM_PRICE,ITEM_IMAGE_URL,ITEM_DESC
 
         final int rest_id= rs.getInt("ID");
         final int item_id= rs.getInt("ITEM_ID");
