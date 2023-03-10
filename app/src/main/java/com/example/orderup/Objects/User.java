@@ -114,9 +114,9 @@ public class User
         this.balance += balance;
     }
 
-    public String getBalance()
+    public float getBalance()
     {
-        return String.valueOf(this.balance);
+        return this.balance;
     }
 
     public String toString(){

@@ -56,7 +56,7 @@ public class UserServices
 
         if(user != null)
         {
-            return user.getBalance();
+            return String.valueOf(user.getBalance());
         }else
         {
             return null;

@@ -1,10 +1,39 @@
 package com.example.orderup.Objects;
 
+import static org.junit.Assert.assertEquals;
+
 import junit.framework.TestCase;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-public class UserTest extends TestCase {
+public class UserTest {
+
+    @Test
+    public void testUserConstructor() {
+        String email = "test@example.com";
+        String password = "password123";
+        String firstName = "John";
+        String lastName = "Doe";
+        String creditCard = "1234-5678-9012-3456";
+        String cvc = "123";
+        String expiry = "12/23";
+        String address = "123 Main St";
+        String balance = "50.00F";
+
+        User user = new User(email, password, firstName, lastName, creditCard, cvc, expiry, address, balance);
+
+        assertEquals(email, user.getEmail());
+        assertEquals(password, user.getPassword());
+        assertEquals(firstName, user.getFirstName());
+        assertEquals(lastName, user.getLastName());
+        assertEquals(creditCard, user.getCreditCard());
+        assertEquals(cvc, user.getCvc());
+        assertEquals(expiry, user.getExpiry());
+        assertEquals(address, user.getAddress());
+        assertEquals(50.0, user.getBalance(), 0.001);
+    }
+
 
     @Test
     public void testGetFirstName() {
@@ -15,7 +44,7 @@ public class UserTest extends TestCase {
         String password = "administrator";
 
         User user = new User(firstName, lastName, email, password);
-        assertEquals(firstName,user.getFirstName());
+        assertEquals(firstName, user.getFirstName());
     }
     @Test
     public void testGetLastName() {
@@ -26,7 +55,7 @@ public class UserTest extends TestCase {
         String password = "administrator";
 
         User user = new User(firstName, lastName, email, password);
-        assertEquals(lastName,user.getLastName());
+        assertEquals(lastName, user.getLastName());
     }
     @Test
     public void testGetEmail() {
@@ -37,7 +66,7 @@ public class UserTest extends TestCase {
         String password = "administrator";
 
         User user = new User(firstName, lastName, email, password);
-        assertEquals(email,user.getEmail());
+        assertEquals(email, user.getEmail());
     }
     @Test
     public void testGetPassword() {
@@ -48,7 +77,7 @@ public class UserTest extends TestCase {
         String password = "administrator";
 
         User user = new User(firstName, lastName, email, password);
-        assertEquals(password,user.getPassword());
+        assertEquals(password, user.getPassword());
     }
     @Test
     public void testGetAddress() {
@@ -59,7 +88,7 @@ public class UserTest extends TestCase {
         String address = "123 Main Street";
         User user = new User(firstName, lastName, email, password);
         user.updateAddress(address);
-        assertEquals(address,user.getAddress());
+        assertEquals(address, user.getAddress());
 
     }
 
@@ -77,7 +106,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         user.addCreditCard(creditCard,cvc,expiry);
 
-        assertEquals(creditCard,user.getCreditCard());
+        assertEquals(creditCard, user.getCreditCard());
 
     }
     @Test
@@ -94,7 +123,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         user.addCreditCard(creditCard,cvc,expiry);
 
-        assertEquals(cvc,user.getCvc());
+        assertEquals(cvc, user.getCvc());
 
     }
     @Test
@@ -111,7 +140,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         user.addCreditCard(creditCard,cvc,expiry);
 
-        assertEquals(expiry,user.getExpiry());
+        assertEquals(expiry, user.getExpiry());
 
     }
     @Test
@@ -125,7 +154,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
 
         user.updateFirstName(firstName2);
-        assertEquals(firstName2,user.getFirstName());
+        assertEquals(firstName2, user.getFirstName());
     }
     @Test
     public void testUpdateLastName() {
@@ -138,7 +167,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
 
         user.updateLastName(lastName2);
-        assertEquals(lastName2,user.getLastName());
+        assertEquals(lastName2, user.getLastName());
     }
     @Test
     public void testUpdatePass() {
@@ -151,7 +180,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
 
         user.updatePass(password2);
-        assertEquals(password2,user.getPassword());
+        assertEquals(password2, user.getPassword());
     }
     @Test
     public void testUpdateAddress() {
@@ -164,7 +193,7 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
 
         user.updateAddress(address);
-        assertEquals(address,user.getAddress());
+        assertEquals(address, user.getAddress());
 
     }
     @Test
@@ -181,9 +210,9 @@ public class UserTest extends TestCase {
         User user = new User(firstName, lastName, email, password);
         user.addCreditCard(creditCard,cvc,expiry);
 
-        assertEquals(creditCard,user.getCreditCard());
-        assertEquals(cvc,user.getCvc());
-        assertEquals(expiry,user.getExpiry());
+        assertEquals(creditCard, user.getCreditCard());
+        assertEquals(cvc, user.getCvc());
+        assertEquals(expiry, user.getExpiry());
 
     }
     @Test
