@@ -12,16 +12,16 @@ public class UserServicesTest {
     public void getFirstName() {
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
-        assertEquals(UserServices.getFirstName(existingEmail), "admin@email.com");
-        assertEquals(UserServices.getFirstName(nonexistingEmail), null);
+        assertEquals("admin@email.com", UserServices.getFirstName(existingEmail));
+        assertEquals(null, UserServices.getFirstName(nonexistingEmail));
     }
 
     @Test
     public void getLastName() {
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
-        assertEquals(UserServices.getLastName(existingEmail), "admin");
-        assertEquals(UserServices.getLastName(nonexistingEmail), null);
+        assertEquals("admin", UserServices.getLastName(existingEmail));
+        assertEquals(null, UserServices.getLastName(nonexistingEmail));
     }
 
     @Test
@@ -32,10 +32,10 @@ public class UserServicesTest {
         String nonexistingEmail = "nothere@email.com";
         String newAddress = "123 Main Street";
 
-        userPersistence.updateAddress(existingEmail,newAddress);
-        userPersistence.updateAddress(nonexistingEmail,newAddress);
-        assertEquals(UserServices.getAddress(existingEmail), "123 Main Street");
-        assertEquals(UserServices.getAddress(nonexistingEmail), null);
+        userPersistence.updateAddress(newAddress, existingEmail);
+        userPersistence.updateAddress(newAddress, nonexistingEmail);
+        assertEquals("123 Main Street", UserServices.getAddress(existingEmail));
+        assertEquals(null, UserServices.getAddress(nonexistingEmail));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class UserServicesTest {
         float newBalance = 10.00F;
         userPersistence.modifyBalance(existingEmail, newBalance);
         userPersistence.modifyBalance(nonexistingEmail, newBalance);
-        assertEquals(UserServices.getBalance(existingEmail), "10.0");
-        assertEquals(UserServices.getBalance(nonexistingEmail), null);
+        assertEquals("10.0", UserServices.getBalance(existingEmail));
+        assertEquals(null, UserServices.getBalance(nonexistingEmail));
     }
 }

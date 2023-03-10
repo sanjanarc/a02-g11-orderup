@@ -56,8 +56,8 @@ public class UserVerificationTest {
         String invalidPostal = "G4D3U4";
         String invalidAddress= validStreet + ", " + invalidCity + ", " + invalidProvince + ", " + invalidPostal;;
         String email = "admin@email.com";
-        assertEquals(UserVerification.addressVerification(validStreet, validCity, validProvince, validPostal, email, validAddress), "Address added.");
-        assertEquals(UserVerification.addressVerification(validStreet, invalidCity, invalidProvince, invalidPostal, email, invalidAddress), "Error: The city you entered must be located within Manitoba.\n" + "Error: Currently does not support other province other than Manitoba.\n" + "Error: Postal Code not located in Manitoba.\n");
+        assertEquals("Address added.", UserVerification.addressVerification(validStreet, validCity, validProvince, validPostal, email, validAddress));
+        assertEquals("Error: The city you entered must be located within Manitoba.\n" + "Error: Currently does not support other province other than Manitoba.\n" + "Error: Postal Code not located in Manitoba.\n", UserVerification.addressVerification(validStreet, invalidCity, invalidProvince, invalidPostal, email, invalidAddress));
 
     }
 
@@ -68,9 +68,9 @@ public class UserVerificationTest {
         String doubleAt = "admin@@email.com";
         String noNot = "admin@emailcom";
 
-        assertEquals(UserVerification.emailCheck(validEmail),true);
-        assertEquals(UserVerification.emailCheck(noAt),false);
-        assertEquals(UserVerification.emailCheck(doubleAt),false);
-        assertEquals(UserVerification.emailCheck(noNot),false);
+        assertEquals(true, UserVerification.emailCheck(validEmail));
+        assertEquals(false, UserVerification.emailCheck(noAt));
+        assertEquals(false, UserVerification.emailCheck(doubleAt));
+        assertEquals(false, UserVerification.emailCheck(noNot));
     }
 }

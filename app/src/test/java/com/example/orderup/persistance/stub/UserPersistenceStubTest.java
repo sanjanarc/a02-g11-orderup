@@ -21,8 +21,8 @@ public class UserPersistenceStubTest {
         UserPersistence userPersistence;
         userPersistence = Services.getUserPersistence();
         userPersistence.addUser(email,password,firstName,lastName);
-        assertEquals(UserServices.getFirstName(email), firstName);
-        assertEquals(UserServices.getLastName(email), lastName);
+        assertEquals(firstName, UserServices.getFirstName(email));
+        assertEquals(lastName, UserServices.getLastName(email));
 
     }
 
@@ -35,15 +35,15 @@ public class UserPersistenceStubTest {
         String expiry = "06/22";
         UserPersistence userPersistence;
         userPersistence = Services.getUserPersistence();
-        userPersistence.addCreditCard(email,cardNum, cvc,expiry);
-        assertEquals(UserServices.getCredit(email), cardNum);
-        assertEquals(UserServices.getCvc(email), cvc);
-        assertEquals(UserServices.getExpiry(email), expiry);
+        userPersistence.addCreditCard(expiry, email,cardNum, cvc);
+        assertEquals(cardNum, UserServices.getCredit(email));
+        assertEquals(cvc, UserServices.getCvc(email));
+        assertEquals(expiry, UserServices.getExpiry(email));
 
         userPersistence.addCreditCard(nonexistingEmail,cardNum, cvc,expiry);
-        assertEquals(UserServices.getCredit(nonexistingEmail), null);
-        assertEquals(UserServices.getCvc(nonexistingEmail), null);
-        assertEquals(UserServices.getExpiry(nonexistingEmail), null);
+        assertEquals(null, UserServices.getCredit(nonexistingEmail));
+        assertEquals(null, UserServices.getCvc(nonexistingEmail));
+        assertEquals(null, UserServices.getExpiry(nonexistingEmail));
 
 
     }
@@ -57,10 +57,10 @@ public class UserPersistenceStubTest {
         userPersistence = Services.getUserPersistence();
 
         userPersistence.updateAddress(email, newAddress);
-        assertEquals(UserServices.getAddress(email),newAddress);
+        assertEquals(newAddress, UserServices.getAddress(email));
 
         userPersistence.updateAddress(nonexistingEmail, newAddress);
-        assertEquals(UserServices.getAddress(nonexistingEmail),null);
+        assertEquals(null, UserServices.getAddress(nonexistingEmail));
 
     }
 
@@ -73,10 +73,10 @@ public class UserPersistenceStubTest {
         userPersistence = Services.getUserPersistence();
 
         userPersistence.modifyBalance(email, newBalance);
-        assertEquals(UserServices.getBalance(email), "" + newBalance);
+        assertEquals("" + newBalance, UserServices.getBalance(email));
 
         userPersistence.modifyBalance(nonexistingEmail, newBalance);
-        assertEquals(UserServices.getBalance(nonexistingEmail), null);
+        assertEquals(null, UserServices.getBalance(nonexistingEmail));
     }
 
     @Test
@@ -84,6 +84,6 @@ public class UserPersistenceStubTest {
         UserPersistence userPersistence;
         userPersistence = Services.getUserPersistence();
         Giftcard[] test = new Giftcard[0];
-        assertEquals(userPersistence.getGiftcards().length, test.length);
+        assertEquals(test.length, userPersistence.getGiftcards().length);
     }
 }
