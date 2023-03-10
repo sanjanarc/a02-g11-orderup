@@ -4,21 +4,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+//This class will pop up a window to display given message to user.
 public class ErrorPopUp
 {
-    //Display a dialog on the screen and show the message to user.
+    //Display the given message to user.
     public static void errorMsg(Context context, String msg)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(msg);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                //Do nothing.
+            public void onClick(DialogInterface dialog, int which) {
             }
         });
-
         builder.show();
     }
 }

@@ -2,77 +2,124 @@ package com.example.orderup.Objects;
 
 import java.util.Objects;
 
-public class User {
+public class User
+{
+    private String firstName;
+    private String lastName;
+    private final String email;
+    private String password;
+    private String expiry;
+    private String address;
+    private String creditCard;
+    private String cvc;
+    private float balance;
 
-    private String firstName, lastName, email, password, expiry, address, creditCard, cvc;
-
-    public User(String firstName, String lastName, String email, String password)
+    public User(String email, String password, String firstName, String lastName)
     {
-        this.firstName= firstName;
-        this.lastName= lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.address="";
-        this.creditCard="";
-        this.cvc="";
-        this.expiry="";
+        this.creditCard = "";
+        this.cvc = "";
+        this.expiry = "";
+        this.balance = 0.00F;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.creditCard = creditCard;
+        this.cvc = cvc;
+        this.expiry = expiry;
+        this.address = address;
+        if(null == balance) {
+            balance = "0.00F";
+        }
+        this.balance = Float.parseFloat(balance);
     }
 
-    public String getLastName(){
-        return lastName;
-    }
-
-    public String getEmail(){
+    public String getEmail()
+    {
         return email;
     }
 
-    public String getPassword(){
+    public String getPassword()
+    {
         return password;
     }
 
-    public String getAddress(){
-        return address;
+    public String getFirstName()
+    {
+        return firstName;
     }
 
-    public String getExpiry() {
-        return expiry;
+    public String getLastName()
+    {
+        return lastName;
     }
 
-    public String getCreditCard() {
+    public String getCreditCard()
+    {
         return creditCard;
     }
 
-    public String getCvc() {
+    public String getCvc()
+    {
         return cvc;
     }
 
-    public void updateFirstName(String newFirstName){
+    public String getExpiry()
+    {
+        return expiry;
+    }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void updateFirstName(String newFirstName)
+    {
         this.firstName= newFirstName;
     }
 
-    public void updateLastName(String newLastName){
+    public void updateLastName(String newLastName)
+    {
         this.lastName= newLastName;
     }
 
-    public void updatePass(String newPassword){
+    public void updatePass(String newPassword)
+    {
         this.password= newPassword;
     }
 
-    public void updateAddress(String newAddress){
+    public void updateAddress(String newAddress)
+    {
         this.address= newAddress;
     }
 
-    public void addCreditCard(String newCreditCard, String newCvc, String newExpiry){
-        this.creditCard= newCreditCard;
-        this.cvc= newCvc;
-        this.expiry= newExpiry;
+    public void addCreditCard(String newCreditCard, String newCvc, String newExpiry)
+    {
+        this.creditCard = newCreditCard;
+        this.cvc = newCvc;
+        this.expiry = newExpiry;
     }
 
-    public String toString() {
+    public void modifyBalance(float balance)
+    {
+        this.balance += balance;
+    }
+
+    public String getBalance()
+    {
+        return String.valueOf(this.balance);
+    }
+
+    public String toString(){
         return String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +

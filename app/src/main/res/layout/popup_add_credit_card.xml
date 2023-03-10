@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Credit Card Number"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="20" />
 
     <EditText
         android:id="@+id/cardCvcInput"
@@ -16,12 +17,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardNumberInput"
         android:hint="Cvc"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="20" />
 
     <EditText
         android:id="@+id/cardExpiryInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardCvcInput"
-        android:hint="Expiry" />
+        android:hint="Expiry"
+        android:maxLength="20" />
 </RelativeLayout>
