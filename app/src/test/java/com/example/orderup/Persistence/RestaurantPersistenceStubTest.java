@@ -4,16 +4,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
 
 public class RestaurantPersistenceStubTest {
-    private RestaurantPersistence restaurantPersistence;
+    private RestaurantPersistenceStub restaurantPersistence;
 
     @Before
     public void testRestPersistenceStub(){
