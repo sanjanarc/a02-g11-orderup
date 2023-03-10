@@ -30,8 +30,6 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
 
         String path ="jdbc:hsqldb:file:" + dbPath + ";shutdown=true";
-        Log.d("Here------------->", "Now inside connection");
-        Log.d("Here----->Let see what path-------->",path);
         return DriverManager.getConnection(path, "SA", "");
     }
 
@@ -166,16 +164,12 @@ public class UserPersistenceHSQLDB implements UserPersistence
         int i = 0;
         try (final Connection c = connection())
         {
-            Log.d("this","1 line");
             final Statement st = c.createStatement();
-            Log.d("this","2 line");
             final ResultSet rs = st.executeQuery("SELECT * FROM GIFTCARD");
-            Log.d("this","3 line");
             while (rs.next()) {
                 cardList[i] = new Giftcard(rs.getString("NUMBER"), rs.getFloat("AMOUNT"));
                 i++;
             }
-            Log.d("this","4 line");
             rs.close();
             st.close();
         }
