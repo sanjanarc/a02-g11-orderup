@@ -1,8 +1,6 @@
 package com.example.orderup.logic;
 
-import static org.junit.Assert.*;
-
-import com.example.orderup.persistance.UserPersistence;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -48,13 +46,31 @@ public class UserVerificationTest {
 
     @Test
     public void addressVerificationTest() {
-    }
+        String validStreet = "123 Fake Street";
+        String validCity = "Winnipeg";
+        String validProvince = "Manitoba";
+        String validPostal = "R3A5H4";
+        String validAddress = validStreet + ", " + validCity + ", " + validProvince + ", " + validPostal;
+        String invalidCity = "Edmonton";
+        String invalidProvince = "Alberta";
+        String invalidPostal = "G4D3U4";
+        String invalidAddress= validStreet + ", " + invalidCity + ", " + invalidProvince + ", " + invalidPostal;;
+        String email = "admin@email.com";
+        assertEquals(UserVerification.addressVerification(validStreet, validCity, validProvince, validPostal, email, validAddress), "Address added.");
+        assertEquals(UserVerification.addressVerification(validStreet, invalidCity, invalidProvince, invalidPostal, email, invalidAddress), "Error: The city you entered must be located within Manitoba.\n" + "Error: Currently does not support other province other than Manitoba.\n" + "Error: Postal Code not located in Manitoba.\n");
 
-    @Test
-    public void giftCardVerificationTest() {
     }
 
     @Test
     public void emailCheckTest() {
+        String validEmail = "admin@email.com";
+        String noAt = "adminemail.com";
+        String doubleAt = "admin@@email.com";
+        String noNot = "admin@emailcom";
+
+        assertEquals(UserVerification.emailCheck(validEmail),true);
+        assertEquals(UserVerification.emailCheck(noAt),false);
+        assertEquals(UserVerification.emailCheck(doubleAt),false);
+        assertEquals(UserVerification.emailCheck(noNot),false);
     }
 }
