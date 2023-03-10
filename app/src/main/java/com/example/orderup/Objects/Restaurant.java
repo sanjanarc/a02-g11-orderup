@@ -10,12 +10,8 @@ public class Restaurant {
     private final String cityName;
     private final String newCategory;
     private final String description;
-    //private int num_ratings = 0;
-    //private int average_rating = 0;
-
     private  int imagesURL=0;
 
-    //private final String imagesURL;
     private final List <FoodItem> menu; //menu List
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
