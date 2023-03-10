@@ -36,7 +36,8 @@ public class RegisterActivity extends AppCompatActivity
 
         //Event listener of the register button.
         registerButton = (Button) findViewById(R.id.registerButton1);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -72,7 +73,8 @@ public class RegisterActivity extends AppCompatActivity
 
         //Event listener of the back button.
         backButton= (Button) findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
