@@ -13,11 +13,11 @@ public class RestaurantServicesTest {
 
     @Test
     public void testGetRestList() {
-        // Create some sample restaurants
+        // Create some  restaurants
         Restaurant restaurant1 = new Restaurant(1, "Indian Food Corner", "City A", "Category A", "Description A", null, null, null, 3, "Location A", "image");
         Restaurant restaurant2 = new Restaurant(2, "Banh Mi King", "City B", "Category B", "Description B", null, null, null, 3, "Location B", "image");
 
-        // Add the sample restaurants to the persistence layer
+        // Add the  restaurants to the persistence layer
         RestaurantPersistenceStub restaurantPersistenceStub = new RestaurantPersistenceStub();
         restaurantPersistenceStub.insertRestaurant(restaurant1);
         restaurantPersistenceStub.insertRestaurant(restaurant2);
