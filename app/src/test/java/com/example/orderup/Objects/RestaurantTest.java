@@ -80,7 +80,7 @@ public class RestaurantTest {
         assertEquals("Fast Food", restaurant.getRestaurantCategory());
         assertEquals("New York City", restaurant.getCityName());
         assertEquals("The world's largest chain of hamburger fast food restaurants", restaurant.getRestaurantDescription());
-        assertEquals(3, restaurant.getMenuItems());
+        assertEquals(3, restaurant.getMenuItems().size());
         assertEquals("123 Main Street", restaurant.getRestaurant_location());
         assertEquals("https://example.com/mcdonalds.jpg", restaurant.getImagesURL());
 

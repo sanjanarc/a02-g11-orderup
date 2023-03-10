@@ -12,6 +12,7 @@ public class FoodItem {
 
     public FoodItem(int restaurant_id,int item_id, String itemName, double itemPrice, String itemImageURL, String itemDescription ){
         this.restaurant_id= restaurant_id;
+        item_id = item_id;
         item_name= itemName;
         price= itemPrice;
         image_url= itemImageURL;
