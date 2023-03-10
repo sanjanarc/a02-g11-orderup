@@ -43,7 +43,7 @@ public class Restaurant {
         location= null;
     }
 
-    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, int num_ratings, int average_rating, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
+    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, final FoodItem item1, final FoodItem item2, final FoodItem item3,final int num_menu_items, final String location )
     {
         this.menu =  new ArrayList<>();
 
