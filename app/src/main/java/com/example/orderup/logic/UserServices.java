@@ -3,7 +3,7 @@ package com.example.orderup.logic;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
-//This class will pass data from persistence to presentation.
+//This class will pass User data from persistence to presentation: User First and Last name, Address,and Wallet Balance
 public class UserServices
 {
     private static UserPersistence userPersistence = Services.getUserPersistence();
