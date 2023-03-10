@@ -2,6 +2,7 @@ package com.example.orderup.persistance.hsqldb;
 
 import android.util.Log;
 
+import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
@@ -52,6 +53,16 @@ public class UserPersistenceHSQLDB implements UserPersistence
         return new User(email,password,firstname,lastname,creditcard,cvc,expiry,address,balance);
     }
 
+    private Giftcard fromResultSet2(final ResultSet rs) throws SQLException
+    {
+        //Getting data from the table.
+        final String number = rs.getString("NUMBER");
+        final float amount = rs.getFloat("AMOUNT");
+
+        //Return a user object with filled data.
+        return new Giftcard(number, amount);
+    }
+
     //Build a user hash map from database and return the user table.
     @Override
     public HashMap<String, User> getUserTable()
@@ -96,7 +107,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
             st.setString(6, null);
             st.setString(7, null);
             st.setString(8, null);
-            st.setString(9, null);
+            st.setFloat(9, 0.00F);
             st.executeUpdate();
         }
         catch (SQLException e)
@@ -200,6 +211,34 @@ public class UserPersistenceHSQLDB implements UserPersistence
             throw new PersistenceException(e);
         }
     }
+
+    @Override
+    public Giftcard[] getGiftcards() {
+        Giftcard cardList[] = new Giftcard[5];
+        int i = 0;
+        try (final Connection c = connection())
+        {
+            Log.d("this","1 line");
+            final Statement st = c.createStatement();
+            Log.d("this","2 line");
+            final ResultSet rs = st.executeQuery("SELECT * FROM GIFTCARD");
+            Log.d("this","3 line");
+            while (rs.next()) {
+                cardList[i] = new Giftcard(rs.getString("NUMBER"), rs.getFloat("AMOUNT"));
+                i++;
+            }
+            Log.d("this","4 line");
+            rs.close();
+            st.close();
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+
+        return cardList;
+    }
+
     /* Do we really need these method?
     @Override
     public User insertUser(User currentUser) {

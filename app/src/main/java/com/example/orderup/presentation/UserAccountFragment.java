@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +21,11 @@ import com.example.orderup.logic.UserVerification;
 //This is the User page UI class.
 public class UserAccountFragment extends Fragment
 {
+    EditText giftCardCode;
     TextView infoContainer, accountBalance;
 
     Button addCardButton, logoutButton, addAddressButton;
-
+    String giftcard;
     String userEmail = Services.getCurrentUser();
 
     @Override
@@ -43,6 +43,7 @@ public class UserAccountFragment extends Fragment
         //Connect to xml file.
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
         accountBalance= (TextView) view.findViewById(R.id.accountBalance);
+        giftCardCode = (EditText) view.findViewById(R.id.giftCardCode);
 
         //Display the message to user.
         accountBalance.setText("$" + UserServices.getBalance(userEmail));
@@ -90,16 +91,14 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-
+                giftcard = giftCardCode.getText().toString();
                 //Verify and add credit card to database.
-                String result = UserVerification.giftCardVerification(userEmail);
+                String result = UserVerification.giftCardVerification(userEmail,giftcard);
 
                 //Display the result to user.
-                if("0.00F" == result) {
-                    result = "Error - Invalid Gift Card";
+                if("" != result) {
                     ErrorPopUp.errorMsg(getActivity(), result);
                 } else {
-                    Log.d("balance", result);
                     accountBalance.setText("$" + UserServices.getBalance(userEmail));
                 }
 
@@ -171,6 +170,13 @@ public class UserAccountFragment extends Fragment
 
                 //Display the result to user.
                 ErrorPopUp.errorMsg(getActivity(), result);
+
+                String display = String.format("First name: %s\n" +
+                        "Last name: %s\n" +
+                        "Email: %s\n" +
+                        "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
+                infoContainer.setText(display);
+                infoContainer.setTextSize(30);
             }
         });
         builder.show();

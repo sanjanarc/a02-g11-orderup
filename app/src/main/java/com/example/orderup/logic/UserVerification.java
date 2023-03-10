@@ -1,5 +1,8 @@
 package com.example.orderup.logic;
 
+import android.util.Log;
+
+import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
@@ -105,6 +108,7 @@ public class UserVerification
             {
                 //Create a user to stub or database.
                 userPersistence.addUser(email, password, firstName, lastName);
+                userPersistence.modifyBalance(email, 0.00F);
                 msg = null;
             }
         }
@@ -235,23 +239,56 @@ public class UserVerification
         return msg;
     }
 
-    public static String giftCardVerification(String email) {
+    public static String giftCardVerification(String email, String card) {
+        Giftcard[] cardList = userPersistence.getGiftcards();
         Float amount = 0.00F;
-        int rand = (int)Math.floor(Math.random() * (5) + 1);
-        switch(rand) {
-            case 1: amount = 5.00F;
+        String msg = "";
+        boolean found = false;
+
+        for(int i = 0; i < 5; i++) {
+            if(card.equals(cardList[i].getNumber())) {
+                Log.d("stored", cardList[i].getNumber());
+                Log.d("entered", card);
+                amount = cardList[i].getAmount();
+                found = true;
+            }
+        }
+
+        if (card.length() != 16) {
+            msg = "Error: Invalid gift card format, must be 16 digits.";
+        } else if(!found) {
+            msg = "Error: Gift card not found in our system.";
+        } else if(found) {
+            msg = "";
+            userPersistence.modifyBalance(email, amount);
+        }
+
+        /*
+        if (card.length() != 16) {
+            msg = "Error: Invalid gift card format, must be 16 digits.";
+        } else {
+        int rand = (int) Math.floor(Math.random() * (5) + 1);
+        switch (rand) {
+            case 1:
+                amount = 5.00F;
                 break;
-            case 2: amount = 10.00F;
+            case 2:
+                amount = 10.00F;
                 break;
-            case 3: amount = 20.00F;
+            case 3:
+                amount = 20.00F;
                 break;
-            case 4: amount = 50.00F;
+            case 4:
+                amount = 50.00F;
                 break;
-            case 5: amount = 100.00F;
+            case 5:
+                amount = 100.00F;
                 break;
         }
-        userPersistence.modifyBalance(email, amount);
-        return "" + amount;
+            userPersistence.modifyBalance(email, amount);
+    }
+*/
+        return msg;
     }
 
     //Make sure the email input contain character "@".

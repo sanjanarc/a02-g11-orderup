@@ -1,5 +1,6 @@
 package com.example.orderup.persistance;
 
+import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 
 import java.util.HashMap;
@@ -30,6 +31,8 @@ public interface UserPersistence {
 
     //Modify the user account balance.
     void modifyBalance(String email, float balance);
+
+     Giftcard[] getGiftcards();
 
     //User insertUser(User currentUser);
 
