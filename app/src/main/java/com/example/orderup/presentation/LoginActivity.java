@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -128,9 +127,8 @@ public class LoginActivity extends AppCompatActivity
             int count;
 
             File outFile = new File(copyPath);
-
-            //outFile.exists()
-            if (true)
+            // !outFile.exists()
+            if (!outFile.exists())
             {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);

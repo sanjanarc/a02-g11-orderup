@@ -35,6 +35,9 @@ public class User
         this.creditCard = creditCard;
         this.cvc = cvc;
         this.expiry = expiry;
+        if(null == balance) {
+            balance = "0.00F";
+        }
         this.balance = Float.parseFloat(balance);
     }
 

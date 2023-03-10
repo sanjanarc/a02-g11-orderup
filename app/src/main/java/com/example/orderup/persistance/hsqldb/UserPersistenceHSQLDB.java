@@ -7,6 +7,7 @@ import com.example.orderup.persistance.UserPersistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -86,8 +87,17 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         try(Connection c = connection())
         {
-            Statement st = c.createStatement();
-            st.executeQuery("INSERT INTO USERS VALUES (" + email + "," + password + "," + firstName + "," + lastName + "," + null + "," + null + "," + null + "," + null + "," + null + ")");
+            PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            st.setString(1, email);
+            st.setString(2, password);
+            st.setString(3, firstName);
+            st.setString(4, lastName);
+            st.setString(5, null);
+            st.setString(6, null);
+            st.setString(7, null);
+            st.setString(8, null);
+            st.setString(9, null);
+            st.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -101,8 +111,12 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         try(Connection c = connection())
         {
-            Statement st = c.createStatement();
-            st.executeQuery("UPDATE USERS SET CREDITCARD = " + cardNum + ", CVC = " + cvc + ", EXPIRY = " + expiry + " WHERE EMAIL = " + email);
+            PreparedStatement st = c.prepareStatement("UPDATE USERS SET CREDITCARD = ?, CVC = ?, EXPIRY = ? WHERE EMAIL = ?");
+            st.setString(1, cardNum);
+            st.setString(2, cvc);
+            st.setString(3, expiry);
+            st.setString(4, email);
+            st.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -160,8 +174,10 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         try(Connection c = connection())
         {
-            Statement st = c.createStatement();
-            st.executeQuery("UPDATE USERS SET ADDRESS = " + address + " WHERE EMAIL = " + email);
+            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET ADDRESS = ? WHERE EMAIL = ?");
+            ps.setString(1, address);
+            ps.setString(2, email);
+            ps.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -174,8 +190,10 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         try(Connection c = connection())
         {
-            Statement st = c.createStatement();
-            st.executeQuery("UPDATE USERS SET BALANCE = " + balance + " WHERE EMAIL = " + email);
+            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET BALANCE = ? WHERE EMAIL = ?");
+            ps.setDouble(1, balance);
+            ps.setString(2, email);
+            ps.executeUpdate();
         }
         catch (SQLException e)
         {

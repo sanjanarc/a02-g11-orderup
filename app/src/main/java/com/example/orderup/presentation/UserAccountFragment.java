@@ -21,7 +21,7 @@ import com.example.orderup.logic.UserVerification;
 //This is the User page UI class.
 public class UserAccountFragment extends Fragment
 {
-    TextView infoContainer;
+    TextView infoContainer, accountBalance;
 
     Button addCardButton, logoutButton, addAddressButton;
 
@@ -87,23 +87,18 @@ public class UserAccountFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                /*
-                int rand = (int)Math.floor(Math.random() * (5) + 1);
-                switch(rand) {
-                    case 1: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 5.00F);
-                        break;
-                    case 2: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 10.00F);
-                        break;
-                    case 3: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 20.00F);
-                        break;
-                    case 4: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 50.00F);
-                        break;
-                    case 5: userPersistence.addBalance(getActivity().getIntent().getStringExtra("email"), 100.00F);
-                        break;
+
+                //Verify and add credit card to database.
+                String result = UserVerification.giftCardVerification(userEmail);
+
+                //Display the result to user.
+                if("0.00F" == result) {
+                    result = "Error - Invalid Gift Card";
+                    ErrorPopUp.errorMsg(getActivity(), result);
+                } else {
+                    accountBalance.setText("$" + result);
                 }
 
-                accountBalance.setText("$" + userPersistence.getBalance(getActivity().getIntent().getStringExtra("email")));
-                 */
                 //addCardBalance();
             }
         });
