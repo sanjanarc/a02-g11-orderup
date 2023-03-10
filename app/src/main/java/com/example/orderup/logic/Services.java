@@ -22,8 +22,8 @@ public class Services
     {
         if(userPersistence== null)
         {
-            userPersistence= new UserPersistenceStub();
-            //userPersistence = new UserPersistenceHSQLDB(getDBPathName());
+//            userPersistence= new UserPersistenceStub();
+            userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
 
         return userPersistence;
@@ -34,8 +34,8 @@ public class Services
     {
         if (restaurantPersistence == null)
         {
-            restaurantPersistence = new RestaurantPersistenceStub();
-            //restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
+//            restaurantPersistence = new RestaurantPersistenceStub();
+            restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
         }
 
         return restaurantPersistence;

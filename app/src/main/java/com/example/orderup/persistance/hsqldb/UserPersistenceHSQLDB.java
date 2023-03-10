@@ -28,7 +28,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
     //Ask the Device to load and run the database script.
     private Connection connection() throws SQLException
     {
-        //Log.d("path",dbPath);
+
         String path ="jdbc:hsqldb:file:" + dbPath + ";shutdown=true";
         Log.d("Here------------->", "Now inside connection");
         Log.d("Here----->Let see what path-------->",path);
