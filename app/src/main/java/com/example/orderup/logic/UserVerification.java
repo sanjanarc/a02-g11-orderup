@@ -6,6 +6,9 @@ import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
+/*
+This class verifies Information provided by User: email and password,
+ */
 public class UserVerification
 {
     private static UserPersistence userPersistence;
