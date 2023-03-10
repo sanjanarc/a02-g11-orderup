@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity
     }*/
     private void copyDatabaseToDevice()
     {
-        final String DB_PATH = "assets";
+        final String DB_PATH = "db";
 
         String[] assetNames;
         Context context = getApplicationContext();
