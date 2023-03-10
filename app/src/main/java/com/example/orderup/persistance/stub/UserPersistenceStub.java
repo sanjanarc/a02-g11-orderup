@@ -43,27 +43,6 @@ public class UserPersistenceStub implements UserPersistence
         userTable.get(email).addCreditCard(cardNum, cvc, expiry);
     }
 
-    //Rename the user object.
-
-    public void updateFirstName(String email, String firstName)
-    {
-        userTable.get(email).updateFirstName(firstName);
-    }
-
-    //Rename the user object.
-
-    public void updateLastName(String email, String lastName)
-    {
-        userTable.get(email).updateLastName(lastName);
-    }
-
-    //Reset the user account password.
-
-    public void updatePassword(String email, String password)
-    {
-        userTable.get(email).updatePass(password);
-    }
-
     //Update the user address.
     @Override
     public void updateAddress(String email, String address)

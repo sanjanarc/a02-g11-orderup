@@ -105,4 +105,8 @@ public class Restaurant {
     public String getImagesURL() {
         return imagesURL;
     }
+
+    public int getNum_menuItem(){
+        return num_menu_items;
+    }
 }
