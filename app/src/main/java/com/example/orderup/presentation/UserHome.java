@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
+import com.example.orderup.logic.Services;
+import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
 import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
 
 import java.util.List;
@@ -23,8 +25,12 @@ public class UserHome extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RestaurantPersistenceStub restaurants = new RestaurantPersistenceStub() ;
-        List<Restaurant> restaurantsList = restaurants.getRestaurants();
+//        RestaurantPersistenceStub restaurants = new RestaurantPersistenceStub() ;
+//        List<Restaurant> restaurantsList = restaurants.getRestaurants();
+//        recyclerView.setAdapter(new MyAdapter(restaurantsList));
+
+        RestaurantPersistenceHSQLDB restaurants = new RestaurantPersistenceHSQLDB(Services.getDBPathName()) ;
+        List<Restaurant> restaurantsList = restaurants.getRestaurantSequential();
         recyclerView.setAdapter(new MyAdapter(restaurantsList));
 
     }

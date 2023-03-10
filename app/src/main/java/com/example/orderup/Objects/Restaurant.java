@@ -10,8 +10,8 @@ public class Restaurant {
     private final String cityName;
     private final String newCategory;
     private final String description;
-    private final int num_ratings;
-    private final int average_rating;
+    private int num_ratings = 0;
+    private int average_rating = 0;
 
     private  int imagesURL=0;
 
@@ -20,7 +20,7 @@ public class Restaurant {
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
     private final FoodItem item3;
-    private final int num_menu_items;
+    private  int num_menu_items;
     //private ArrayList<String> location'
     private final String location;
 
@@ -52,8 +52,8 @@ public class Restaurant {
         this.newCategory= newCategory;
         this.cityName= cityName;
         this.description= description;
-        this.num_ratings= num_ratings;
-        this.average_rating= average_rating;
+        this.num_ratings= 0;
+        this.average_rating= 0;
         //this.imagesURL= imagesURL;
         this.item1= item1;
         this.item2= item2;
@@ -69,6 +69,31 @@ public class Restaurant {
 
     }
 
+    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, final FoodItem item1, final FoodItem item2, final FoodItem item3, final String location )
+    {
+        this.menu =  new ArrayList<>();
+
+        restaurantID = newID;
+        restaurantName = newRestaurantName;
+        this.newCategory= newCategory;
+        this.cityName= cityName;
+        this.description= description;
+//        this.num_ratings= num_ratings;
+//        this.average_rating= average_rating;
+        //this.imagesURL= imagesURL;
+        this.item1= item1;
+        this.item2= item2;
+        this.item3= item3;
+
+        this.num_menu_items=0;
+        this.location= location;
+
+        //add the FoodItems to menu List
+        menu.add(item1);
+        menu.add(item2);
+        menu.add(item3);
+
+    }
 
     public String getRestaurantCategory(){
         return(newCategory);

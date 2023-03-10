@@ -29,9 +29,9 @@ public class RestaurantActivity extends AppCompatActivity {
         restinfo = (TextView) findViewById(R.id.RestInfo);
         restinfo.setText(restaurantPersistence.getRestaurantSequential().get(position).toString());
 
-        ImageView Restbg;
-        Restbg = (ImageView) findViewById(R.id.Restbg);
-        Restbg.setImageResource(restaurantPersistence.getRestaurantSequential().get(position).getImagesURL());
+//        ImageView Restbg;
+//        Restbg = (ImageView) findViewById(R.id.Restbg);
+//        Restbg.setImageResource(restaurantPersistence.getRestaurantSequential().get(position).getImagesURL());
 
         RecyclerView recyclerView;
         recyclerView = findViewById(R.id.MenuRecyclerView);
