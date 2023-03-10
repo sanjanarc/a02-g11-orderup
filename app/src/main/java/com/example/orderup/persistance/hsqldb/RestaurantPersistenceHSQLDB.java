@@ -46,15 +46,14 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final String image = rs.getString("IMAGE");
         //final int location = rs.getArray("LOCATION"); //idk why this is an error// Hence, only using 1 location for now
         final String location= rs.getString("LOCATION");
-
+        final int num_items= rs.getInt("NUM_ITEMS");
         System.out.println("before food1");
         final FoodItem item1 = getFoodById(id,1); //get fooditem in the rest's menu
         System.out.println("after food1");
-//        Log.d("thid", item1.getItemDescription());
         final FoodItem item2 = getFoodById(id,2);
         final FoodItem item3 = getFoodById(id,3);
 
-        return new Restaurant(id,name,category,city,description,item1,item2, item3,location,image);
+        return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image);
     }
 
 

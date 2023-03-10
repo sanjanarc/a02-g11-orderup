@@ -45,35 +45,35 @@ public class Restaurant {
         location= null;
     }
 
-    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, int num_ratings, int average_rating, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
-    {
-        this.menu =  new ArrayList<>();
-
-        restaurantID = newID;
-        restaurantName = newRestaurantName;
-        this.newCategory= newCategory;
-        this.cityName= cityName;
-        this.description= description;
-        this.num_ratings= 0;
-        this.average_rating= 0;
-        //this.imagesURL= imagesURL;
-        this.item1= item1;
-        this.item2= item2;
-        this.item3= item3;
-
-        this.num_menu_items=num_menu_items;
-        this.location= location;
-
-        //add the FoodItems to menu List
-        menu.add(item1);
-        menu.add(item2);
-        menu.add(item3);
-
-    }
+//    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, int num_ratings, int average_rating, final FoodItem item1, final FoodItem item2, final FoodItem item3, final int num_menu_items, final String location )
+//    {
+//        this.menu =  new ArrayList<>();
+//
+//        restaurantID = newID;
+//        restaurantName = newRestaurantName;
+//        this.newCategory= newCategory;
+//        this.cityName= cityName;
+//        this.description= description;
+//        this.num_ratings= 0;
+//        this.average_rating= 0;
+//        //this.imagesURL= imagesURL;
+//        this.item1= item1;
+//        this.item2= item2;
+//        this.item3= item3;
+//
+//        this.num_menu_items=num_menu_items;
+//        this.location= location;
+//
+//        //add the FoodItems to menu List
+//        menu.add(item1);
+//        menu.add(item2);
+//        menu.add(item3);
+//
+//    }
 
     // the one in use
     public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description,
-                      final FoodItem item1, final FoodItem item2, final FoodItem item3, final String location, final String image)
+                      final FoodItem item1, final FoodItem item2, final FoodItem item3,final int num_menu_items, final String location, final String image)
     {
         this.menu =  new ArrayList<>();
 
@@ -82,14 +82,13 @@ public class Restaurant {
         this.newCategory= newCategory;
         this.cityName= cityName;
         this.description= description;
-//        this.num_ratings= num_ratings;
-//        this.average_rating= average_rating;
         this.imagesURL= image;
         this.item1= item1;
         this.item2= item2;
         this.item3= item3;
 
-        this.num_menu_items=0;
+        this.num_menu_items=num_menu_items;
+
         this.location= location;
 
         //add the FoodItems to menu List
