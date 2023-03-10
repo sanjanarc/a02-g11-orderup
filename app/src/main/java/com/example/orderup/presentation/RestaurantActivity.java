@@ -4,42 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.orderup.R;
-import com.example.orderup.logic.Services;
-import com.example.orderup.persistance.RestaurantPersistence;
+import com.example.orderup.logic.RestaurantServices;
 
+//This is the activity class showing the specific restaurant info.
 public class RestaurantActivity extends AppCompatActivity {
-
-    RestaurantPersistence restaurantPersistence = Services.getRestaurantPersistence();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         int position = getIntent().getIntExtra("position", 1);
-        Log.d("this", ""+ restaurantPersistence.getRestaurantSequential().get(position).getRestaurantName());
 
+        //Showing the restaurant info.
         TextView restinfo;
         restinfo = (TextView) findViewById(R.id.RestInfo);
-        restinfo.setText(restaurantPersistence.getRestaurantSequential().get(position).toString());
+        restinfo.setText(RestaurantServices.getRestList().get(position).toString());
 
-//        ImageView Restbg;
-//        Restbg = (ImageView) findViewById(R.id.Restbg);
-//        Restbg.setImageResource(restaurantPersistence.getRestaurantSequential().get(position).getImagesURL());
-
+        //Showing the restaurant food item.
         RecyclerView recyclerView;
         recyclerView = findViewById(R.id.MenuRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MenuAdapter(restaurantPersistence.getRestaurantSequential().get(position).getMenuItems()));
-
-
-
+        recyclerView.setAdapter(new MenuAdapter(RestaurantServices.getRestList().get(position).getMenuItems()));
     }
 }

@@ -23,9 +23,8 @@ public class UserAccountFragment extends Fragment
 {
     EditText giftCardCode;
     TextView infoContainer, accountBalance;
-
     Button addCardButton, logoutButton, addAddressButton;
-    String giftcard;
+    String giftcard, display;
     String userEmail = Services.getCurrentUser();
 
     @Override
@@ -35,7 +34,7 @@ public class UserAccountFragment extends Fragment
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
 
         //Organized the user info.
-        String display = String.format("First name: %s\n" +
+        display = String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
                 "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
@@ -52,7 +51,8 @@ public class UserAccountFragment extends Fragment
 
         //Event listener of the add credit card button.
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
-        addCardButton.setOnClickListener(new View.OnClickListener() {
+        addCardButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 addCardPopUp();
@@ -61,7 +61,8 @@ public class UserAccountFragment extends Fragment
 
         //Event listener of the add address button.
         addAddressButton= (Button) view.findViewById(R.id.addAddressButton);
-        addAddressButton.setOnClickListener(new View.OnClickListener() {
+        addAddressButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 addAddressPopUp();
@@ -70,7 +71,8 @@ public class UserAccountFragment extends Fragment
 
         //Event listener of the logout button.
         logoutButton= (Button) view.findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -87,7 +89,8 @@ public class UserAccountFragment extends Fragment
 
         //Event listener of the redeem button.
         Button redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
-        redeemCardButton.setOnClickListener(new View.OnClickListener() {
+        redeemCardButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -101,8 +104,6 @@ public class UserAccountFragment extends Fragment
                 } else {
                     accountBalance.setText("$" + UserServices.getBalance(userEmail));
                 }
-
-                //addCardBalance();
             }
         });
 
@@ -117,7 +118,8 @@ public class UserAccountFragment extends Fragment
         builder.setTitle("Enter your Credit Card Info:");
         View v = getLayoutInflater().inflate(R.layout.popup_add_credit_card, null);
         builder.setView(v);
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
+        {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
@@ -148,7 +150,8 @@ public class UserAccountFragment extends Fragment
         builder.setTitle("Enter your Address:");
         View v = getLayoutInflater().inflate(R.layout.popup_add_address, null);
         builder.setView(v);
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
+        {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
@@ -171,12 +174,10 @@ public class UserAccountFragment extends Fragment
                 //Display the result to user.
                 ErrorPopUp.errorMsg(getActivity(), result);
 
-                String display = String.format("First name: %s\n" +
+                display = String.format("First name: %s\n" +
                         "Last name: %s\n" +
                         "Email: %s\n" +
                         "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
-                infoContainer.setText(display);
-                infoContainer.setTextSize(30);
             }
         });
         builder.show();

@@ -55,7 +55,7 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
-        android:maxLength="15"
+        android:maxLength="20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
