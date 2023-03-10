@@ -41,11 +41,9 @@ public class UserVerificationTest {
         assertEquals("Error: Card is not Visa, American Express or Mastercard.", UserVerification.creditCardVerification("donotcare", "8234567891234567", "donotcare", "donotcare"));
         assertEquals("Error: Incorrect CVC length.", UserVerification.creditCardVerification("donotcare", "2234567891234567", "00", "donotcare"));
         assertEquals("Error: Incorrect CVC length.", UserVerification.creditCardVerification("donotcare", "2234567891234567", "00000", "donotcare"));
-        assertEquals("Error: Incorrect Expiry date length.", UserVerification.creditCardVerification("", "", "", ""));
-        assertEquals("Missing Field: Please check you have entered all fields.", UserVerification.creditCardVerification("", "", "", ""));
-        assertEquals("Missing Field: Please check you have entered all fields.", UserVerification.creditCardVerification("", "", "", ""));
-        assertEquals("Missing Field: Please check you have entered all fields.", UserVerification.creditCardVerification("", "", "", ""));
-        assertEquals("Missing Field: Please check you have entered all fields.", UserVerification.creditCardVerification("", "", "", ""));
+        assertEquals("Error: Incorrect Expiry date length.", UserVerification.creditCardVerification("donotcare", "2234567891234567", "000", "01/01/1990"));
+        assertEquals("Error: Incorrect Expiry date.", UserVerification.creditCardVerification("donotcare", "2234567891234567", "000", "50/13"));
+        assertEquals("Credit Card added.", UserVerification.creditCardVerification("imcorrect@email.com", "2234567891234567", "000", "01/01"));
     }
 
     @Test
