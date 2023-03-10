@@ -31,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.nameview.setText(restaurants.get(position).getRestaurantName());
         holder.descriptionview.setText(restaurants.get(position).getRestaurantDescription());
-       // holder.imageview.setImageResource(restaurants.get(position).getImagesURL());
+        holder.imageview.setImageResource(restaurants.get(position).getImagesURL());
         holder.position = holder.getAdapterPosition();
     }
 

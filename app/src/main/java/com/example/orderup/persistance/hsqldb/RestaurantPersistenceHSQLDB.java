@@ -38,7 +38,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final String description = rs.getString("DESCRIPTION");
 //        final int num_ratings = rs.getInt("NUM_RATINGS");
 //        final int average_rating = rs.getInt("AVERAGE_RATING");
-//        final int num_items = rs.getInt("NUM_ITEMS");
+        final int image = rs.getInt("IMAGE");
         //final int location = rs.getArray("LOCATION"); //idk why this is an error// Hence, only using 1 location for now
         final String location= rs.getString("LOCATION");
 
