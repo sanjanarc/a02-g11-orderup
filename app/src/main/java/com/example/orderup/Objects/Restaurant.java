@@ -1,8 +1,8 @@
 package com.example.orderup.Objects;
+
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
-
 public class Restaurant {
 
     private final int restaurantID;
@@ -25,6 +25,9 @@ public class Restaurant {
     private final String location;
 
 
+    /*
+    Default constructor
+     */
     public Restaurant(final int newID)
     {
         restaurantID = newID;
@@ -32,9 +35,6 @@ public class Restaurant {
         newCategory= null;
         cityName=null;
         description= null;
-        //num_ratings= 0;
-        //average_rating= 0;
-        //imagesURL= null;
         menu= null;
         item1= null;
         item2= null;
@@ -52,40 +52,10 @@ public class Restaurant {
         this.newCategory= newCategory;
         this.cityName= cityName;
         this.description= description;
-        //this.num_ratings= 0;
-        //this.average_rating= 0;
-        //this.imagesURL= imagesURL;
         this.item1= item1;
         this.item2= item2;
         this.item3= item3;
-
         this.num_menu_items=num_menu_items;
-        this.location= location;
-
-        //add the FoodItems to menu List
-        menu.add(item1);
-        menu.add(item2);
-        menu.add(item3);
-
-    }
-
-    public Restaurant(int newID, String newRestaurantName, String newCategory, String cityName, String description, final FoodItem item1, final FoodItem item2, final FoodItem item3, final String location )
-    {
-        this.menu =  new ArrayList<>();
-
-        restaurantID = newID;
-        restaurantName = newRestaurantName;
-        this.newCategory= newCategory;
-        this.cityName= cityName;
-        this.description= description;
-//        this.num_ratings= num_ratings;
-//        this.average_rating= average_rating;
-        //this.imagesURL= imagesURL;
-        this.item1= item1;
-        this.item2= item2;
-        this.item3= item3;
-
-        this.num_menu_items=0;
         this.location= location;
 
         //add the FoodItems to menu List
