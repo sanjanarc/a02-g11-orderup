@@ -34,13 +34,17 @@ public class UserPersistenceStub implements UserPersistence
     @Override
     public void addUser(String email, String pass, String first, String last)
     {
-        userTable.put(email, new User(first, last, email, pass));
+        if(null != email && null != pass && null != first && null != last) {
+            userTable.put(email, new User(first, last, email, pass));
+        }
     }
 
     //Add the credit card info to the user object.
     public void addCreditCard(String email, String cardNum, String cvc, String expiry)
     {
-        userTable.get(email).addCreditCard(cardNum, cvc, expiry);
+        if(null != userTable.get(email) && null != email && null != cardNum && null != cvc && null != expiry) {
+          userTable.get(email).addCreditCard(cardNum, cvc, expiry);
+        }
     }
 
     //Update the user address.
@@ -57,7 +61,7 @@ public class UserPersistenceStub implements UserPersistence
     public void modifyBalance(String email, float balance)
     {
         if(null != userTable.get(email)) {
-        userTable.get(email).modifyBalance(balance);
+            userTable.get(email).modifyBalance(balance);
         }
     }
 
