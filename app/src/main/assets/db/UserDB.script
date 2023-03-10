@@ -12,3 +12,6 @@ SET FILES SCALE 32
 SET SCHEMA PUBLIC
 INSERT INTO USERS VALUES(1,'admin2@email.com','admin123','John','Doe','5299640000000000','505','03/03','66 Chancellors Circle, Winnipeg, Manitoba, R3T2N2','0')
 INSERT INTO RESTAURANTS VALUES(1,'Indian Food Corner','Tandoori,Indian, Chicken','Winnipeg','Traditional Indian dishes from butter chicken to chicken biryani.','1373 Pembina Hwy #4 Winnipeg MB R3T 2B7','bc' )
+INSERT INTO RESTAURANTS VALUES(2,'Indian Food Corner','Tandoori,Indian, Chicken','Winnipeg','Traditional Indian dishes from butter chicken to chicken biryani.','1373 Pembina Hwy #4 Winnipeg MB R3T 2B7','bc' )
+INSERT INTO RESTAURANTS VALUES(3,'Indian Food Corner','Tandoori,Indian, Chicken','Winnipeg','Traditional Indian dishes from butter chicken to chicken biryani.','1373 Pembina Hwy #4 Winnipeg MB R3T 2B7','bc' )
+INSERT INTO RESTAURANTS VALUES(4,'Indian Food Corner','Tandoori,Indian, Chicken','Winnipeg','Traditional Indian dishes from butter chicken to chicken biryani.','1373 Pembina Hwy #4 Winnipeg MB R3T 2B7','bc' )

@@ -1,4 +1,6 @@
 package com.example.orderup.Objects;
+import com.example.orderup.R;
+
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
@@ -171,6 +173,10 @@ public class Restaurant {
 
     public String getImagesURL() {
         return imagesURL;
+    }
+
+    public int getImageInt(){
+        return R.drawable.bc;
     }
 
 
