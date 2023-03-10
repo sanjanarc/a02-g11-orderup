@@ -38,7 +38,6 @@ public class UserPersistenceStub implements UserPersistence
     }
 
     //Add the credit card info to the user object.
-    @Override
     public void addCreditCard(String email, String cardNum, String cvc, String expiry)
     {
         userTable.get(email).addCreditCard(cardNum, cvc, expiry);

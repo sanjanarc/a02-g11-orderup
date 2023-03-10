@@ -6,6 +6,8 @@ import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
 import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
+import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
+import com.example.orderup.persistance.stub.UserPersistenceStub;
 
 //Class that holds most the static variables.
 public class Services
@@ -20,8 +22,8 @@ public class Services
     {
         if(userPersistence== null)
         {
-            //userPersistence= new UserPersistenceStub();
-            userPersistence = new UserPersistenceHSQLDB(getDBPathName());
+            userPersistence= new UserPersistenceStub();
+            //userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
 
         return userPersistence;
@@ -32,8 +34,8 @@ public class Services
     {
         if (restaurantPersistence == null)
         {
-            //restaurantPersistence = new RestaurantPersistenceStub();
-            restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
+            restaurantPersistence = new RestaurantPersistenceStub();
+            //restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
         }
 
         return restaurantPersistence;
