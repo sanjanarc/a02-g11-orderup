@@ -62,4 +62,45 @@ public class UserServices
             return null;
         }
     }
+
+    public static String getCredit(String email)
+    {
+        User user = userPersistence.getUserTable().get(email);
+
+        if(user != null)
+        {
+            return user.getCreditCard();
+        }else
+        {
+            return null;
+        }
+    }
+
+    public static String getCvc(String email)
+    {
+        User user = userPersistence.getUserTable().get(email);
+
+        if(user != null)
+        {
+            return user.getCvc();
+        }else
+        {
+            return null;
+        }
+    }
+
+    public static String getExpiry(String email)
+    {
+        User user = userPersistence.getUserTable().get(email);
+
+        if(user != null)
+        {
+            return user.getExpiry();
+        }else
+        {
+            return null;
+        }
+    }
+
+
 }
