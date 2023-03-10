@@ -7,7 +7,7 @@ import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
 /*
-This class verifies Information provided by User: email and password,
+This class verifies Information provided by User: name,email and password, address, credit card and gift card format before creating an Account for the User.
  */
 public class UserVerification
 {
