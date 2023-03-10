@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 import com.example.orderup.Objects.Restaurant;
+import com.example.orderup.logic.Services;
+import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
 
 import java.util.List;
 
@@ -31,7 +33,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.nameview.setText(restaurants.get(position).getRestaurantName());
         holder.descriptionview.setText(restaurants.get(position).getRestaurantDescription());
-       // holder.imageview.setImageResource(restaurants.get(position).getImagesURL());
+        int url = holder.imageview.getResources().getIdentifier(restaurants.get(position).getImagesURL(), "drawable", MainActivity.PACKAGE_NAME);
+        holder.imageview.setImageResource(url);
         holder.position = holder.getAdapterPosition();
     }
 
