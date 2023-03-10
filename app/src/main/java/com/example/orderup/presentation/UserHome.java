@@ -25,10 +25,6 @@ public class UserHome extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        RestaurantPersistenceStub restaurants = new RestaurantPersistenceStub() ;
-//        List<Restaurant> restaurantsList = restaurants.getRestaurants();
-//        recyclerView.setAdapter(new MyAdapter(restaurantsList));
-
         RestaurantPersistenceHSQLDB restaurants = new RestaurantPersistenceHSQLDB(Services.getDBPathName()) ;
         List<Restaurant> restaurantsList = restaurants.getRestaurantSequential();
         recyclerView.setAdapter(new MyAdapter(restaurantsList));
