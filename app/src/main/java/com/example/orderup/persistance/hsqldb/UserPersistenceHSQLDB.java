@@ -96,7 +96,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
             st.setString(6, null);
             st.setString(7, null);
             st.setString(8, null);
-            st.setString(9, null);
+            st.setFloat(9, 0.00F);
             st.executeUpdate();
         }
         catch (SQLException e)
@@ -190,7 +190,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         try(Connection c = connection())
         {
-            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET BALANCE = ? WHERE EMAIL = ?");
+            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET BALANCE = BALANCE + ? WHERE EMAIL = ?");
             ps.setDouble(1, balance);
             ps.setString(2, email);
             ps.executeUpdate();

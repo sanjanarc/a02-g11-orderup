@@ -35,6 +35,7 @@ public class User
         this.creditCard = creditCard;
         this.cvc = cvc;
         this.expiry = expiry;
+        this.address = address;
         if(null == balance) {
             balance = "0.00F";
         }

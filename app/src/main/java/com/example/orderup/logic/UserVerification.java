@@ -105,6 +105,7 @@ public class UserVerification
             {
                 //Create a user to stub or database.
                 userPersistence.addUser(email, password, firstName, lastName);
+                userPersistence.modifyBalance(email, 0.00F);
                 msg = null;
             }
         }
@@ -219,27 +220,50 @@ public class UserVerification
     //Check the format of the postal code.
     private static String postalVerification(String postal)
     {
-    // change later
-        return "";
+        String msg;
+
+        if(postal.length() != 6) {
+            msg = "Error: Invalid postal code length.\n";
+        } else if(Character.toUpperCase(postal.charAt(0)) != 'R') {
+            msg = "Error: Postal Code not located in Manitoba.\n";
+        } else if(!Character.isLetter(postal.charAt(0)) || !Character.isDigit(postal.charAt(1)) || !Character.isLetter(postal.charAt(2)) || !Character.isDigit(postal.charAt(3))
+        || !Character.isLetter(postal.charAt(4)) || !Character.isDigit(postal.charAt(5))) {
+            msg = "Error: Invalid postal code format.\n";
+        } else {
+            msg = "";
+        }
+
+        return msg;
     }
 
-    public static String giftCardVerification(String email) {
+    public static String giftCardVerification(String email, String card) {
         Float amount = 0.00F;
-        int rand = (int)Math.floor(Math.random() * (5) + 1);
-        switch(rand) {
-            case 1: amount = 5.00F;
+        String msg = "";
+        if (card.length() != 16) {
+            msg = "Error: Invalid gift card format, must be 16 digits.";
+        } else {
+        int rand = (int) Math.floor(Math.random() * (5) + 1);
+        switch (rand) {
+            case 1:
+                amount = 5.00F;
                 break;
-            case 2: amount = 10.00F;
+            case 2:
+                amount = 10.00F;
                 break;
-            case 3: amount = 20.00F;
+            case 3:
+                amount = 20.00F;
                 break;
-            case 4: amount = 50.00F;
+            case 4:
+                amount = 50.00F;
                 break;
-            case 5: amount = 100.00F;
+            case 5:
+                amount = 100.00F;
                 break;
         }
-        userPersistence.modifyBalance(email, amount);
-        return Float.toString(amount);
+            userPersistence.modifyBalance(email, amount);
+    }
+
+        return msg;
     }
 
     //Make sure the email input contain character "@".

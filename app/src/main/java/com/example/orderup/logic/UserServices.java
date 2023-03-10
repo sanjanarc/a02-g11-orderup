@@ -49,4 +49,17 @@ public class UserServices
             return null;
         }
     }
+
+    public static String getBalance(String email)
+    {
+        User user = userPersistence.getUserTable().get(email);
+
+        if(user != null)
+        {
+            return user.getBalance();
+        }else
+        {
+            return null;
+        }
+    }
 }
