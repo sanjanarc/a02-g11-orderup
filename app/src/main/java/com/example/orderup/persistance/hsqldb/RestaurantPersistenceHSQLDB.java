@@ -43,8 +43,9 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final FoodItem item1 = getFoodById(id,1); //get fooditem in the rest's menu
         System.out.println("after food1");
         final FoodItem item2 = getFoodById(id,2);
+        System.out.println("after food2");
         final FoodItem item3 = getFoodById(id,3);
-
+        System.out.println("after food3");
         return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image);
     }
 
@@ -56,9 +57,10 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
     private FoodItem getFoodById(int id, int itemID) {
 
         try (final Connection c = connection()) {
-            String query = "SELECT * FROM FOODITEM WHERE ITEM_ID = ?";
+            String query = "SELECT * FROM FOODITEM WHERE ID = ? AND ITEM_ID = ?";
             PreparedStatement pstmt = c.prepareStatement(query);
-            pstmt.setInt(1, itemID);
+            pstmt.setInt(1, id);
+            pstmt.setInt(2, itemID);
             ResultSet menurs = pstmt.executeQuery();
             menurs.next();
             return fromMenuResultSet(menurs);
