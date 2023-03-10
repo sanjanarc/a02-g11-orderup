@@ -10,8 +10,8 @@ public class Restaurant {
     private final String cityName;
     private final String newCategory;
     private final String description;
-    private int num_ratings = 0;
-    private int average_rating = 0;
+    //private int num_ratings = 0;
+    //private int average_rating = 0;
 
     private  int imagesURL=0;
 
@@ -32,8 +32,8 @@ public class Restaurant {
         newCategory= null;
         cityName=null;
         description= null;
-        num_ratings= 0;
-        average_rating= 0;
+        //num_ratings= 0;
+        //average_rating= 0;
         //imagesURL= null;
         menu= null;
         item1= null;
@@ -52,8 +52,8 @@ public class Restaurant {
         this.newCategory= newCategory;
         this.cityName= cityName;
         this.description= description;
-        this.num_ratings= 0;
-        this.average_rating= 0;
+        //this.num_ratings= 0;
+        //this.average_rating= 0;
         //this.imagesURL= imagesURL;
         this.item1= item1;
         this.item2= item2;
@@ -100,13 +100,6 @@ public class Restaurant {
     }
     public String getRestaurantDescription(){
         return(description);
-    }
-    public int getRestaurant_numRatings(){
-        return(num_ratings);
-
-    }
-    public int getRestaurant_avgRatings(){
-        return(average_rating);
     }
 
 
