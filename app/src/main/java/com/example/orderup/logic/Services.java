@@ -4,12 +4,8 @@ import android.util.Log;
 
 import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
-import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
-import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
 import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
-
-
-import java.util.Arrays;
+import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
 
 //Class that holds most the static variables.
 public class Services
@@ -36,6 +32,7 @@ public class Services
     {
         if (restaurantPersistence == null)
         {
+            //restaurantPersistence = new RestaurantPersistenceStub();
             restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
         }
 
