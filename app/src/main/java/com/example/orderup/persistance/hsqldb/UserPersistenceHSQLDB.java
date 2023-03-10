@@ -96,7 +96,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
             st.setString(6, null);
             st.setString(7, null);
             st.setString(8, null);
-            st.setString(9, null);
+            st.setFloat(9, 0.00F);
             st.executeUpdate();
         }
         catch (SQLException e)

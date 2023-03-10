@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,6 +170,13 @@ public class UserAccountFragment extends Fragment
 
                 //Display the result to user.
                 ErrorPopUp.errorMsg(getActivity(), result);
+
+                String display = String.format("First name: %s\n" +
+                        "Last name: %s\n" +
+                        "Email: %s\n" +
+                        "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
+                infoContainer.setText(display);
+                infoContainer.setTextSize(30);
             }
         });
         builder.show();
