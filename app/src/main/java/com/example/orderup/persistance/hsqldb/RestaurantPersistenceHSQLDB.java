@@ -2,6 +2,8 @@ package com.example.orderup.persistance.hsqldb;
 
 import static java.security.AccessController.getContext;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,7 +47,10 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         //final int location = rs.getArray("LOCATION"); //idk why this is an error// Hence, only using 1 location for now
         final String location= rs.getString("LOCATION");
 
+        System.out.println("before food1");
         final FoodItem item1 = getFoodById(id,1); //get fooditem in the rest's menu
+        System.out.println("after food1");
+//        Log.d("thid", item1.getItemDescription());
         final FoodItem item2 = getFoodById(id,2);
         final FoodItem item3 = getFoodById(id,3);
 
@@ -58,13 +63,15 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
    returns FoodItem associated with specific restaurantID and fooditem ID
     */
     private FoodItem getFoodById(int id, int itemID) {
-        try (final Connection c = connection();) {
-            final Statement state = c.createStatement();
-            String query = String.format("SELECT * FROM FoodItem WHERE id= %d, item_id= %d", id, itemID);
-            final ResultSet menurs = state.executeQuery(query);
+
+        try (final Connection c = connection()) {
+            String query = "SELECT * FROM FOODITEM WHERE ITEM_ID = ?";
+            PreparedStatement pstmt = c.prepareStatement(query);
+            pstmt.setInt(1, itemID);
+            ResultSet menurs = pstmt.executeQuery();
+            menurs.next();
             return fromMenuResultSet(menurs);
         } catch (final SQLException e) {
-
         }
         return null;
     }
@@ -76,6 +83,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
      */
     private FoodItem fromMenuResultSet(final ResultSet rs) throws SQLException {
         //ID ,ITEM_ID,ITEM_NAME,ITEM_PRICE,ITEM_IMAGE_URL,ITEM_DESC
+
         final int rest_id= rs.getInt("ID");
         final int item_id= rs.getInt("ITEM_ID");
         final String item_name= rs.getString("ITEM_NAME");

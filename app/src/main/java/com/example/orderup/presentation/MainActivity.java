@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity
     UserAccountFragment userAccountFragment=new UserAccountFragment();
     CustomerSupportFragment customerSupportFragment=new CustomerSupportFragment();
 
+    public static String PACKAGE_NAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity
 
         bottomNavigationView=findViewById(R.id.bottomNavigationView);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+        PACKAGE_NAME= getApplicationContext().getPackageName();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

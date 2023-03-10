@@ -33,7 +33,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.nameview.setText(restaurants.get(position).getRestaurantName());
         holder.descriptionview.setText(restaurants.get(position).getRestaurantDescription());
-        holder.imageview.setImageResource(restaurants.get(position).getImageInt());
+        int url = holder.imageview.getResources().getIdentifier(restaurants.get(position).getImagesURL(), "drawable", MainActivity.PACKAGE_NAME);
+        holder.imageview.setImageResource(url);
         holder.position = holder.getAdapterPosition();
     }
 
