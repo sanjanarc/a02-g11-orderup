@@ -190,7 +190,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
     {
         try(Connection c = connection())
         {
-            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET BALANCE = ? WHERE EMAIL = ?");
+            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET BALANCE = BALANCE + ? WHERE EMAIL = ?");
             ps.setDouble(1, balance);
             ps.setString(2, email);
             ps.executeUpdate();

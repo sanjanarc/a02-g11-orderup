@@ -239,7 +239,7 @@ public class UserVerification
                 break;
         }
         userPersistence.modifyBalance(email, amount);
-        return Float.toString(amount);
+        return "" + amount;
     }
 
     //Make sure the email input contain character "@".

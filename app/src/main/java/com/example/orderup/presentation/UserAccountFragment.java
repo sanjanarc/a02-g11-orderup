@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,10 @@ public class UserAccountFragment extends Fragment
 
         //Connect to xml file.
         infoContainer= (TextView) view.findViewById(R.id.infoContainer);
+        accountBalance= (TextView) view.findViewById(R.id.accountBalance);
 
         //Display the message to user.
+        accountBalance.setText("$" + UserServices.getBalance(userEmail));
         infoContainer.setText(display);
         infoContainer.setTextSize(30);
 
@@ -96,7 +99,8 @@ public class UserAccountFragment extends Fragment
                     result = "Error - Invalid Gift Card";
                     ErrorPopUp.errorMsg(getActivity(), result);
                 } else {
-                    accountBalance.setText("$" + result);
+                    Log.d("balance", result);
+                    accountBalance.setText("$" + UserServices.getBalance(userEmail));
                 }
 
                 //addCardBalance();
