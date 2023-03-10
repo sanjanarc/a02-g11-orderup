@@ -47,14 +47,18 @@ public class UserPersistenceStub implements UserPersistence
     @Override
     public void updateAddress(String email, String address)
     {
-        userTable.get(email).updateAddress(address);
+        if(null != userTable.get(email)) {
+            userTable.get(email).updateAddress(address);
+        }
     }
 
     //Modify the user account balance.
     @Override
     public void modifyBalance(String email, float balance)
     {
+        if(null != userTable.get(email)) {
         userTable.get(email).modifyBalance(balance);
+        }
     }
 
     @Override
