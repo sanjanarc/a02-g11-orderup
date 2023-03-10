@@ -235,23 +235,34 @@ public class UserVerification
         return msg;
     }
 
-    public static String giftCardVerification(String email) {
+    public static String giftCardVerification(String email, String card) {
         Float amount = 0.00F;
-        int rand = (int)Math.floor(Math.random() * (5) + 1);
-        switch(rand) {
-            case 1: amount = 5.00F;
+        String msg = "";
+        if (card.length() != 16) {
+            msg = "Error: Invalid gift card format, must be 16 digits.";
+        } else {
+        int rand = (int) Math.floor(Math.random() * (5) + 1);
+        switch (rand) {
+            case 1:
+                amount = 5.00F;
                 break;
-            case 2: amount = 10.00F;
+            case 2:
+                amount = 10.00F;
                 break;
-            case 3: amount = 20.00F;
+            case 3:
+                amount = 20.00F;
                 break;
-            case 4: amount = 50.00F;
+            case 4:
+                amount = 50.00F;
                 break;
-            case 5: amount = 100.00F;
+            case 5:
+                amount = 100.00F;
                 break;
         }
-        userPersistence.modifyBalance(email, amount);
-        return "" + amount;
+            userPersistence.modifyBalance(email, amount);
+    }
+
+        return msg;
     }
 
     //Make sure the email input contain character "@".
