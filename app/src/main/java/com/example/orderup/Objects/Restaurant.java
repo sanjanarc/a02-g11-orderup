@@ -13,6 +13,8 @@ public class Restaurant {
     private final int num_ratings;
     private final int average_rating;
 
+    private  int imagesURL=0;
+
     //private final String imagesURL;
     private final List <FoodItem> menu; //menu List
     private final FoodItem item1; //FoodItems in a menu List
@@ -139,11 +141,10 @@ public class Restaurant {
 
         return equals;
     }
- /*
+
     public int getImagesURL() {
         return imagesURL;
     }
 
-  */
 
 }
