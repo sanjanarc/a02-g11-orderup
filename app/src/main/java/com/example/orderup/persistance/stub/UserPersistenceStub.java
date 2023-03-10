@@ -1,5 +1,6 @@
 package com.example.orderup.persistance.stub;
 
+import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
@@ -76,5 +77,10 @@ public class UserPersistenceStub implements UserPersistence
     public void modifyBalance(String email, float balance)
     {
         userTable.get(email).modifyBalance(balance);
+    }
+
+    @Override
+    public Giftcard[] getGiftcards() {
+        return new Giftcard[0];
     }
 }
