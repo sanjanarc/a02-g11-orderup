@@ -1,9 +1,5 @@
 package com.example.orderup.persistance.hsqldb;
 
-import static java.security.AccessController.getContext;
-
-import android.util.Log;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +11,6 @@ import java.util.List;
 
 import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.logic.Services;
 import com.example.orderup.persistance.RestaurantPersistence;
 
 public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{

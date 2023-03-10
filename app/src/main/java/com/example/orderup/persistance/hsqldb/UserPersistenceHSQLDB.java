@@ -159,6 +159,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
         }
     }
 
+    //Read and store the giftcard data frim database.
     @Override
     public Giftcard[] getGiftcards() {
         Giftcard cardList[] = new Giftcard[5];
@@ -185,20 +186,4 @@ public class UserPersistenceHSQLDB implements UserPersistence
 
         return cardList;
     }
-
-    /* Do we really need these method?
-    @Override
-    public User insertUser(User currentUser) {
-        return null;
-    }
-
-    @Override
-    public User updateUser(User currentUser) {
-        return null;
-    }
-
-    @Override
-    public void deleteUser(User currentUser) {
-
-    }*/
 }
