@@ -17,26 +17,12 @@ public interface UserPersistence {
     //Add a credit card info to the specific user.
     void addCreditCard(String email, String cardNum, String cvc, String expiry);
 
-    //Rename the specific user object.
-    void updateFirstName(String email, String firstName);
-
-    //Rename the specific user object.
-    void updateLastName(String email, String lastName);
-
-    //Reset the user password.
-    void updatePassword(String email, String password);
-
     //Update the user address.
     void updateAddress(String email, String address);
 
     //Modify the user account balance.
     void modifyBalance(String email, float balance);
 
-     Giftcard[] getGiftcards();
-
-    //User insertUser(User currentUser);
-
-    //User updateUser(final User currentUser);
-
-    //void deleteUser(final User currentUser);
+    //This get a list of giftcard info from database.
+    Giftcard[] getGiftcards();
 }

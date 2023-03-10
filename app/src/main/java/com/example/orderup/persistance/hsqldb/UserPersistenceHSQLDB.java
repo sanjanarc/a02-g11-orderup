@@ -53,16 +53,6 @@ public class UserPersistenceHSQLDB implements UserPersistence
         return new User(email,password,firstname,lastname,creditcard,cvc,expiry,address,balance);
     }
 
-    private Giftcard fromResultSet2(final ResultSet rs) throws SQLException
-    {
-        //Getting data from the table.
-        final String number = rs.getString("NUMBER");
-        final float amount = rs.getFloat("AMOUNT");
-
-        //Return a user object with filled data.
-        return new Giftcard(number, amount);
-    }
-
     //Build a user hash map from database and return the user table.
     @Override
     public HashMap<String, User> getUserTable()
@@ -135,51 +125,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
         }
     }
 
-    //Renaming the user.
-    @Override
-    public void updateFirstName(String email, String firstName)
-    {
-        try(Connection c = connection())
-        {
-            Statement st = c.createStatement();
-            st.executeQuery("UPDATE USERS SET FIRSTNAME = " + firstName + " WHERE EMAIL = " + email);
-        }
-        catch (SQLException e)
-        {
-            throw new PersistenceException(e);
-        }
-    }
-
-    //Renaming the user.
-    @Override
-    public void updateLastName(String email, String lastName)
-    {
-        try(Connection c = connection())
-        {
-            Statement st = c.createStatement();
-            st.executeQuery("UPDATE USERS SET LASTNAME = " + lastName + " WHERE EMAIL = " + email);
-        }
-        catch (SQLException e)
-        {
-            throw new PersistenceException(e);
-        }
-    }
-
-    //Reset the user password.
-    @Override
-    public void updatePassword(String email, String password)
-    {
-        try(Connection c = connection())
-        {
-            Statement st = c.createStatement();
-            st.executeQuery("UPDATE USERS SET PASSWORD = " + password + " WHERE EMAIL = " + email);
-        }
-        catch (SQLException e)
-        {
-            throw new PersistenceException(e);
-        }
-    }
-
+    //Add the given address to the database.
     @Override
     public void updateAddress(String email, String address)
     {
@@ -196,6 +142,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
         }
     }
 
+    //Add or Reduce the balance from database.
     @Override
     public void modifyBalance(String email, float balance)
     {

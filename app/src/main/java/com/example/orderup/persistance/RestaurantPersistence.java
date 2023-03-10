@@ -2,18 +2,18 @@ package com.example.orderup.persistance;
 
 import java.util.List;
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.Objects.FoodItem;
-
 
 public interface RestaurantPersistence {
 
-
+    //Get a list of restaurant from database.
     List<Restaurant> getRestaurantSequential();
+
+    //Insert new restaurant to database.
     boolean insertRestaurant(Restaurant currentRestaurant);
+
+    //Go through the database and search for a specific restaurant.
     boolean findRestaurant(int restNum);
 
-    void updateRestaurant(Restaurant currentRestaurant); //to be used to update ratings or send comments
+    //Remove a specific restaurant from database.
     void deleteRestaurant(int currentRestaurantNum);
-
-    //int getImg(Restaurant currentRestaurant);
 }
