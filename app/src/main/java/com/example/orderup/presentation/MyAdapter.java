@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.logic.RestaurantServices;
 
 import java.util.List;
 
-//This class is the structure of the My view holder class.
+//This class set the restaurant list align and show on the home fragment.
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>
 {
     List<Restaurant> restaurants;
@@ -31,15 +30,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
-        holder.nameview.setText(RestaurantServices.getRestList().get(position).getRestaurantName());
-        holder.descriptionview.setText(RestaurantServices.getRestList().get(position).getRestaurantDescription());
-        int url = holder.imageview.getResources().getIdentifier(RestaurantServices.getRestList().get(position).getImagesURL(), "drawable", MainActivity.PACKAGE_NAME);
-        holder.imageview.setImageResource(url);
-        holder.position = holder.getAdapterPosition();
+        holder.nameview.setText(restaurants.get(position).getRestaurantName());
+        holder.descriptionview.setText(restaurants.get(position).getRestaurantDescription());
+        int url = holder.imageview.getResources().getIdentifier(restaurants.get(position).getImagesURL(), "drawable", MainActivity.PACKAGE_NAME);
+        holder.imageview.setBackgroundResource(url);
+        holder.position = holder.getAdapterPosition(); //Pass current position back to super class and knowing that which restaurant get clicked.
     }
 
     @Override
     public int getItemCount() {
-        return RestaurantServices.getRestList().size();
+        return restaurants.size();
     }
 }

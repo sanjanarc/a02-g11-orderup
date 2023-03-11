@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
-import com.example.orderup.logic.Services;
-import com.example.orderup.persistance.RestaurantPersistence;
 
-//This is the class that holds every in the home pages.
+//This is the home page UI class.
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
