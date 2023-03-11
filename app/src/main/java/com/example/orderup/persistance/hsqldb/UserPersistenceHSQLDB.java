@@ -59,11 +59,8 @@ public class UserPersistenceHSQLDB implements UserPersistence
 
         try (final Connection c = connection())
         {
-            Log.d("this","1 line");
             final Statement st = c.createStatement();
-            Log.d("this","2 line");
             final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
-            Log.d("this","3 line");
             while (rs.next()) {
                 User user = fromResultSet(rs);
                 userList.put(user.getEmail(), user);

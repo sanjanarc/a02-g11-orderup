@@ -55,7 +55,6 @@ public class Services
 
     public static void setDBPathName(final String name)
     {
-        Log.d("Set dbpath to ----------->", name);
         try
         {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();

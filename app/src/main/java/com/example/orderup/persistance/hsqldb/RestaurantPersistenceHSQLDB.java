@@ -108,7 +108,4 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
             throw new PersistenceException(e);
         }
     }
-
-
-
 }
