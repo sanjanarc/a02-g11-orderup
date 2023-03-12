@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new MyAdapter(RestaurantServices.getRestList()));
+        recyclerView.setAdapter(new RestaurantAdapter(RestaurantServices.getRestList()));
 
         // Inflate the layout for this fragment
         return view;

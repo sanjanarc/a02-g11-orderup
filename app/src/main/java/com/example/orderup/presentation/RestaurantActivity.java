@@ -12,6 +12,8 @@ import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 
+import org.w3c.dom.Text;
+
 //This is the activity class showing the specific restaurant info.
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -27,18 +29,19 @@ public class RestaurantActivity extends AppCompatActivity {
         imageView.setBackgroundResource(getResources().getIdentifier(restaurant.getImagesURL(),"drawable", MainActivity.PACKAGE_NAME));
 
         //Showing the restaurant info.
-        String restName, restDes, restLoca;
-        restName = restaurant.getRestaurantName();
-        restDes = restaurant.getRestaurantDescription();
-        restLoca = restaurant.getRestaurant_location();
-        TextView restInfo = (TextView) findViewById(R.id.RestInfo);
-        restInfo.setText(restName+"\n"+restDes+"\n"+restLoca);
+        TextView restName = (TextView) findViewById(R.id.RestName);
+        restName.setText(restaurant.getRestaurantName());
+        TextView restDes = (TextView) findViewById(R.id.RestDes);
+        restDes.setText(restaurant.getRestaurantDescription());
+        TextView restLoca = (TextView) findViewById(R.id.RestLoca);
+        restLoca.setText(restaurant.getRestaurant_location());
+
 
         //Showing the restaurant food item.
         RecyclerView recyclerView;
         recyclerView = findViewById(R.id.MenuRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MenuAdapter(RestaurantServices.getRestList().get(position).getMenuItems()));
+        recyclerView.setAdapter(new MenuAdapter(restaurant.getMenuItems()));
     }
 }

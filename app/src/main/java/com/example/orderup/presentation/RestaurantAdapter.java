@@ -12,23 +12,23 @@ import com.example.orderup.Objects.Restaurant;
 import java.util.List;
 
 //This class set the restaurant list align and show on the home fragment.
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder>
 {
     List<Restaurant> restaurants;
-    MyAdapter(List<Restaurant> restaurants)
+    RestaurantAdapter(List<Restaurant> restaurants)
     {
         this.restaurants = restaurants;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public RestaurantHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_view,parent,false));
+        return new RestaurantHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_view,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull RestaurantHolder holder, int position)
     {
         holder.nameview.setText(restaurants.get(position).getRestaurantName());
         holder.descriptionview.setText(restaurants.get(position).getRestaurantDescription());

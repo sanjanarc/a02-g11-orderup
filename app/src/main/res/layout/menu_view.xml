@@ -26,7 +26,7 @@
 
             <TextView
                 android:id="@+id/foodInfo"
-                android:layout_width="270dp"
+                android:layout_width="460dp"
                 android:layout_height="match_parent"
                 android:text="TextView"
                 android:textColor="@color/black"/>

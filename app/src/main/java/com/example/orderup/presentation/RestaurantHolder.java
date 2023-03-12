@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderup.R;
 
 //This class provide function for MyAdapter and also handle the click event and call related restaurant activity.
-public class MyViewHolder extends RecyclerView.ViewHolder
+public class RestaurantHolder extends RecyclerView.ViewHolder
 {
     ImageView imageview;
     TextView nameview, descriptionview;
     int position = 0;
 
-    public MyViewHolder(@NonNull View itemView)
+    public RestaurantHolder(@NonNull View itemView)
     {
         super(itemView);
         imageview = itemView.findViewById(R.id.imageview);
