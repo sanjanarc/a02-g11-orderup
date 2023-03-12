@@ -13,4 +13,8 @@ public class RestaurantServices {
     public static List<Restaurant> getRestList(){
         return restaurantPersistence.getRestaurantSequential();
     }
+
+    public static Restaurant getRest(int pos){
+        return restaurantPersistence.getRestaurantSequential().get(pos);
+    }
 }
