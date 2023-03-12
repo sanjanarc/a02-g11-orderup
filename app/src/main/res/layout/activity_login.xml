@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
+    android:background="@drawable/loginbg1"
     tools:context=".presentation.LoginActivity">
 
 
@@ -18,7 +18,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        android:background="#99F8F8F6">
 
         <TextView
             android:id="@+id/textView"
@@ -27,7 +28,8 @@
             android:layout_marginBottom="50dp"
             android:text="Sign In:"
             android:textAlignment="center"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/emailInput"
@@ -54,7 +56,8 @@
             android:text="Sign In"
             android:textSize="20dp"
             android:layout_gravity="center"
-            android:backgroundTint="#65350f"/>
+            android:textColor="@color/white"
+            android:backgroundTint="#5565350f"/>
 
         <Button
             android:id="@+id/registerButton"
@@ -62,8 +65,8 @@
             android:layout_height="50dp"
             android:text="Register"
             android:textSize="20dp"
-            android:backgroundTint="#65350f"
-            />
+            android:backgroundTint="#5565350f"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 
