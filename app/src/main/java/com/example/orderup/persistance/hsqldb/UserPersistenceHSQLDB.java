@@ -65,7 +65,6 @@ public class UserPersistenceHSQLDB implements UserPersistence
                 User user = fromResultSet(rs);
                 userList.put(user.getEmail(), user);
             }
-            Log.d("this","4 line");
             rs.close();
             st.close();
         }

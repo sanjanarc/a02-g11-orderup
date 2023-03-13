@@ -23,9 +23,59 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:text="Info"
-            android:background="#55ffffff"
-            />
+            android:background="#55ffffff"/>
     </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/backpack"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:text="backpack"
+            android:textSize="30dp"
+            android:layout_gravity="top|start"/>
+
+        <Button
+            android:id="@+id/redeemCardButton"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:text="Redeem"
+            android:textSize="30dp"
+            android:layout_gravity="top|end"/>
+
+        <Button
+            android:id="@+id/addCardButton"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:text="Add Credit Card"
+            android:textSize="30dp"
+            android:layout_gravity="center|start"/>
+
+        <Button
+            android:id="@+id/addAddressButton"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:text="Add address"
+            android:textSize="30dp"
+            android:layout_gravity="center|end"/>
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:text="Logout"
+            android:textSize="30dp"
+            android:layout_gravity="bottom|center"/>
+    </FrameLayout>
+
     <TextView
         android:id="@+id/accountBalance"
         android:layout_width="match_parent"
@@ -34,16 +84,7 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         android:background="#55ffffff"/>
-    <Button
-        android:id="@+id/redeemCardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginEnd="160dp"
-        android:text="Redeem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/giftCardCode" />
+
 
     <EditText
         android:id="@+id/giftCardCode"
@@ -72,39 +113,5 @@
         app:layout_constraintBottom_toTopOf="@+id/addCardButton"
         app:layout_constraintStart_toStartOf="@id/giftCardCode"
         app:layout_constraintTop_toTopOf="@id/firstNameInput" />
-
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
-
-    <Button
-        android:id="@+id/addCardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Credit Card"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576" />
-
-    <Button
-        android:id="@+id/addAddressButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add address"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
 
 </LinearLayout>

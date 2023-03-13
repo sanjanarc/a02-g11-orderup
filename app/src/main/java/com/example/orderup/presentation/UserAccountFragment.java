@@ -21,10 +21,9 @@ import com.example.orderup.logic.UserVerification;
 //This is the User page UI class.
 public class UserAccountFragment extends Fragment
 {
-    EditText giftCardCode;
-    TextView infoContainer, accountBalance;
-    Button addCardButton, logoutButton, addAddressButton;
-    String giftcard, display;
+    TextView infoContainer;
+    Button addCardButton, logoutButton, addAddressButton, redeemCardButton;
+    String display;
     String userEmail = Services.getCurrentUser();
 
     @Override
@@ -33,21 +32,8 @@ public class UserAccountFragment extends Fragment
     {
         View view= inflater.inflate(R.layout.fragment_user_account, container, false);
 
-        //Organized the user info.
-        display = String.format("First name: %s\n" +
-                "Last name: %s\n" +
-                "Email: %s\n" +
-                "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
-
-        //Connect to xml file.
-        infoContainer= (TextView) view.findViewById(R.id.infoContainer);
-        accountBalance= (TextView) view.findViewById(R.id.accountBalance);
-        giftCardCode = (EditText) view.findViewById(R.id.giftCardCode);
-
-        //Display the message to user.
-        accountBalance.setText("$" + UserServices.getBalance(userEmail));
-        infoContainer.setText(display);
-        infoContainer.setTextSize(30);
+        infoContainer = (TextView) view.findViewById(R.id.infoContainer);
+        updateInfo();
 
         //Event listener of the add credit card button.
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
@@ -69,6 +55,17 @@ public class UserAccountFragment extends Fragment
             }
         });
 
+        //Event listener of the redeem button.
+        redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
+        redeemCardButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                redeemPopUp();
+            }
+        });
+
         //Event listener of the logout button.
         logoutButton= (Button) view.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener()
@@ -87,28 +84,38 @@ public class UserAccountFragment extends Fragment
             }
         });
 
-        //Event listener of the redeem button.
-        Button redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
-        redeemCardButton.setOnClickListener(new View.OnClickListener()
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    //This method pop up a window and prompt user to enter the gift card code.
+    private void redeemPopUp(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Enter your Gift card code:");
+        View v = getLayoutInflater().inflate(R.layout.popup_redeem_gift_card, null);
+        builder.setView(v);
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
         {
             @Override
-            public void onClick(View view)
+            public void onClick(DialogInterface dialog, int which)
             {
-                giftcard = giftCardCode.getText().toString();
-                //Verify and add credit card to database.
-                String result = UserVerification.giftCardVerification(userEmail,giftcard);
+                //Connect to xml file.
+                EditText giftCard= (EditText) v.findViewById(R.id.redeemInput);
+
+                //Get input data from xml file.
+                String cardNum = giftCard.getText().toString();
+
+                //Verify and add gift card amount to user account.
+                String result = UserVerification.giftCardVerification(userEmail,cardNum);
 
                 //Display the result to user.
                 if("" != result) {
                     ErrorPopUp.errorMsg(getActivity(), result);
-                } else {
-                    accountBalance.setText("$" + UserServices.getBalance(userEmail));
                 }
+                updateInfo();
             }
         });
-
-        // Inflate the layout for this fragment
-        return view;
+        builder.show();
     }
 
     //This method will pop up a window to prompt user to enter credit card info.
@@ -173,13 +180,20 @@ public class UserAccountFragment extends Fragment
 
                 //Display the result to user.
                 ErrorPopUp.errorMsg(getActivity(), result);
-
-                display = String.format("First name: %s\n" +
-                        "Last name: %s\n" +
-                        "Email: %s\n" +
-                        "Address: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail));
+                updateInfo();
             }
         });
         builder.show();
+    }
+
+    //Display the account info to user.
+    private void updateInfo(){
+        display = String.format("First name: %s\n" +
+                "Last name: %s\n" +
+                "Email: %s\n" +
+                "Address: %s\n" +
+                "Account balance: $ %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail));
+
+        infoContainer.setText(display);
     }
 }
