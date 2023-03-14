@@ -129,7 +129,6 @@ public class User extends FoodItem
 
     public boolean equals(Object other) {
         boolean equals = false;
-
         if (other instanceof User) {
             final User otherStudent = (User) other;
             equals = Objects.equals(this.email, otherStudent.email);
