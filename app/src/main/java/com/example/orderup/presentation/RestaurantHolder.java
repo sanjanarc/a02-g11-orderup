@@ -1,7 +1,6 @@
 package com.example.orderup.presentation;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 
-//This class provided the structure/pattern for the Home Fragment.
-public class MyViewHolder extends RecyclerView.ViewHolder
+//This class provide function for MyAdapter and also handle the click event and call related restaurant activity.
+public class RestaurantHolder extends RecyclerView.ViewHolder
 {
     ImageView imageview;
     TextView nameview, descriptionview;
     int position = 0;
 
-    public MyViewHolder(@NonNull View itemView)
+    public RestaurantHolder(@NonNull View itemView)
     {
         super(itemView);
         imageview = itemView.findViewById(R.id.imageview);
@@ -33,7 +32,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder
                 Intent intent = new Intent(view.getContext(), RestaurantActivity.class);
                 intent.putExtra("position", position);
                 view.getContext().startActivity(intent);
-                Log.d("this", ""+position);
             }
         });
     }

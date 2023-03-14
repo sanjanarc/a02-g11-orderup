@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
-import com.example.orderup.logic.Services;
-import com.example.orderup.persistance.RestaurantPersistence;
 
-//This is the class that holds every in the home pages.
+//This is the home page UI class.
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -27,7 +25,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new MyAdapter(RestaurantServices.getRestList()));
+        recyclerView.setAdapter(new RestaurantAdapter(RestaurantServices.getRestList()));
 
         // Inflate the layout for this fragment
         return view;
