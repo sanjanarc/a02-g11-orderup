@@ -9,8 +9,17 @@ public class FoodItem {
     private final String image_url;
     private final String item_description;
 
+    public FoodItem() {
+        restaurant_id = 0;
+        item_id = 0;
+        item_name = "";
+        item_description = "";
+        price = 0;
+        image_url = "";
 
-    public FoodItem(int restaurant_id,int item_id, String itemName, double itemPrice, String itemImageURL, String itemDescription ){
+    }
+
+    public FoodItem(int restaurant_id, int item_id, String itemName, double itemPrice, String itemImageURL, String itemDescription ){
         this.restaurant_id= restaurant_id;
         item_id = item_id;
         item_name= itemName;
