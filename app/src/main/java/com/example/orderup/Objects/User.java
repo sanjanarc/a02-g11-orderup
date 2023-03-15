@@ -1,9 +1,11 @@
 package com.example.orderup.Objects;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User extends FoodItem
 {
+    public  final int MAX_ORDER_ITEMS = 100;
     private String firstName;
     private String lastName;
     private final String email;
@@ -13,6 +15,8 @@ public class User extends FoodItem
     private String creditCard;
     private String cvc;
     private float balance;
+
+    private ArrayList<FoodItem> cart = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String password)
     {
@@ -135,5 +139,10 @@ public class User extends FoodItem
         }
 
         return equals;
+    }
+
+    public void foodCart(FoodItem foodItem)
+    {
+        cart.add(foodItem);
     }
 }

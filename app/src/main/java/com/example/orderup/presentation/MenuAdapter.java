@@ -3,6 +3,7 @@ package com.example.orderup.presentation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         this.foods = foods;
     }
 
+    private Button addButton, subtractButton;
+    private int FoodItemNumber = 0;
+
     @NonNull
     @Override
     public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,21 +42,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
 
-        //Event listener of the remove button of the food item.
-        holder.removeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        addButton = (Button) findViewById(R.id.addButton);
 
-            }
-        });
 
-        //Event listener of the add button of the food item.
-        holder.addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     @Override

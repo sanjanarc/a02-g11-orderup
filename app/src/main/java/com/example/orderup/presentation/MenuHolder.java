@@ -20,7 +20,5 @@ public class MenuHolder extends RecyclerView.ViewHolder {
         super(itemView);
         imageview = itemView.findViewById(R.id.foodImage);
         nameview = itemView.findViewById(R.id.foodInfo);
-        removeBtn = itemView.findViewById(R.id.removeItemButton);
-        addBtn = itemView.findViewById(R.id.addItemButton);
     }
 }
