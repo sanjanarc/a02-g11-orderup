@@ -3,7 +3,7 @@ package com.example.orderup.presentation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +17,12 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     List<FoodItem> foods;
+
+    public  final int MAX_ORDER_ITEMS = 100;
     MenuAdapter(List<FoodItem> foods)
     {
         this.foods = foods;
     }
-
-    private Button addButton, subtractButton;
-    private int FoodItemNumber = 0;
 
     @NonNull
     @Override
@@ -42,7 +41,27 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
 
-//        addButton = (Button) findViewById(R.id.addButton);
+
+        holder.addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.FoodItemNumber < MAX_ORDER_ITEMS)
+                {
+                    holder.FoodItemNumber++;
+
+                }
+            }
+        });
+
+        holder.subtractButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.FoodItemNumber < MAX_ORDER_ITEMS)
+                {
+                    holder.FoodItemNumber--;
+                }
+            }
+        });
 
 
     }

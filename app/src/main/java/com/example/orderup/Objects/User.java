@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class User extends FoodItem
 {
-    public  final int MAX_ORDER_ITEMS = 100;
     private String firstName;
     private String lastName;
     private final String email;
