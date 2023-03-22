@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
@@ -18,7 +19,9 @@ public class MenuHolder extends RecyclerView.ViewHolder {
 
     FloatingActionButton addButton = null;
     FloatingActionButton subtractButton = null;
-    int FoodItemNumber = 0;
+    TextView FoodItemNumber;
+
+    int textviewValueForFood = 0;
 
     public MenuHolder(@NonNull View itemView) {
         super(itemView);
@@ -27,7 +30,7 @@ public class MenuHolder extends RecyclerView.ViewHolder {
 
         addButton = (FloatingActionButton) itemView.findViewById(R.id.addButton);
         subtractButton = (FloatingActionButton) itemView.findViewById(R.id.subtractButton);
-        FoodItemNumber = itemView.findViewById(R.id.FoodItemNumber);
+        FoodItemNumber =  (TextView) itemView.findViewById(R.id.NumberOfFood);
 
     }
 }

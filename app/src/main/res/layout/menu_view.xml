@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/FoodItemNumber"
+    android:layout_width="wrap_content"
     android:layout_height="250dp"
-    app:cardCornerRadius="30dp"
     android:layout_margin="10dp"
-    android:elevation="10dp">
+    android:elevation="10dp"
+    app:cardCornerRadius="30dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         <ImageView
             android:id="@+id/foodImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,23 +57,18 @@
                 app:srcCompat="@drawable/baseline_remove_24" />
 
             <EditText
-                android:id="@+id/FoodItemNumber"
-                android:layout_width="33dp"
-                android:layout_height="53dp"
-                android:layout_alignStart="@+id/subtractButton"
-                android:layout_alignTop="@+id/addButton"
+                android:id="@+id/NumberOfFood"
+                android:layout_width="35dp"
+                android:layout_height="56dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="33dp"
-                android:layout_marginTop="-15dp"
-                android:layout_marginEnd="51dp"
-                android:layout_marginBottom="23dp"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="49dp"
+                android:layout_marginBottom="36dp"
                 android:ems="10"
                 android:hint="0"
                 android:inputType="number"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textAlignment="center" />
 
         </RelativeLayout>
     </FrameLayout>
