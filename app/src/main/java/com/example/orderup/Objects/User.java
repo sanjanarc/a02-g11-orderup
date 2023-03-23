@@ -1,5 +1,7 @@
 package com.example.orderup.Objects;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -148,7 +150,11 @@ public class User extends FoodItem
     }
 
     public void printFoodCart(){
-        for(int i = 0; i < cart.size(); i++)
-        System.out.println(cart.get(i).getItemName());
+            for(int i = 0; i < cart.size(); i++)
+            {
+                System.out.println(cart.get(i).getItemName());
+            }
+
+            Log.d("Cart Size: ",String.valueOf(cart.size()));
     }
 }

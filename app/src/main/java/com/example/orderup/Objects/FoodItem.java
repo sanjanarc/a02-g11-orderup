@@ -12,8 +12,8 @@ public class FoodItem {
     public FoodItem() {
         restaurant_id = 0;
         item_id = 0;
-        item_name = "";
-        item_description = "";
+        item_name = "Default Name";
+        item_description = "Default Description";
         price = 0;
         image_url = "";
 

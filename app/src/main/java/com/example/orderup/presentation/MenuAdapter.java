@@ -1,4 +1,8 @@
 package com.example.orderup.presentation;
+
+import static com.example.orderup.logic.Services.getUserPersistence;
+
+import android.content.Context;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,13 +26,12 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     List<FoodItem> foods;
-
+    User user = getUserPersistence().getUserTable().get(Services.getCurrentUser());
     public  final int MAX_ORDER_ITEMS = 100;
     MenuAdapter(List<FoodItem> foods)
     {
         this.foods = foods;
     }
-
     @NonNull
     @Override
     public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,11 +40,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
         return new MenuHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_view,parent,false));
     }
-
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
-
-        UserPersistence userPersistence = Services.getUserPersistence();
 
         FoodItem foodItem = foods.get(position);
         String foodName = foodItem.getItemName();
@@ -51,9 +51,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.nameview.setText(info);
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
-
-
-        holder.FoodItemNumber.setText(String.valueOf(0));
+        holder.FoodItemNumber.setText(String.valueOf(1));
 
         holder.FoodItemNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -83,8 +81,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
                 {
                     int temp = Integer.parseInt(holder.FoodItemNumber.getText().toString());
                     temp++;
-
                     holder.FoodItemNumber.setText(String.valueOf(temp));
+
                     Log.d("AddButton",String.valueOf(temp));
 
                 }
@@ -98,39 +96,32 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.subtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) < MAX_ORDER_ITEMS && Integer.parseInt(holder.FoodItemNumber.getText().toString()) >= 0)
+                if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) < MAX_ORDER_ITEMS && Integer.parseInt(holder.FoodItemNumber.getText().toString()) > 0)
                 {
                     int temp = Integer.parseInt(holder.FoodItemNumber.getText().toString());
-                    if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) != 0 )
+                    if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) != 1 )
                         temp--;
                     else
                         ErrorPopUp.errorMsg(view.getContext(), "Minimum item number reached");
 
-
                     holder.FoodItemNumber.setText(String.valueOf(temp));
                     Log.d("AddButton",String.valueOf(temp));
-
                 }
-
             }
         });
 
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User user = userPersistence.getUserTable().get(Services.getCurrentUser());
                 assert user != null;
-                user.addToFoodCart(foodItem);
+                for(int i = 1; i <= Integer.parseInt(holder.FoodItemNumber.getText().toString()); i ++)
+                    user.addToFoodCart(foodItem);
+                ErrorPopUp.errorMsg(view.getContext(), "Item added");
                 user.printFoodCart();
 
             }
         });
-
-
     }
-
-
-
     @Override
     public int getItemCount() {
         return foods.size();
