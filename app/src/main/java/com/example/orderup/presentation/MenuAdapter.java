@@ -1,8 +1,7 @@
 package com.example.orderup.presentation;
 
+import static com.example.orderup.logic.Services.getCurrentUser;
 import static com.example.orderup.logic.Services.getUserPersistence;
-
-import android.content.Context;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.User;
 import com.example.orderup.R;
+import com.example.orderup.presentation.MainActivity;
 import com.example.orderup.logic.Services;
-import com.example.orderup.persistance.UserPersistence;
 
 import java.util.List;
 
@@ -26,8 +25,8 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     List<FoodItem> foods;
-    User user = getUserPersistence().getUserTable().get(Services.getCurrentUser());
     public  final int MAX_ORDER_ITEMS = 100;
+
     MenuAdapter(List<FoodItem> foods)
     {
         this.foods = foods;
@@ -113,14 +112,16 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                assert user != null;
+                assert MainActivity.user != null;
                 for(int i = 1; i <= Integer.parseInt(holder.FoodItemNumber.getText().toString()); i ++)
-                    user.addToFoodCart(foodItem);
+                   MainActivity.user.addToFoodCart(foodItem);
                 ErrorPopUp.errorMsg(view.getContext(), "Item added");
-                user.printFoodCart();
+                Log.d("Email",MainActivity.user.getEmail());
+                MainActivity.user.printFoodCart();
 
             }
         });
+
     }
     @Override
     public int getItemCount() {

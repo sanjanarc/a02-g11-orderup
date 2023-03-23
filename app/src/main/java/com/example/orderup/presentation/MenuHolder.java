@@ -1,5 +1,8 @@
 package com.example.orderup.presentation;
 
+import static com.example.orderup.logic.Services.getUserPersistence;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,14 +28,14 @@ public class MenuHolder extends RecyclerView.ViewHolder {
     FloatingActionButton subtractButton = null;
     TextView FoodItemNumber;
 
-    Button submitBButton;
+    Button submitBButton,ViewCartButton;
 
     public MenuHolder(@NonNull View itemView) {
         super(itemView);
         imageview = itemView.findViewById(R.id.foodImage);
         nameview = itemView.findViewById(R.id.foodInfo);
 
-        UserPersistence userPersistence = Services.getUserPersistence();
+        User user = getUserPersistence().getUserTable().get(Services.getCurrentUser());
 
 
         addButton = (FloatingActionButton) itemView.findViewById(R.id.addButton);
@@ -40,5 +43,6 @@ public class MenuHolder extends RecyclerView.ViewHolder {
         FoodItemNumber = (TextView) itemView.findViewById(R.id.NumberOfFood);
 
         submitBButton = (Button) itemView.findViewById(R.id.Submit);
+
     }
 }
