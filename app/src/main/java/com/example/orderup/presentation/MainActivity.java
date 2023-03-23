@@ -1,11 +1,16 @@
 package com.example.orderup.presentation;
 
+import static com.example.orderup.logic.Services.getUserPersistence;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.orderup.Objects.User;
 import com.example.orderup.R;
+import com.example.orderup.logic.Services;
+import com.example.orderup.persistance.UserPersistence;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     CustomerSupportFragment customerSupportFragment = new CustomerSupportFragment();
 
     // Used to retrieve image.
+    public static User user = getUserPersistence().getUserTable().get(Services.getCurrentUser());
     public static String PACKAGE_NAME;
 
     @Override
@@ -54,5 +60,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    public MainActivity getMainActivity()
+    {
+        return this;
+    }
+
+    public User getUser()
+    {
+        return user;
     }
 }

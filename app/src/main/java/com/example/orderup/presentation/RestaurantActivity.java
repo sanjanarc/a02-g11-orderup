@@ -9,14 +9,25 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.example.orderup.logic.Services.getUserPersistence;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.orderup.Objects.Restaurant;
+import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.orderup.logic.Services;
 
 import java.util.List;
 
@@ -25,6 +36,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         int position = getIntent().getIntExtra("position", 1);
@@ -115,5 +127,17 @@ public class RestaurantActivity extends AppCompatActivity {
 
         //Display the comments.
         commentSec.setText(comments);
+
+
+        Button ViewCartButton = (Button) findViewById(R.id.ViewCartButtonXML);
+
+        ViewCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Email: ",MainActivity.user.getEmail());
+                MainActivity.user.printFoodCart();
+
+            }
+        });
     }
 }
