@@ -1,18 +1,20 @@
 package com.example.orderup.presentation;
-
-import static java.lang.Integer.parseInt;
-
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.Objects.FoodItem;
+import com.example.orderup.Objects.User;
 import com.example.orderup.R;
+import com.example.orderup.logic.Services;
+import com.example.orderup.persistance.UserPersistence;
 
 import java.util.List;
 
@@ -38,6 +40,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
+
+        UserPersistence userPersistence = Services.getUserPersistence();
+
         FoodItem foodItem = foods.get(position);
         String foodName = foodItem.getItemName();
         String foodDes = foodItem.getItemDescription();
@@ -46,19 +51,41 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.nameview.setText(info);
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
-        holder.FoodItemNumber.setText(String.valueOf(holder.textviewValueForFood));
-        holder.FoodItemNumber.setText(String.valueOf(R.id.NumberOfFood));
+
+
+        holder.FoodItemNumber.setText(String.valueOf(0));
+
+        holder.FoodItemNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    // Handle the "Done" button press event
+                    holder.FoodItemNumber.setText(holder.FoodItemNumber.getText().toString());
+
+                    if( Integer.parseInt(holder.FoodItemNumber.getText().toString()) > 100 || Integer.parseInt(holder.FoodItemNumber.getText().toString()) < 0) {
+                        holder.FoodItemNumber.setText(String.valueOf(0));
+                        ErrorPopUp.errorMsg(textView.getContext(), "Enter value between 0 and 100");
+                    }
+                    Log.d("After changing the value in editor action",holder.FoodItemNumber.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
 
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.textviewValueForFood < MAX_ORDER_ITEMS)
+
+                if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) < MAX_ORDER_ITEMS)
                 {
-                    holder.textviewValueForFood++;
-                    holder.FoodItemNumber.setText(String.valueOf(holder.textviewValueForFood));
-                    Log.d("this",String.valueOf(holder.textviewValueForFood));
+                    int temp = Integer.parseInt(holder.FoodItemNumber.getText().toString());
+                    temp++;
+
+                    holder.FoodItemNumber.setText(String.valueOf(temp));
+                    Log.d("AddButton",String.valueOf(temp));
 
                 }
                 else {
@@ -71,22 +98,38 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.subtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.textviewValueForFood < MAX_ORDER_ITEMS && holder.textviewValueForFood > 0)
+                if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) < MAX_ORDER_ITEMS && Integer.parseInt(holder.FoodItemNumber.getText().toString()) >= 0)
                 {
-                    holder.textviewValueForFood--;
-                    holder.FoodItemNumber.setText(String.valueOf(holder.textviewValueForFood));
-                    Log.d("this",String.valueOf(holder.textviewValueForFood));
+                    int temp = Integer.parseInt(holder.FoodItemNumber.getText().toString());
+                    if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) != 0 )
+                        temp--;
+                    else
+                        ErrorPopUp.errorMsg(view.getContext(), "Minimum item number reached");
+
+
+                    holder.FoodItemNumber.setText(String.valueOf(temp));
+                    Log.d("AddButton",String.valueOf(temp));
 
                 }
-                else{
-                    ErrorPopUp.errorMsg(view.getContext(), "Minimum item number reached");
 
-                }
+            }
+        });
+
+        holder.submitBButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User user = userPersistence.getUserTable().get(Services.getCurrentUser());
+                assert user != null;
+                user.addToFoodCart(foodItem);
+                user.printFoodCart();
+
             }
         });
 
 
     }
+
+
 
     @Override
     public int getItemCount() {
