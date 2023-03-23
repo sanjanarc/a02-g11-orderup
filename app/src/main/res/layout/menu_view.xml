@@ -27,48 +27,64 @@
 
             <TextView
                 android:id="@+id/foodInfo"
-                android:layout_width="460dp"
-                android:layout_height="match_parent"
+                android:layout_width="264dp"
+                android:layout_height="90dp"
                 android:text="TextView"
                 android:textColor="@color/black" />
 
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addButton"
-                android:layout_width="22dp"
-                android:layout_height="37dp"
+                android:layout_width="19dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/NumberOfFood"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="39dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="61dp"
                 android:clickable="true"
                 app:srcCompat="@drawable/baseline_add_24" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/subtractButton"
-                android:layout_width="22dp"
-                android:layout_height="37dp"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/addButton"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="59dp"
-                android:layout_marginBottom="39dp"
+                android:layout_marginEnd="54dp"
+                android:layout_marginBottom="61dp"
                 android:layout_toStartOf="@+id/addButton"
                 android:clickable="true"
                 app:srcCompat="@drawable/baseline_remove_24" />
 
             <EditText
                 android:id="@+id/NumberOfFood"
-                android:layout_width="35dp"
-                android:layout_height="56dp"
+                android:layout_width="37dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
-                android:layout_marginEnd="49dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="55dp"
                 android:ems="10"
                 android:hint="0"
+                android:imeOptions="actionDone"
                 android:inputType="number"
                 android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/Submit"
+                android:layout_width="81dp"
+                android:layout_height="36dp"
+                android:layout_alignStart="@+id/subtractButton"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="-45dp"
+                android:layout_marginEnd="280dp"
+                android:layout_marginBottom="13dp"
+                android:text="Add" />
 
         </RelativeLayout>
     </FrameLayout>

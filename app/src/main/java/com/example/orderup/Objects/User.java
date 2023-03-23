@@ -43,6 +43,8 @@ public class User extends FoodItem
             balance = "0.00F";
         }
         this.balance = Float.parseFloat(balance);
+
+        this.cart = new ArrayList<>();
     }
 
     public String getEmail()
@@ -140,8 +142,13 @@ public class User extends FoodItem
         return equals;
     }
 
-    public void foodCart(FoodItem foodItem)
+    public void addToFoodCart(FoodItem foodItem)
     {
         cart.add(foodItem);
+    }
+
+    public void printFoodCart(){
+        for(int i = 0; i < cart.size(); i++)
+        System.out.println(cart.get(i).getItemName());
     }
 }

@@ -2,6 +2,7 @@ package com.example.orderup.logic;
 
 import android.util.Log;
 
+import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
