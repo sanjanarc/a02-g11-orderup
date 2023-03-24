@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.MainActivity"
+    tools:visibility="visible">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/container"
-        android:layout_above="@id/bottomNavigationView"/>
+        android:layout_width="match_parent"
+        android:layout_height="623dp"
+        android:layout_above="@id/bottomNavigationView" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -20,5 +21,16 @@
         android:background="#ff8c00"
         app:itemIconTint="@drawable/nav_selected_color"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
+
+    <Button
+        android:id="@+id/ViewCartHomeButton"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="7dp"
+        android:background="#00FFFFFF"
+        android:foreground="@drawable/cart" />
 </RelativeLayout>
