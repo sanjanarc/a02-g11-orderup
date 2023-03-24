@@ -63,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public MainActivity getMainActivity()
-    {
-        return this;
-    }
-
     public User getUser()
     {
         return user;
