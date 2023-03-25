@@ -1,14 +1,13 @@
 package com.example.orderup.logic;
 
-import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.persistance.RestaurantPersistence;
 
 import java.util.List;
 
-public class RestaurantServices {
+public class RestaurantServices extends Services{
 
-    static RestaurantPersistence restaurantPersistence = Services.getRestaurantPersistence();
+    private static final RestaurantPersistence restaurantPersistence = getRestaurantPersistence();
 
     public static List<Restaurant> getRestList(){
         return restaurantPersistence.getRestaurantSequential();

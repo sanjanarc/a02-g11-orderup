@@ -9,16 +9,15 @@ import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
 public class Services
 {
     private static String currentUser = null;
+    private static String dbPath = "DB";
     private static UserPersistence userPersistence= null;
     private static RestaurantPersistence restaurantPersistence= null;
-    private static String dbPath = "UserDB";
 
     //Get the User database setup and ready to use.
-    public static synchronized UserPersistence getUserPersistence()
+    protected static synchronized UserPersistence getUserPersistence()
     {
         if(userPersistence== null)
         {
-//            userPersistence= new UserPersistenceStub();
             userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
 
@@ -26,11 +25,10 @@ public class Services
     }
 
     //Get the Restaurant database setup and ready for use.
-    public static synchronized RestaurantPersistence getRestaurantPersistence()
+    protected static synchronized RestaurantPersistence getRestaurantPersistence()
     {
         if (restaurantPersistence == null)
         {
-//            restaurantPersistence = new RestaurantPersistenceStub();
             restaurantPersistence = new RestaurantPersistenceHSQLDB(getDBPathName());
         }
 
@@ -55,15 +53,7 @@ public class Services
         {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
         }
-        catch (InstantiationException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e)
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException e)
         {
             e.printStackTrace();
         }

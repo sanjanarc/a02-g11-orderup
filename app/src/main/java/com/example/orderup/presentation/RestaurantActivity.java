@@ -4,15 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
 
 //This is the activity class showing the specific restaurant info.
 public class RestaurantActivity extends AppCompatActivity {
@@ -43,5 +45,16 @@ public class RestaurantActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MenuAdapter(restaurant.getMenuItems()));
+
+        //Comment button listener.
+        FloatingActionButton commentButton = findViewById(R.id.comment_Button);
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CommentActivity.class);
+                intent.putExtra("position", position);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 }

@@ -11,14 +11,12 @@ This class verifies Information provided by User: name,email and password, addre
  */
 public class UserVerification
 {
-    private static UserPersistence userPersistence;
+    //Get the database.
+    private static final UserPersistence userPersistence = UserServices.getUserPersistence();
 
     //Verify the input email and password from databases. Return null if input data are correct, return error message, otherwise.
     public static String loginVerification(String email, String password)
     {
-        //Get the database.
-        userPersistence = Services.getUserPersistence();
-
         //Store message that going to return to presentation layer.
         String msg;
 
@@ -62,9 +60,6 @@ public class UserVerification
     //Verify the input data's format and create an account if the data is correct. Return error message if data format is incorrect.
     public static String registrationVerification(String email, String firstName, String lastName, String password, String rePassword)
     {
-        //Get the database.
-        userPersistence = Services.getUserPersistence();
-
         //Store message that going to return to presentation layer.
         String msg;
 
@@ -121,9 +116,6 @@ public class UserVerification
     //Verify the input credit card format.
     public static String creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry)
     {
-        //Get the database.
-        userPersistence = Services.getUserPersistence();
-
         //Store message that going to return to presentation layer.
         String msg;
 
@@ -169,8 +161,6 @@ public class UserVerification
     //Verity the input address format and return the message to user.
     public static String addressVerification(String street, String city, String province, String postal, String email, String address)
     {
-        userPersistence = Services.getUserPersistence();
-
         String result = streetVerification(street) + cityVerification(city) + provinceVerification(province) + postalVerification(postal);
         if(result.equals(""))
         {
