@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,9 +52,22 @@ public class RestaurantActivity extends AppCompatActivity {
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CommentActivity.class);
-                intent.putExtra("position", position);
-                view.getContext().startActivity(intent);
+                FrameLayout frameLayout = findViewById(R.id.commentContainer);
+                boolean moveable;
+                if (frameLayout.getHeight() == 0){
+                    frameLayout.getLayoutParams().height = 600;
+                    moveable = true;
+                }else {
+                    frameLayout.getLayoutParams().height = 0;
+                    moveable = false;
+                }
+                frameLayout.setLayoutParams(frameLayout.getLayoutParams());
+                recyclerView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        return moveable;
+                    }
+                });
             }
         });
     }
