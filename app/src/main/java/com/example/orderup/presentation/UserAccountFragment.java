@@ -34,7 +34,7 @@ public class UserAccountFragment extends Fragment
 
         infoContainer = (TextView) view.findViewById(R.id.infoContainer);
         updateInfo();
-
+        
         //Event listener of the add credit card button.
         addCardButton= (Button) view.findViewById(R.id.addCardButton);
         addCardButton.setOnClickListener(new View.OnClickListener()
