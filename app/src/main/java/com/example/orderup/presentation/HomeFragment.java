@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
+import com.example.orderup.logic.Search_algorithm;
+
 import com.example.orderup.logic.Services;
 
 /**
@@ -43,6 +45,16 @@ public class HomeFragment extends Fragment {
                 startActivity(intent); //Start the cart activity class.
             }
         });
+
+//        boolean searchBar = False;
+//        if (searchBar) {
+//           String inputText = "user typed in search bar";
+//           recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(inputText)));
+//        }
+//        else {
+//            recyclerView.setAdapter(new RestaurantAdapter(RestaurantServices.getRestList()));
+//
+//        }
 
         // Inflate the layout for this fragment
         return view;
