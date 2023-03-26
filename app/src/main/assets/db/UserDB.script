@@ -28,11 +28,6 @@ INSERT INTO FOODITEM VALUES(3,3, 'Deluxe Beef Pho',1129.00,'food_3_3','Gluten fr
 INSERT INTO FOODITEM VALUES(4,1, 'Banana Langka Pie',401.00,'food_4_1','Use code BOGOBLP at checkout to redeem offer. \r\n\r\nBanana Langka Pie is a perfect combination of two popular fruits from the Philippines – banana and jackfruit. The fruity filling encrusted in a buttery flaky crust makes a delicious sweet treat!\r\n');
 INSERT INTO FOODITEM VALUES(4,2,'Peach Mango Pie',401.00,'food_4_2','Sweet and flaky Peach Mango Pie made with real Philippine mangoes');
 INSERT INTO FOODITEM VALUES(4,3, 'Pepsi',344.00,'food_4_3','A 20 oz Pepsi');
-INSERT INTO GIFTCARD VALUES('6748369873539860',5.0)
-INSERT INTO GIFTCARD VALUES('0086811568571859',10.0)
-INSERT INTO GIFTCARD VALUES('8081831768969802',20.0)
-INSERT INTO GIFTCARD VALUES('1785555962791673',50.0)
-INSERT INTO GIFTCARD VALUES('7923457638237639',100.0)
 INSERT INTO RESTAURANTS VALUES(5,'JOEY Restaurants','Burgers,Canadian,Pasta,Sandwiches,Fries','Winnipeg','The restaurant focuses on Asian, American, Mediterranean and other global dishes. It is a Western Canadian premium casual restaurant.',3,'1550 Kenaston Blvd Winnipeg MB R3P 0Y4','joey_home','Monday to Friday: 9am-4pm')
 INSERT INTO RESTAURANTS VALUES(6,'Mars Sisig','Filipino,Philippines,Pho','Winnipeg','The restaurant serves Filipino dishes from breakfast to dinner.',3,'1303 Jefferson Ave Winnipeg MB R2P 1S7','mars_home','Friday to Sunday: 1pm-10pm')
 INSERT INTO RESTAURANTS VALUES(7,'Aroma Bistro','KWB,Chinese,Hong Kong,Sichuan,Savory,China','Winnipeg','Aroma Bistro is serving Asian Fusion Food in Winnipeg.',3, '741 St Mary''s Rd Winnipeg MB R2M 3N5','aroma_home','Monday to Sunday: 2pm-11pm')
@@ -206,8 +201,14 @@ INSERT INTO FOODITEM VALUES (46, 3, 'Green Curry', 15.99, 'food_46_3', 'Simmered
 INSERT INTO FOODITEM VALUES (47, 1, 'Assorted Naan Basket (4 Pieces)', 13.99, 'food_47_1', 'Includes regular naan, garlic naan, Mozzarella cheese naan, and whole wheat naan.');
 INSERT INTO FOODITEM VALUES (47, 2, 'Garlic Naan (1 Piece)', 3.19, 'food_47_2', 'Plain flour naan bread with garlic. One order comes with one naan.');
 INSERT INTO FOODITEM VALUES (47, 3, 'Tandoori Paneer Veggie Sizzler', 17.99, 'food_47_3', 'Vegetarian and gluten friendly. Homemade Indian dish with cheese and seasonal mixed vegetables, grilled in the tandoor.');
-INSERT INTO FOODITEM VALUES (48, 1, 'Spicy Beef Soup Yukgaejang', 13.99, 'food_48_1', 'Spicy soup with beef, vegetables and glass noodles.');
+INSERT INTO FOODITEM VALUES (48, 1, 'Spicy Beef Soup', 13.99,'food_48_1', 'Spicy soup with beef, vegetables and glass noodles.');
 INSERT INTO FOODITEM VALUES (48, 2, 'Beef Bulgogi', 14.99, 'food_48_2', 'Stir fried beef slices with teriyaki sauce and vegetables.');
-INSERT INTO FOODITEM VALUES (48, 3, 'Chicken Bulgogi', 14.99, 'food_48_3', 'Stir fried chicken with spicy sauce and vegetables.');
+INSERT INTO FOODITEM VALUES (48, 3, 'Chicken Bulgogi', 14.99, 'food_48_3','Stir fried chicken with spicy sauce and vegetables.');
+INSERT INTO GIFTCARD VALUES('6748369873539860',5.0)
+INSERT INTO GIFTCARD VALUES('0086811568571859',10.0)
+INSERT INTO GIFTCARD VALUES('8081831768969802',20.0)
+INSERT INTO GIFTCARD VALUES('1785555962791673',50.0)
+INSERT INTO GIFTCARD VALUES('7923457638237639',100.0)
+
 
 

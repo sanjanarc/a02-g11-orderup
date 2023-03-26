@@ -30,7 +30,7 @@ public class Search_algorithm {
     // Returns:
     //           ArrayList<String>: an ArrayList<String> of  restaurant recommendation based on user's search
     //------------------------------------------------------
-    public static ArrayList<String>  searchRestaurant(String userInput) {
+    public static List<String>  searchRestaurant(String userInput) {
 
         RestaurantPersistence p = new RestaurantPersistenceStub();
         List<Restaurant> restaurants = p.getRestaurantSequential(); // want to use method from restaurant interface
@@ -49,11 +49,11 @@ public class Search_algorithm {
 
         }
 
-        ArrayList<String> restaurantResults = new ArrayList<String>();
+        List<String> restaurantResults = new ArrayList<String>();
 
 
 
-        ArrayList<Integer> results= searchRestaurantKey(errorCheck(userInput), restNames, restCategories); //korean, sushi, nagiri, apple
+        List<Integer> results= searchRestaurantKey(errorCheck(userInput), restNames, restCategories); //korean, sushi, nagiri, apple
         if(results.isEmpty()){
             System.out.println("Your search does not match any restaurants on OrderUp");
         }else{
@@ -88,7 +88,7 @@ public class Search_algorithm {
     // Returns:
     //           ArrayList<Integer>: an ArrayList<Integer> of relevant restaurant's row number
     //------------------------------------------------------
-    public static ArrayList<Integer> searchRestaurantKey( String user_input, String[] restaurants, String[] categories){
+    public static List<Integer> searchRestaurantKey( String user_input, String[] restaurants, String[] categories){
         ArrayList<Integer> restaurantFound= new ArrayList<Integer>(); //an array list of restaurant's row number relevant to the user input
 
         //start iteration from 1, as first row is Headings
