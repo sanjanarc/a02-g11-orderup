@@ -22,7 +22,7 @@ public class RestaurantPersistenceStub implements RestaurantPersistence {
                 new FoodItem(1,2,"Vegetarian Combo", 12.99, "https://cdn.doordash.com/media/photos/bb5dfdcd-8ea0-4a4e-b89d-dfc7071873dd-retina-large-jpeg",
                         "Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle."),new FoodItem(1,3,"Pani Puri",
                 6.99, "https://cdn.doordash.com/media/photos/8b253848-5857-413c-a9bb-a9d3b8d66262-retina-large-jpeg",
-                "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null,"image"));
+                "Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions"), 3, null,"image","time"));
         restaurants.add(new Restaurant(3,"Banh Mi King","Vietnamese,Savory,Sandwiches,Phom Poutine","Winnipeg"
                 ,"Choose from an incredible selection of appetizing rice dishes, Vietnamese salads, pho, Viet subs, baoger and more.",new FoodItem(3,1, "Pork Belly Baoger",
                 7.79,"https://cdn.doordash.com/media/photos/3ccb98e4-3e03-411b-ae5d-4c7487db481f-retina-large.jpg",
@@ -31,7 +31,7 @@ public class RestaurantPersistenceStub implements RestaurantPersistence {
                         "Homemade beef patties, steamed bun, cheese, pickled daikons, red onions, and lettuce."),new FoodItem(3,3, "Deluxe Beef Pho",11.29,
                 "https://cdn.doordash.com/media/photos/8a2be946-c47b-4055-a8ce-1d6f531a68f3-retina-large.jpg",
                 "Gluten friendly. Sliced top sirloin raw beef, beef brisket, and beef balls with your choice of broth served with a side of bean sprouts and basil."),
-                3,"510 Portage Ave Winnipeg MB R3C 0G2","image"));
+                3,"510 Portage Ave Winnipeg MB R3C 0G2","image","time"));
 
 
     }
