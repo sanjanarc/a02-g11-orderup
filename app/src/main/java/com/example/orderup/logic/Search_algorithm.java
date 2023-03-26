@@ -28,12 +28,11 @@ public class Search_algorithm {
     //            String user_input: user input
     //
     // Returns:
-    //           ArrayList<String>: an ArrayList<String> of  restaurant recommendation based on user's search
+    //           ArrayList<Restaurant>: an ArrayList<Restaurant> of  restaurant recommendation based on user's search
     //------------------------------------------------------
     public static List<Restaurant>  searchRestaurant(String userInput) {
 
-        RestaurantPersistence p = new RestaurantPersistenceStub();
-        List<Restaurant> restaurants = p.getRestaurantSequential(); // want to use method from restaurant interface
+        List<Restaurant> restaurants = RestaurantServices.getRestList(); // access restaurants from script
 
         String[] restNames = new String[50];
         String[] restCategories = new String[50];
@@ -63,7 +62,6 @@ public class Search_algorithm {
 
         }
         return restaurantResults;
-
 
     }
 
