@@ -30,7 +30,7 @@ public class Search_algorithm {
     // Returns:
     //           ArrayList<String>: an ArrayList<String> of  restaurant recommendation based on user's search
     //------------------------------------------------------
-    public static List<String>  searchRestaurant(String userInput) {
+    public static List<Restaurant>  searchRestaurant(String userInput) {
 
         RestaurantPersistence p = new RestaurantPersistenceStub();
         List<Restaurant> restaurants = p.getRestaurantSequential(); // want to use method from restaurant interface
@@ -49,7 +49,7 @@ public class Search_algorithm {
 
         }
 
-        List<String> restaurantResults = new ArrayList<String>();
+        List<Restaurant> restaurantResults = new ArrayList<Restaurant>();
 
 
 
@@ -58,7 +58,7 @@ public class Search_algorithm {
             System.out.println("Your search does not match any restaurants on OrderUp");
         }else{
             for (int j = 0; j < results.size(); j++) {
-                restaurantResults.add(restNames[results.get(j)]);
+                restaurantResults.add(restaurants.get(results.get(j)));
             }
 
         }
