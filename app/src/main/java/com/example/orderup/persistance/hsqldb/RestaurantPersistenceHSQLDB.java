@@ -111,4 +111,22 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
             throw new PersistenceException(e);
         }
     }
+    /*
+    Method adds a comment left on a restaurant's place to the DB.script
+     */
+    public void addComment(int restaurantID, String comment)
+    {
+        try(Connection c = connection())
+        {
+            PreparedStatement st = c.prepareStatement("INSERT INTO comments VALUES (?, ?)");
+            st.setInt(1, restaurantID);
+            st.setString(2, comment);
+
+            st.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
 }
