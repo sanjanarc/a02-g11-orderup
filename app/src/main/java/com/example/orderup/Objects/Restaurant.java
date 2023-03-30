@@ -125,4 +125,5 @@ public class Restaurant {
     public List<Comment> getUserComment(){
         return userComments;
     }
+
 }
