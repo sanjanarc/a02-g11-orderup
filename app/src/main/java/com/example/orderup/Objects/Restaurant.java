@@ -4,8 +4,6 @@ import com.example.orderup.R;
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
-import com.example.orderup.Objects.Comment;
-import com.example.orderup.Objects.User;
 /*
 Restaurant: This object class represents a restaurant in the database. Its menu consists of "FoodItem" objects
  */
@@ -23,8 +21,7 @@ public class Restaurant {
     private final FoodItem item3;
     private int num_menu_items;
     private final String location;
-
-    private final List<Comment> userComments;
+    private final List<String> userComments;
 
 
 
@@ -115,14 +112,14 @@ public class Restaurant {
     /*
     Method adds a user's comment left on the restaurant
      */
-    public void addUserComment(String comment, User user){
-        Comment newComment= new Comment(comment,user);
+    public void addUserComment(String comment, String user){
+        String newComment= comment+ " "+ user;
         userComments.add(newComment);
     }
     /*
     method returns list of Users' comments on the restaurant
      */
-    public List<Comment> getUserComment(){
+    public List<String> getUserComment(){
         return userComments;
     }
 
