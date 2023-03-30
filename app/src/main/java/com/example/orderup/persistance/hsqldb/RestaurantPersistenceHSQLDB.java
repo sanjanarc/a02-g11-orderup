@@ -44,7 +44,8 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final FoodItem item1 = getFoodById(id,1); //get fooditem in the rest's menu
         final FoodItem item2 = getFoodById(id,2);
         final FoodItem item3 = getFoodById(id,3);
-        return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image);
+
+        return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image, getComments(id));
     }
 
 
