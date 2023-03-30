@@ -4,6 +4,8 @@ import com.example.orderup.R;
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
+import com.example.orderup.Objects.Comment;
+import com.example.orderup.Objects.User;
 /*
 Restaurant: This object class represents a restaurant in the database. Its menu consists of "FoodItem" objects
  */
@@ -22,6 +24,9 @@ public class Restaurant {
     private int num_menu_items;
     private final String location;
 
+    private final List<Comment> userComments;
+
+
 
     public Restaurant(final int newID) {
         restaurantID = newID;
@@ -35,6 +40,7 @@ public class Restaurant {
         item3 = null;
         num_menu_items = 0;
         location = null;
+        userComments=null;
     }
 
     public Restaurant(int newID, String newRestaurantName, String newCategory,
@@ -43,6 +49,7 @@ public class Restaurant {
                       final FoodItem item3, final int num_menu_items,
                       final String location, final String image) {
         this.menu = new ArrayList<>();
+        this.userComments= new ArrayList<>();
 
         restaurantID = newID;
         restaurantName = newRestaurantName;
@@ -70,32 +77,24 @@ public class Restaurant {
     public String getRestaurantCategory() {
         return (newCategory);
     }
-
     public String getRestaurantDescription() {
         return (description);
     }
-
     public List<FoodItem> getMenuItems() {
         return (menu);
     }
-
     public FoodItem getItem1() {
         return item1;
     }
-
     public FoodItem getItem2() {
         return item2;
     }
-
     public FoodItem getItem3() {
         return item3;
     }
-
-
     public String getRestaurant_location() {
         return (location);
     }
-
     public String getCityName() {
         return (cityName);
     }
@@ -109,8 +108,21 @@ public class Restaurant {
     public String getImagesURL() {
         return imagesURL;
     }
-
     public int getNum_menuItem(){
         return num_menu_items;
+    }
+
+    /*
+    Method adds a user's comment left on the restaurant
+     */
+    public void addUserComment(String comment, User user){
+        Comment newComment= new Comment(comment,user);
+        userComments.add(newComment);
+    }
+    /*
+    method returns list of Users' comments on the restaurant
+     */
+    public List<Comment> getUserComment(){
+        return userComments;
     }
 }
