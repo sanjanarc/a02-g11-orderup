@@ -9,7 +9,7 @@ import com.example.orderup.R;
 import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.Objects.FoodItem;
 
-public class RestaurantPersistenceStub implements RestaurantPersistence {
+public class RestaurantPersistenceStub {
     private List<Restaurant> restaurants;
 
 

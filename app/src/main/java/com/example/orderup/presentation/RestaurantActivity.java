@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +17,8 @@ import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 
 //This is the activity class showing the specific restaurant info.
@@ -53,9 +57,12 @@ public class RestaurantActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FrameLayout frameLayout = findViewById(R.id.commentContainer);
+
+                loadComment(position);
+
                 boolean moveable;
                 if (frameLayout.getHeight() == 0){
-                    frameLayout.getLayoutParams().height = 600;
+                    frameLayout.getLayoutParams().height = 670;
                     moveable = true;
                 }else {
                     frameLayout.getLayoutParams().height = 0;
@@ -70,5 +77,32 @@ public class RestaurantActivity extends AppCompatActivity {
                 });
             }
         });
+
+        //Send button listener.
+        Button sendButton = findViewById(R.id.sendComment);
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText input = findViewById(R.id.inputComment);
+                String msg = input.getText().toString();
+                if (!msg.equals("")){
+                    RestaurantServices.addComment(position, RestaurantServices.getCurrentUser()+":\n"+msg);
+                    input.setText("");
+                    loadComment(position);
+                }else {
+                    ErrorPopUp.errorMsg(view.getContext(), "Input comment cannot be empty.");
+                }
+            }
+        });
+    }
+
+    public void loadComment(int position){
+        TextView commentSec = findViewById(R.id.commentSection);
+        List<String> commentList = RestaurantServices.loadComment(position);
+        String comments = "";
+        for (String i : commentList) {
+            comments += i+"\n";
+        }
+        commentSec.setText(comments);
     }
 }

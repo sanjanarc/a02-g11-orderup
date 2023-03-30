@@ -81,10 +81,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <EditText
+            android:id="@+id/inputComment"
             android:hint="Enter Comment here...."
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:maxLength="75"
             android:layout_gravity="bottom"/>
+        <Button
+            android:id="@+id/sendComment"
+            android:hint="Send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="#55123456"/>
+
     </FrameLayout>
 
 </FrameLayout>
