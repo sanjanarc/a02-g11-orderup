@@ -4,7 +4,9 @@ import com.example.orderup.R;
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
-
+/*
+Restaurant: This object class represents a restaurant in the database. Its menu consists of "FoodItem" objects
+ */
 public class Restaurant {
 
     private final int restaurantID;
@@ -62,7 +64,9 @@ public class Restaurant {
         menu.add(item3);
 
     }
-
+    /*
+    Accessor and mutator methods
+     */
     public String getRestaurantCategory() {
         return (newCategory);
     }
