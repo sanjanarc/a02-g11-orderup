@@ -113,8 +113,10 @@ public class Restaurant {
     Method adds a user's comment left on the restaurant
      */
     public void addUserComment(String comment, String user){
-        String newComment= comment+ " "+ user;
+        String newComment= comment+ "\nby "+ user;
         userComments.add(newComment);
+
+
     }
     /*
     method returns list of Users' comments on the restaurant

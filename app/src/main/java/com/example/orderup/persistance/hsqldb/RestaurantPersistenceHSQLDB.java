@@ -45,7 +45,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final FoodItem item2 = getFoodById(id,2);
         final FoodItem item3 = getFoodById(id,3);
 
-        return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image, getComments(id));
+        return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image);
     }
 
 
@@ -134,7 +134,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
     /*
     Method adds a comment left on a restaurant's place to the DB.script
      */
-    public void addComment(int restaurantID, String comment)
+    public void updateComment(int restaurantID, String comment)
     {
         try(Connection c = connection())
         {
