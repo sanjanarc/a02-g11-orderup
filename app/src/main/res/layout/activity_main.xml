@@ -10,8 +10,9 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="623dp"
+        android:layout_height="match_parent"
         android:layout_above="@id/bottomNavigationView" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -23,14 +24,4 @@
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />
 
-    <Button
-        android:id="@+id/ViewCartHomeButton"
-        android:layout_width="49dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="7dp"
-        android:background="#00FFFFFF"
-        android:foreground="@drawable/cart" />
 </RelativeLayout>
