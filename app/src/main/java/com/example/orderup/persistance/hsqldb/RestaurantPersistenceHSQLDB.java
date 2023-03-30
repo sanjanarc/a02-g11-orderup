@@ -68,8 +68,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         return null;
     }
 
-
-        /*
+    /*
     called by getFoodByID() method
     returns FoodItem from specified query
      */
@@ -83,8 +82,28 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final String item_desc=rs.getString("ITEM_DESC");
 
         return new FoodItem(rest_id,item_id,item_name,item_price,item_image_url,item_desc);
+    }
+    /*
+    method returns a list of comments left of the restaurant that has the restaurant id
+    Parameters: "int restaurantID" id of the restaurant
+    return: List of comments
+     */
+    public List<String> getComments(int restaurantID){
+        final List<String> comments = new ArrayList<>();
 
+        try (final Connection c = connection()) {
+            String query = "SELECT * FROM comments WHERE ID = ?";
+            PreparedStatement pstmt = c.prepareStatement(query);
+            pstmt.setInt(1, restaurantID); //restaurant of specified id
+            ResultSet commentRS = pstmt.executeQuery();
+            while(commentRS.next()) {
+                comments.add(commentRS.getString("COMMENT"));
+            }
+            return comments; //return the list of comments
+        } catch (final SQLException e) {
 
+        }
+        return null;
     }
 
 
