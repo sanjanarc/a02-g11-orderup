@@ -20,7 +20,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-
 //This is the activity class showing the specific restaurant info.
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -33,7 +32,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
         //Showing the restaurant Image.
         ImageView imageView = (ImageView) findViewById(R.id.Restbg);
-        imageView.setBackgroundResource(getResources().getIdentifier(restaurant.getImagesURL(),"drawable", MainActivity.PACKAGE_NAME));
+        imageView.setBackgroundResource(getResources().getIdentifier(restaurant.getImagesURL(), "drawable", MainActivity.PACKAGE_NAME));
 
         //Showing the restaurant info.
         TextView restName = (TextView) findViewById(R.id.RestName);
@@ -42,7 +41,6 @@ public class RestaurantActivity extends AppCompatActivity {
         restDes.setText(restaurant.getRestaurantDescription());
         TextView restLoca = (TextView) findViewById(R.id.RestLoca);
         restLoca.setText(restaurant.getRestaurant_location());
-
 
         //Showing the restaurant food item.
         RecyclerView recyclerView;
@@ -56,19 +54,22 @@ public class RestaurantActivity extends AppCompatActivity {
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Get the comment box.
                 FrameLayout frameLayout = findViewById(R.id.commentContainer);
-
-                loadComment(position);
-
+                //Update or retrieve data from comment's database to the comment section.
+                loadComment(restaurant);
+                //Flag to disable or able the activity of the background when the comment box is turn on.
                 boolean moveable;
-                if (frameLayout.getHeight() == 0){
-                    frameLayout.getLayoutParams().height = 670;
-                    moveable = true;
-                }else {
+
+                if (frameLayout.getHeight() == 0) {
+                    frameLayout.getLayoutParams().height = 700;
+                    moveable = true; //Deactivation of the background activity.
+                } else {
                     frameLayout.getLayoutParams().height = 0;
                     moveable = false;
                 }
-                frameLayout.setLayoutParams(frameLayout.getLayoutParams());
+
+                frameLayout.setLayoutParams(frameLayout.getLayoutParams()); //Set the comment box size.
                 recyclerView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -85,24 +86,30 @@ public class RestaurantActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText input = findViewById(R.id.inputComment);
                 String msg = input.getText().toString();
-                if (!msg.equals("")){
-                    RestaurantServices.addComment(position, RestaurantServices.getCurrentUser()+":\n"+msg);
-                    input.setText("");
-                    loadComment(position);
-                }else {
+
+                if (!msg.equals("")) {
+                    RestaurantServices.insertComment(restaurant, RestaurantServices.getCurrentUser() + ":\n" + msg);
+                    input.setText(""); //Clear the input box.
+                    loadComment(restaurant); //Update the comment section.
+                } else {
                     ErrorPopUp.errorMsg(view.getContext(), "Input comment cannot be empty.");
                 }
             }
         });
     }
 
-    public void loadComment(int position){
+    //This method will update the comment section.
+    public void loadComment(Restaurant restaurant) {
         TextView commentSec = findViewById(R.id.commentSection);
-        List<String> commentList = RestaurantServices.loadComment(position);
+        List<String> commentList = restaurant.getUserComment();
         String comments = "";
+
+        //Build up the comments.
         for (String i : commentList) {
-            comments += i+"\n";
+            comments += i + "\n\n";
         }
+
+        //Display the comments.
         commentSec.setText(comments);
     }
 }
