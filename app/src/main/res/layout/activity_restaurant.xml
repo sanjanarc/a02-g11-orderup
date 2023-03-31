@@ -19,7 +19,7 @@
             <ImageView
                 android:id="@+id/Restbg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/comment_Button"
@@ -42,23 +42,23 @@
                 android:id="@+id/RestName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:textSize="30dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/RestDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/RestLoca"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="20dp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -68,33 +68,54 @@
     </LinearLayout>
 
     <FrameLayout
-        android:animateLayoutChanges="true"
         android:id="@+id/commentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:animateLayoutChanges="true"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/commentSection"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="50dp"
+            android:text="Comments:"
+            android:textColor="@color/black"
+            android:textSize="35dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/commentSection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </ScrollView>
+
+
         <EditText
             android:id="@+id/inputComment"
-            android:hint="Enter Comment here...."
             android:layout_width="500dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:elevation="2dp"
+            android:hint="Enter Comment here...."
+            android:inputType="text"
             android:maxLength="75"
-            android:layout_gravity="bottom"/>
+            android:maxLines="1" />
+
         <Button
             android:id="@+id/sendComment"
-            android:hint="Send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom|end"
-            android:backgroundTint="#55123456"/>
-
+            android:backgroundTint="#55123456"
+            android:hint="Send" />
     </FrameLayout>
 
 </FrameLayout>

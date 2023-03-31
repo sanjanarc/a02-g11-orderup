@@ -1,5 +1,6 @@
 package com.example.orderup.Objects;
 import com.example.orderup.R;
+import com.example.orderup.logic.RestaurantServices;
 
 import java.util.Objects;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Restaurant {
     private final FoodItem item3;
     private int num_menu_items;
     private final String location;
-    private final List<String> userComments;
+    private List<String> userComments;
 
 
 
@@ -112,17 +113,14 @@ public class Restaurant {
     /*
     Method adds a user's comment left on the restaurant
      */
-    public void addUserComment(String comment, String user){
-        String newComment= comment+ "\nby "+ user;
-        userComments.add(newComment);
-
-
+    public void updateComment(){
+        userComments = RestaurantServices.getComments(restaurantID);
     }
+
     /*
     method returns list of Users' comments on the restaurant
      */
     public List<String> getUserComment(){
         return userComments;
     }
-
 }
