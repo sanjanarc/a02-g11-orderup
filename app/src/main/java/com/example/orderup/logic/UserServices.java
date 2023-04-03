@@ -1,12 +1,23 @@
 package com.example.orderup.logic;
 
+import static com.example.orderup.logic.Services.getUserPersistence;
+
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
 //This class will pass User data from persistence to presentation: User First and Last name, Address,and Wallet Balance
 public class UserServices
 {
+
     private static UserPersistence userPersistence = Services.getUserPersistence();
+
+    private static User user = getUserPersistence().getUserTable().get(Services.getCurrentUser());
+
+    //return user object
+    public static User getUser()
+    {
+        return user;
+    }
 
     //Return the first name of the given email.
     public static String getFirstName(String email)

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
     UserAccountFragment userAccountFragment=new UserAccountFragment();
     CustomerSupportFragment customerSupportFragment=new CustomerSupportFragment();
 
-    public static User user = getUserPersistence().getUserTable().get(Services.getCurrentUser());
+
     public static String PACKAGE_NAME;
 
     @Override
@@ -62,8 +62,4 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public User getUser()
-    {
-        return user;
-    }
 }

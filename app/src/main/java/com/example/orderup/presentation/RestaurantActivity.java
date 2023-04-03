@@ -18,6 +18,7 @@ import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 import com.example.orderup.logic.Services;
+import com.example.orderup.logic.UserServices;
 
 import org.w3c.dom.Text;
 
@@ -57,8 +58,8 @@ public class RestaurantActivity extends AppCompatActivity {
         ViewCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Email: ",MainActivity.user.getEmail());
-                MainActivity.user.printFoodCart();
+                Log.d("Email: ", UserServices.getUser().getEmail());
+                UserServices.getUser().printFoodCart();
 
             }
         });
