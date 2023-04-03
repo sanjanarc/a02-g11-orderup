@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.User;
 import com.example.orderup.R;
+import com.example.orderup.logic.UserServices;
 import com.example.orderup.presentation.MainActivity;
 import com.example.orderup.logic.Services;
 
@@ -51,6 +52,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
         holder.FoodItemNumber.setText(String.valueOf(1));
+
+        Log.d("MenuAdapter", "I'm in bitchessssssssssss!!!!");
 
         holder.FoodItemNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -112,12 +115,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                assert MainActivity.user != null;
+                assert UserServices.getUser() != null;
                 for(int i = 1; i <= Integer.parseInt(holder.FoodItemNumber.getText().toString()); i ++)
-                   MainActivity.user.addToFoodCart(foodItem);
+                   UserServices.getUser().addToFoodCart(foodItem);
                 ErrorPopUp.errorMsg(view.getContext(), "Item added");
-                Log.d("Email",MainActivity.user.getEmail());
-                MainActivity.user.printFoodCart();
+                Log.d("Email",UserServices.getUser().getEmail());
+                UserServices.getUser().printFoodCart();
 
             }
         });

@@ -3,6 +3,7 @@ package com.example.orderup.Objects;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User extends FoodItem
@@ -156,5 +157,10 @@ public class User extends FoodItem
             }
 
             Log.d("Cart Size: ",String.valueOf(cart.size()));
+    }
+
+    public List<FoodItem> getFoodCart()
+    {
+        return cart;
     }
 }

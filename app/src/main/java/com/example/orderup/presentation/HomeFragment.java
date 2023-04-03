@@ -1,9 +1,11 @@
 package com.example.orderup.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +32,18 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new RestaurantAdapter(temp.getRestList()));
 
+
+        Button button = (Button) view.findViewById(R.id.ViewCartHomeButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), myCartActivity.class);
+
+                //Start the main activity class.
+                startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
