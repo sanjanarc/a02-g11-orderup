@@ -55,7 +55,7 @@ public class Search_algorithm {
 
 
         List<Integer> results= searchRestaurantKey(errorCheck(userInput), restNames, restCategories); //korean, sushi, nagiri, apple
-        Log.d("error checked user input",errorCheck(userInput));
+        //Log.d("error checked user input",errorCheck(userInput));
         if(results.isEmpty()){
             System.out.println("Your search does not match any restaurants on OrderUp");
         }else{
@@ -95,7 +95,7 @@ public class Search_algorithm {
         //start iteration from 1, as first row is Headings
         for(int i=1; i<categories.length; i++ ){ //iterating through the category and restaurants list to find match for "user input"
             if( errorCheck(categories[i]).contains(user_input) || errorCheck(restaurants[i]).contains(user_input)){
-                Log.d("error checked restaurant names",errorCheck(restaurants[i]));
+                //Log.d("error checked restaurant names",errorCheck(restaurants[i]));
                 restaurantFound.add(i);
             }
         }

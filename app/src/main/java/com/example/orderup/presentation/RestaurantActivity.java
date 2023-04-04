@@ -35,6 +35,10 @@ public class RestaurantActivity extends AppCompatActivity {
         restDes.setText(restaurant.getRestaurantDescription());
         TextView restLoca = (TextView) findViewById(R.id.RestLoca);
         restLoca.setText(restaurant.getRestaurant_location());
+        TextView servHours = (TextView) findViewById(R.id.RestServ);
+        servHours.setText("Service Hours:");
+        TextView restHours = (TextView) findViewById(R.id.RestHours);
+        restHours.setText(restaurant.getServiceHours());
 
 
         //Showing the restaurant food item.
