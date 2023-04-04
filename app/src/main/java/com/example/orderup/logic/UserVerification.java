@@ -323,11 +323,13 @@ public class UserVerification {
     String msg = "";
     float user_balance = Float.valueOf(UserServices.getBalance(email));
         // If user can afford membership, deduct the cost from their balance and set them as a member
-        if(user_balance >= 25.00) {
+        if(user_balance >= 25.00 && false == UserServices.getMembership(email)) {
             userPersistence.modifyBalance(email, -25.00F);
             userPersistence.setMembership(email);
-        } else {
+        } else if(user_balance < 25.00) {
             msg = "Error: Insufficient balance to purchase membership.";
+        } else if(true == UserServices.getMembership(email)) {
+            msg = "Error: You are already a member!.";
         }
         return msg;
     }

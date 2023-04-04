@@ -54,12 +54,8 @@ public class UserServices {
     {
         User user = userPersistence.getUserTable().get(email);
 
-        if(user != null)
-        {
-            return user.getMembership();
-        }else
-        {
-            return null;
-        }
+
+        return user.getMembership();
+
     }
 }
