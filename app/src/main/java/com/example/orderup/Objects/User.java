@@ -13,6 +13,7 @@ public class User extends FoodItem
     private String creditCard;
     private String cvc;
     private float balance;
+    private Boolean member;
 
     public User(String firstName, String lastName, String email, String password)
     {
@@ -24,9 +25,10 @@ public class User extends FoodItem
         this.cvc = "";
         this.expiry = "";
         this.balance = 0.00F;
+        this.member = false;
     }
 
-    public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance)
+    public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance, Boolean member)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,6 +38,7 @@ public class User extends FoodItem
         this.cvc = cvc;
         this.expiry = expiry;
         this.address = address;
+        this.member = member;
         if(null == balance) {
             balance = "0.00F";
         }

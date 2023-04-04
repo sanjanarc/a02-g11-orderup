@@ -25,4 +25,6 @@ public interface UserPersistence {
 
     //This get a list of giftcard info from database.
     Giftcard[] getGiftcards();
+
+    void setMembership(String email);
 }
