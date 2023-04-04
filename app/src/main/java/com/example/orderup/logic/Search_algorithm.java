@@ -1,6 +1,8 @@
 package com.example.orderup.logic;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 
@@ -34,8 +36,8 @@ public class Search_algorithm {
 
         List<Restaurant> restaurants = RestaurantServices.getRestList(); // access restaurants from script
 
-        String[] restNames = new String[50];
-        String[] restCategories = new String[50];
+        String[] restNames = new String[restaurants.size()];
+        String[] restCategories = new String[restaurants.size()];
 
         // need to link this to restaurant array list created
         // for restaurant name in array list add to restaurants array
@@ -53,6 +55,7 @@ public class Search_algorithm {
 
 
         List<Integer> results= searchRestaurantKey(errorCheck(userInput), restNames, restCategories); //korean, sushi, nagiri, apple
+        Log.d("error checked user input",errorCheck(userInput));
         if(results.isEmpty()){
             System.out.println("Your search does not match any restaurants on OrderUp");
         }else{
@@ -92,6 +95,7 @@ public class Search_algorithm {
         //start iteration from 1, as first row is Headings
         for(int i=1; i<categories.length; i++ ){ //iterating through the category and restaurants list to find match for "user input"
             if( errorCheck(categories[i]).contains(user_input) || errorCheck(restaurants[i]).contains(user_input)){
+                Log.d("error checked restaurant names",errorCheck(restaurants[i]));
                 restaurantFound.add(i);
             }
         }
