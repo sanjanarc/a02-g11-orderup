@@ -68,12 +68,13 @@
                 android:textSize="20dp"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/RestServ"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+        <TextView
+            android:paddingTop="8dp"
+            android:id="@+id/RestServ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/RestHours"
