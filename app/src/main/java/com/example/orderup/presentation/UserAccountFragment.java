@@ -71,9 +71,8 @@ public class UserAccountFragment extends Fragment
         membershipButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view)
-            {
-                redeemPopUp();
+            public void onClick(View view) {
+                memberPopUp();
             }
         });
 
@@ -197,13 +196,49 @@ public class UserAccountFragment extends Fragment
         builder.show();
     }
 
+    private void memberPopUp()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Are you sure you want to purchase membership for 25$?: ");
+        View v = getLayoutInflater().inflate(R.layout.popup_buy_membership, null);
+        builder.setView(v);
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //Connect to xml file.
+                EditText confirmationInput= (EditText) v.findViewById(R.id.confirmationInput);
+
+
+                //Get input data from xml file.
+                String confirm = confirmationInput.getText().toString();
+
+                if(confirm.equals("Yes")) {
+
+                    //Verify and add credit card to database.
+                    String result = UserVerification.verifyMembershipPurchase(userEmail);
+
+                    //Display the result to user.
+                    if(result != "") {
+                        ErrorPopUp.errorMsg(getActivity(), result);
+                    }
+
+                    updateInfo();
+                }
+            }
+        });
+        builder.show();
+    }
+
     //Display the account info to user.
     private void updateInfo(){
         display = String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
                 "Address: %s\n" +
-                "Account balance: $ %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail));
+                "Account balance: $ %s\n" +
+                "Membership status: ", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail), UserServices.getMembership(userEmail));
 
         infoContainer.setText(display);
     }

@@ -85,6 +85,8 @@ public class User extends FoodItem
         return address;
     }
 
+    public Boolean getMembership() {return member;}
+
     public void updateFirstName(String newFirstName)
     {
         this.firstName= newFirstName;

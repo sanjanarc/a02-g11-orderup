@@ -297,4 +297,17 @@ public class UserVerification
         }
         return flag && checkPeriod && !multiplesAts;
     }
+
+    public static String verifyMembershipPurchase(String email) {
+    String msg = "";
+    float user_balance = Float.valueOf(UserServices.getBalance(email));
+        // If user can afford membership, deduct the cost from their balance and set them as a member
+        if(user_balance >= 25.00) {
+            userPersistence.modifyBalance(email, -25.00F);
+            userPersistence.setMembership(email);
+        } else {
+            msg = "Error: Insufficient balance to purchase membership.";
+        }
+        return msg;
+    }
 }
