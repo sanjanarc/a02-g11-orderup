@@ -59,9 +59,10 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         final String expiry = rs.getString("EXPIRY");
         final String address = rs.getString("ADDRESS");
         final String balance = rs.getString("BALANCE");
+        final Boolean membership = rs.getBoolean("MEMBERSHIP");
 
         //Return a user object with filled data.
-        return new User(email, password, firstname, lastname, creditcard, cvc, expiry, address, balance);
+        return new User(email, password, firstname, lastname, creditcard, cvc, expiry, address, balance, membership);
     }
 
     /**
@@ -105,7 +106,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     @Override
     public void addUser(String email, String password, String firstName, String lastName) {
         try (Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, email);
             st.setString(2, password);
             st.setString(3, firstName);
@@ -115,6 +116,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             st.setString(7, null);
             st.setString(8, null);
             st.setFloat(9, 0.00F);
+            st.setBoolean(10, false);
             st.executeUpdate();
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -217,5 +219,25 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
 
         return cardList;
+    }
+
+    /**
+     * Change the membership status of the user.
+     *
+     * @param email the email of the user.
+     */
+    @Override
+    public void setMembership(String email) {
+
+        try (Connection c = connection()) {
+
+            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET MEMBERSHIP = ? WHERE EMAIL = ?");
+            ps.setBoolean(1, true);
+            ps.setString(2, email);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 }

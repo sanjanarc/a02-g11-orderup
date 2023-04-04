@@ -21,6 +21,7 @@ public class User extends FoodItem {
     private String creditCard;
     private String cvc;
     private float balance;
+    private Boolean member;
 
     private ArrayList<FoodItem> cart;
 
@@ -41,6 +42,7 @@ public class User extends FoodItem {
         this.cvc = "";
         this.expiry = "";
         this.balance = 0.00F;
+        this.member = false;
         cart = new ArrayList<>();
     }
 
@@ -56,8 +58,9 @@ public class User extends FoodItem {
      * @param expiry     the new user's creditcard expiry date.
      * @param address    the new user's address.
      * @param balance    the new user's balance.
+     * @param member     the status of membership.
      */
-    public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance) {
+    public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance, Boolean member) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -66,6 +69,7 @@ public class User extends FoodItem {
         this.cvc = cvc;
         this.expiry = expiry;
         this.address = address;
+        this.member = member;
         if (null == balance) {
             balance = "0.00F";
         }
