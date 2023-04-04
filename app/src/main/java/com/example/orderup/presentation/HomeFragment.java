@@ -2,10 +2,12 @@ package com.example.orderup.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,6 +48,27 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d("user input", s);
+                String inputText = s;
+                recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(inputText)));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+//        searchView.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("hello:---->", "hello");
+//            }
+//        });
 //        boolean searchBar = False;
 //        if (searchBar) {
 //           String inputText = "user typed in search bar";
