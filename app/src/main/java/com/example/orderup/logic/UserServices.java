@@ -49,4 +49,17 @@ public class UserServices {
     public void updateCart(String email, ArrayList cart) {
         userPersistence.updateCart(email, cart);
     }
+
+    public static Boolean getMembership(String email)
+    {
+        User user = userPersistence.getUserTable().get(email);
+
+        if(user != null)
+        {
+            return user.getMembership();
+        }else
+        {
+            return null;
+        }
+    }
 }
