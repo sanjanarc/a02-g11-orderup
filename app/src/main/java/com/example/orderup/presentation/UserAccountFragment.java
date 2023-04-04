@@ -325,11 +325,21 @@ public class UserAccountFragment extends Fragment {
 
             User user = userServices.getUser(Services.getCurrentUser());
 
+            String membershipStatus;
+
+            if(true == user.getMembership()) {
+                membershipStatus =  "Enabled";
+            } else {
+                membershipStatus =  "Disabled";
+            }
+
             // Formatting the message.
             String display = String.format("First name: %s\n" +
                     "Last name: %s\n" +
                     "Email: %s\n" +
-                    "Address: %s", user.getFirstName(), user.getLastName(), userEmail, user.getAddress());
+                    "Address: %s\n" +
+                    "Account balance: $ %s\n" +
+                    "Membership status: %s", user.getFirstName(), user.getLastName(), userEmail, user.getAddress(), user.getBalance(), membershipStatus);
             infoContainer.setText(display);
 
         } catch (Exception e) {
