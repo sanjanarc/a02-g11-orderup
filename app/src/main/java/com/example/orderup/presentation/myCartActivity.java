@@ -13,28 +13,24 @@ import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.R;
 import com.example.orderup.logic.UserServices;
 
+import java.util.List;
+
 public class myCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mycart);
 
-        //getting the food item from the user's cart
-        int position = getIntent().getIntExtra("position", 0);
 
-        FoodItem foodItem = UserServices.getUser().getFoodCart().get(position);
+        RecyclerView recyclerView= findViewById(R.id.myCartRecyclerView);
 
+       List <FoodItem> foodList = UserServices.getUser().getFoodCart();
+       Log.d("activityCart:",foodList.get(0).getItemName());
         TextView textView = findViewById(R.id.textView2);
         textView.setText("Your Cart:");
 
-
-
-        RecyclerView recyclerView;
-        recyclerView = findViewById(R.id.myCartRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new myCartAdapter(UserServices.getUser().getFoodCart()));
-
-        Log.d("foodinacartttttttttttt", UserServices.getUser().getFoodCart().get(position).getItemName());
+        recyclerView.setAdapter(new myCartAdapter(getApplicationContext(),foodList));
     }
 }
