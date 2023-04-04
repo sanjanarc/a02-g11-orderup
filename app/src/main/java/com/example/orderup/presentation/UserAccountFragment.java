@@ -233,12 +233,20 @@ public class UserAccountFragment extends Fragment
 
     //Display the account info to user.
     private void updateInfo(){
+        String membershipStatus;
+
+        if(true == UserServices.getMembership(userEmail)) {
+            membershipStatus =  "Enabled";
+        } else {
+            membershipStatus =  "Disabled";
+        }
+
         display = String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
                 "Address: %s\n" +
                 "Account balance: $ %s\n" +
-                "Membership status: ", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail), UserServices.getMembership(userEmail));
+                "Membership status: %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail), membershipStatus);
 
         infoContainer.setText(display);
     }
