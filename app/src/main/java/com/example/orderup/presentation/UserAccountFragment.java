@@ -25,7 +25,7 @@ import com.example.orderup.logic.UserVerification;
  */
 public class UserAccountFragment extends Fragment {
     TextView infoContainer;
-    Button addCardButton, logoutButton, addAddressButton, redeemCardButton;
+    Button addCardButton, logoutButton, addAddressButton, redeemCardButton, membershipButton;
 
     String userEmail = Services.getCurrentUser();
 
@@ -64,6 +64,15 @@ public class UserAccountFragment extends Fragment {
         //Event listener of the redeem button.
         redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
         redeemCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redeemPopUp();
+            }
+        });
+
+        //Event listener of the membership button.
+        membershipButton = (Button) view.findViewById(R.id.membershipButton);
+        membershipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 redeemPopUp();
