@@ -24,6 +24,7 @@ public class RestaurantActivity extends AppCompatActivity {
         int position = getIntent().getIntExtra("position", 1);
         Restaurant restaurant = RestaurantServices.getRest(position);
 
+
         //Showing the restaurant Image.
         ImageView imageView = (ImageView) findViewById(R.id.Restbg);
         imageView.setBackgroundResource(getResources().getIdentifier(restaurant.getImagesURL(),"drawable", MainActivity.PACKAGE_NAME));

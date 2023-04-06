@@ -35,6 +35,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder>
         int url = holder.imageview.getResources().getIdentifier(restaurants.get(position).getImagesURL(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
         holder.position = holder.getAdapterPosition(); //Pass current position back to super class and knowing that which restaurant get clicked.
+        int id= restaurants.get(holder.getAdapterPosition()).getRestaurantID();
+        holder.position =id-1;
     }
 
     @Override
