@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), myCartActivity.class);
+                Intent intent = new Intent(getContext(), MyCartsActivity.class);
 
                 //Start the main activity class.
                 startActivity(intent);
