@@ -20,8 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 //Login UI class.
-public class LoginActivity extends AppCompatActivity
-{
+public class LoginActivity extends AppCompatActivity {
     private Button signInButton, registerButton;
 
     private String email, password;
@@ -29,67 +28,65 @@ public class LoginActivity extends AppCompatActivity
     private EditText emailInput, passwordInput;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         copyDatabaseToDevice();
 
-        //Build connection with xml file.
+        // Build connection with xml file.
         emailInput = (EditText) findViewById(R.id.emailInput);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
 
-        //Event listener of the login button.
-        signInButton= (Button) findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(new View.OnClickListener()
-        {
+        // Event listener of the login button.
+        signInButton = (Button) findViewById(R.id.signInButton);
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                //Get input data from xml file.
+            public void onClick(View view) {
+                // Get input data from xml file.
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                //Verify the input data with databases. Go to home page if nothing wrong. Will pop up a window if error occurs.
+                try {
+
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+                // Verify the input data with databases. Go to home page if nothing wrong. Will
+                // pop up a window if error occurs.
                 String result = UserVerification.loginVerification(email, password);
-                if(result == null)
-                {
+                if (result == null) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                    //Tell the system who is the current user.
+                    // Tell the system who is the current user.
                     Services.setCurrentUser(email);
 
-                    //Start the main activity class.
+                    // Start the main activity class.
                     startActivity(intent);
 
-                    //Remove current activity.
+                    // Remove current activity.
                     finish();
-                }
-                else //Failed to login.
+                } else // Failed to login.
                 {
                     ErrorPopUp.errorMsg(LoginActivity.this, result);
                 }
             }
         });
 
-        //Event listener of the register button.
-        registerButton= (Button) findViewById(R.id.registerButton);
-        registerButton.setOnClickListener(new View.OnClickListener()
-        {
+        // Event listener of the register button.
+        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                //Start the register page activity.
+            public void onClick(View view) {
+                // Start the register page activity.
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
 
-                //Remove current activity.
+                // Remove current activity.
                 finish();
             }
         });
     }
 
-    private void copyDatabaseToDevice()
-    {
+    private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
 
         String[] assetNames;
@@ -97,29 +94,23 @@ public class LoginActivity extends AppCompatActivity
         File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
         AssetManager assetManager = getAssets();
 
-        try
-        {
+        try {
             assetNames = assetManager.list(DB_PATH);
-            for (int i = 0; i < assetNames.length; i++)
-            {
+            for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
             }
             copyAssetsToDirectory(assetNames, dataDirectory);
             Services.setDBPathName(dataDirectory.toString() + "/" + Services.getDBPathName());
 
-        }
-        catch (final IOException ioe)
-        {
+        } catch (final IOException ioe) {
             ErrorPopUp.errorMsg(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
 
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException
-    {
+    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
 
-        for (String asset : assets)
-        {
+        for (String asset : assets) {
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
 
@@ -127,14 +118,12 @@ public class LoginActivity extends AppCompatActivity
             int count;
 
             File outFile = new File(copyPath);
-            if (true)
-            {
+            if (true) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
                 count = in.read(buffer);
-                while (count != -1)
-                {
+                while (count != -1) {
                     out.write(buffer, 0, count);
                     count = in.read(buffer);
                 }
