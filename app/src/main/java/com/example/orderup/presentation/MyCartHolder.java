@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
 
-public class myCartHolder extends RecyclerView.ViewHolder {
+public class MyCartHolder extends RecyclerView.ViewHolder {
 
     ImageView imageView;
     TextView textView;
 
-    public myCartHolder(@NonNull View itemView) {
+    public MyCartHolder(@NonNull View itemView) {
         super(itemView);
-        imageView = itemView.findViewById(R.id.CartfoodInfo);
+        imageView = itemView.findViewById(R.id.CartfoodImage);
         textView = itemView.findViewById(R.id.CartfoodInfo);
     }
 }
