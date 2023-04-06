@@ -1,10 +1,13 @@
 package com.example.orderup.Objects;
 import com.example.orderup.R;
+import com.example.orderup.logic.RestaurantServices;
 
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
-
+/*
+Restaurant: This object class represents a restaurant in the database. Its menu consists of "FoodItem" objects
+ */
 public class Restaurant {
 
     private final int restaurantID;
@@ -19,6 +22,8 @@ public class Restaurant {
     private final FoodItem item3;
     private int num_menu_items;
     private final String location;
+    private List<String> userComments;
+
 
 
     public Restaurant(final int newID) {
@@ -33,6 +38,7 @@ public class Restaurant {
         item3 = null;
         num_menu_items = 0;
         location = null;
+        userComments=null;
     }
 
     public Restaurant(int newID, String newRestaurantName, String newCategory,
@@ -41,6 +47,7 @@ public class Restaurant {
                       final FoodItem item3, final int num_menu_items,
                       final String location, final String image) {
         this.menu = new ArrayList<>();
+        this.userComments= new ArrayList<>();
 
         restaurantID = newID;
         restaurantName = newRestaurantName;
@@ -62,36 +69,30 @@ public class Restaurant {
         menu.add(item3);
 
     }
-
+    /*
+    Accessor and mutator methods
+     */
     public String getRestaurantCategory() {
         return (newCategory);
     }
-
     public String getRestaurantDescription() {
         return (description);
     }
-
     public List<FoodItem> getMenuItems() {
         return (menu);
     }
-
     public FoodItem getItem1() {
         return item1;
     }
-
     public FoodItem getItem2() {
         return item2;
     }
-
     public FoodItem getItem3() {
         return item3;
     }
-
-
     public String getRestaurant_location() {
         return (location);
     }
-
     public String getCityName() {
         return (cityName);
     }
@@ -105,8 +106,21 @@ public class Restaurant {
     public String getImagesURL() {
         return imagesURL;
     }
-
     public int getNum_menuItem(){
         return num_menu_items;
+    }
+
+    /*
+    Method adds a user's comment left on the restaurant
+     */
+    public void updateComment(){
+        userComments = RestaurantServices.getComments(restaurantID);
+    }
+
+    /*
+    method returns list of Users' comments on the restaurant
+     */
+    public List<String> getUserComment(){
+        return userComments;
     }
 }

@@ -44,6 +44,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final FoodItem item1 = getFoodById(id,1); //get fooditem in the rest's menu
         final FoodItem item2 = getFoodById(id,2);
         final FoodItem item3 = getFoodById(id,3);
+
         return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image);
     }
 
@@ -68,8 +69,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         return null;
     }
 
-
-        /*
+    /*
     called by getFoodByID() method
     returns FoodItem from specified query
      */
@@ -83,8 +83,28 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         final String item_desc=rs.getString("ITEM_DESC");
 
         return new FoodItem(rest_id,item_id,item_name,item_price,item_image_url,item_desc);
+    }
+    /*
+    method returns a list of comments left of the restaurant that has the restaurant id
+    Parameters: "int restaurantID" id of the restaurant
+    return: List of comments
+     */
+    public List<String> getComments(int restaurantID){
+        final List<String> comments = new ArrayList<>();
 
+        try (final Connection c = connection()) {
+            String query = "SELECT * FROM comments WHERE ID = ?";
+            PreparedStatement pstmt = c.prepareStatement(query);
+            pstmt.setInt(1, restaurantID); //restaurant of specified id
+            ResultSet commentRS = pstmt.executeQuery();
+            while(commentRS.next()) {
+                comments.add(commentRS.getString("COMMENT"));
+            }
+            return comments; //return the list of comments
+        } catch (final SQLException e) {
 
+        }
+        return null;
     }
 
 
@@ -108,6 +128,24 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
 
             return restaurants;
         } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+    /*
+    Method adds a comment left on a restaurant's place to the DB.script
+     */
+    public void insertComment(int restaurantID, String comment)
+    {
+        try(Connection c = connection())
+        {
+            PreparedStatement st = c.prepareStatement("INSERT INTO comments VALUES (?, ?)");
+            st.setInt(1, restaurantID);
+            st.setString(2, comment);
+
+            st.executeUpdate();
+        }
+        catch (SQLException e)
+        {
             throw new PersistenceException(e);
         }
     }

@@ -4,9 +4,9 @@ import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
 //This class will pass User data from persistence to presentation: User First and Last name, Address,and Wallet Balance
-public class UserServices
+public class UserServices extends Services
 {
-    private static UserPersistence userPersistence = Services.getUserPersistence();
+    private static final UserPersistence userPersistence = getUserPersistence();
 
     //Return the first name of the given email.
     public static String getFirstName(String email)

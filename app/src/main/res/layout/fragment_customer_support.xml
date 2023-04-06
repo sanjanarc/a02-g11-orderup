@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.CustomerSupportFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/customerbg">
 
     <TextView
         android:id="@+id/infoBox"
