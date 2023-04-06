@@ -93,7 +93,7 @@ public class Search_algorithm {
         ArrayList<Integer> restaurantFound= new ArrayList<Integer>(); //an array list of restaurant's row number relevant to the user input
 
         //start iteration from 1, as first row is Headings
-        for(int i=1; i<categories.length; i++ ){ //iterating through the category and restaurants list to find match for "user input"
+        for(int i=0; i<categories.length; i++ ){ //iterating through the category and restaurants list to find match for "user input"
             if( errorCheck(categories[i]).contains(user_input) || errorCheck(restaurants[i]).contains(user_input)){
                 //Log.d("error checked restaurant names",errorCheck(restaurants[i]));
                 restaurantFound.add(i);
