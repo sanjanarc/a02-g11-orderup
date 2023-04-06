@@ -15,7 +15,7 @@ import com.example.orderup.R;
 import java.util.List;
 
 //This class is the structure of all the adapter.
-public class myCartAdapter extends RecyclerView.Adapter<myCartHolder> {
+public class myCartAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     Context context;
     List<FoodItem> foods;
@@ -29,17 +29,17 @@ public class myCartAdapter extends RecyclerView.Adapter<myCartHolder> {
 
     @NonNull
     @Override
-    public myCartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new myCartHolder(LayoutInflater.from(context).inflate(R.layout.mycartadapter,parent,false));
+    public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MenuHolder(LayoutInflater.from(context).inflate(R.layout.mycartadapter,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myCartHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
 
-        holder.textView.setText(foods.get(position).getItemName());
-        holder.imageView.setImageResource(foods.get(position).getItem_id());
-        int url = holder.imageView.getResources().getIdentifier(foods.get(position).getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
-        holder.imageView.setBackgroundResource(url);
+        holder.nameViewCart.setText(foods.get(position).getItemName());
+        holder.imageViewCart.setImageResource(foods.get(position).getItem_id());
+        int url = holder.imageViewCart.getResources().getIdentifier(foods.get(position).getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
+        holder.imageViewCart.setBackgroundResource(url);
 
     }
 //
