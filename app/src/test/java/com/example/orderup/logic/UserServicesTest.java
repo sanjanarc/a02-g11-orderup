@@ -10,44 +10,48 @@ public class UserServicesTest {
 
     @Test
     public void getFirstName() {
+        UserServices temp = new UserServices();
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
-        assertEquals("admin@email.com", UserServices.getFirstName(existingEmail));
-        assertEquals(null, UserServices.getFirstName(nonexistingEmail));
+        assertEquals("admin@email.com", temp.getFirstName(existingEmail));
+        assertEquals(null, temp.getFirstName(nonexistingEmail));
     }
 
     @Test
     public void getLastName() {
+        UserServices temp = new UserServices();
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
-        assertEquals("admin", UserServices.getLastName(existingEmail));
-        assertEquals(null, UserServices.getLastName(nonexistingEmail));
+        assertEquals("admin", temp.getLastName(existingEmail));
+        assertEquals(null, temp.getLastName(nonexistingEmail));
     }
 
     @Test
     public void getAddress() {
+        UserServices temp = new UserServices();
         UserPersistence userPersistence;
-        userPersistence = Services.getUserPersistence();
+        userPersistence = temp.getUserPersistence();
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
         String newAddress = "123 Main Street";
 
         userPersistence.updateAddress(newAddress, existingEmail);
         userPersistence.updateAddress(newAddress, nonexistingEmail);
-        assertEquals("123 Main Street", UserServices.getAddress(existingEmail));
-        assertEquals(null, UserServices.getAddress(nonexistingEmail));
+        assertEquals("123 Main Street", temp.getAddress(existingEmail));
+        assertEquals(null, temp.getAddress(nonexistingEmail));
     }
 
     @Test
     public void getBalance() {
+        UserServices temp = new UserServices();
         UserPersistence userPersistence;
-        userPersistence = Services.getUserPersistence();
+        userPersistence = temp.getUserPersistence();
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
         float newBalance = 10.00F;
         userPersistence.modifyBalance(existingEmail, newBalance);
         userPersistence.modifyBalance(nonexistingEmail, newBalance);
-        assertEquals("10.0", UserServices.getBalance(existingEmail));
-        assertEquals(null, UserServices.getBalance(nonexistingEmail));
+        assertEquals("10.0", temp.getBalance(existingEmail));
+        assertEquals(null, temp.getBalance(nonexistingEmail));
     }
 }
