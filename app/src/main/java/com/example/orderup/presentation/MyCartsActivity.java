@@ -1,6 +1,9 @@
 package com.example.orderup.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -33,9 +36,22 @@ public class MyCartsActivity extends AppCompatActivity {
         PlaceOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserServices.getUser().getOrderHistory().add(UserServices.getUser().getFoodCart());
-                UserServices.getUser().clearFoodCart();
+                if (!UserServices.getUser().getFoodCart().isEmpty()) {
+                    UserServices.getUser().getOrderHistory().add(UserServices.getUser().getFoodCart());
+                    UserServices.getUser().clearFoodCart();
+                    ErrorPopUp.errorMsg(view.getContext(), "Order Placed!");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
+                            Intent intent = getIntent();
+                            finish();
+                            startActivity(intent);
+                        }
+                    }, 3000);
+                }
+                else
+                    ErrorPopUp.errorMsg(view.getContext(), "Cart is empty");
             }
         });
 
