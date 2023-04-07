@@ -13,17 +13,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 //This class is the structure of the menu.
 public class MenuHolder extends RecyclerView.ViewHolder {
+    //All the necessary button that are used in the adapter (names are self explanatory)
     ImageView imageview;
     TextView nameview;
-
     Button addButton = null;
     Button subtractButton = null;
     TextView FoodItemNumber;
-
-
     Button submitBButton;
 
     public MenuHolder(@NonNull View itemView) {
+        //assigning the buttons, textviews and imageviews to its attributes
         super(itemView);
         imageview = itemView.findViewById(R.id.foodImage);
         nameview = itemView.findViewById(R.id.foodInfo);
