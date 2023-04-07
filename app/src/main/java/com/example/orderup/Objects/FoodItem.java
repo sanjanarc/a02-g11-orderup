@@ -3,7 +3,7 @@ package com.example.orderup.Objects;
 public class FoodItem {
 
     private int restaurant_id;
-    private int item_id;
+    private int item_id, numItems;
     private final String item_name;
     private final double price;
     private final String image_url;
@@ -16,6 +16,7 @@ public class FoodItem {
         item_description = "Default Description";
         price = 0;
         image_url = "";
+        numItems = 0;
 
     }
 
@@ -26,6 +27,7 @@ public class FoodItem {
         price= itemPrice;
         image_url= itemImageURL;
         item_description= itemDescription;
+        numItems = 0;
 
     }
     public int getRestaurant_id(){
@@ -47,4 +49,6 @@ public class FoodItem {
     public String getItemDescription(){
         return item_description;
     }
+    public int getNumItems(){return numItems;}
+    public void setNumItems(int num){this.numItems = num;}
 }

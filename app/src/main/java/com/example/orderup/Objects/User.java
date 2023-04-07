@@ -19,6 +19,7 @@ public class User extends FoodItem
     private float balance;
 
     private ArrayList<FoodItem> cart = new ArrayList<>();
+    private ArrayList<ArrayList<FoodItem>> OrderHistory = new ArrayList<>();
 
     public User(String firstName, String lastName, String email, String password)
     {
@@ -30,6 +31,7 @@ public class User extends FoodItem
         this.cvc = "";
         this.expiry = "";
         this.balance = 0.00F;
+        cart = new ArrayList<>();
     }
 
     public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance)
@@ -48,6 +50,7 @@ public class User extends FoodItem
         this.balance = Float.parseFloat(balance);
 
         this.cart = new ArrayList<>();
+        OrderHistory = new ArrayList<ArrayList<FoodItem>>();
     }
 
     public String getEmail()
@@ -145,22 +148,24 @@ public class User extends FoodItem
         return equals;
     }
 
-    public void addToFoodCart(FoodItem foodItem)
+    public void addToFoodCart(FoodItem foodItem, int number)
     {
         cart.add(foodItem);
+        foodItem.setNumItems(number);
     }
 
-    public void printFoodCart(){
-            for(int i = 0; i < cart.size(); i++)
-            {
-                System.out.println(cart.get(i).getItemName());
-            }
-
-            Log.d("Cart Size: ",String.valueOf(cart.size()));
-    }
-
-    public List<FoodItem> getFoodCart()
+    public ArrayList<FoodItem> getFoodCart()
     {
         return cart;
+    }
+
+    public void clearFoodCart()
+    {
+        cart.clear();
+    }
+
+    public ArrayList<ArrayList<FoodItem>> getOrderHistory()
+    {
+        return OrderHistory;
     }
 }

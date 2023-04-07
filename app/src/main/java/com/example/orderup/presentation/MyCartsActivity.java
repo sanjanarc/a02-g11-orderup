@@ -1,6 +1,8 @@
 package com.example.orderup.presentation;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,5 +28,16 @@ public class MyCartsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyCartAdapter(foodList));
+
+        Button PlaceOrderButton = findViewById(R.id.PlaceOrder);
+        PlaceOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserServices.getUser().getOrderHistory().add(UserServices.getUser().getFoodCart());
+                UserServices.getUser().clearFoodCart();
+
+            }
+        });
+
     }
 }
