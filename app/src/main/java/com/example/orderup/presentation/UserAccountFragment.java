@@ -13,20 +13,27 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.orderup.Objects.User;
 import com.example.orderup.R;
+import com.example.orderup.logic.MyException;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserServices;
 import com.example.orderup.logic.UserVerification;
 
-//This is the User page UI class.
+/**
+ * This is the User page class.
+ */
 public class UserAccountFragment extends Fragment {
     TextView infoContainer;
     Button addCardButton, logoutButton, addAddressButton, redeemCardButton;
-    String display;
+
     String userEmail = Services.getCurrentUser();
 
     // Create user verification object and passing the database.
     UserVerification userVerification = new UserVerification(Services.getUserPersistence());
+
+    // Create user services object and passing the database and the user email.
+    UserServices userServices = new UserServices(Services.getUserPersistence(), userEmail);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,31 +90,52 @@ public class UserAccountFragment extends Fragment {
         return view;
     }
 
-    //This method pop up a window and prompt user to enter the gift card code.
+    /**
+     * This method pop up a window and prompt user to enter the gift card code.
+     */
     private void redeemPopUp() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Enter your Gift card code:");
-        View v = getLayoutInflater().inflate(R.layout.popup_redeem_gift_card, null);
-        builder.setView(v);
+
+        View view = getLayoutInflater().inflate(R.layout.popup_redeem_gift_card, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // Create the builder box object.
+        builder.setTitle("Enter your Gift card code:"); // Set the box title.
+        builder.setView(view);
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //Connect to xml file.
-                EditText giftCard = (EditText) v.findViewById(R.id.redeemInput);
 
                 //Get input data from xml file.
-                String cardNum = giftCard.getText().toString();
+                String cardNum = ((EditText) view.findViewById(R.id.redeemInput)).getText().toString();
 
-                //Verify and add gift card amount to user account.
-                String result = UserVerification.giftCardVerification(userEmail, cardNum);
+                try {
 
-                //Display the result to user.
-                if ("" != result) {
-                    ErrorPopUp.errorMsg(getActivity(), result);
+                    // Verify and add gift card amount to user account.
+                    userVerification.giftCardVerification(userEmail, cardNum);
+                    updateInfo();
+
+                } catch (Exception e) {
+
+                    String msg;
+
+                    if (e instanceof MyException.EXCEPTION_ILLEGAL_FORMAT) {
+
+                        msg = "Error: Invalid gift card format, must be 16 digits.";
+
+                    } else if (e instanceof MyException.EXCEPTION_ITEM_DOES_NOT_EXIST) {
+
+                        msg = "Error: Gift card not found in our system.";
+
+                    } else {
+
+                        msg = e.getMessage();
+
+                    }
+
+                    ErrorPopUp.errorMsg(getActivity(), msg);
                 }
-                updateInfo();
             }
         });
+
         builder.show();
     }
 
@@ -135,31 +163,31 @@ public class UserAccountFragment extends Fragment {
                     // Verify the credit card info and store the data if no error.
                     userVerification.creditCardVerification(userEmail, cardNum, cardCvc, cardExpiry);
 
-                } catch (Throwable e) {
+                } catch (Exception e) {
 
-                    String msg = "";
+                    String msg;
 
-                    if (e instanceof) {
+                    if (e instanceof MyException.EXCEPTION_ILLEGAL_FORMAT) {
 
                         msg = "Error: Incorrect Card Number Format.";
 
-                    } else if (e instanceof) {
+                    } else if (e instanceof MyException.EXCEPTION_TYPE_MISMATCH) {
 
                         msg = "Error: Card is not Visa, American Express or Mastercard.";
 
-                    } else if (e instanceof) {
+                    } else if (e instanceof MyException.EXCEPTION_CVC_LENGTH_DOES_NOT_MATCH) {
 
                         msg = "Error: Incorrect CVC length.";
 
-                    } else if (e instanceof) {
+                    } else if (e instanceof MyException.EXCEPTION_ILLEGAL_DATE_FORMAT) {
 
                         msg = "Error: Incorrect Expiry date length.";
 
-                    } else if (e instanceof) {
+                    } else if (e instanceof MyException.EXCEPTION_ILLEGAL_DATE_FORMAT2) {
 
                         msg = "Error: Incorrect Expiry date.";
 
-                    } else if (e instanceof) {
+                    } else if (e instanceof MyException.EXCEPTION_EMPTY_INPUT) {
 
                         msg = "Missing Field: Please check you have entered all fields.";
 
@@ -205,9 +233,39 @@ public class UserAccountFragment extends Fragment {
                     userVerification.addressVerification(street, city, province, postal, userEmail, address);
                     updateInfo(); // Update the info and display it.
 
-                } catch (Throwable e) {
+                } catch (Exception e) {
 
-                    String msg = "";
+                    String msg;
+
+                    if (e instanceof MyException.EXCEPTION_ILLEGAL_FORMAT) {
+
+                        msg = "Error: Address format incorrect.";
+
+                    } else if (e instanceof MyException.EXCEPTION_LOCATION_OUT_OF_BOUND) {
+
+                        msg = "Error: The city you entered must be located within Manitoba.";
+
+                    } else if (e instanceof MyException.EXCEPTION_LOCATION_OUT_OF_BOUND2) {
+
+                        msg = "Error: Currently does not support other province other than Manitoba.";
+
+                    } else if (e instanceof MyException.EXCEPTION_INVALID_POSTAL_CODE_LENGTH) {
+
+                        msg = "Error: Invalid postal code length.";
+
+                    } else if (e instanceof MyException.EXCEPTION_LOCATION_OUT_OF_BOUND3) {
+
+                        msg = "Error: Postal Code not located in Manitoba.";
+
+                    } else if (e instanceof MyException.EXCEPTION_INVALID_POSTAL_CODE_FORMAT) {
+
+                        msg = "Error: Invalid postal code format.";
+
+                    } else {
+
+                        msg = e.getMessage();
+
+                    }
 
                     // Display the result to user.
                     ErrorPopUp.errorMsg(getActivity(), msg);
@@ -223,13 +281,19 @@ public class UserAccountFragment extends Fragment {
      */
     private void updateInfo() {
 
-        // Formatting the message.
-        display = String.format("First name: %s\n" +
-                "Last name: %s\n" +
-                "Email: %s\n" +
-                "Address: %s\n" +
-                "Account balance: $ %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail));
+        try {
 
-        infoContainer.setText(display);
+            User user = userServices.getUser();
+
+            // Formatting the message.
+            String display = String.format("First name: %s\n" +
+                    "Last name: %s\n" +
+                    "Email: %s\n" +
+                    "Address: %s", user.getFirstName(), user.getLastName(), userEmail, user.getAddress());
+            infoContainer.setText(display);
+
+        } catch (Exception e) {
+            throw new NullPointerException();
+        }
     }
 }

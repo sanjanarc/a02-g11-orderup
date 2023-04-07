@@ -4,12 +4,16 @@ import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //The interface for user persistence.
 public interface UserPersistence {
 
     //Get a table of users.
-    HashMap<String, User> getUserTable();
+    Map<String, User> getUserTable();
+
+    User getUser(String email);
 
     //Add a user object to the table.
     void addUser(String email, String password, String firstName, String lastName);
@@ -23,6 +27,6 @@ public interface UserPersistence {
     //Modify the user account balance.
     void modifyBalance(String email, float balance);
 
-    //This get a list of giftcard info from database.
-    Giftcard[] getGiftcards();
+    //This get a list of gift card info from database.
+    List<Giftcard> getGiftCards();
 }

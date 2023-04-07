@@ -19,8 +19,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.IllegalFormatFlagsException;
-import java.util.NoSuchElementException;
 
 /**
  * Login Interface.
@@ -63,9 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent); // Start the main activity class.
                     finish(); // Remove current activity.
 
-                } catch (Throwable e) { // Catch error thrown from login verification.
+                } catch (Exception e) { // Catch error thrown from login verification.
 
-                    String msg = "";
+                    String msg;
 
                     if (e instanceof MyException.EXCEPTION_EMPTY_INPUT) {
 

@@ -6,11 +6,7 @@ import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
-import java.util.IllegalFormatException;
-import java.util.IllegalFormatFlagsException;
-import java.util.NoSuchElementException;
-
-import javax.security.auth.login.LoginException;
+import java.util.List;
 
 /**
  * This class verifies Information provided by User: name,email and password, address, credit card and gift card format before creating an Account for the User.
@@ -36,7 +32,7 @@ public class UserVerification {
      * @param password The input password.
      * @throws Exception Will throw error if the input data is not correct.
      */
-    public void loginVerification(String email, String password) throws Exception, MyException {
+    public void loginVerification(String email, String password) throws Exception {
 
         if (email.equals("") || password.equals("")) { // Input cannot be empty.
 
@@ -49,7 +45,7 @@ public class UserVerification {
         } else { // Compare the entered password with the account password.
 
             // Search the input email from database.
-            User tempUser = userPersistence.getUserTable().get(email);
+            User tempUser = userPersistence.getUser(email);
 
             if (tempUser != null) { // Match the password iff the email exists in the database.
 
@@ -75,6 +71,7 @@ public class UserVerification {
      * @param lastName   the last name of the user.
      * @param password   the password for login.
      * @param rePassword re-enter the password for double confirm.
+     * @throws Exception will throws exception when input data is incorrect.
      */
     public void registrationVerification(String email, String firstName, String lastName, String password,
                                          String rePassword) throws Exception {
@@ -105,8 +102,9 @@ public class UserVerification {
             throw new MyException.EXCEPTION_INPUT_OVER_FLOW2();
 
         } else {
+
             // Search the input email from database.
-            User tempUser = userPersistence.getUserTable().get(email);
+            User tempUser = userPersistence.getUser(email);
 
             if (tempUser != null) { // Registered email is already exist in the database and cannot be used again.
 
@@ -127,118 +125,168 @@ public class UserVerification {
      * @param cardNum    the user credit card number.
      * @param cardCvc    the user credit card cvc.
      * @param cardExpiry the user credit card expiry date.
+     * @throws Exception will throw exception when the input data is incorrect.
      */
-    public void creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry) {
+    public void creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry) throws Exception {
 
         if (!(cardNum.equals("") || cardCvc.equals("") || cardExpiry.equals(""))) { // Inputs cannot be empty.
 
-            if (cardNum.length() != 16) {
-                msg = "Error: Incorrect Card Number Format.";
+            if (cardNum.length() != 16) { // Credit card number must equal to 16.
+
+                throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
+
             } else if (cardNum.charAt(0) != '2' && cardNum.charAt(0) != '3'
-                    && cardNum.charAt(0) != '4' && cardNum.charAt(0) != '5') {
-                msg = "Error: Card is not Visa, American Express or Mastercard.";
-            } else if (cardCvc.length() != 3 && cardCvc.length() != 4) {
-                msg = "Error: Incorrect CVC length.";
-            } else if (cardExpiry.length() != 5) {
-                msg = "Error: Incorrect Expiry date length.";
+                    && cardNum.charAt(0) != '4' && cardNum.charAt(0) != '5') { // Credit card type does not match.
+
+                throw new MyException.EXCEPTION_TYPE_MISMATCH();
+
+            } else if (cardCvc.length() != 3 && cardCvc.length() != 4) { // CVC length must between 3 or 4.
+
+                throw new MyException.EXCEPTION_CVC_LENGTH_DOES_NOT_MATCH();
+
+            } else if (cardExpiry.length() != 5) { // Expiry data length.
+
+                throw new MyException.EXCEPTION_ILLEGAL_DATE_FORMAT();
+
             } else if (cardExpiry.charAt(2) != '/' || (cardExpiry.charAt(0) != '0' && cardExpiry.charAt(0) != '1')
-                    || (cardExpiry.charAt(0) == '1' && Character.getNumericValue(cardExpiry.charAt(1)) >= 3)) {
-                msg = "Error: Incorrect Expiry date.";
-            } else {
-                // Add the credit card to the database.
+                    || (cardExpiry.charAt(0) == '1' && Character.getNumericValue(cardExpiry.charAt(1)) >= 3)) { // Expiry date format.
+
+                throw new MyException.EXCEPTION_ILLEGAL_DATE_FORMAT2();
+
+            } else { // Add the credit card to the database.
+
                 userPersistence.addCreditCard(email, cardNum, cardCvc, cardExpiry);
-                msg = "Credit Card added.";
+
             }
+
         } else {
-            msg = "Missing Field: Please check you have entered all fields.";
+
+            throw new MyException.EXCEPTION_EMPTY_INPUT();
+
         }
     }
 
-    // Verity the input address format and return the message to user.
+    /**
+     * Verity the input address format and return the message to user.
+     *
+     * @param street
+     * @param city
+     * @param province
+     * @param postal
+     * @param email
+     * @param address
+     * @throws Exception will throw exception when input data is incorrect.
+     */
     public void addressVerification(String street, String city, String province, String postal, String email,
-                                             String address) {
-        String result = streetVerification(street) + cityVerification(city) + provinceVerification(province)
-                + postalVerification(postal);
-        if (result.equals("")) {
-            // No error occur than add the address to database.
-            userPersistence.updateAddress(email, address);
-            return "Address added.";
-        } else {
-            return result;
-        }
+                                    String address) throws Exception {
+
+        //Verify every input.
+        streetVerification(street);
+        cityVerification(city);
+        provinceVerification(province);
+        postalVerification(postal);
+
+        // No error occur than add the address to database.
+        userPersistence.updateAddress(email, address);
     }
 
-    // Check the street section of the address.
-    private static String streetVerification(String street) {
+    /**
+     * Check the street section of the address.
+     *
+     * @param street
+     * @throws Exception will throw error format exception.
+     */
+    private void streetVerification(String street) throws Exception{
         if (street == null || street.equals("")) {
-            return "Error: Address format incorrect.\n";
-        } else {
-            return "";
+
+            throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
+
         }
     }
 
-    // Check the city is Winnipeg or not.
-    private static String cityVerification(String city) {
+    /**
+     * Check the city is Winnipeg or not.
+     *
+     * @param city
+     * @throws Exception will throw error location exception.
+     */
+    private void cityVerification(String city) throws Exception {
         if (!city.equalsIgnoreCase("Winnipeg")) {
-            return "Error: The city you entered must be located within Manitoba.\n";
-        } else {
-            return "";
+
+            throw new MyException.EXCEPTION_LOCATION_OUT_OF_BOUND();
+
         }
     }
 
-    // Check the province is Manitoba or other province.
-    private static String provinceVerification(String province) {
+    /**
+     * Check the province is Manitoba or other province.
+     *
+     * @param province
+     * @throws Exception will throw error location exception.
+     */
+    private void provinceVerification(String province) throws Exception {
         if (!province.equalsIgnoreCase("Manitoba")) {
-            return "Error: Currently does not support other province other than Manitoba.\n";
-        } else {
-            return "";
+
+            throw new MyException.EXCEPTION_LOCATION_OUT_OF_BOUND2();
+
         }
     }
 
-    // Check the format of the postal code.
-    private static String postalVerification(String postal) {
-        String msg;
+    /**
+     * Check the format of the postal code.
+     *
+     * @param postal
+     * @throws Exception will throw error exception related to postal code.
+     */
+    private void postalVerification(String postal) throws Exception {
 
-        if (postal.length() != 6) {
-            msg = "Error: Invalid postal code length.\n";
-        } else if (Character.toUpperCase(postal.charAt(0)) != 'R') {
-            msg = "Error: Postal Code not located in Manitoba.\n";
+        if (postal.length() != 6) { // Length must equal to 6.
+
+            throw new MyException.EXCEPTION_INVALID_POSTAL_CODE_LENGTH();
+
+        } else if (Character.toUpperCase(postal.charAt(0)) != 'R') { // Location invalid.
+
+            throw new MyException.EXCEPTION_LOCATION_OUT_OF_BOUND3();
+
         } else if (!Character.isLetter(postal.charAt(0)) || !Character.isDigit(postal.charAt(1))
                 || !Character.isLetter(postal.charAt(2)) || !Character.isDigit(postal.charAt(3))
-                || !Character.isLetter(postal.charAt(4)) || !Character.isDigit(postal.charAt(5))) {
-            msg = "Error: Invalid postal code format.\n";
-        } else {
-            msg = "";
-        }
+                || !Character.isLetter(postal.charAt(4)) || !Character.isDigit(postal.charAt(5))) { // Invalid format.
 
-        return msg;
+            throw new MyException.EXCEPTION_INVALID_POSTAL_CODE_FORMAT();
+        }
     }
 
-    public static String giftCardVerification(String email, String card) {
-        Giftcard[] cardList = userPersistence.getGiftcards();
+    /**
+     * Verify the gift card and add amount to account balance.
+     *
+     * @param email
+     * @param card
+     * @throws Exception will throw exception when gift card is incorrect.
+     */
+    public void giftCardVerification(String email, String card) throws Exception {
+        List cardList = userPersistence.getGiftCards();
         Float amount = 0.00F;
-        String msg = "";
+        String msg;
         boolean found = false;
 
-        for (int i = 0; i < 5; i++) {
-            if (card.equals(cardList[i].getNumber())) {
-                Log.d("stored", cardList[i].getNumber());
-                Log.d("entered", card);
+        for (int i = 0; i < cardList.size(); i++) {
+            if (card.equals(cardList.get(i).getNumber())) {
                 amount = cardList[i].getAmount();
                 found = true;
             }
         }
 
         if (card.length() != 16) {
-            msg = "Error: Invalid gift card format, must be 16 digits.";
+
+            throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
+
         } else if (!found) {
-            msg = "Error: Gift card not found in our system.";
+
+            throw new MyException.EXCEPTION_ITEM_DOES_NOT_EXIST();
+
         } else if (found) {
-            msg = "";
             userPersistence.modifyBalance(email, amount);
         }
-
-        return msg;
     }
 
     // Make sure the email input contain character "@".

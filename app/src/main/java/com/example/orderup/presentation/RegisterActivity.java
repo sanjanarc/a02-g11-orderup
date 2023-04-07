@@ -13,8 +13,6 @@ import com.example.orderup.logic.MyException;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
 
-import java.util.IllegalFormatFlagsException;
-
 /**
  * Register Interface.
  */
@@ -53,9 +51,9 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent); // Start the main activity.
                     finish(); // Remove current activity.
 
-                } catch (Throwable e) {
+                } catch (Exception e) {
 
-                    String msg = "";
+                    String msg;
 
                     if (e instanceof MyException.EXCEPTION_EMPTY_INPUT) {
 
