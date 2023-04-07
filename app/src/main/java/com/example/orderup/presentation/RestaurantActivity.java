@@ -1,22 +1,22 @@
 package com.example.orderup.presentation;
 
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.content.Context;
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.orderup.logic.Services;
+import com.example.orderup.logic.UserServices;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         int position = getIntent().getIntExtra("position", 1);
@@ -115,5 +116,18 @@ public class RestaurantActivity extends AppCompatActivity {
 
         //Display the comments.
         commentSec.setText(comments);
+
+
+        Button ViewCartButton = (Button) findViewById(R.id.ViewCartButtonXML);
+
+        ViewCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(),MyCartsActivity.class);
+
+                //Start the main activity class.
+                startActivity(intent);
+            }
+        });
     }
 }

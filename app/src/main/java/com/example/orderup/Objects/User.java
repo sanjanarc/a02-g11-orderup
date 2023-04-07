@@ -1,5 +1,9 @@
 package com.example.orderup.Objects;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User extends FoodItem
@@ -14,6 +18,9 @@ public class User extends FoodItem
     private String cvc;
     private float balance;
 
+    private ArrayList<FoodItem> cart = new ArrayList<>();
+    private ArrayList<ArrayList<FoodItem>> OrderHistory = new ArrayList<>();
+
     public User(String firstName, String lastName, String email, String password)
     {
         this.firstName = firstName;
@@ -24,6 +31,7 @@ public class User extends FoodItem
         this.cvc = "";
         this.expiry = "";
         this.balance = 0.00F;
+        cart = new ArrayList<>();
     }
 
     public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance)
@@ -40,6 +48,9 @@ public class User extends FoodItem
             balance = "0.00F";
         }
         this.balance = Float.parseFloat(balance);
+
+        this.cart = new ArrayList<>();
+        OrderHistory = new ArrayList<ArrayList<FoodItem>>();
     }
 
     public String getEmail()
@@ -135,5 +146,26 @@ public class User extends FoodItem
         }
 
         return equals;
+    }
+
+    public void addToFoodCart(FoodItem foodItem, int number)
+    {
+        cart.add(foodItem);
+        foodItem.setNumItems(number);
+    }
+
+    public ArrayList<FoodItem> getFoodCart()
+    {
+        return cart;
+    }
+
+    public void clearFoodCart()
+    {
+        cart.clear();
+    }
+
+    public ArrayList<ArrayList<FoodItem>> getOrderHistory()
+    {
+        return OrderHistory;
     }
 }

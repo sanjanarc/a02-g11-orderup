@@ -1,6 +1,7 @@
 package com.example.orderup.presentation;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -8,19 +9,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.R;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 //This class is the structure of the menu.
 public class MenuHolder extends RecyclerView.ViewHolder {
+    //All the necessary button that are used in the adapter (names are self explanatory)
     ImageView imageview;
     TextView nameview;
-    MaterialButton removeBtn, addBtn;
+    Button addButton = null;
+    Button subtractButton = null;
+    TextView FoodItemNumber;
+    Button submitBButton;
 
     public MenuHolder(@NonNull View itemView) {
+        //assigning the buttons, textviews and imageviews to its attributes
         super(itemView);
         imageview = itemView.findViewById(R.id.foodImage);
         nameview = itemView.findViewById(R.id.foodInfo);
-        removeBtn = itemView.findViewById(R.id.removeItemButton);
-        addBtn = itemView.findViewById(R.id.addItemButton);
+
+        addButton = itemView.findViewById(R.id.addButton);
+        subtractButton = itemView.findViewById(R.id.subtractButton);
+        FoodItemNumber = (TextView) itemView.findViewById(R.id.NumberOfFood);
+
+        submitBButton = (Button) itemView.findViewById(R.id.Submit);
+
     }
 }

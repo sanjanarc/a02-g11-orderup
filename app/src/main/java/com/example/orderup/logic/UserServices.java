@@ -1,5 +1,8 @@
 package com.example.orderup.logic;
 
+import static com.example.orderup.logic.Services.getUserPersistence;
+
+import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
@@ -99,5 +102,14 @@ public class UserServices {
      */
     public String getExpiry() {
         return user.getExpiry();
+    }
+
+    public static boolean FoodItemExists(FoodItem foodItem) {
+        for(int i = 0; i< getUser().getFoodCart().size(); i++)
+        {
+            if(getUser().getFoodCart().get(i).equals(foodItem))
+                return true;
+        }
+        return false;
     }
 }
