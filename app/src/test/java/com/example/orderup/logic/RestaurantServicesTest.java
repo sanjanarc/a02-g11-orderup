@@ -16,6 +16,7 @@ public class RestaurantServicesTest {
         // Create some  restaurants
         Restaurant restaurant1 = new Restaurant(1, "Indian Food Corner", "City A", "Category A", "Description A", null, null, null, 3, "Location A", "image");
         Restaurant restaurant2 = new Restaurant(2, "Banh Mi King", "City B", "Category B", "Description B", null, null, null, 3, "Location B", "image");
+        RestaurantServices temp = new RestaurantServices();
 
         // Add the  restaurants to the persistence layer
         RestaurantPersistenceStub restaurantPersistenceStub = new RestaurantPersistenceStub();
@@ -24,7 +25,7 @@ public class RestaurantServicesTest {
 
 
         // Call the getRestList method to retrieve the list of restaurants
-        List<Restaurant> restaurantList = RestaurantServices.getRestList();
+        List<Restaurant> restaurantList = temp.getRestList();
 
         // Check that the list is not null and contains two restaurants
         assertNotNull(restaurantList);

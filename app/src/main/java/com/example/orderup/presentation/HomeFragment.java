@@ -21,11 +21,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.user_home, container, false);
-
+        RestaurantServices temp = new RestaurantServices();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new RestaurantAdapter(RestaurantServices.getRestList()));
+        recyclerView.setAdapter(new RestaurantAdapter(temp.getRestList()));
 
         // Inflate the layout for this fragment
         return view;

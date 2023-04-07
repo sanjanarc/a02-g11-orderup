@@ -1,10 +1,9 @@
 package com.example.orderup.Objects;
-import com.example.orderup.R;
+
 import com.example.orderup.logic.RestaurantServices;
 
-import java.util.Objects;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 /*
 Restaurant: This object class represents a restaurant in the database. Its menu consists of "FoodItem" objects
  */
@@ -114,7 +113,8 @@ public class Restaurant {
     Method adds a user's comment left on the restaurant
      */
     public void updateComment(){
-        userComments = RestaurantServices.getComments(restaurantID);
+        RestaurantServices temp = new RestaurantServices();
+        userComments = temp.getComments(restaurantID);
     }
 
     /*

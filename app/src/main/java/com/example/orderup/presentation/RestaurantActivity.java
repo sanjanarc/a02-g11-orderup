@@ -1,9 +1,5 @@
 package com.example.orderup.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +8,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
@@ -28,7 +28,9 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         int position = getIntent().getIntExtra("position", 1);
-        Restaurant restaurant = RestaurantServices.getRest(position);
+        RestaurantServices temp = new RestaurantServices();
+
+        Restaurant restaurant = temp.getRest(position);
 
         //Showing the restaurant Image.
         ImageView imageView = (ImageView) findViewById(R.id.Restbg);
@@ -86,9 +88,11 @@ public class RestaurantActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText input = findViewById(R.id.inputComment);
                 String msg = input.getText().toString();
+                RestaurantServices temp = new RestaurantServices();
+
 
                 if (!msg.equals("")) {
-                    RestaurantServices.insertComment(restaurant, RestaurantServices.getCurrentUser() + ":\n" + msg);
+                    RestaurantServices.insertComment(restaurant, temp.getCurrentUser() + ":\n" + msg);
                     input.setText(""); //Clear the input box.
                     loadComment(restaurant); //Update the comment section.
                 } else {
