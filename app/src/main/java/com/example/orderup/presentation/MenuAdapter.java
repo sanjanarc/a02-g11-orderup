@@ -52,9 +52,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
         holder.FoodItemNumber.setText(String.valueOf(1));
-
-        Log.d("MenuAdapter", "I'm in bitchessssssssssss!!!!");
-
         holder.FoodItemNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -66,7 +63,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
                         holder.FoodItemNumber.setText(String.valueOf(0));
                         ErrorPopUp.errorMsg(textView.getContext(), "Enter value between 0 and 100");
                     }
-                    Log.d("After changing the value in editor action",holder.FoodItemNumber.getText().toString());
                     return true;
                 }
                 return false;
@@ -77,20 +73,18 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
                 if(Integer.parseInt(holder.FoodItemNumber.getText().toString()) < MAX_ORDER_ITEMS)
                 {
                     int temp = Integer.parseInt(holder.FoodItemNumber.getText().toString());
                     temp++;
                     holder.FoodItemNumber.setText(String.valueOf(temp));
-
-                    Log.d("AddButton",String.valueOf(temp));
-
                 }
-                else {
+                else
+                {
                     ErrorPopUp.errorMsg(view.getContext(), "Max item number reached");
-
                 }
             }
         });
@@ -107,21 +101,24 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
                         ErrorPopUp.errorMsg(view.getContext(), "Minimum item number reached");
 
                     holder.FoodItemNumber.setText(String.valueOf(temp));
-                    Log.d("AddButton",String.valueOf(temp));
                 }
             }
         });
 
+        holder.submitBButton.setText("Add");
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 assert UserServices.getUser() != null;
-                for(int i = 1; i <= Integer.parseInt(holder.FoodItemNumber.getText().toString()); i ++)
-                   UserServices.getUser().addToFoodCart(foodItem);
+                if(UserServices.FoodItemExists(foodItem))
+                {
+                    foodItem.setNumItems(Integer.parseInt(holder.FoodItemNumber.getText().toString()) + foodItem.getNumItems());
+                }
+                else
+                {
+                    UserServices.getUser().addToFoodCart(foodItem, Integer.parseInt(holder.FoodItemNumber.getText().toString()));
+                }
                 ErrorPopUp.errorMsg(view.getContext(), "Item added");
-                Log.d("Email",UserServices.getUser().getEmail());
-                UserServices.getUser().printFoodCart();
-
             }
         });
 

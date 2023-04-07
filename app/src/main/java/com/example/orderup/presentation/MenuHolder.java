@@ -13,31 +13,24 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 //This class is the structure of the menu.
 public class MenuHolder extends RecyclerView.ViewHolder {
-    ImageView imageview, imageViewCart;
-    TextView nameview,nameViewCart;
+    ImageView imageview;
+    TextView nameview;
 
-    FloatingActionButton addButton = null;
-    FloatingActionButton subtractButton = null;
+    Button addButton = null;
+    Button subtractButton = null;
     TextView FoodItemNumber;
-    TextView myCartFoodItemNumber;
 
 
-    Button submitBButton,ViewCartButton;
+    Button submitBButton;
 
     public MenuHolder(@NonNull View itemView) {
         super(itemView);
         imageview = itemView.findViewById(R.id.foodImage);
         nameview = itemView.findViewById(R.id.foodInfo);
 
-        imageViewCart = itemView.findViewById(R.id.CartfoodImage);
-        nameViewCart = itemView.findViewById(R.id.CartfoodInfo);
-
-
-        addButton = (FloatingActionButton) itemView.findViewById(R.id.addButton);
-        subtractButton = (FloatingActionButton) itemView.findViewById(R.id.subtractButton);
+        addButton = itemView.findViewById(R.id.addButton);
+        subtractButton = itemView.findViewById(R.id.subtractButton);
         FoodItemNumber = (TextView) itemView.findViewById(R.id.NumberOfFood);
-
-
 
         submitBButton = (Button) itemView.findViewById(R.id.Submit);
 

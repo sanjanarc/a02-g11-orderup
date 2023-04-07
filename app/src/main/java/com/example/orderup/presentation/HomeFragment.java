@@ -18,14 +18,12 @@ import com.example.orderup.logic.Services;
 //This is the home page UI class.
 public class HomeFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.user_home, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new RestaurantAdapter(RestaurantServices.getRestList()));

@@ -7,6 +7,7 @@
     android:layout_height="250dp"
     android:layout_margin="10dp"
     android:elevation="10dp"
+    app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="30dp">
 
     <FrameLayout
@@ -33,7 +34,7 @@
                 android:textColor="@color/black" />
 
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/addButton"
                 android:layout_width="19dp"
                 android:layout_height="wrap_content"
@@ -44,9 +45,15 @@
                 android:layout_marginEnd="18dp"
                 android:layout_marginBottom="61dp"
                 android:clickable="true"
+                android:text="+"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:backgroundTint="#FFFFFF"
+                app:icon="@drawable/baseline_remove_24"
+                app:iconPadding="0dp"
                 app:srcCompat="@drawable/baseline_add_24" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/subtractButton"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
@@ -57,7 +64,10 @@
                 android:layout_marginBottom="61dp"
                 android:layout_toStartOf="@+id/addButton"
                 android:clickable="true"
-                app:srcCompat="@drawable/baseline_remove_24" />
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:backgroundTint="#FFFFFF"
+                app:icon="@drawable/baseline_add_24" />
 
             <EditText
                 android:id="@+id/NumberOfFood"
@@ -76,15 +86,14 @@
 
             <Button
                 android:id="@+id/Submit"
-                android:layout_width="81dp"
-                android:layout_height="36dp"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/subtractButton"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="-3dp"
                 android:layout_marginTop="-45dp"
                 android:layout_marginEnd="280dp"
-                android:layout_marginBottom="13dp"
-                android:text="Add" />
+                android:layout_marginBottom="1dp" />
 
         </RelativeLayout>
     </FrameLayout>
