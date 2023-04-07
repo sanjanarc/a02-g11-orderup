@@ -14,7 +14,7 @@ public class Services
     private static RestaurantPersistence restaurantPersistence= null;
 
     //Get the User database setup and ready to use.
-    protected static synchronized UserPersistence getUserPersistence()
+    public static synchronized UserPersistence getUserPersistence()
     {
         if(userPersistence== null)
         {

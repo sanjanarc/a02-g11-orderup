@@ -6,127 +6,132 @@ import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
-/*
-This class verifies Information provided by User: name,email and password, address, credit card and gift card format before creating an Account for the User.
+import java.util.IllegalFormatException;
+import java.util.IllegalFormatFlagsException;
+import java.util.NoSuchElementException;
+
+import javax.security.auth.login.LoginException;
+
+/**
+ * This class verifies Information provided by User: name,email and password, address, credit card and gift card format before creating an Account for the User.
  */
 public class UserVerification {
 
     // Store the database instances
-    private UserPersistence userPersistence;
+    private final UserPersistence userPersistence;
 
     /**
      * Constructor
-     * 
-     * @param userPersistence : the database going to use.
+     *
+     * @param userPersistence the database going to use.
      */
-    UserVerification(UserPersistence userPersistence) {
-        this.userPersistence = userPersistence;
+    public UserVerification(UserPersistence userPersistence) {
+        this.userPersistence = userPersistence; //Dependency injection the database.
     }
 
     /**
      * Verify the input email and password with databases.
-     * 
-     * @param email    : The input email.
-     * @param password : The input password.
-     * @throws Exception : Will throw error if the input data is not correct.
+     *
+     * @param email    The input email.
+     * @param password The input password.
+     * @throws Exception Will throw error if the input data is not correct.
      */
-    public void loginVerification(String email, String password) throws Exception {
-        // Store message that going to return to presentation layer.
-        String msg;
+    public void loginVerification(String email, String password) throws Exception, MyException {
 
-        // Input cannot be empty.
-        if (email.equals("") || password.equals("")) {
-            throw new IllegalArgumentException();
-            msg = "Email or Password is Empty.";
-        }
-        // Email format must meet standard format.
-        else if (!emailCheck(email)) {
-            throw new IllegalFormatException();
-            msg = "Incorrect Email Format.";
-        }
-        // Compare the entered password with the account password.
-        else {
+        if (email.equals("") || password.equals("")) { // Input cannot be empty.
+
+            throw new MyException.EXCEPTION_EMPTY_INPUT();
+
+        } else if (!emailCheck(email)) { // Email format must meet standard format.
+
+            throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
+
+        } else { // Compare the entered password with the account password.
+
             // Search the input email from database.
             User tempUser = userPersistence.getUserTable().get(email);
 
-            // Match the password iff the email exists in the database.
-            if (tempUser != null) {
+            if (tempUser != null) { // Match the password iff the email exists in the database.
+
                 if (!tempUser.getPassword().equals(password)) {
-                    throw new InvalidPasswordException();
-                    msg = "Incorrect Password.";
+
+                    throw new MyException.EXCEPTION_INVALID_PASSWORD();
+
                 }
+
             } else {
-                throw new NoSuchElementException();
-                msg = "Email does not exist.";
+
+                throw new MyException.EXCEPTION_ITEM_DOES_NOT_EXIST();
+
             }
         }
     }
 
     /**
      * Verify the inputs and create account if input correct.
-     * 
-     * @param email
-     * @param firstName
-     * @param lastName
-     * @param password
-     * @param rePassword
+     *
+     * @param email      The email of the user.
+     * @param firstName  the first name of the user.
+     * @param lastName   the last name of the user.
+     * @param password   the password for login.
+     * @param rePassword re-enter the password for double confirm.
      */
     public void registrationVerification(String email, String firstName, String lastName, String password,
-            String rePassword) throws Exception {
-        // Store message that going to return to presentation layer.
-        String msg;
+                                         String rePassword) throws Exception {
 
-        // Inputs cannot be empty.
         if (firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("")
-                || rePassword.equals("")) {
-            throw new IllegalArgumentException();
-            msg = "Missing Field: Please check you have entered all fields.";
-        }
-        // Email format must meet standard format.
-        else if (!emailCheck(email)) {
-            throw new IllegalFormatException();
-            msg = "Incorrect Email Format.";
-        }
-        // Password must be the same.
-        else if (!password.equals(rePassword)) {
-            throw new InvalidPasswordException();
-            msg = "Password and Re-password do not match.";
-        }
-        // Password must more than 6 character.
-        else if (password.length() < 6) {
-            msg = "Password needs to be at least 6 characters long.";
-        }
-        // First name cannot more than 7 character.
-        else if (firstName.length() > 7) {
-            msg = "Your first name is more than 7 character.";
-        }
-        // Last name cannot more than 7 character.
-        else if (lastName.length() > 7) {
-            msg = "Your last name is more than 7 character.";
+                || rePassword.equals("")) { // Inputs cannot be empty.
+
+            throw new MyException.EXCEPTION_EMPTY_INPUT();
+
+        } else if (!emailCheck(email)) { // Email format must meet standard format.
+
+            throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
+
+        } else if (!password.equals(rePassword)) { // Password must be the same.
+
+            throw new MyException.EXCEPTION_INVALID_PASSWORD();
+
+        } else if (password.length() < 6) { // Password must more than 6 character.
+
+            throw new MyException.EXCEPTION_PASSWORD_NOT_ENOUGH_LENGTH();
+
+        } else if (firstName.length() > 7) { // First name cannot more than 7 character.
+
+            throw new MyException.EXCEPTION_INPUT_OVER_FLOW();
+
+        } else if (lastName.length() > 7) { // Last name cannot more than 7 character.
+
+            throw new MyException.EXCEPTION_INPUT_OVER_FLOW2();
+
         } else {
             // Search the input email from database.
             User tempUser = userPersistence.getUserTable().get(email);
 
-            if (tempUser != null) // Registered email is already exist in the database and cannot be used again.
-            {
-                msg = "Email already in use.";
+            if (tempUser != null) { // Registered email is already exist in the database and cannot be used again.
+
+                throw new MyException.EXCEPTION_ITEM_ALREADY_EXIST();
+
             } else {
-                // Create a user to stub or database.
-                userPersistence.addUser(email, password, firstName, lastName);
-                userPersistence.modifyBalance(email, 0.00F);
-                msg = null;
+
+                userPersistence.addUser(email, password, firstName, lastName); // Create a user to stub or database.
+                userPersistence.modifyBalance(email, 0.00F); // Set the user balance to 0.
             }
         }
-        return msg;
     }
 
-    // Verify the input credit card format.
-    public static String creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry) {
-        // Store message that going to return to presentation layer.
-        String msg;
+    /**
+     * Verify the input credit card format.
+     *
+     * @param email      the user email.
+     * @param cardNum    the user credit card number.
+     * @param cardCvc    the user credit card cvc.
+     * @param cardExpiry the user credit card expiry date.
+     */
+    public void creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry) {
 
-        // Inputs cannot be empty.
-        if (!(cardNum.equals("") || cardCvc.equals("") || cardExpiry.equals(""))) {
+        if (!(cardNum.equals("") || cardCvc.equals("") || cardExpiry.equals(""))) { // Inputs cannot be empty.
+
             if (cardNum.length() != 16) {
                 msg = "Error: Incorrect Card Number Format.";
             } else if (cardNum.charAt(0) != '2' && cardNum.charAt(0) != '3'
@@ -147,12 +152,11 @@ public class UserVerification {
         } else {
             msg = "Missing Field: Please check you have entered all fields.";
         }
-        return msg;
     }
 
     // Verity the input address format and return the message to user.
-    public static String addressVerification(String street, String city, String province, String postal, String email,
-            String address) {
+    public void addressVerification(String street, String city, String province, String postal, String email,
+                                             String address) {
         String result = streetVerification(street) + cityVerification(city) + provinceVerification(province)
                 + postalVerification(postal);
         if (result.equals("")) {

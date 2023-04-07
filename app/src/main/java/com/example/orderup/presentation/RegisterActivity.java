@@ -9,80 +9,102 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
+import com.example.orderup.logic.MyException;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
 
-//Register UI class.
-public class RegisterActivity extends AppCompatActivity
-{
+import java.util.IllegalFormatFlagsException;
+
+/**
+ * Register Interface.
+ */
+public class RegisterActivity extends AppCompatActivity {
+
     private String firstName, lastName, email, password, rePassword;
-
-    private EditText firstNameInput, lastNameInput, emailInput, passwordInput, rePasswordInput;
-
     private Button registerButton, backButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //Connect to the xml file.
-        firstNameInput = (EditText) findViewById(R.id.firstNameInput);
-        lastNameInput = (EditText) findViewById(R.id.lastNameInput);
-        emailInput= (EditText) findViewById(R.id.emailInput);
-        passwordInput= (EditText) findViewById(R.id.passwordInput);
-        rePasswordInput= (EditText) findViewById(R.id.rePasswordInput);
-
-        //Event listener of the register button.
+        // Event listener of the register button.
         registerButton = (Button) findViewById(R.id.registerButton1);
-        registerButton.setOnClickListener(new View.OnClickListener()
-        {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
+
+                // Create the user verification object and passing the database.
+                UserVerification userVerification = new UserVerification(Services.getUserPersistence());
+
                 //Get input data from xml file.
-                firstName = firstNameInput.getText().toString();
-                lastName = lastNameInput.getText().toString();
-                email= emailInput.getText().toString();
-                password= passwordInput.getText().toString();
-                rePassword= rePasswordInput.getText().toString();
+                firstName = ((EditText) findViewById(R.id.firstNameInput)).getText().toString();
+                lastName = ((EditText) findViewById(R.id.lastNameInput)).getText().toString();
+                email = ((EditText) findViewById(R.id.emailInput)).getText().toString();
+                password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
+                rePassword = ((EditText) findViewById(R.id.rePasswordInput)).getText().toString();
 
-                //Verify the input data with databases. Will add the account to databases and login the application if input data are correct.
-                String result = UserVerification.registrationVerification(email, firstName, lastName, password, rePassword);
-                if(result == null) //Account created successful.
-                {
-                    Intent intent= new Intent(RegisterActivity.this, MainActivity.class);
+                try { // Verify the input data with databases. Will add the account to databases and login the application if input data are correct.
 
-                    //Tell the system who is the current user.
-                    Services.setCurrentUser(email);
+                    userVerification.registrationVerification(email, firstName, lastName, password, rePassword);
 
-                    //Start the main activity.
-                    startActivity(intent);
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    Services.setCurrentUser(email); // Tell the system who is the current user.
+                    startActivity(intent); // Start the main activity.
+                    finish(); // Remove current activity.
 
-                    //Remove current activity.
-                    finish();
-                }
-                else
-                {
-                    //Warning user something went wrong.
-                    ErrorPopUp.errorMsg(RegisterActivity.this, result);
+                } catch (Throwable e) {
+
+                    String msg = "";
+
+                    if (e instanceof MyException.EXCEPTION_EMPTY_INPUT) {
+
+                        msg = "Missing Field: Please check you have entered all fields.";
+
+                    } else if (e instanceof MyException.EXCEPTION_ILLEGAL_FORMAT) {
+
+                        msg = "Incorrect Email Format.";
+
+                    } else if (e instanceof MyException.EXCEPTION_INVALID_PASSWORD) {
+
+                        msg = "Password and Re-password do not match.";
+
+                    } else if (e instanceof MyException.EXCEPTION_PASSWORD_NOT_ENOUGH_LENGTH) {
+
+                        msg = "Password needs to be at least 6 characters long.";
+
+                    } else if (e instanceof MyException.EXCEPTION_INPUT_OVER_FLOW) {
+
+                        msg = "Your first name is more than 7 character.";
+
+                    } else if (e instanceof MyException.EXCEPTION_INPUT_OVER_FLOW2) {
+
+                        msg = "Your last name is more than 7 character.";
+
+                    } else if (e instanceof MyException.EXCEPTION_ITEM_ALREADY_EXIST) {
+
+                        msg = "Email already in use.";
+
+                    } else {
+
+                        msg = e.getMessage();
+
+                    }
+
+                    // Display the error message.
+                    ErrorPopUp.errorMsg(RegisterActivity.this, msg);
                 }
             }
         });
 
-        //Event listener of the back button.
-        backButton= (Button) findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener()
-        {
+        // Event listener of the back button.
+        backButton = (Button) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                //Close this activity and back to login activity.
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            public void onClick(View view) {
 
-                //Remove current activity.
-                finish();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class)); // Close this activity and back to login activity.
+                finish(); // Remove current activity.
             }
         });
     }

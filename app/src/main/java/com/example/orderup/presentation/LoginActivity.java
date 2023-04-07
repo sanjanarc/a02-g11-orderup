@@ -11,6 +11,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
+import com.example.orderup.logic.MyException;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserVerification;
 
@@ -18,17 +19,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.IllegalFormatFlagsException;
+import java.util.NoSuchElementException;
 
-//Login UI class.
+/**
+ * Login Interface.
+ */
 public class LoginActivity extends AppCompatActivity {
+
     private Button signInButton, registerButton;
-
     private String email, password;
-
     private EditText emailInput, passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         copyDatabaseToDevice();
@@ -42,32 +47,50 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Create the user verification object and passing the database.
+                UserVerification userVerification = new UserVerification(Services.getUserPersistence());
+
                 // Get input data from xml file.
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                try {
+                try { // Verify the input data and throw exception if input data is incorrect.
 
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
-                // Verify the input data with databases. Go to home page if nothing wrong. Will
-                // pop up a window if error occurs.
-                String result = UserVerification.loginVerification(email, password);
-                if (result == null) {
+                    userVerification.loginVerification(email, password);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Services.setCurrentUser(email); // Tell the system who is the current user.
+                    startActivity(intent); // Start the main activity class.
+                    finish(); // Remove current activity.
 
-                    // Tell the system who is the current user.
-                    Services.setCurrentUser(email);
+                } catch (Throwable e) { // Catch error thrown from login verification.
 
-                    // Start the main activity class.
-                    startActivity(intent);
+                    String msg = "";
 
-                    // Remove current activity.
-                    finish();
-                } else // Failed to login.
-                {
-                    ErrorPopUp.errorMsg(LoginActivity.this, result);
+                    if (e instanceof MyException.EXCEPTION_EMPTY_INPUT) {
+
+                        msg = "Input cannot be empty.";
+
+                    } else if (e instanceof MyException.EXCEPTION_ILLEGAL_FORMAT) {
+
+                        msg = "Email format is incorrect.";
+
+                    } else if (e instanceof MyException.EXCEPTION_ITEM_DOES_NOT_EXIST) {
+
+                        msg = "Email does not exist.";
+
+                    } else if (e instanceof MyException.EXCEPTION_INVALID_PASSWORD) {
+
+                        msg = "Incorrect password.";
+
+                    } else {
+
+                        msg = e.getMessage();
+
+                    }
+
+                    // Display the error message.
+                    ErrorPopUp.errorMsg(LoginActivity.this, msg);
                 }
             }
         });
@@ -77,11 +100,10 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // Start the register page activity.
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-
-                // Remove current activity.
-                finish();
+                finish(); // Remove current activity.
             }
         });
     }

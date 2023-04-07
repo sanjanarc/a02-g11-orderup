@@ -19,26 +19,26 @@ import com.example.orderup.logic.UserServices;
 import com.example.orderup.logic.UserVerification;
 
 //This is the User page UI class.
-public class UserAccountFragment extends Fragment
-{
+public class UserAccountFragment extends Fragment {
     TextView infoContainer;
     Button addCardButton, logoutButton, addAddressButton, redeemCardButton;
     String display;
     String userEmail = Services.getCurrentUser();
 
+    // Create user verification object and passing the database.
+    UserVerification userVerification = new UserVerification(Services.getUserPersistence());
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
-        View view= inflater.inflate(R.layout.fragment_user_account, container, false);
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_user_account, container, false);
 
         infoContainer = (TextView) view.findViewById(R.id.infoContainer);
         updateInfo();
-        
+
         //Event listener of the add credit card button.
-        addCardButton= (Button) view.findViewById(R.id.addCardButton);
-        addCardButton.setOnClickListener(new View.OnClickListener()
-        {
+        addCardButton = (Button) view.findViewById(R.id.addCardButton);
+        addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addCardPopUp();
@@ -46,9 +46,8 @@ public class UserAccountFragment extends Fragment
         });
 
         //Event listener of the add address button.
-        addAddressButton= (Button) view.findViewById(R.id.addAddressButton);
-        addAddressButton.setOnClickListener(new View.OnClickListener()
-        {
+        addAddressButton = (Button) view.findViewById(R.id.addAddressButton);
+        addAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addAddressPopUp();
@@ -57,22 +56,18 @@ public class UserAccountFragment extends Fragment
 
         //Event listener of the redeem button.
         redeemCardButton = (Button) view.findViewById(R.id.redeemCardButton);
-        redeemCardButton.setOnClickListener(new View.OnClickListener()
-        {
+        redeemCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 redeemPopUp();
             }
         });
 
         //Event listener of the logout button.
-        logoutButton= (Button) view.findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener()
-        {
+        logoutButton = (Button) view.findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 //Change the activity to login page.
                 startActivity(new Intent(getActivity(), LoginActivity.class));
 
@@ -89,27 +84,25 @@ public class UserAccountFragment extends Fragment
     }
 
     //This method pop up a window and prompt user to enter the gift card code.
-    private void redeemPopUp(){
+    private void redeemPopUp() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter your Gift card code:");
         View v = getLayoutInflater().inflate(R.layout.popup_redeem_gift_card, null);
         builder.setView(v);
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
-        {
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
+            public void onClick(DialogInterface dialog, int which) {
                 //Connect to xml file.
-                EditText giftCard= (EditText) v.findViewById(R.id.redeemInput);
+                EditText giftCard = (EditText) v.findViewById(R.id.redeemInput);
 
                 //Get input data from xml file.
                 String cardNum = giftCard.getText().toString();
 
                 //Verify and add gift card amount to user account.
-                String result = UserVerification.giftCardVerification(userEmail,cardNum);
+                String result = UserVerification.giftCardVerification(userEmail, cardNum);
 
                 //Display the result to user.
-                if("" != result) {
+                if ("" != result) {
                     ErrorPopUp.errorMsg(getActivity(), result);
                 }
                 updateInfo();
@@ -118,76 +111,119 @@ public class UserAccountFragment extends Fragment
         builder.show();
     }
 
-    //This method will pop up a window to prompt user to enter credit card info.
-    private void addCardPopUp()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Enter your Credit Card Info:");
-        View v = getLayoutInflater().inflate(R.layout.popup_add_credit_card, null);
-        builder.setView(v);
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
-        {
+    /**
+     * This method will pop up a window to prompt user to enter credit card info.
+     */
+    private void addCardPopUp() {
+
+        View view = getLayoutInflater().inflate(R.layout.popup_add_credit_card, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // Create the builder box object.
+        builder.setTitle("Enter your Credit Card Info:"); // Set the box title.
+        builder.setView(view);
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                //Connect to xml file.
-                EditText cardNumInput= (EditText) v.findViewById(R.id.cardNumberInput);
-                EditText cardCvcInput= (EditText) v.findViewById(R.id.cardCvcInput);
-                EditText cardExpiryInput= (EditText) v.findViewById(R.id.cardExpiryInput);
+            public void onClick(DialogInterface dialog, int which) {
 
-                //Get input data from xml file.
-                String cardNum = cardNumInput.getText().toString();
-                String cardCvc = cardCvcInput.getText().toString();
-                String cardExpiry = cardExpiryInput.getText().toString();
+                //Get input data from user.
+                String cardNum = ((EditText) view.findViewById(R.id.cardNumberInput)).getText().toString();
+                String cardCvc = ((EditText) view.findViewById(R.id.cardCvcInput)).getText().toString();
+                String cardExpiry = ((EditText) view.findViewById(R.id.cardExpiryInput)).getText().toString();
 
-                //Verify and add credit card to database.
-                String result = UserVerification.creditCardVerification(userEmail, cardNum, cardCvc, cardExpiry);
+                try {
 
-                //Display the result to user.
-                ErrorPopUp.errorMsg(getActivity(), result);
+                    // Verify the credit card info and store the data if no error.
+                    userVerification.creditCardVerification(userEmail, cardNum, cardCvc, cardExpiry);
+
+                } catch (Throwable e) {
+
+                    String msg = "";
+
+                    if (e instanceof) {
+
+                        msg = "Error: Incorrect Card Number Format.";
+
+                    } else if (e instanceof) {
+
+                        msg = "Error: Card is not Visa, American Express or Mastercard.";
+
+                    } else if (e instanceof) {
+
+                        msg = "Error: Incorrect CVC length.";
+
+                    } else if (e instanceof) {
+
+                        msg = "Error: Incorrect Expiry date length.";
+
+                    } else if (e instanceof) {
+
+                        msg = "Error: Incorrect Expiry date.";
+
+                    } else if (e instanceof) {
+
+                        msg = "Missing Field: Please check you have entered all fields.";
+
+                    } else {
+
+                        msg = e.getMessage();
+
+                    }
+
+                    // Display the error message.
+                    ErrorPopUp.errorMsg(getActivity(), msg);
+                }
             }
         });
+
         builder.show();
     }
 
-    //This method will pop up a window to prompt user to enter their address.
-    private void addAddressPopUp()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Enter your Address:");
-        View v = getLayoutInflater().inflate(R.layout.popup_add_address, null);
-        builder.setView(v);
-        builder.setPositiveButton("Done", new DialogInterface.OnClickListener()
-        {
+    /**
+     * This method will pop up a window to prompt user to enter their address.
+     */
+    private void addAddressPopUp() {
+
+        View view = getLayoutInflater().inflate(R.layout.popup_add_address, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // Create the builder box object.
+        builder.setTitle("Enter your Address:"); // Set the box title.
+        builder.setView(view);
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                //Connect to xml file.
-                EditText streetInput= (EditText) v.findViewById(R.id.streetInput);
-                EditText cityInput= (EditText) v.findViewById(R.id.cityInput);
-                EditText provinceInput= (EditText) v.findViewById(R.id.provinceInput);
-                EditText postalInput= (EditText) v.findViewById(R.id.postalInput);
+            public void onClick(DialogInterface dialog, int which) {
 
                 //Get input data from xml file.
-                String street= streetInput.getText().toString();
-                String city= cityInput.getText().toString();
-                String province= provinceInput.getText().toString();
-                String postal= postalInput.getText().toString();
+                String street = ((EditText) view.findViewById(R.id.streetInput)).getText().toString();
+                String city = ((EditText) view.findViewById(R.id.cityInput)).getText().toString();
+                String province = ((EditText) view.findViewById(R.id.provinceInput)).getText().toString();
+                String postal = ((EditText) view.findViewById(R.id.postalInput)).getText().toString();
                 String address = street + ", " + city + ", " + province + ", " + postal;
 
-                //Verify the input address and add to the database.
-                String result = UserVerification.addressVerification(street, city, province, postal, userEmail, address);
+                try {
 
-                //Display the result to user.
-                ErrorPopUp.errorMsg(getActivity(), result);
-                updateInfo();
+                    // Verify the input date and add to database.
+                    userVerification.addressVerification(street, city, province, postal, userEmail, address);
+                    updateInfo(); // Update the info and display it.
+
+                } catch (Throwable e) {
+
+                    String msg = "";
+
+                    // Display the result to user.
+                    ErrorPopUp.errorMsg(getActivity(), msg);
+                }
             }
         });
+
         builder.show();
     }
 
-    //Display the account info to user.
-    private void updateInfo(){
+    /**
+     * Display the account info to user.
+     */
+    private void updateInfo() {
+
+        // Formatting the message.
         display = String.format("First name: %s\n" +
                 "Last name: %s\n" +
                 "Email: %s\n" +
