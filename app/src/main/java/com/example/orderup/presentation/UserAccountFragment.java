@@ -41,7 +41,7 @@ public class UserAccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_account, container, false);
 
         infoContainer = (TextView) view.findViewById(R.id.infoContainer);
-        updateInfo();
+        updateInfo(); // Display the user info.
 
         //Event listener of the add credit card button.
         addCardButton = (Button) view.findViewById(R.id.addCardButton);
@@ -75,14 +75,10 @@ public class UserAccountFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Change the activity to login page.
-                startActivity(new Intent(getActivity(), LoginActivity.class));
 
-                //Tell the system that the current user is logged out.
-                Services.setCurrentUser(null);
-
-                //Remove current activity.
-                getActivity().finish();
+                startActivity(new Intent(getActivity(), LoginActivity.class)); // Change the activity to login page.
+                Services.setCurrentUser(null); // Tell the system that the current user is logged out.
+                getActivity().finish(); // Remove current activity.
             }
         });
 

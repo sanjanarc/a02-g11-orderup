@@ -3,102 +3,101 @@ package com.example.orderup.logic;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
-//This class will pass User data from persistence to presentation: User First and Last name, Address,and Wallet Balance
-public class UserServices extends Services
-{
-    private static final UserPersistence userPersistence = getUserPersistence();
+/**
+ * This class provided method/services that related to user.
+ */
+public class UserServices {
 
-    //Return the first name of the given email.
-    public static String getFirstName(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
+    public UserPersistence userPersistence;
+    public User user;
 
-        if(user != null)
-        {
-            return user.getFirstName();
-        }else
-        {
-            return null;
+    /**
+     * Constructor.
+     *
+     * @param userPersistence the user database.
+     * @param email the user email.
+     */
+    public UserServices(UserPersistence userPersistence, String email) {
+
+        //Dependency injection.
+        this.userPersistence = userPersistence;
+        user = this.userPersistence.getUser(email);
+    }
+
+    /**
+     * Return user object.
+     *
+     * @return current user.
+     */
+    public User getUser() {
+
+        if (user != null){
+            return user;
+        } else {
+            throw new NullPointerException();
         }
     }
 
-    //Return the last name of the given email.
-    public static String getLastName(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
-
-        if(user != null)
-        {
-            return user.getLastName();
-        }else
-        {
-            return null;
-        }
+    /**
+     * Return the first name of current user.
+     *
+     * @return current user first name.
+     */
+    public String getFirstName() {
+        return user.getFirstName();
     }
 
-    //Return the Address of the given email.
-    public static String getAddress(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
-
-        if(user != null)
-        {
-            return user.getAddress();
-        }else
-        {
-            return null;
-        }
+    /**
+     * Return the last name of the current user.
+     *
+     * @return current user last name.
+     */
+    public String getLastName() {
+        return user.getLastName();
     }
 
-    public static String getBalance(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
-
-        if(user != null)
-        {
-            return String.valueOf(user.getBalance());
-        }else
-        {
-            return null;
-        }
+    /**
+     * Return the address of current user.
+     *
+     * @return current user address.
+     */
+    public String getAddress() {
+        return user.getAddress();
     }
 
-    public static String getCredit(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
-
-        if(user != null)
-        {
-            return user.getCreditCard();
-        }else
-        {
-            return null;
-        }
+    /**
+     * Return the balance of current user.
+     *
+     * @return current user balance.
+     */
+    public String getBalance() {
+        return String.valueOf(user.getBalance());
     }
 
-    public static String getCvc(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
-
-        if(user != null)
-        {
-            return user.getCvc();
-        }else
-        {
-            return null;
-        }
+    /**
+     * Return credit card number of current user.
+     *
+     * @return credit card number.
+     */
+    public String getCredit() {
+        return user.getCreditCard();
     }
 
-    public static String getExpiry(String email)
-    {
-        User user = userPersistence.getUserTable().get(email);
+    /**
+     * Return credit card cvc.
+     *
+     * @return cvc of the credit card.
+     */
+    public String getCvc() {
+        return user.getCvc();
+    }
 
-        if(user != null)
-        {
-            return user.getExpiry();
-        }else
-        {
-            return null;
-        }
+    /**
+     * Return expiry date of the credit card.
+     *
+     * @return expiry date.
+     */
+    public String getExpiry() {
+        return user.getExpiry();
     }
 }

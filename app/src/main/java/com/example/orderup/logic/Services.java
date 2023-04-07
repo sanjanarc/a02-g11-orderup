@@ -25,7 +25,7 @@ public class Services
     }
 
     //Get the Restaurant database setup and ready for use.
-    protected static synchronized RestaurantPersistence getRestaurantPersistence()
+    public static synchronized RestaurantPersistence getRestaurantPersistence()
     {
         if (restaurantPersistence == null)
         {

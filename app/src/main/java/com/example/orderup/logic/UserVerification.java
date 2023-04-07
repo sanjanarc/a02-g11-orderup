@@ -1,7 +1,5 @@
 package com.example.orderup.logic;
 
-import android.util.Log;
-
 import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
@@ -196,7 +194,7 @@ public class UserVerification {
      * @param street
      * @throws Exception will throw error format exception.
      */
-    private void streetVerification(String street) throws Exception{
+    private void streetVerification(String street) throws Exception {
         if (street == null || street.equals("")) {
 
             throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
@@ -259,19 +257,18 @@ public class UserVerification {
     /**
      * Verify the gift card and add amount to account balance.
      *
-     * @param email
-     * @param card
+     * @param email the user email.
+     * @param card  the gift card number.
      * @throws Exception will throw exception when gift card is incorrect.
      */
     public void giftCardVerification(String email, String card) throws Exception {
-        List cardList = userPersistence.getGiftCards();
+        List<Giftcard> cardList = userPersistence.getGiftCards();
         Float amount = 0.00F;
-        String msg;
         boolean found = false;
 
         for (int i = 0; i < cardList.size(); i++) {
             if (card.equals(cardList.get(i).getNumber())) {
-                amount = cardList[i].getAmount();
+                amount = cardList.get(i).getAmount();
                 found = true;
             }
         }
@@ -285,12 +282,20 @@ public class UserVerification {
             throw new MyException.EXCEPTION_ITEM_DOES_NOT_EXIST();
 
         } else if (found) {
+
+            // Add the amount to the user account.
             userPersistence.modifyBalance(email, amount);
+
         }
     }
 
-    // Make sure the email input contain character "@".
-    public static boolean emailCheck(String email) {
+    /**
+     * Make sure the email input contain character "@".
+     *
+     * @param email the user email.
+     * @return boolean True if the email format is correct, False if not correct.
+     */
+    private boolean emailCheck(String email) {
         boolean flag = false;
         boolean checkPeriod = false;
         boolean multiplesAts = false;
@@ -310,6 +315,7 @@ public class UserVerification {
 
             counter++;
         }
+
         return flag && checkPeriod && !multiplesAts;
     }
 }

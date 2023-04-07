@@ -8,6 +8,8 @@ public interface RestaurantPersistence {
     //Get a list of restaurant from database.
     List<Restaurant> getRestaurantSequential();
 
+    Restaurant getRest(int id);
+
     //Insert new user comment to database.
     void insertComment(int restID, String comment);
 
