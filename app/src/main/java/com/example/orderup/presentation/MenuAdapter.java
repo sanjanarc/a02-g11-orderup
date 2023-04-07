@@ -25,6 +25,7 @@ import java.util.List;
 //This class is the structure of all the adapter.
 public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
+    // The list of food items that will be presented in the menu view
     List<FoodItem> foods;
     public  final int MAX_ORDER_ITEMS = 100;
 
@@ -32,6 +33,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
     {
         this.foods = foods;
     }
+
+    // setting up the adapter that the cart will use to display each foot item
     @NonNull
     @Override
     public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,6 +43,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
         return new MenuHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_view,parent,false));
     }
+
+    // the viewbindholder that will set the texts, images and the prices for the food items
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
 
@@ -52,6 +57,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
         holder.FoodItemNumber.setText(String.valueOf(1));
+
+        // the text view listener that will save the number of food items the user wants to order( could be typed using the keyboard)
         holder.FoodItemNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -70,7 +77,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         });
 
 
-
+        // this button increments the number of the particular food item that could be ordered
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -89,6 +96,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
             }
         });
 
+        // this button is used to decrement the number of food item that the user could order
         holder.subtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

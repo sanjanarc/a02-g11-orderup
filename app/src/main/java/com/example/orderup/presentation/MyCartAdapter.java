@@ -21,15 +21,16 @@ import java.util.List;
 
 //This class is the structure of all the adapter.
 public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
+    // The list of food items that will be presented in the cart view
     List<FoodItem> foods;
-
+    //The maximum number of each item the user could order
     public final int MAX_ORDER_ITEMS = 100;
 
+    // setting up the adapter that the cart will use to display each foot item
     MyCartAdapter(List<FoodItem> foods)
     {
         this.foods = foods;
     }
-
     @NonNull
     @Override
     public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,6 +41,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     }
 
+    // the viewbindholder that will set the texts, images and the prices for the food items
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
 
@@ -51,6 +53,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.FoodItemNumber.setText(String.valueOf(foods.get(position).getNumItems()));
 
         int temp = position;
+
+        // the text view listener that will save the number of food items the user wants to order( could be typed using the keyboard)
         holder.FoodItemNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -69,6 +73,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
             }
         });
 
+        // this button increments the number of the particular food item that could be ordered
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +92,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
             }
         });
 
+        // this button is used to decrement the number of food item that the user could order
         holder.subtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +108,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
             }
         });
 
+        // the submit button to remove the item completely from the cart
         holder.submitBButton.setText("Remove");
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override
