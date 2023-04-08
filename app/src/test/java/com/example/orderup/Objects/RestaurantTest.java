@@ -34,7 +34,7 @@ public class RestaurantTest {
         menu.add(item3);
 
         restaurant = new Restaurant(restaurantID, restaurantName, newCategory, cityName,
-                description, item1, item2, item3, num_menu_items, location, image);
+                description, item1, item2, item3, num_menu_items, location, image, "8");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class RestaurantTest {
         // Create a new restaurant
         Restaurant restaurant = new Restaurant(1, "McDonald's", "Fast Food", "New York City",
                 "The world's largest chain of hamburger fast food restaurants",
-                item1, item2, item3, 3, "123 Main Street", "https://example.com/mcdonalds.jpg");
+                item1, item2, item3, 3, "123 Main Street", "https://example.com/mcdonalds.jpg", "8");
 
         // Test that the restaurant was created with the correct values
         assertEquals(1, restaurant.getRestaurantID());
@@ -106,7 +106,7 @@ public class RestaurantTest {
 
   @Test
   public void testGetRestaurantID() {
-      Restaurant restaurant = new Restaurant(1, "Restaurant A", "City A", "Category A", "Description A", item1, item2, item3, 3, "Location A", "image");
+      Restaurant restaurant = new Restaurant(1, "Restaurant A", "City A", "Category A", "Description A", item1, item2, item3, 3, "Location A", "image", "8");
       int expectedId = 1;
       int actualId = restaurant.getRestaurantID();
       assertEquals(expectedId, actualId);
@@ -114,7 +114,7 @@ public class RestaurantTest {
 
     @Test
     public void testGetRestaurantName() {
-        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image");
+        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image","8");
         String expectedName = "Restaurant B";
         String actualName = restaurant.getRestaurantName();
         assertEquals(expectedName, actualName);
@@ -122,7 +122,7 @@ public class RestaurantTest {
 
     @Test
     public void testGetRestaurantCategory() {
-        Restaurant restaurant = new Restaurant(3, "Restaurant C", "Category C", "City C", "Description C", item1, item2, item3, 3, "Location C", "image");
+        Restaurant restaurant = new Restaurant(3, "Restaurant C", "Category C", "City C", "Description C", item1, item2, item3, 3, "Location C", "image","8");
         String expectedCategory = "Category C";
         String actualCategory = restaurant.getRestaurantCategory();
         assertEquals(expectedCategory, actualCategory);
@@ -130,7 +130,7 @@ public class RestaurantTest {
 
     @Test
     public void testGetRestaurantDescription() {
-        Restaurant restaurant = new Restaurant(4, "Restaurant D", "City D", "Category D", "Description D", item1, item2, item3, 3, "Location D", "image");
+        Restaurant restaurant = new Restaurant(4, "Restaurant D", "City D", "Category D", "Description D", item1, item2, item3, 3, "Location D", "image","8");
         String expectedDescription = "Description D";
         String actualDescription = restaurant.getRestaurantDescription();
         assertEquals(expectedDescription, actualDescription);
@@ -143,7 +143,7 @@ public class RestaurantTest {
         FoodItem item2 = new FoodItem(1,2, "Test Food 2",0, "image", "Food Description 2");
         FoodItem item3 = new FoodItem(1,2, "Test Food 3", 0, "image", "Test Food Description 3");
         List<FoodItem> menu = Arrays.asList(item1, item2, item3);
-        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image");
+        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image","8");
         List<FoodItem> expectedMenu = menu;
         List<FoodItem> actualMenu = restaurant.getMenuItems();
         assertEquals(expectedMenu, actualMenu);
@@ -156,7 +156,7 @@ public class RestaurantTest {
         FoodItem item2 = new FoodItem(1,2, "Test Food 2",0, "image", "Food Description 2");
         FoodItem item3 = new FoodItem(1,2, "Test Food 3", 0, "image", "Test Food Description 3");
         List<FoodItem> menu = Arrays.asList(item1, item2, item3);
-        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image");
+        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image","8");
         FoodItem expectedItem1 = item1;
         FoodItem actualItem1 = restaurant.getItem1();
         assertEquals(expectedItem1, actualItem1);
@@ -169,7 +169,7 @@ public class RestaurantTest {
         FoodItem item2 = new FoodItem(1,2, "Test Food 2",0, "image", "Food Description 2");
         FoodItem item3 = new FoodItem(1,2, "Test Food 3", 0, "image", "Test Food Description 3");
         List<FoodItem> menu = Arrays.asList(item1, item2, item3);
-        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image");
+        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image","8");
         FoodItem expectedItem = item2;
         FoodItem actualItem = restaurant.getItem2();
         assertEquals(expectedItem, actualItem);
@@ -184,7 +184,7 @@ public class RestaurantTest {
         FoodItem item2 = new FoodItem(1,2, "Test Food 2",0, "image", "Food Description 2");
         FoodItem item3 = new FoodItem(1,2, "Test Food 3", 0, "image", "Test Food Description 3");
         List<FoodItem> menu = new ArrayList<>(Arrays.asList(item1, item2, item3));
-        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image");
+        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "Location B", "image","8");
         FoodItem expectedItem = item3;
         FoodItem actualItem = restaurant.getItem3();
         assertEquals(expectedItem, actualItem);
@@ -193,7 +193,7 @@ public class RestaurantTest {
     @Test
     public void testGetRestaurantLocation() {
         List<FoodItem> menu = new ArrayList<>();
-        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "456 State St", "image");
+        Restaurant restaurant = new Restaurant(2, "Restaurant B", "City B", "Category B", "Description B", item1, item2, item3, 3, "456 State St", "image","8");
         String expectedLocation = "456 State St";
         String actualLocation = restaurant.getRestaurant_location();
         assertEquals(expectedLocation, actualLocation);

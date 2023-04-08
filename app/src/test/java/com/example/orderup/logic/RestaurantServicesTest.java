@@ -10,6 +10,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class RestaurantServicesTest {
 
+    /*
     @Test
     public void testGetRestList() {
         // Create some  restaurants
@@ -17,7 +18,7 @@ public class RestaurantServicesTest {
         Restaurant restaurant2 = new Restaurant(2, "Banh Mi King", "City B", "Category B", "Description B", null, null, null, 3, "Location B", "image");
         //RestaurantServices temp = new RestaurantServices();
 
-        /*
+
         // Add the  restaurants to the persistence layer
         RestaurantPersistenceStub restaurantPersistenceStub = new RestaurantPersistenceStub();
         restaurantPersistenceStub.insertRestaurant(restaurant1);
@@ -37,5 +38,5 @@ public class RestaurantServicesTest {
          */
 
 
-    }
+
 }

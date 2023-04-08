@@ -151,8 +151,9 @@ public class Restaurant {
 
     public String getServiceHours() { return serviceHours; }
 
-    public int getNum_menuItem(){
+    public int getNum_menuItem() {
         return num_menu_items;
+    }
     /**
      * Method returns list of Users' comments on the restaurant
      */
