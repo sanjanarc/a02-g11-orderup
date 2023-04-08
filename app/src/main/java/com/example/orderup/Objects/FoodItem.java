@@ -9,6 +9,10 @@ public class FoodItem {
     private final String image_url;
     private final String item_description;
 
+    /**
+     * Constructor.
+     *
+     */
     public FoodItem() {
         restaurant_id = 0;
         item_id = 0;
@@ -20,6 +24,16 @@ public class FoodItem {
 
     }
 
+    /**
+     * Constructor.
+     *
+     * @param restaurant_id the restaurant id.
+     * @param item_id the item id.
+     * @param itemName the item name.
+     * @param itemPrice the item price.
+     * @param itemImageURL the item image url.
+     * @param itemDescription the item description.
+     */
     public FoodItem(int restaurant_id, int item_id, String itemName, double itemPrice, String itemImageURL, String itemDescription ){
         this.restaurant_id= restaurant_id;
         item_id = item_id;
