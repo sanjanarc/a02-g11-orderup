@@ -48,6 +48,34 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image);
     }
 
+    /**
+     * Get the specific restaurant by passing the restaurant id.
+     *
+     * @param id the restaurant id.
+     * @return Restaurant object.
+     */
+    public Restaurant getRest(int id) {
+
+        Restaurant restaurant = null;
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM RESTAURANTS WHERE id = ?");
+            st.setInt(1, id);
+            final ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                restaurant = fromResultSet(rs);
+            }
+
+            rs.close();
+            st.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return restaurant;
+    }
 
     /*
    called in fromResultSet() method

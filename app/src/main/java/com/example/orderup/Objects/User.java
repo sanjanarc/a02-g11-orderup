@@ -200,4 +200,8 @@ public class User extends FoodItem
     {
         return OrderHistory;
     }
+
+    public void removeFoodFromCart(FoodItem foodItem, int num) {
+
+    }
 }

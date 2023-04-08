@@ -25,25 +25,25 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.user_home, container, false);
+        View view = inflater.inflate(R.layout.user_home, container, false);
+
         RestaurantServices temp = new RestaurantServices(Services.getRestaurantPersistence());
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new RestaurantAdapter(temp.getRestList()));
 
-
+        // Cart button event listener.
         Button button = (Button) view.findViewById(R.id.ViewCartHomeButton);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MyCartsActivity.class);
 
-                //Start the main activity class.
-                startActivity(intent);
+                Intent intent = new Intent(getContext(), MyCartsActivity.class); // Open the cart activity.
+                startActivity(intent); //Start the cart activity class.
             }
         });
+
         // Inflate the layout for this fragment
         return view;
     }

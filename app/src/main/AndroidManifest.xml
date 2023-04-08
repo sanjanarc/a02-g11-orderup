@@ -38,10 +38,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".presentation.CommentActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".presentation.MyCartsActivity"
             android:exported="false"
             android:screenOrientation="portrait"

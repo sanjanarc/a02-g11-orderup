@@ -3,30 +3,61 @@ package com.example.orderup.persistance;
 import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-//The interface for user persistence.
+/**
+ * The interface for user persistence.
+ */
 public interface UserPersistence {
 
-    //Get a table of users.
-    Map<String, User> getUserTable();
-
+    /**
+     * Get user object by email.
+     *
+     * @param email the user email.
+     * @return an User object.
+     */
     User getUser(String email);
 
-    //Add a user object to the table.
+    /**
+     * Add new user object to the table.
+     *
+     * @param email     the user email.
+     * @param password  the user account password.
+     * @param firstName the user first name.
+     * @param lastName  the user last name.
+     */
     void addUser(String email, String password, String firstName, String lastName);
 
-    //Add a credit card info to the specific user.
+    /**
+     * Add credit card info to user table.
+     *
+     * @param email   the user email.
+     * @param cardNum the credit card number.
+     * @param cvc     the credit card cvc.
+     * @param expiry  the expiry date of the credit card.
+     */
     void addCreditCard(String email, String cardNum, String cvc, String expiry);
 
-    //Update the user address.
+    /**
+     * Add the given address to the database.
+     *
+     * @param email   the user email.
+     * @param address the user address.
+     */
     void updateAddress(String email, String address);
 
-    //Modify the user account balance.
+    /**
+     * Add or Reduce the balance from database.
+     *
+     * @param email the user email.
+     * @param balance the amount to remove or add.
+     */
     void modifyBalance(String email, float balance);
 
-    //This get a list of gift card info from database.
+    /**
+     * Read and store the gift card data from database.
+     *
+     * @return List of gift card object.
+     */
     List<Giftcard> getGiftCards();
 }

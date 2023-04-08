@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
-import com.example.orderup.persistance.UserPersistence;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
