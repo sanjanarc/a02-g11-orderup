@@ -1,10 +1,9 @@
 package com.example.orderup.logic;
 
-import static com.example.orderup.logic.Services.getUserPersistence;
-
-import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
+
+import java.util.ArrayList;
 
 /**
  * This class provided method/services that related to user.
@@ -18,7 +17,7 @@ public class UserServices {
      * Constructor.
      *
      * @param userPersistence the user database.
-     * @param email the user email.
+     * @param email           the user email.
      */
     public UserServices(UserPersistence userPersistence, String email) {
 
@@ -34,11 +33,21 @@ public class UserServices {
      */
     public User getUser() {
 
-        if (user != null){
+        if (user != null) {
             return user;
         } else {
             throw new NullPointerException();
         }
+    }
+
+    /**
+     * Add the user cart info to database.
+     *
+     * @param email the user email.
+     * @param cart  the user cart info.
+     */
+    public void updateCart(String email, ArrayList cart) {
+        userPersistence.updateCart(email, cart);
     }
 
     /**
@@ -102,20 +111,5 @@ public class UserServices {
      */
     public String getExpiry() {
         return user.getExpiry();
-    }
-
-    /**
-     * Search foodItems for the read in foodItem
-     *
-     * @param foodItem the foodItem to search for.
-     * @return true if found, false if not.
-     */
-    public static boolean FoodItemExists(FoodItem foodItem) {
-        for(int i = 0; i< getUser().getFoodCart().size(); i++)
-        {
-            if(getUser().getFoodCart().get(i).equals(foodItem))
-                return true;
-        }
-        return false;
     }
 }

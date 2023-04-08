@@ -1,7 +1,5 @@
 package com.example.orderup.persistance.hsqldb;
 
-import android.util.Log;
-
 import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
@@ -13,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -68,30 +65,6 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     }
 
     /**
-     * Build a user hash map from database and return the user table.
-     * @return
-     */
-    @Override
-    public HashMap<String, User> getUserTable() {
-        final HashMap<String, User> userList = new HashMap<>();
-
-        try (final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM USERS");
-            while (rs.next()) {
-                User user = fromResultSet(rs);
-                userList.put(user.getEmail(), user);
-            }
-            rs.close();
-            st.close();
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
-
-        return userList;
-    }
-
-    /**
      * Get the user info from database.
      *
      * @param email the specific user email.
@@ -121,7 +94,14 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         return user;
     }
 
-    //Add new user object to the table.
+    /**
+     * Add new user object to the table.
+     *
+     * @param email     the user email.
+     * @param password  the user account password.
+     * @param firstName the user first name.
+     * @param lastName  the user last name.
+     */
     @Override
     public void addUser(String email, String password, String firstName, String lastName) {
         try (Connection c = connection()) {
@@ -141,7 +121,14 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
-    //Add credit card info to user table.
+    /**
+     * Add credit card info to user table.
+     *
+     * @param email   the user email.
+     * @param cardNum the credit card number.
+     * @param cvc     the credit card cvc.
+     * @param expiry  the expiry date of the credit card.
+     */
     @Override
     public void addCreditCard(String email, String cardNum, String cvc, String expiry) {
         try (Connection c = connection()) {
@@ -156,7 +143,12 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
-    //Add the given address to the database.
+    /**
+     * Add the given address to the database.
+     *
+     * @param email   the user email.
+     * @param address the user address.
+     */
     @Override
     public void updateAddress(String email, String address) {
         try (Connection c = connection()) {
@@ -169,7 +161,24 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
-    //Add or Reduce the balance from database.
+    @Override
+    public void updateCart(String email, ArrayList cart) {
+//        try (Connection c = connection()) {
+//            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET ADDRESS = ? WHERE EMAIL = ?");
+//            ps.setString(1, address);
+//            ps.setString(2, email);
+//            ps.executeUpdate();
+//        } catch (SQLException e) {
+//            throw new PersistenceException(e);
+//        }
+    }
+
+    /**
+     * Add or Reduce the balance from database.
+     *
+     * @param email   the user email.
+     * @param balance the amount to remove or add.
+     */
     @Override
     public void modifyBalance(String email, float balance) {
         try (Connection c = connection()) {
