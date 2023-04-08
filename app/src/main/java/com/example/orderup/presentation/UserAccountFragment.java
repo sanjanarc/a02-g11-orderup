@@ -25,7 +25,7 @@ import com.example.orderup.logic.UserVerification;
  */
 public class UserAccountFragment extends Fragment {
     TextView infoContainer;
-    Button addCardButton, logoutButton, addAddressButton, redeemCardButton;
+    Button addCardButton, logoutButton, addAddressButton, redeemCardButton, membershipButton;
 
     String userEmail = Services.getCurrentUser();
 
@@ -67,6 +67,15 @@ public class UserAccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 redeemPopUp();
+            }
+        });
+
+        //Event listener of the membership button.
+        membershipButton = (Button) view.findViewById(R.id.membershipButton);
+        membershipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                memberPopUp();
             }
         });
 
@@ -273,6 +282,41 @@ public class UserAccountFragment extends Fragment {
     }
 
     /**
+     * This method will pop up and prompt user for become a membership.
+     */
+    private void memberPopUp() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Are you sure you want to purchase membership for 25$?: ");
+        View v = getLayoutInflater().inflate(R.layout.popup_buy_membership, null);
+        builder.setView(v);
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Connect to xml file.
+                EditText confirmationInput = (EditText) v.findViewById(R.id.confirmationInput);
+
+                //Get input data from xml file.
+                String confirm = confirmationInput.getText().toString();
+
+                if (confirm.equals("Yes")) {
+
+                    //Verify and add credit card to database.
+                    String result = UserVerification.verifyMembershipPurchase(userEmail);
+
+                    //Display the result to user.
+                    if (result != "") {
+                        ErrorPopUp.errorMsg(getActivity(), result);
+                    }
+
+                    updateInfo();
+                }
+            }
+        });
+
+        builder.show();
+    }
+
+    /**
      * Display the account info to user.
      */
     private void updateInfo() {
@@ -281,11 +325,21 @@ public class UserAccountFragment extends Fragment {
 
             User user = userServices.getUser(Services.getCurrentUser());
 
+            String membershipStatus;
+
+            if(true == user.getMembership()) {
+                membershipStatus =  "Enabled";
+            } else {
+                membershipStatus =  "Disabled";
+            }
+
             // Formatting the message.
             String display = String.format("First name: %s\n" +
                     "Last name: %s\n" +
                     "Email: %s\n" +
-                    "Address: %s", user.getFirstName(), user.getLastName(), userEmail, user.getAddress());
+                    "Address: %s\n" +
+                    "Account balance: $ %s\n" +
+                    "Membership status: %s", user.getFirstName(), user.getLastName(), userEmail, user.getAddress(), user.getBalance(), membershipStatus);
             infoContainer.setText(display);
 
         } catch (Exception e) {

@@ -69,4 +69,11 @@ public interface UserPersistence {
      * @return List of gift card object.
      */
     List<Giftcard> getGiftCards();
+
+    /**
+     * Change the membership status of the user.
+     *
+     * @param email the email of the user.
+     */
+    void setMembership(String email);
 }
