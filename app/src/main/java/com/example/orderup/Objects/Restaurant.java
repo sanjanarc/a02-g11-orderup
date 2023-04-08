@@ -25,6 +25,7 @@ public class Restaurant {
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
     private final FoodItem item3;
+    private final int num_menu_items;
     private final String location;
     private List<String> userComments;
 

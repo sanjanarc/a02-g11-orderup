@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
+import com.example.orderup.logic.MyException;
 import com.example.orderup.logic.RestaurantServices;
 import com.example.orderup.logic.Search_algorithm;
 import com.example.orderup.logic.Services;
@@ -55,8 +56,28 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
-                // Set the new restaurant list to home page.
-                recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(s)));
+                try {
+
+                    // Set the new restaurant list to home page.
+                    recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(s)));
+                } catch (Exception e) {
+
+                    String msg;
+
+                    if (e instanceof MyException.EXCEPTION_ITEM_DOES_NOT_EXIST) {
+
+                        msg = "No such restaurant.";
+
+                    } else {
+
+                        msg = e.getMessage();
+
+                    }
+
+                    ErrorPopUp.errorMsg(getActivity(), msg);
+                }
+
+
                 return false;
             }
 
