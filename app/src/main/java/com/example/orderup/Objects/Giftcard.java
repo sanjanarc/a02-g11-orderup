@@ -1,4 +1,5 @@
 package com.example.orderup.Objects;
+
 /**
  * This class holds a single Giftcard object.
  */
@@ -24,5 +25,4 @@ public class Giftcard {
     public String getNumber() {
         return number;
     }
-
 }

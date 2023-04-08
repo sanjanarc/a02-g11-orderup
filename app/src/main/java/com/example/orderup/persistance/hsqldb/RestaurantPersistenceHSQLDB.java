@@ -85,7 +85,7 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         return new FoodItem(rest_id,item_id,item_name,item_price,item_image_url,item_desc);
     }
     /*
-    method returns a list of comments left of the restaurant that has the restaurant id
+    method returns a list of comments left to the restaurant that has the restaurant id
     Parameters: "int restaurantID" id of the restaurant
     return: List of comments
      */
@@ -106,7 +106,6 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         }
         return null;
     }
-
 
 
     /*
@@ -131,6 +130,31 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
             throw new PersistenceException(e);
         }
     }
+    /*
+    method returns restaurant of specific id
+     */
+    @Override
+    public Restaurant getRest(int id) {
+        Restaurant restaurantToReturn=null;
+
+        try (final Connection c = connection()) {
+            String query = "SELECT * FROM restaurants WHERE ID = ?";
+            PreparedStatement pstmt = c.prepareStatement(query);
+            pstmt.setInt(1, id); //restaurant of specified id
+            ResultSet rs = pstmt.executeQuery();
+            restaurantToReturn= fromResultSet(rs);
+
+            rs.close();
+
+            return restaurantToReturn; //return the list of comments
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+
+        }
+
+
+    }
+
     /*
     Method adds a comment left on a restaurant's place to the DB.script
      */

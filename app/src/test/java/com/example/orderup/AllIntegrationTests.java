@@ -16,5 +16,5 @@ import com.example.orderup.persistance.hsqldb.IntegrationTests.UserIntegrationTe
 
 })
 
-public class IntegrationTests {
+public class AllIntegrationTests {
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public class RestaurantServices {
 
     private final RestaurantPersistence restaurantPersistence;
+    private Restaurant restaurant;
 
     /**
      * Constructor.
@@ -19,6 +20,7 @@ public class RestaurantServices {
      */
     public RestaurantServices(RestaurantPersistence restaurantPersistence) {
         this.restaurantPersistence = restaurantPersistence;
+        restaurant=null;
     }
 
     /**
@@ -28,6 +30,11 @@ public class RestaurantServices {
      */
     public List<Restaurant> getRestList() {
         return restaurantPersistence.getRestaurantSequential();
+    }
+
+    public Restaurant getSequential(){
+        String result=null;
+        if()
     }
 
     /**
