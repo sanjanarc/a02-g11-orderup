@@ -58,4 +58,13 @@ public class UserServices {
         return user.getMembership();
 
     }
+
+    public static Boolean getMembership(String email)
+    {
+        User user = userPersistence.getUserTable().get(email);
+
+
+        return user.getMembership();
+
+    }
 }
