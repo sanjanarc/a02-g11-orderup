@@ -9,45 +9,42 @@ import org.junit.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import static junit.framework.TestCase.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+
+import java.io.File;
+import java.io.IOException;
+
+import com.example.orderup.logic.RestaurantServices;
+import com.example.orderup.logic.UserServices;
+import com.example.orderup.persistance.RestaurantPersistence;
+import com.example.orderup.persistance.UserPersistence;
+import com.example.orderup.Objects.User;
+import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
+import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
+import com.example.orderup.utils.TestFilesUtil;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+
+
 public class UserPersistenceHSQLDBTest {
-    Connection connection = null;
-    String dbPath;
+    private UserServices userServices;
+    private UserPersistence userPersistence;
 
     @Before
-    public void connection(){
-        setDbTest("com/example/orderup/persistance/hsqldb");
-        try {
-            connection = DriverManager.getConnection(dbPath, "SA", "");
-        }catch (SQLException e){
-            System.out.println("Connection is not working. ---->");
-            e.printStackTrace();
-        }
-    }
-
-    private void setDbTest(String name){
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-        }
-        catch (InstantiationException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-
-        dbPath = name;
+    public void setUp() throws SQLException {
+        //mock of Restaurant Persistence created
+        userPersistence= mock(UserPersistence.class);
+        userServices= new UserServices(userPersistence);
     }
 
     @Test

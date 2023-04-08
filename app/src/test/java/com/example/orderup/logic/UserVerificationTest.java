@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class UserVerificationTest {
-    /*
 
+/*
     @Test
     public void loginVerificationTest() {
         assertEquals("Email or Password is Empty.", UserVerification.loginVerification("", ""));

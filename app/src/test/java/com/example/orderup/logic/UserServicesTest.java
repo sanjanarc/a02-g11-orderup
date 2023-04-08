@@ -9,13 +9,14 @@ import org.junit.Test;
 public class UserServicesTest {
     /*
 
+
     @Test
     public void getFirstName() {
         UserServices temp = new UserServices();
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
-        assertEquals("admin@email.com", temp.getFirstName(existingEmail));
-        assertEquals(null, temp.getFirstName(nonexistingEmail));
+        assertEquals("admin@email.com", temp.getUser(existingEmail).getFirstName());
+        assertEquals(null, temp.getUser(nonexistingEmail).getFirstName());
     }
 
     @Test
@@ -55,5 +56,7 @@ public class UserServicesTest {
         assertEquals("10.0", temp.getBalance(existingEmail));
         assertEquals(null, temp.getBalance(nonexistingEmail));
     }
+
      */
+
 }

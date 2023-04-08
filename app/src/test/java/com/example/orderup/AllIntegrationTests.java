@@ -12,7 +12,7 @@ import com.example.orderup.persistance.hsqldb.IntegrationTests.UserIntegrationTe
 @Suite.SuiteClasses({
         //all integration test classes
         RestaurantIntegrationTest.class,
-        //UserIntegrationTest.class
+        UserIntegrationTest.class
 
 })
 
