@@ -9,8 +9,6 @@ import com.example.orderup.Objects.FoodItemTest;
 import com.example.orderup.Objects.GiftcardTest;
 import com.example.orderup.Objects.RestaurantTest;
 import com.example.orderup.Objects.UserTest;
-import com.example.orderup.logic.RestaurantServicesTest;
-import com.example.orderup.logic.UserServicesTest;
 
 
 @RunWith(Suite.class)
