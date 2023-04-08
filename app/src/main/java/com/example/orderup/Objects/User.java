@@ -1,11 +1,10 @@
 package com.example.orderup.Objects;
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-
+/**
+ * This class holds a single User object.
+ */
 public class User extends FoodItem
 {
     private String firstName;
@@ -21,6 +20,14 @@ public class User extends FoodItem
     private ArrayList<FoodItem> cart = new ArrayList<>();
     private ArrayList<ArrayList<FoodItem>> OrderHistory = new ArrayList<>();
 
+    /**
+     * Constructor.
+     *
+     * @param firstName the new user's first name.
+     * @param lastName the new user's last name.
+     * @param email the new user's email.
+     * @param password the new user's password.
+     */
     public User(String firstName, String lastName, String email, String password)
     {
         this.firstName = firstName;
@@ -34,6 +41,19 @@ public class User extends FoodItem
         cart = new ArrayList<>();
     }
 
+    /**
+     * Constructor.
+     *
+     * @param email the new user's email.
+     * @param password the new user's password.
+     * @param firstName the new user's first name.
+     * @param lastName the new user's last name.
+     * @param creditCard the new user's creditcard number.
+     * @param cvc the new user's cvc number.
+     * @param expiry the new user's creditcard expiry date.
+     * @param address the new user's address.
+     * @param balance the new user's balance.
+     */
     public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance)
     {
         this.firstName = firstName;
@@ -138,6 +158,12 @@ public class User extends FoodItem
                 "Address: %s", firstName, lastName, email, password, address);
     }
 
+    /**
+     * Checks two emails to see if they are the samel.
+     *
+     * @param other the user to compare to this user.
+     * @return true if they are the same, false if not.
+     */
     public boolean equals(Object other) {
         boolean equals = false;
         if (other instanceof User) {
@@ -148,6 +174,12 @@ public class User extends FoodItem
         return equals;
     }
 
+    /**
+     * Adds a food item to the user's cart.
+     *
+     * @param foodItem the foodItem to add.
+     * @param number the amount of that item to add.
+     */
     public void addToFoodCart(FoodItem foodItem, int number)
     {
         cart.add(foodItem);

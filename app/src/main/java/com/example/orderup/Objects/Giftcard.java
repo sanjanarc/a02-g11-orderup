@@ -1,5 +1,7 @@
 package com.example.orderup.Objects;
-
+/**
+ * This class holds a single Giftcard object.
+ */
 public class Giftcard {
     String number;
     float amount;

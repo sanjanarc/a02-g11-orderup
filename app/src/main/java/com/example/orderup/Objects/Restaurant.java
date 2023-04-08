@@ -1,12 +1,12 @@
 package com.example.orderup.Objects;
-
 import com.example.orderup.logic.RestaurantServices;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
-Restaurant: This object class represents a restaurant in the database. Its menu consists of "FoodItem" objects
+/**
+ * This class holds a single Restaurant object.
  */
+
 public class Restaurant {
 
     private final int restaurantID;
@@ -24,7 +24,11 @@ public class Restaurant {
     private List<String> userComments;
 
 
-
+    /**
+     * Constructor.
+     *
+     * @param newID the new restaurant's ID.
+     */
     public Restaurant(final int newID) {
         restaurantID = newID;
         restaurantName = null;
@@ -40,6 +44,21 @@ public class Restaurant {
         userComments=null;
     }
 
+    /**
+     * Constructor.
+     *
+     * @param newID the new restaurant's ID.
+     * @param newRestaurantName the new restaurant's name.
+     * @param newCategory the new restaurant's food category.
+     * @param cityName the new restaurant's city.
+     * @param description the new restaurant's description.
+     * @param item1 the first item in the menu list.
+     * @param item2 the second item in the menu list.
+     * @param item3 the third item in the menu list.
+     * @param num_menu_items the amount of menu items.
+     * @param location the new restaurant's location.
+     * @param image the new restaurant's image.
+     */
     public Restaurant(int newID, String newRestaurantName, String newCategory,
                       String cityName, String description,
                       final FoodItem item1, final FoodItem item2,
@@ -109,16 +128,16 @@ public class Restaurant {
         return num_menu_items;
     }
 
-    /*
-    Method adds a user's comment left on the restaurant
+    /**
+     *  Method adds a user's comment left on the restaurant
      */
     public void updateComment(){
         RestaurantServices temp = new RestaurantServices();
         userComments = temp.getComments(restaurantID);
     }
 
-    /*
-    method returns list of Users' comments on the restaurant
+    /**
+     *  Method returns list of Users' comments on the restaurant
      */
     public List<String> getUserComment(){
         return userComments;

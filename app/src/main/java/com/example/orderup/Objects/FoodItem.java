@@ -1,5 +1,7 @@
 package com.example.orderup.Objects;
-
+/**
+ * This class holds a single FoodItem object.
+ */
 public class FoodItem {
 
     private int restaurant_id;
