@@ -104,6 +104,12 @@ public class UserServices {
         return user.getExpiry();
     }
 
+    /**
+     * Search foodItems for the read in foodItem
+     *
+     * @param foodItem the foodItem to search for.
+     * @return true if found, false if not.
+     */
     public static boolean FoodItemExists(FoodItem foodItem) {
         for(int i = 0; i< getUser().getFoodCart().size(); i++)
         {
