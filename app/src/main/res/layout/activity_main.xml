@@ -7,6 +7,10 @@
     tools:context=".presentation.MainActivity"
     tools:visibility="visible">
 
+
+
+
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -14,12 +18,14 @@
         android:layout_above="@id/bottomNavigationView" />
 
 
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#ff8c00"
+        android:background="#c4f5f1"
         app:itemIconTint="@drawable/nav_selected_color"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />

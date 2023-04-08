@@ -1,6 +1,6 @@
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
 CREATE MEMORY TABLE PUBLIC.USERS(EMAIL VARCHAR(20) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(20),FIRSTNAME VARCHAR(20),LASTNAME VARCHAR(20),CREDITCARD VARCHAR(20),CVC VARCHAR(20),EXPIRY VARCHAR(20),ADDRESS VARCHAR(50),BALANCE DECIMAL(10, 2))
-CREATE MEMORY TABLE PUBLIC.RESTAURANTS(ID INTEGER NOT NULL PRIMARY KEY,NAME VARCHAR(100),CATEGORY VARCHAR(100),CITY VARCHAR(15),DESCRIPTION VARCHAR(1000),NUM_ITEMS INTEGER NOT NULL, LOCATION VARCHAR(200), IMAGE VARCHAR(50))
+CREATE MEMORY TABLE PUBLIC.RESTAURANTS(ID INTEGER NOT NULL PRIMARY KEY,NAME VARCHAR(100),CATEGORY VARCHAR(100),CITY VARCHAR(15),DESCRIPTION VARCHAR(1000),NUM_ITEMS INTEGER NOT NULL, LOCATION VARCHAR(200), IMAGE VARCHAR(50),HOURS VARCHAR(100))
 CREATE MEMORY TABLE PUBLIC.FOODITEM(ID INTEGER NOT NULL,ITEM_ID INTEGER NOT NULL,ITEM_NAME VARCHAR(50),ITEM_PRICE DECIMAL(10, 2),ITEM_IMAGE_URL VARCHAR(500),ITEM_DESC VARCHAR(500))
 CREATE MEMORY TABLE PUBLIC.GIFTCARD(NUMBER VARCHAR(16), AMOUNT DECIMAL(10, 2))
 CREATE MEMORY TABLE PUBLIC.COMMENTS(ID INTEGER NOT NULL,COMMENT VARCHAR(1000))
@@ -13,9 +13,10 @@ SET WRITE_DELAY 20
 SET FILES SCALE 32
 SET SCHEMA PUBLIC
 INSERT INTO USERS VALUES('admin2@email.com','admin123','John','Doe','5299640000000000','505','03/03','66 Chancellors Circle, Winnipeg, Manitoba, R3T2N2',0.0)
-INSERT INTO RESTAURANTS VALUES(1,'Indian Food Corner','Tazndoori,Indian, Chicken','Winnipeg','Traditional Indian dishes from butter chicken to chicken biryani.',3,'1373 Pembina Hwy #4 Winnipeg MB R3T 2B7','indianfoodcorner_home')
-INSERT INTO RESTAURANTS VALUES(2,'Baked Expectations','Pie,Dessert,Sweet,Cake,Cookies,Cupcakes','Winnipeg','With our dizzying array of cheesecakes, cakes, tortes and pies it is easy to come here with only your sweet tooth in mind, but sweet or savoury, you are in for a treat!',3,'161 Osborne St Winnipeg MB R3L 1Y7','baked_expectations')
-INSERT INTO RESTAURANTS VALUES(3,'Banh Mi King','Vietnamese,Savory,Sandwiches,Phom Poutine','Winnipeg','Choose from an incredible selection of appetizing rice dishes, Vietnamese salads, pho, Viet subs, baoger and more.',3,'510 Portage Ave Winnipeg MB R3C 0G2','banh_mi_king')
+INSERT INTO RESTAURANTS VALUES(1,'Indian Food Corner','Tandoori,Indian,Chicken','Winnipeg','Traditional Indian dishes from butter chicken to chicken biryani.',3,'1373 Pembina Hwy #4 Winnipeg MB R3T 2B7','indianfoodcorner_home','Monday to Sunday : 11am- 8pm')
+INSERT INTO RESTAURANTS VALUES(2,'Baked Expectations','Pie,Dessert,Sweet,Cake,Cookies,Cupcakes','Winnipeg','With our dizzying array of cheesecakes, cakes, tortes and pies it is easy to come here with only your sweet tooth in mind, but sweet or savoury, you are in for a treat!',3,'161 Osborne St Winnipeg MB R3L 1Y7','baked_expectations','Monday to Friday: 10am-7pm')
+INSERT INTO RESTAURANTS VALUES(3,'Banh Mi King','Vietnamese,Savory,Sandwiches,Phom Poutine','Winnipeg','Choose from an incredible selection of appetizing rice dishes, Vietnamese salads, pho, Viet subs, baoger and more.',3,'510 Portage Ave Winnipeg MB R3C 0G2','banh_mi_king','Monday to Saturday: 12pm-9pm')
+INSERT INTO RESTAURANTS VALUES(4,'Jollibee','Fried Chicken,Philippines,Filipino Fast Food','Winnipeg','One of the jolliest fast food restaurants on earth. Our menu offers many of your favorite comfort foods including fried chicken, French fries, pies, spaghetti, burgers, and more but with a Filipino twist.',3,'1377 McPhillips St Winnipeg MB R2V 3C4','jollibee_home','Monday to Sunday: 11am-6pm')
 INSERT INTO FOODITEM VALUES(1,1,'IFC Spl Saag & Makki Di Roti Meal',999.00,'food_1_1','Saag and two makki di rotis with salted lassi.')
 INSERT INTO FOODITEM VALUES(1,2,'Vegetarian Combo',1299.00,'food_1_2','Chana masala with one of your choice of Vegetarian curry or sabzi, rice, Butter naan bread and pickle.')
 INSERT INTO FOODITEM VALUES(1,3,'Pani Puri',699.00,'food_1_3','Round, hollow puri fried and filled with a mixture of flavored water, tamarind chutney, chilly, chat masala, potatoes, and onions.')
@@ -25,6 +26,185 @@ INSERT INTO FOODITEM VALUES(2,3, 'Oreo Cookie Cheesecake',975.00, 'food_2_3', 'W
 INSERT INTO FOODITEM VALUES(3,1, 'Pork Belly Baoger',779.00,'food_3_1','Slow-braised pork belly cooked in a hot oven and served on a steamed bun with cheese, pickled daikons, red onions, and lettuce.')
 INSERT INTO FOODITEM VALUES(3,2,'Beef Baoger',799.00,'food_3_2','Homemade beef patties, steamed bun, cheese, pickled daikons, red onions, and lettuce.')
 INSERT INTO FOODITEM VALUES(3,3, 'Deluxe Beef Pho',1129.00,'food_3_3','Gluten friendly. Sliced top sirloin raw beef, beef brisket, and beef balls with your choice of broth served with a side of bean sprouts and basil.')
+INSERT INTO FOODITEM VALUES(4,1, 'Banana Langka Pie',401.00,'food_4_1','Use code BOGOBLP at checkout to redeem offer. \r\n\r\nBanana Langka Pie is a perfect combination of two popular fruits from the Philippines – banana and jackfruit. The fruity filling encrusted in a buttery flaky crust makes a delicious sweet treat!\r\n');
+INSERT INTO FOODITEM VALUES(4,2,'Peach Mango Pie',401.00,'food_4_2','Sweet and flaky Peach Mango Pie made with real Philippine mangoes');
+INSERT INTO FOODITEM VALUES(4,3, 'Pepsi',344.00,'food_4_3','A 20 oz Pepsi');
+INSERT INTO RESTAURANTS VALUES(5,'JOEY Restaurants','Burgers,Canadian,Pasta,Sandwiches,Fries','Winnipeg','The restaurant focuses on Asian, American, Mediterranean and other global dishes. It is a Western Canadian premium casual restaurant.',3,'1550 Kenaston Blvd Winnipeg MB R3P 0Y4','joey_home','Monday to Friday: 9am-4pm')
+INSERT INTO RESTAURANTS VALUES(6,'Mars Sisig','Filipino,Philippines,Pho','Winnipeg','The restaurant serves Filipino dishes from breakfast to dinner.',3,'1303 Jefferson Ave Winnipeg MB R2P 1S7','mars_home','Friday to Sunday: 1pm-10pm')
+INSERT INTO RESTAURANTS VALUES(7,'Aroma Bistro','KWB,Chinese,Hong Kong,Sichuan,Savory,China','Winnipeg','Aroma Bistro is serving Asian Fusion Food in Winnipeg.',3, '741 St Mary''s Rd Winnipeg MB R2M 3N5','aroma_home','Monday to Sunday: 2pm-11pm')
+INSERT INTO RESTAURANTS VALUES(8,'LOCAL Public Eatery','Burgers,Neighbourhood,Drinks,Bar','Winnipeg','We bring family & friends (new & old) together over our favourite things: local craft beer, wine & cocktails, elevated food that comforts the soul, sports & social games.',3,'274 Garry St Winnipeg MB R3C 1H3','local_pub_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(9,'Earls Kitchen + Bar','Pizza,Canadian,Drinks,Burgers,Pasta','Winnipeg','Earls Kitchen + Bar is a Canadian-based sleek, upscale chain serving gourmet burgers, global comfort food, cocktails, wines & beers. Each location has a menu that's curated just for them.',3,'300 Main St #100 Winnipeg MB R3B 1B6','earls_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(10,'Korean Garden','Korean','Winnipeg','Traditional korean food. Cook with love and patient.',3,'1399 McPhillips St Winnipeg MB R2V 3C4','korean_garden_home','Monday to Friday: 10am-9pm')
+INSERT INTO RESTAURANTS VALUES(11,'Nuburger','Burgers,Fast Food','Winnipeg','Feelin Saucy? Take Your Favourite Sauce Home.',3,'1 Forks Market Road Winnipeg MB R3C 4L9','nuburger_home','Monday to Sunday: 2pm-11pm')
+INSERT INTO RESTAURANTS VALUES(12,'Wendy''s','Burgers,Fast Food, Milk Shakes','Winnipeg','We Believe in Quality. Inside and Out. We Run on our Values.',3, '650 ST. JAMES STREET WINNIPEG MB R3G 3J5','wendy_home','Monday to Friday: 10am-8pm')
+INSERT INTO RESTAURANTS VALUES(13,'Popeyes Louisiana Kitchen','Halal,Chicken,Fast Food','Winnipeg','Popeyes culinary heritage is built upon the rich Cajun and creole flavor profiles that are unmistakably Louisiana. We continuously draw upon and celebrate this heritage to inspire new, authentic menu creations the world craves.',3,'605 Sterling Lyon Parkway Winnipeg MB R3G 0W9','popeyes_home','Monday to Saturday: 12pm-9pm')
+INSERT INTO RESTAURANTS VALUES(14,'PC Express Rapid Delivery','Convenience,Fast,Superstore,No Frills','Winnipeg','We have anything you want and deliver it to you. Anything? Yes, ANYTHING.',3, '80 Bison Dr Winnipeg MB R3T 4Z7','pc_home','Monday to Saturday: 9am-6pm')
+INSERT INTO RESTAURANTS VALUES(15,'Wako Sushi Cafe','Sushi,Japanese','Winnipeg','Fresh ingredients and Amazing taste make life more colorful.',3, '875 Corydon Ave Winnipeg MB R3M','wako_home','Monday to Friday: 9am-5pm')
+INSERT INTO RESTAURANTS VALUES(16,'Logan Corner Restaurant','Chicken,Chinese,China','Winnipeg','We are one of the best Chinese restaurants in Winnipeg, specializing in providing customers with fast and delicious Chinese food and Asian cuisine. Try their amazing seafood, meat, or vegetarian dishes whatever your preference, they make it delicious!',3,'247 Logan Avenue Winnipeg MB R3B 0K9','logan_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(17,'Happy Lemon','Bubble Tea, Drinks','Winnipeg','Do you want Happy? Our drinks can fulfill what you need.',3, '1600 Ness Ave A Winnipeg MB R3J 3W6','happy_lemon','Monday to Sunday: 11am-5pm')
+INSERT INTO RESTAURANTS VALUES(18,'Little Viet','Bubble Tea,Vietnamese','Winnipeg','Bubble Tea? Come Little Viet, we have the best drinks on earth.',3,'2565 Portage Ave Winnipeg MB R3J 0P4','little_viet_home','Monday to Saturday: 12pm-9pm')
+INSERT INTO RESTAURANTS VALUES(19,'Mama Nors Kitchen','Filipino,Philippines,Catering','Winnipeg','Try our best home-made Filipino cuisine here in Winnipeg. Our selections of food are best for get to.',3,'642 Leila Ave Winnipeg MB R2V 3N7','mama_home','Friday to Sunday: 1pm-10pm')
+INSERT INTO RESTAURANTS VALUES(20,'Poke Mono','Poke,Hawaiian,Bowls,Chicken','Winnipeg','Japanese and Hawaiian Restaurant in Winnipeg',3,'77 Edmonton St Winnipeg MB R3C 4H8','poke_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(21,'Leopold''s Tavern','Burgers,Pub,Drinks,Fries','Winnipeg','Classic neighbourhood bar. We love good food, good beer and our community!',3,'696 Osborne St Winnipeg MB R3L2B9','leopald_home','Monday to Sunday: 2pm-11pm')
+INSERT INTO RESTAURANTS VALUES(22,'Harvey''s','Burgers,Fast Food','Winnipeg','The home of flame-grilled burgers made with 100% Canadian beef and topped the way you want it! Over 250 million ways to make your burger a beautiful thing!',3,'600 Portage Avenue Winnipeg MB R3C 3L7','harvey_home','Monday to Saturday: 12pm-9pm')
+INSERT INTO RESTAURANTS VALUES(23,'Tim Hortons','Coffee,Donuts,Fast Food,Drinks,Sandwiches,Canadian','Winnipeg','Tim Hortons is the perfect place to go for freshly brewed coffee. We also offer specialty beverages including lattes, cappuccinos, espresso, iced and frozen coffee, hot chocolate, tea and real fruit Quenchers.',3, '570 Pembina Hwy Winnipeg MB R3M 2M5','tims_home','Monday to Sunday: 6am-10pm')
+INSERT INTO RESTAURANTS VALUES(24,'Naru Sushi Japanese Restaurant','Sushi,Japanese','Winnipeg','Naru Sushi Japanese Restaurant welcomes you to their establishment',3, '159 Osborne St Winnipeg MB R3L 1Y7','naru_home','Monday to Sunday: 11am-6pm')
+INSERT INTO RESTAURANTS VALUES(25,'Stella''s','Breakfast,Bakery,Cafe,Brunch','Winnipeg','Stella inspired taste & healthy ingredients. The right way. Scratch-made everything from bread, soups, desserts, even the mayonnaise',3,'460 Portage Ave Winnipeg MB R3C 0E8','stella_home','Monday to Friday: 9am-3pm')
+INSERT INTO RESTAURANTS VALUES(26,'Lamar Donair & Burgers','Wraps,Shwarma, Falafel, Middle Eastern','Winnipeg','Lamar Donair & Burgers is a privately held restaurant in Winnipeg, MB, that services delicious Halal & Middle Eastern Food to all of Winnipeg. We specialize in Middle Eastern Food, Catering, Chicken Fingers, Wraps, Burgers, Salads, Falafel, Mediterranean Food, Halal Food, and Poutine.',3,'17-160 Meadowood Dr Winnipeg MB R2M 5L6','lamar_home','Friday to Sunday: 2pm-10pm')
+INSERT INTO RESTAURANTS VALUES(27,'Magic Sushi & Wok','Sushi,Japanese','Winnipeg','Come enjoy a savory dish at Magic Sushi & Wok. Explore a menu featuring a variety of sushi.',3,'272 McPhillips St Winnipeg MB R3E 2K6','magic_home','Wednesday to Sunday: 12pm-7pm')
+INSERT INTO RESTAURANTS VALUES(28,'Honu Poke','Poke, Hawaiian','Winnipeg','We want to give you a great excuse to have a poke bowl every day. Vibrant and Healthy bowls that give you energy to seize the day.',3,'190 Smith St WINNIPEG MANITOBA R3C 1J8','honu_poke_home','Monday to Friday: 1pm-8pm')
+INSERT INTO RESTAURANTS VALUES(29,'Thida''s Thai Restaurant','Thai','Winnipeg','Great lunch specials. Get to choose level of spice. You could drink gallon of the peanut sauce',3, '78 Donald St Winnipeg MB R3C 1L6','thida_home','Monday to Sunday: 12pm-4pm')
+INSERT INTO RESTAURANTS VALUES(30,'Burrito del Rio','Burritos, South American, Mexican','Winnipeg','Full on flavour. Mexican Taqueria in the heart of Osborne Village Winnipeg.',3,'433 River Ave Winnipeg MB R3L 2V1','burrito_rio_home','Monday to Friday: 1pm-8pm')
+INSERT INTO RESTAURANTS VALUES(31,'St. James Burger and Chip','Burgers,Fries','Winnipeg','Award winning burger and fry joint serving the St. James community.',3, '1866 Ness Ave Winnipeg MB R3Y 0G1','st_james_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(32,'Flying Pizza','Pizza,Italian','Winnipeg','We Are Proud Supporters of Quality, Local Ingredients. Each pizza is handmade using fresh dough everyday. ',3, '1192 Jefferson Ave Winnipeg MB R2P 0C7','flying_home','Monday to Sunday: 11am-9pm')
+INSERT INTO RESTAURANTS VALUES(33,'Dim Sum Kingdom Restaurant','Chinese,Dim Sum,Soup','Winnipeg','Dim Sum Kingdom is famous for its great service and friendly staff, that is always ready to help you.',3,'2677 Pembina Hwy Winnipeg MB R3T 2H5','dim_sum_home','Monday to Sunday: 2pm-9pm')
+INSERT INTO RESTAURANTS VALUES(34,'Hao Hao Chinese Restaurant','Chinese','Winnipeg','We serve fresh homemade chinese food, with quality and affordability as our goal.',3,'1100 Waverley St #1 Winnipeg MB R3T 0P4','hao_home','Wednesday to Saturday: 2pm-8pm')
+INSERT INTO RESTAURANTS VALUES(35,'Juniors Restaurant','Burgers,Fast Food','Winnipeg','Juniors Restaurant has been a staple of Winnipeg for over 60 years, and since then we have been serving fresh, crispy fries at a great family fare, and juicy gourmet burgers.',3,'558 Portage Ave Winnipeg MB R3C 0G3','juniors_home','Monday to Sunday: 11am-10pm')
+INSERT INTO RESTAURANTS VALUES(36,'Gongcha','Bubble Tea, Drinks','Winnipeg','Here at Gongcha we serve authentic bubble tea and freshly brewed teas.',3,'1875 Pembina Hwy #4 Winnipeg MB R3T 2G7','gongcha_home','Monday to Friday: 9am-5pm')
+INSERT INTO RESTAURANTS VALUES(37,'McDonalds','Burgers, Fast Food, Fries, Coffee','Winnipeg','Choose your favourites from the complete McDonalds menu. Browse from a large selection of breakfast, lunch, dinner & more!',3,'2027 Pembina Hwy Winnipeg MB R3T 5W7','mcdonalds_home','Monday to Sunday: Open 24 hours')
+INSERT INTO RESTAURANTS VALUES(38,'Juvians Restaurant','Filipino,Philipines','Winnipeg','Juvians serves authentic filipino cuisine to the St. James community.',3,'1280 Notre Dame Ave Winnipeg MB R3E 3R7','juvians_home','Monday to Sunday: 11am-8pm')
+INSERT INTO RESTAURANTS VALUES(39,'Les Saj Restaurant','Shawarma,Middle Eastern','Winnipeg','Les Saj is a fast-casual restaurant that serves Middle Eastern cuisine.',3,'1038 St James St Winnipeg MB R3H 0K5','saj_home','Monday to Sunday: 2pm-10pm')
+INSERT INTO RESTAURANTS VALUES(40,'Sushi Hon','Sushi,Japanese','Winnipeg','An authentic Japanese experience.',3,'120-1570 Kenaston Blvd Winnipeg MB R3P 0Y4','sushi_hon_home','Monday to Sunday: 11am-6pm')
+INSERT INTO RESTAURANTS VALUES(41,'Little Korea','Korean','Winnipeg','We have a wide range of Korean foods, from bulgogi to bibimbob, and japchae to toppoki,enjoy big taste with Little Korea.',3,'519 Ellice Avenue Winnipeg MB R3B 1Z1','little_korea_home','Monday to Friday: 1pm-8pm')
+INSERT INTO RESTAURANTS VALUES(42,'Smoke''s Poutinerie','Poutine,Smoke,Local','Winnipeg','Smoke\u2019s Poutinerie is the World's Largest & Original Poutinerie offering a broad menu exclusive to Poutine.',3,'131 Albert St Winnipeg MB R3B 1G6','smokes_home','Monday to Sunday: 12pm-7pm')
+INSERT INTO RESTAURANTS VALUES(43,'Kawaii Crepe','Crepes,Dessert,Sweet','Winnipeg','Om Nom Nom. We lovingly hand-craft, customizable, sweet & savoury, delicately folded, crispy goodness.',3,'99 Osborne St #201 Winnipeg MB R3L 2R4','kawaii_home','Monday to Sunday: 2pm-11pm')
+INSERT INTO RESTAURANTS VALUES(44,'Cilantro''s Modern Indian Cuisine','Indian,Spicy','Winnipeg','We serve breakfast, lunch and dinner with Authentic and some Modern Indian dishes. We also serve vegan friendly and Gluten free menu.',3, '1132 Portage Ave Winnipeg MB R3G 0S7','cilantro_home','Monday to Sunday: 11am-9pm')
+INSERT INTO RESTAURANTS VALUES(45,'Sargent Taco Shop','Tacos,Mexican','Winnipeg','Down-to-earth Mexican counter-serve specializing in tacos, plus flautas, quesadillas & churros.',3,'698 Sargent Ave Winnipeg MB R3E 0A9','sargent_home','Monday to Sunday: 11am-5pm')
+INSERT INTO RESTAURANTS VALUES(46,'Siam Authentic Thai Cuisine','Noodles,Thai','Winnipeg','At Siam Thai, every dish is created using only the freshest, finest ingredients. We serve only the choicest meats and seafood, freshest rice and noodles, and sauces that are made fresh daily.',3,'587 St Anne''s Rd Winnipeg MB R2M 2S3','siam_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(47,'Clay Oven','Biryani,Indian','Winnipeg','Founded in 2005 by the Ahluwalia Family, Clay Oven offers a vast menu of chicken, lamb, goat, seafood, vegetarian and vegan dishes, as well as a selection of sweets and desserts all prepared from authentic Indian recipes.',3, '1600 Kenaston Blvd #240 Winnipeg MB R3P 2M6','clay_oven_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(48,'Kimbaek Restaurant','Korean','Winnipeg','We are a west end affordable korean restaurant with resonable servings.',3,'193 Isabel St Winnipeg MB R3A 1G8','kimbaek_home','Monday to Friday: 1pm-8pm')
+INSERT INTO FOODITEM VALUES(5, 1, 'Individually Baked Apple Pie - Maple', 11.50, 'food_5_1', 'Hand-folded pastry, toasted almonds, Canadian maple ice cream.');
+INSERT INTO FOODITEM VALUES (5, 2, 'California Chicken', 21.50, 'food_5_2', 'Spicy mayo, aged cheddar, smoky bacon');
+INSERT INTO FOODITEM VALUES (5, 3, 'Hand-Pressed Burger', 19.25, 'food_5_3', 'Brioche bun, all the groceries, secret sauce.');
+INSERT INTO FOODITEM VALUES (6, 1, 'Goto', 7.99, 'food_6_1', 'A rice porridge made with glutinous rice, beef, tripe, and ginger.');
+INSERT INTO FOODITEM VALUES (6, 2, 'Breakfast Meal 2', 11.99, 'food_6_2', '2 choice of Meat + fried rice + 2 Eggs');
+INSERT INTO FOODITEM VALUES (6, 3, 'tapasilog', 9.99, 'food_6_3', 'A traditional Filipino breakfast dish made with cured beef,garlic fried rice, and fried egg.');
+INSERT INTO FOODITEM VALUES(7, 1, 'Aroma Red Chili Oil', 11.50, 'food_7_1', 'Aroma Signature Red Chill Oil Sauce contains ingredients such as garlic, soy, sugar that can bring your food into the next level with multiple layers of flavours.');
+INSERT INTO FOODITEM VALUES (7, 2, 'Aroma Red Chili Oil Wontons', 21.50, 'food_7_2', 'This Home Chef kit Includes the ready-to-cook frozen wontons, a portion of Aroma Red Chili Oil with Special Sauce and the simple cooking instruction.');
+INSERT INTO FOODITEM VALUES (7, 3, 'Spicy Beef Shank Udon Soup', 19.25, 'food_7_3', 'Sliced Beef Shank, vegetable, tofu buff & Udon, served with Aroma Chili Oil chicken broth as soup base. Topping with sunny Egg and scallion.');
+INSERT INTO FOODITEM VALUES (8, 1, 'Pinche Beef Tacos', 7.99, 'food_8_1', 'Three slow-cooked beef tacos, shredded cabbage, feta & cilantro');
+INSERT INTO FOODITEM VALUES (8, 2, 'Fresh Tortilla Chips & Salsa Roja', 11.99, 'food_8_2', 'Fresh Tortilla chips dipped in mildly hot salsa.');
+INSERT INTO FOODITEM VALUES (8, 3, 'Cheese Perogies', 9.99, 'food_8_3', 'Potato & cheddar cheese filled, bacon & caramelized onions.');
+INSERT INTO FOODITEM VALUES (9, 1, 'Santa Fe Salad', 18.25, 'food_9_1', 'CHOOSE YOUR PROTEIN OPTION. Avocado, feta, black beans, corn, dates, pico de gallo, peanut lime vinaigrette');
+INSERT INTO FOODITEM VALUES (9, 2, 'Mother Earth Bowl', 19.75, 'food_9_2', 'Mixed greens, yam, cauliflower, quinoa, almonds, broccoli pesto, white balsamic vinaigrette');
+INSERT INTO FOODITEM VALUES (9, 3, 'Cajun Chicken Caesar', 21.50, 'food_9_3', 'Cajun chicken, romaine, croutons, caesar dressing');
+INSERT INTO FOODITEM VALUES (10, 1, 'Sushi Bento(Lunch)', 16.95, 'food_10_1', 'Miso soup, tempura, Salad, 6 Pc assorted sashimi, 3 Pc sushi nigiri, Alaska roll.');
+INSERT INTO FOODITEM VALUES (10, 2, 'Takoyaki', 7.55, 'food_10_2', 'Deep fired tempura battered octopus ball with teriyaki sauce and tuna takes.');
+INSERT INTO FOODITEM VALUES (10, 3, 'Gamjatang', 13.95, 'food_10_3', 'Pork neck bone soup.');
+INSERT INTO FOODITEM VALUES (11, 1, 'A PARADE OF SNICKERDOODLES (6x)', 13.50, 'food_11_1', 'Six freshly baked snickerdoodle cookies');
+INSERT INTO FOODITEM VALUES (11, 2, 'A PARADE OF COOKIES (6x)', 13.50, 'food_11_2', 'Six assorted freshly baked cookies');
+INSERT INTO FOODITEM VALUES (11, 3, 'THEM SNICKERDOODLES (4x)', 10.00, 'food_11_3', 'Four freshly baked snickerdoodle cookies');
+INSERT INTO FOODITEM VALUES (12, 1, 'Classic Chicken Sandwich (Cals: 480)', 9.53, 'food_12_1', 'Juicy crispy chicken breast with lettuce, tomato, mayo, and pickles on a toasted bun.');
+INSERT INTO FOODITEM VALUES (12, 2, 'Spicy Chicken Sandwich (Cals: 450)', 10.22, 'food_12_2', 'Fiery blend of peppers and spices on a juicy all-white meat chicken breast with lettuce, tomato, and mayo on a toasted bun.');
+INSERT INTO FOODITEM VALUES (12, 3, 'Grilled Chicken Sandwich (Cals: 340)', 9.53, 'food_12_3', 'Herb-marinated grilled all-white meat chicken breast with honey mustard, lettuce, and tomato on a toasted bun.');
+INSERT INTO FOODITEM VALUES (13, 1, 'Strawberry Cheesecake', 5.99, 'food_13_1', 'A classic, creamy cheesecake mixed with strawberries on top of a graham cracker crust.');
+INSERT INTO FOODITEM VALUES (13, 2, 'Deluxe Chicken Sandwich', 10.49, 'food_13_2', 'Our hand battered and breaded juicy chicken breast filet served on a buttery toasted brioche bun with crisp, barrel-cured pickles, lettuce, and tomato. Available in Classic or Spicy.');
+INSERT INTO FOODITEM VALUES (13, 3, 'Deluxe Chicken Sandwich platter', 17.29, 'food_13_3', 'Our hand battered and breaded juicy chicken breast filet served on a buttery toasted brioche bun with crisp, barrel-cured pickles, lettuce, and tomato. Available in Classic or Spicy. Includes two regular sides and drink.');
+INSERT INTO FOODITEM VALUES (14, 1, 'Macaroni and Cheese', 3.99, 'food_14_1', 'Classic mac and cheese made with elbow noodles and creamy cheddar cheese sauce.');
+INSERT INTO FOODITEM VALUES (14, 2, 'Instant Noodle Soup', 1.99, 'food_14_2', 'Quick and easy soup with your choice of chicken, beef, or vegetable flavors.');
+INSERT INTO FOODITEM VALUES (14, 3, 'Chicken and Noodles', 7.99, 'food_14_3', 'A hearty and savory dish made with tender chicken, thick noodles, and flavorful broth.');
+INSERT INTO FOODITEM VALUES (15, 1, 'Wako Roll (8 Pieces)', 12.50, 'food_15_1', 'Deep fried shrimp, cream cheese, creamy mayo, orange fish eggs, topped with sliced avocado, deep fried sweet potato, with sweet teriyaki sauce and chili sauce. One order comes with eight pieces.');
+INSERT INTO FOODITEM VALUES (15, 2, 'Tuna Lover Roll (8 Pieces)', 14.50, 'food_15_2', 'Fresh spicy tuna, diced avocado, sliced cucumber, red fish eggs, wrapped with fresh tuna and hot sauce. One order comes with eight pieces.');
+INSERT INTO FOODITEM VALUES (15, 3, 'Dragon Roll (8 Pieces)', 11.99, 'food_15_3', 'Tempura shrimp roll topped with fresh eel and savoury eel sauce. One order comes with eight pieces.');
+INSERT INTO FOODITEM VALUES (16, 1, 'Deep-Fried Bean Curd with Spice Salt / 椒盐豆腐', 13.25, 'food_16_1', 'Spicy. Hot and spicy. Vegetarian dish with deep fried bean curds. / 辣.');
+INSERT INTO FOODITEM VALUES (16, 2, 'Crab Meat with Fish Maw Soup / 蟹肉鱼肚更', 12.95, 'food_16_2', 'Mild Fish soup topped with crab meat.');
+INSERT INTO FOODITEM VALUES (16, 3, 'Pan-Fried Pork Dumplings / 香煎锅贴', 12.25, 'food_16_3', 'One order comes with eight dumplings.');
+INSERT INTO FOODITEM VALUES (17, 1, 'Avocado Slushy', 8.39, 'food_17_1', 'Fresh avocado slushy without any toppings.');
+INSERT INTO FOODITEM VALUES (17, 2, 'Avocado Matcha Smoothie (Large)', 9.25, 'food_17_2', 'Fresh avocado in matcha slushy. It also can called “Avocado Matcha Latte”');
+INSERT INTO FOODITEM VALUES (17, 3, 'Mango Matcha Smoothie (Large)', 9.20, 'food_17_3', 'Real mango in matcha slushy. It also can called “Mango Matcha Latter”');
+INSERT INTO FOODITEM VALUES (18, 1, 'Deep Blue Ocean', 6.25, 'food_18_1', 'Recommended. Passion fruit and blue ocean syrup.');
+INSERT INTO FOODITEM VALUES (18, 2, 'Strawberry series', 6.25, 'food_18_2', 'Sweet summer strawberry flavoured bubble tea topped with fresh strawberries.');
+INSERT INTO FOODITEM VALUES (18, 3, 'Salted Cloudy cheese with Caramel Creamy Milo', 7.14, 'food_18_3', 'Sweet and savoury caramel flavoured bubble tea topped with a creamy caramel cream.');
+INSERT INTO FOODITEM VALUES (19, 1, 'Regular Combo', 14.00, 'food_19_1', 'A combination of two proteins of your choice, garlic fried rice, 2 pieces of eggs with your choice of preparation, side garnish, cucumber, and tomato.');
+INSERT INTO FOODITEM VALUES (19, 2, 'Chopsilog', 10.00, 'food_19_2', 'Chopped porkchop, garlic fried rice, 2 pieces of eggs with your choice of preparation, side garnish, cucumber, tomato and MamaNors vinegar.');
+INSERT INTO FOODITEM VALUES (19, 3, 'Chixsilog Special', 10.00, 'food_19_3', 'Fried Chicken, garlic fried rice, 2 pieces of eggs with your choice of preparation, side garnish, cucumber, tomato and sweet chili sauce.');
+INSERT INTO FOODITEM VALUES (20, 1, 'Classic Tuna Bowl', 14.95, 'food_20_1', '2 scoops of tuna, avocado, cucumber, red radish, edamame, corn, seaweed salad, wasabi mayo and gochu aioli sauce, crispy onion and sesame seeds on top. Enjoy Your Poké :)');
+INSERT INTO FOODITEM VALUES (20, 2, 'P.M Salmon Bowl', 14.95, 'food_20_2', '2 scoops of salmon, avocado, red cabbage, corn, carrots, mango, wasabi mayo and spicy mayo sauce, crispy onion and sesame seeds on top. Enjoy Your Poké :)');
+INSERT INTO FOODITEM VALUES (20, 3, 'Tropical Storm Bowl', 12.95, 'food_20_3', 'shrimp, mango, edamame, red pepper, pineapple, cucumber, sesame and teriyaki sauce, crispy onion and sesame seeds on top. Enjoy Your Poké :)');
+INSERT INTO FOODITEM VALUES (21, 1, 'Fried Pickles', 13.00, 'food_21_1', 'Deep-fried pickle spears with choice of dip.');
+INSERT INTO FOODITEM VALUES (21, 2, 'Wings', 19.00, 'food_21_2', 'Tossed in your choice of flavour with choice of dip.');
+INSERT INTO FOODITEM VALUES (21, 3, 'Classic Cheeseburger', 19.50, 'food_21_3', 'House-made chuck patty with white cheddar, lettuce, tomato, pickles, onions and mayo on a house bun. Choice of side.');
+INSERT INTO FOODITEM VALUES (22, 1, 'Grilled Hot Dog Combo', 10.19, 'food_22_1', '100% Canadian, all beef Hot Dog. Served with your choice of a side and a drink.');
+INSERT INTO FOODITEM VALUES (22, 2, 'Buffalo Chicken Wrap Combo', 14.89, 'food_22_2', 'Crispy Buffalo Chicken plus your choice of toppings and sauces, all wrapped together in a grilled flour tortilla. Made with 100% Canadian Chicken. Served with your choice of a side and a drink.');
+INSERT INTO FOODITEM VALUES (22, 3, 'Chicken Strips (4)', 10.69, 'food_22_3', 'Try Harvey's juicy white meat chicken strips, ruffle coated for an extra crunch. Customize your chicken strips with one of Harvey's tasty dipping sauces.');
+INSERT INTO FOODITEM VALUES (23, 1, 'Iced Latte', 3.50, 'food_23_1', 'Enjoy premium Espresso blended with milk, sweetened and served over ice. It's the perfect answer to summertime heat.');
+INSERT INTO FOODITEM VALUES (23, 2, 'Mocha Iced Capp', 4.43, 'food_23_2', 'Our signature creamy blended frozen coffee beverage with whipped cream topping.');
+INSERT INTO FOODITEM VALUES (23, 3, 'Caramel Iced Capp', 4.43, 'food_23_3', ' Our signature creamy blended frozen coffee beverage with caramel sauce and whipped cream topping.');
+INSERT INTO FOODITEM VALUES (24, 1, 'Croquette', 4.00, 'food_24_1', 'Crisp-fried mashed potatoes and corn, served with a tasty mayo and teriyaki sauce.');
+INSERT INTO FOODITEM VALUES (24, 2, 'Sushi Pizza', 8.50, 'food_24_2', 'Crisp-fried rice cake patty topped with salmon sashimi, fish eggs, avocado, tempura crumbs, unagi sauce, and creamy mayo.');
+INSERT INTO FOODITEM VALUES (24, 3, 'Chicken Salad', 8.50, 'food_24_3', 'Crisp-fried chicken breast served with mixed greens in a homemade honey mustard dressing.');
+INSERT INTO FOODITEM VALUES (25, 1, 'Mexican Breakfast', 16.45, 'food_25_1', 'Two sunny side eggs, soft corn tortillas, refried beans, cheddar cheese, green onion and tomato. With salsa, guacamole, cilantro sauce and hash browns');
+INSERT INTO FOODITEM VALUES (25, 2, 'Chicken Provolone', 18.95, 'food_25_2', 'Oven roasted chicken, provolone cheese, cucumber, lettuce, tomato & rémoulade on toasted multigrain.');
+INSERT INTO FOODITEM VALUES (25, 3, 'Pepper Jelly, Chicken & Brie', 18.95, 'food_25_3', 'Oven roasted chicken, brie cheese, pesto mayonnaise, pepper jelly and arugula on golden grilled sourdough.');
+INSERT INTO FOODITEM VALUES (26, 1, 'Greek Salad', 11.99, 'food_26_1', 'Lettuce, Tomatoes, Onions, Cucumber, dressed with olive oil, lemon juice, dried oregano, salt & pepper, topped with Feta cheese and kalamata olives');
+INSERT INTO FOODITEM VALUES (26, 2, 'French Fries', 5.99, 'food_26_2', 'Half pound of golden thick cut fries');
+INSERT INTO FOODITEM VALUES (26, 3, 'Chicken Nuggets', 5.99, 'food_26_3', '6 or 10 pieces of Crispy Chicken Nuggets with your choice of dipping sauce');
+INSERT INTO FOODITEM VALUES (27, 1, 'California Maki Roll', 4.95, 'food_27_1', 'Sushi prepared with mangoes, avocadoes, cucumber, crab sticks then rolled with nori sheets.');
+INSERT INTO FOODITEM VALUES (27, 2, 'Spider Maki Roll', 4.95, 'food_27_2', 'A savoury combination of soft-shell crab, avocado, and vegetables.');
+INSERT INTO FOODITEM VALUES (27, 3, 'Gyoza (6pcs)', 6.95, 'food_27_3', 'Japanese mouth watering pan-fried dumplings.');
+INSERT INTO FOODITEM VALUES (28, 1, 'Crispy Moa', 14.99, 'food_28_1', 'Triple threat sauce, crispy breaded chicken, edamame beans, mixed greens,avocado, carrots.');
+INSERT INTO FOODITEM VALUES (28, 2, 'Crispy Opae', 14.99, 'food_28_2', 'Honey sriracha sauce, crispy breaded shrimp, avocado, mixed greens, corns, jalapeno slices.');
+INSERT INTO FOODITEM VALUES (28, 3, 'Honu Lulu', 15.99, 'food_28_3', 'Yuzu salmon poké, mango, shaved onion, furikake, cucumber, edamame,onion chip, avocado.');
+INSERT INTO FOODITEM VALUES (29, 1, 'Rice Rolls (4 Pcs)', 8.95, 'food_29_1', 'Rice noodle lettuce, carrot & wrapped in rice paper.');
+INSERT INTO FOODITEM VALUES (29, 2, 'Spring Rolls (5 Pcs)', 8.95, 'food_29_2', 'Deep fry in spring rolls wrapper');
+INSERT INTO FOODITEM VALUES (29, 3, 'Tod Man Pla (6 Pcs)', 9.95, 'food_29_3', 'Fish cake.');
+INSERT INTO FOODITEM VALUES (30, 1, 'Carnitas (Medium)', 12.99, 'food_30_1', 'Carnitas mediano pulled pork slow braised in a traditional sauce.');
+INSERT INTO FOODITEM VALUES (30, 2, 'Carnitas (Large)', 15.25, 'food_30_2', 'Carnitas mediano pulled pork slow braised in a traditional sauce.');
+INSERT INTO FOODITEM VALUES (30, 3, 'Barbacoa (Medium)', 12.99, 'food_30_3', 'Tender braised beef slow-cooked ancho chipotle adobo sauce.');
+INSERT INTO FOODITEM VALUES (31, 1, 'Hot or Not Pineapple Bacon Burger and Chips', 17.10, 'food_31_1', 'Looking to add a bit of juicy sweetness to your life? Log off Tinder and see how this leaves you feeling. Our bacon-infused beef patty is dressed for the occasion with lettuce, tomato, mayo, Bull’s-Eye BBQ sauce, our hot honey mustard.');
+INSERT INTO FOODITEM VALUES (31, 2, 'Royal Canadian Burger and Chips', 15.10, 'food_31_2', 'Comes with a bacon-infused beef patty on a fresh bun with mozzarella cheese, mayonnaise, lettuce, pickle, tomato, a hashbrown patty, bacon, green onions, pancake syrup, and a drizzle of gravy.');
+INSERT INTO FOODITEM VALUES (31, 3, 'Marvellous Mushroom Mozzarella Burger and Chips', 9.54, 'food_31_3', 'You get your thicc-cut bacon, lettuce, tomatoes, and pickles with some Bull’s-Eye BBQ sauce all on our juicy bacon-infused beef patty, but the stars of the show here are our bada** mushroom garlic mix.');
+INSERT INTO FOODITEM VALUES (32, 1, 'Large Deluxe Pizza', 22.99, 'food_32_1', 'Pepperoni, bacon, mushrooms, onions, green peppers and mozzarella cheese.');
+INSERT INTO FOODITEM VALUES (32, 2, 'Large Vegetarian Pizza', 20.99, 'food_32_2', 'Onions, mushrooms, tomatoes, green peppers, green or black olives and mozzarella cheese.');
+INSERT INTO FOODITEM VALUES (32, 3, 'Large Hawaiian Pizza', 20.99, 'food_32_3', 'Double ham, double pineapple, and extra mozzarella cheese.');
+INSERT INTO FOODITEM VALUES (33, 1, 'Curry Chicken', 16.10, 'food_33_1', 'Tender chicken pieces cooked in a spicy curry.');
+INSERT INTO FOODITEM VALUES (33, 2, 'Chicken with Broccoli', 14.95, 'food_33_2', 'Tender chicken pieces mixed with broccoli.');
+INSERT INTO FOODITEM VALUES (33, 3, 'Szechuan Chicken', 20.03, 'food_33_3', 'Tender chicken pieces in a spicy szechuan sauce.');
+INSERT INTO FOODITEM VALUES (34, 1, 'Consommé Soup', 3.58, 'food_34_1', 'French Tomato soup with pasta and peas.');
+INSERT INTO FOODITEM VALUES (34, 2, 'Hot & Sour Soup', 6.60, 'food_34_2', 'Spicy broth soup with chicken and noodles.');
+INSERT INTO FOODITEM VALUES (34, 3, 'Deluxe Wonton Soup', 12.34, 'food_34_3', 'Thin broth soup with wonton pieces mixed vegetables and proteins.');
+INSERT INTO FOODITEM VALUES (35, 1, 'Greek Salad', 12.49, 'food_35_1', 'Crisp romaine lettuce, cucumbers, kalamata olives, cherry tomatoes, feta cheese, red peppers, and red onions in a tasty Greek dressing.');
+INSERT INTO FOODITEM VALUES (35, 2, 'Tossed Salad', 10.49, 'food_35_2', 'Crisp romaine lettuce, cucumbers, red onions, red peppers, and cherry tomatoes with your choice of dressing.');
+INSERT INTO FOODITEM VALUES (35, 3, 'Fat boy', 7.99, 'food_35_3', 'One certified angus beef patty topped with chili, onions, mustard, pickles, lettuce, tomato, mayo, and processed cheddar cheese on a sesame seed bun.');
+INSERT INTO FOODITEM VALUES (36, 1, 'Original Waffle', 6.49, 'food_36_1', 'Original Egg Waffle.');
+INSERT INTO FOODITEM VALUES (36, 2, 'Milk Foam Black Forest', 6.49, 'food_36_2', 'A dessert. Comes with Pearl (Tapioca), Grass Jelly, and Milk Foam. Mostly topping in the cup. Little liquid to drink.');
+INSERT INTO FOODITEM VALUES (36, 3, 'Panda Milk Foam', 6.99, 'food_36_3', 'Green tea served with milk foam and oreo on top. Comes with Black Pearls or White Pearls.');
+INSERT INTO FOODITEM VALUES (37, 1, 'Egg BLT McMuffin [360.0 Cals]', 5.99, 'food_37_1', 'This breakfast sandwich is made with a freshly cracked Canada Grade A egg, topped with crispy hickory smoked bacon.');
+INSERT INTO FOODITEM VALUES (37, 2, 'Egg BLT McMuffin Extra Value Meal [710-810 Cals]', 8.29, 'food_37_2', 'Our signature breakfast sandwich boasts one freshly-cracked Canada Grade A large egg topped with Canadian bacon and a slice of tasty processed cheddar cheese. Comes with drink of choice.');
+INSERT INTO FOODITEM VALUES (37, 3, 'Egg McMuffin [290.0 Cals]', 3.99, 'food_37_3', 'Freshly cracked Grade A egg placed on a toasted English Muffin topped with real butter, lean Canadian bacon.');
+INSERT INTO FOODITEM VALUES (38, 1, 'Tocino', 11.99, 'food_38_1', 'Marinated sweet fried pork. Served with garlic rice and 2 scrambled eggs of your choice.');
+INSERT INTO FOODITEM VALUES (38, 2, 'Tapa', 14.99, 'food_38_2', 'Homemade style! Marinated  beef tapa  served with garlic fried rice and 2 scrambled eggs.');
+INSERT INTO FOODITEM VALUES (38, 3, 'Longganisa', 11.99, 'food_38_3', 'Our delicious Filipino style sausage, Sweet & Tangy is served with garlic  fried rice and 2 scrambled eggs.');
+INSERT INTO FOODITEM VALUES (39, 1, 'Hummus', 8.99, 'food_39_1', 'Vegetarian. Chickpea puree blended with tahini, served with saj bread.');
+INSERT INTO FOODITEM VALUES (39, 2, 'Falafel', 7.49, 'food_39_2', 'Vegetarian. Ground chickpeas mixed with coriander, parsley and Middle Eastern spices.');
+INSERT INTO FOODITEM VALUES (39, 3, 'Chicken Shwarma', 15.99, 'food_39_3', 'Traditional shawarma made of shredded meat, pickles, few pieces of fries, garlic sauce.');
+INSERT INTO FOODITEM VALUES (40, 1, 'Agedashi Tofu (4 Pieces)', 5.75, 'food_40_1', 'Vegetarian. Deep fried tofu with tempura sauce.');
+INSERT INTO FOODITEM VALUES (40, 2, 'Pork Gyoza (4 Pieces)', 7.19, 'food_40_2', 'Big sized pork and vegetable dumplings with dipping sauce.');
+INSERT INTO FOODITEM VALUES (40, 3, 'Chicken Katsu', 10.35, 'food_40_3', 'Deep fried breaded chicken with teriyaki sauce.');
+INSERT INTO FOODITEM VALUES (41, 1, 'Chicken, Pork, or Vegetable Dumpling (6 Pieces)', 5.95, 'food_41_1', 'Six traditional Korean dumplings, filled with your choice of chicken, pork or vegetables.');
+INSERT INTO FOODITEM VALUES (41, 2, 'Bibimbap', 15.95, 'food_41_2', 'Mixed rice with vegetables, beef and egg.');
+INSERT INTO FOODITEM VALUES (41, 3, 'Beef Bulgogi', 15.95, 'food_41_3', 'Marinated thinly sliced beef & vegetables.');
+INSERT INTO FOODITEM VALUES (42, 1, 'BBQ Steak Deluxe', 16.99, 'food_42_1', 'Fresh Hand-Cut Fries, Smoke's Signature Gravy, Quebec Cheese Curds. Topped with Flat-Iron Steak, 40 Creek BBQ Sauce, Sautéed Mushrooms, and Caramelized Onions.');
+INSERT INTO FOODITEM VALUES (42, 2, 'Boneless Wings (Large)', 11.29, 'food_42_2', 'Juicy deep-fried boneless chicken wings.');
+INSERT INTO FOODITEM VALUES (42, 3, 'Country Style', 16.99, 'food_42_3', 'Fresh Hand-Cut Fries, Smoke's Signature Gravy, Quebec Cheese Curds. Topped with Grilled Chicken, Double-Smoked Bacon, Caramelized Onions, Sautéed Mushrooms, and Green Peas.');
+INSERT INTO FOODITEM VALUES (43, 1, 'The Early Bird ', 10.95, 'food_43_1', 'Your choice of 3 veggies, cheese, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
+INSERT INTO FOODITEM VALUES (43, 2, 'Jalapeno Poppers', 11.50, 'food_43_2', 'Sriracha infused cream cheese, candied jalapeno peppers, cheese, bacon, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
+INSERT INTO FOODITEM VALUES (43, 3, 'Morning Sunshine', 10.95, 'food_43_3', 'Bacon, cheese, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
+INSERT INTO FOODITEM VALUES (44, 1, 'Falooda', 6.99, 'food_44_1', 'Rose flavored milkshake with basil seeds, falooda sev, and vermicelli');
+INSERT INTO FOODITEM VALUES (44, 2, 'Kesar Thandai', 6.99, 'food_44_2', 'Refreshing and fragrant milk-based drink flavored with saffron, almonds, and cardamom');
+INSERT INTO FOODITEM VALUES (44, 3, 'Kesar Ginger Tea', 4.99, 'food_44_3', 'A hot and soothing beverage made with tea, ginger, saffron, and milk');
+INSERT INTO FOODITEM VALUES (45, 1, 'Pork (3)', 8.75, 'food_45_1', 'Pastor style, pineapple, cilantro-onions.');
+INSERT INTO FOODITEM VALUES (45, 2, 'Chicken (3)', 8.75, 'food_45_2', 'Grilled chicken, pico de gallo, cream, panela cheese.');
+INSERT INTO FOODITEM VALUES (45, 3, 'Chicken Mushroom (3)', 8.75, 'food_45_3', 'Grilled. Cream, panela cheese.');
+INSERT INTO FOODITEM VALUES (46, 1, 'Thai Fried Rice', 14.99, 'food_46_1', 'Stir-fried with tomatoes, onions, and garnished with coriander leaves and sliced cucumbers.');
+INSERT INTO FOODITEM VALUES (46, 2, 'Pad Thai', 14.99, 'food_46_2', 'Your choice of meat is stir fried with tofu, ground roasted peanuts, bean sprouts, and spring onions.');
+INSERT INTO FOODITEM VALUES (46, 3, 'Green Curry', 15.99, 'food_46_3', 'Simmered in coconut milk and green curry paste. Includes bamboo shoots, zucchini, snow peas, red and green bell peppers, Thai eggplant (seasonal) and garnished with Thai basil.');
+INSERT INTO FOODITEM VALUES (47, 1, 'Assorted Naan Basket (4 Pieces)', 13.99, 'food_47_1', 'Includes regular naan, garlic naan, Mozzarella cheese naan, and whole wheat naan.');
+INSERT INTO FOODITEM VALUES (47, 2, 'Garlic Naan (1 Piece)', 3.19, 'food_47_2', 'Plain flour naan bread with garlic. One order comes with one naan.');
+INSERT INTO FOODITEM VALUES (47, 3, 'Tandoori Paneer Veggie Sizzler', 17.99, 'food_47_3', 'Vegetarian and gluten friendly. Homemade Indian dish with cheese and seasonal mixed vegetables, grilled in the tandoor.');
+INSERT INTO FOODITEM VALUES (48, 1, 'Spicy Beef Soup', 13.99,'food_48_1', 'Spicy soup with beef, vegetables and glass noodles.');
+INSERT INTO FOODITEM VALUES (48, 2, 'Beef Bulgogi', 14.99, 'food_48_2', 'Stir fried beef slices with teriyaki sauce and vegetables.');
+INSERT INTO FOODITEM VALUES (48, 3, 'Chicken Bulgogi', 14.99, 'food_48_3','Stir fried chicken with spicy sauce and vegetables.');
 INSERT INTO GIFTCARD VALUES('6748369873539860',5.0)
 INSERT INTO GIFTCARD VALUES('0086811568571859',10.0)
 INSERT INTO GIFTCARD VALUES('8081831768969802',20.0)

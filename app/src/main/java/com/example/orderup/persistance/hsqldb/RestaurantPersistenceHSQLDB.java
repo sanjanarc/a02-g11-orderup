@@ -53,13 +53,13 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence {
         final String city = rs.getString("CITY");
         final String description = rs.getString("DESCRIPTION");
         final String image = rs.getString("IMAGE");
-        final String location = rs.getString("LOCATION");
-        final int num_items = rs.getInt("NUM_ITEMS");
-        final FoodItem item1 = getFoodById(id, 1); //get fooditem in the rest's menu
-        final FoodItem item2 = getFoodById(id, 2);
-        final FoodItem item3 = getFoodById(id, 3);
-
-        return new Restaurant(id, name, category, city, description, item1, item2, item3, num_items, location, image);
+        final String hours = rs.getString("HOURS");
+        final String location= rs.getString("LOCATION");
+        final int num_items= rs.getInt("NUM_ITEMS");
+        final FoodItem item1 = getFoodById(id,1); //get fooditem in the rest's menu
+        final FoodItem item2 = getFoodById(id,2);
+        final FoodItem item3 = getFoodById(id,3);
+        return new Restaurant(id,name,category,city,description,item1,item2, item3,num_items,location,image,hours);
     }
 
 

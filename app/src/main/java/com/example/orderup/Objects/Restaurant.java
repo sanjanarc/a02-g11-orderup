@@ -18,6 +18,9 @@ public class Restaurant {
     private final String newCategory;
     private final String description;
     private String imagesURL;
+
+    private String serviceHours;
+
     private final List<FoodItem> menu; //menu List
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
@@ -65,7 +68,7 @@ public class Restaurant {
                       String cityName, String description,
                       final FoodItem item1, final FoodItem item2,
                       final FoodItem item3, final int num_menu_items,
-                      final String location, final String image) {
+                      final String location, final String image, final String hours) {
         this.menu = new ArrayList<>();
         this.userComments = new ArrayList<>();
 
@@ -82,6 +85,7 @@ public class Restaurant {
         this.num_menu_items = num_menu_items;
 
         this.location = location;
+        this.serviceHours = hours;
 
         //add the FoodItems to menu List
         menu.add(item1);
@@ -142,6 +146,10 @@ public class Restaurant {
         userComments = temp.getComments(restaurantID);
     }
 
+    public String getServiceHours() { return serviceHours; }
+
+    public int getNum_menuItem(){
+        return num_menu_items;
     /**
      * Method returns list of Users' comments on the restaurant
      */
