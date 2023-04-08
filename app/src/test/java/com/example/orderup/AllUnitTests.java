@@ -3,7 +3,6 @@ package com.example.orderup;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import com.example.orderup.Persistence.RestaurantPersistenceStubTest;
 import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDBTest;
 import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDBTest;
 import com.example.orderup.Objects.FoodItemTest;
@@ -17,7 +16,7 @@ import com.example.orderup.logic.UserServicesTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 
-        RestaurantPersistenceStubTest.class,
+
         RestaurantPersistenceHSQLDBTest.class,
         UserPersistenceHSQLDBTest.class,
         FoodItemTest.class,
