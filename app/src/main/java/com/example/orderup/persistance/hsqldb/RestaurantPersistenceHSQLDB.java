@@ -1,6 +1,8 @@
 package com.example.orderup.persistance.hsqldb;
 
-import android.util.Log;
+import com.example.orderup.Objects.FoodItem;
+import com.example.orderup.Objects.Restaurant;
+import com.example.orderup.persistance.RestaurantPersistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,10 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.orderup.Objects.FoodItem;
-import com.example.orderup.Objects.Restaurant;
-import com.example.orderup.persistance.RestaurantPersistence;
 
 /**
  * This class implements the restaurant database using HSQLDB
@@ -115,11 +113,6 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         }
         return null;
     }
-
-    /*
-    called by getFoodByID() method
-    returns FoodItem from specified query
-     */
 
     /**
      * Gets a FoodItem from the database
