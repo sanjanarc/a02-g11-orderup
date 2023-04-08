@@ -32,9 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
+            android:iconifiedByDefault="false"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="40dp"
-            android:iconifiedByDefault="false"
             tools:layout_editor_absoluteY="160dp" />
 
         <LinearLayout
