@@ -2,7 +2,6 @@ package com.example.orderup.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,8 @@ import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 import com.example.orderup.logic.Search_algorithm;
-
 import com.example.orderup.logic.Services;
+
 import java.util.List;
 
 /**
@@ -50,14 +49,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Search bar event listener.
         SearchView searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                //Log.d("user input", s);
-                String inputText = s;
-                List<Restaurant>  newRestaurantList = Search_algorithm.searchRestaurant(inputText);
-                recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(inputText)));
+
+                // Set the new restaurant list to home page.
+                recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(s)));
                 return false;
             }
 
@@ -66,21 +65,6 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
-//        searchView.setOnSearchClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("hello:---->", "hello");
-//            }
-//        });
-//        boolean searchBar = False;
-//        if (searchBar) {
-//           String inputText = "user typed in search bar";
-//           recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(inputText)));
-//        }
-//        else {
-//            recyclerView.setAdapter(new RestaurantAdapter(RestaurantServices.getRestList()));
-//
-//        }
 
         // Inflate the layout for this fragment
         return view;
