@@ -1,9 +1,11 @@
 package com.example.orderup.Objects;
+
 /**
  * This class holds a single FoodItem object.
  */
 public class FoodItem {
 
+    // Food item attributes.
     private int restaurant_id;
     private int item_id, numItems;
     private final String item_name;
@@ -13,7 +15,6 @@ public class FoodItem {
 
     /**
      * Constructor.
-     *
      */
     public FoodItem() {
         restaurant_id = 0;
@@ -23,48 +24,57 @@ public class FoodItem {
         price = 0;
         image_url = "";
         numItems = 0;
-
     }
 
     /**
      * Constructor.
      *
-     * @param restaurant_id the restaurant id.
-     * @param item_id the item id.
-     * @param itemName the item name.
-     * @param itemPrice the item price.
-     * @param itemImageURL the item image url.
+     * @param restaurant_id   the restaurant id.
+     * @param item_id         the item id.
+     * @param itemName        the item name.
+     * @param itemPrice       the item price.
+     * @param itemImageURL    the item image url.
      * @param itemDescription the item description.
      */
-    public FoodItem(int restaurant_id, int item_id, String itemName, double itemPrice, String itemImageURL, String itemDescription ){
-        this.restaurant_id= restaurant_id;
-        item_id = item_id;
-        item_name= itemName;
-        price= itemPrice;
-        image_url= itemImageURL;
-        item_description= itemDescription;
+    public FoodItem(int restaurant_id, int item_id, String itemName, double itemPrice, String itemImageURL, String itemDescription) {
+        this.restaurant_id = restaurant_id;
+        this.item_id = item_id;
+        item_name = itemName;
+        price = itemPrice;
+        image_url = itemImageURL;
+        item_description = itemDescription;
         numItems = 0;
-
     }
-    public int getRestaurant_id(){
+
+    public int getRestaurant_id() {
         return restaurant_id;
     }
-    public int getItem_id(){
+
+    public int getItem_id() {
         return item_id;
     }
 
-    public String getItemName(){
+    public String getItemName() {
         return item_name;
     }
-    public double getItemPrice(){
+
+    public double getItemPrice() {
         return price;
     }
-    public String getImageUrl(){
+
+    public String getImageUrl() {
         return image_url;
     }
-    public String getItemDescription(){
+
+    public String getItemDescription() {
         return item_description;
     }
-    public int getNumItems(){return numItems;}
-    public void setNumItems(int num){this.numItems = num;}
+
+    public int getNumItems() {
+        return numItems;
+    }
+
+    public void setNumItems(int num) {
+        this.numItems = num;
+    }
 }

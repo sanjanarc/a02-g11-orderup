@@ -3,6 +3,7 @@ package com.example.orderup.persistance;
 import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,9 +48,17 @@ public interface UserPersistence {
     void updateAddress(String email, String address);
 
     /**
-     * Add or Reduce the balance from database.
+     * Add the user cart info to database.
      *
      * @param email the user email.
+     * @param cart  the user cart info.
+     */
+    void updateCart(String email, ArrayList cart);
+
+    /**
+     * Add or Reduce the balance from database.
+     *
+     * @param email   the user email.
      * @param balance the amount to remove or add.
      */
     void modifyBalance(String email, float balance);

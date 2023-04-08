@@ -39,7 +39,6 @@ public class MyCartsActivity extends AppCompatActivity {
 
                 if (!user.getFoodCart().isEmpty()) { //Check the food list is empty or not.
 
-                    //userServices.getUser().getOrderHistory().add(UserServices.getUser().getFoodCart());
                     user.clearFoodCart(); // Empty the food list.
                     ErrorPopUp.errorMsg(view.getContext(), "Order Placed!"); // Display message that order placed.
                     updateCartInfo(user.getFoodCart()); // Display the food card.

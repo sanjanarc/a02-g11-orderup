@@ -43,10 +43,10 @@ public class RestaurantServices {
     /**
      * Insert new user comment to database and ask restaurant to retrieve the newest user comments.
      *
-     * @param rest the restaurant object.
+     * @param rest    the restaurant object.
      * @param comment the comment string.
      */
-    public static void insertComment(Restaurant rest, String comment) {
+    public void insertComment(Restaurant rest, String comment) {
         restaurantPersistence.insertComment(rest.getRestaurantID(), comment);
         rest.updateComment();
     }
@@ -56,7 +56,7 @@ public class RestaurantServices {
      *
      * @param restID the restaurant id.
      */
-    public static List<String> getComments(int restID) {
+    public List<String> getComments(int restID) {
         return restaurantPersistence.getComments(restID);
     }
 }

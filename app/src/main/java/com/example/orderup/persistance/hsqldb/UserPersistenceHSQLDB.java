@@ -161,6 +161,18 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
+    @Override
+    public void updateCart(String email, ArrayList cart) {
+//        try (Connection c = connection()) {
+//            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET ADDRESS = ? WHERE EMAIL = ?");
+//            ps.setString(1, address);
+//            ps.setString(2, email);
+//            ps.executeUpdate();
+//        } catch (SQLException e) {
+//            throw new PersistenceException(e);
+//        }
+    }
+
     /**
      * Add or Reduce the balance from database.
      *

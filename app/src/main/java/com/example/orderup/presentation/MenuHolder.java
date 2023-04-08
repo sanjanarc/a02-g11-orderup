@@ -24,7 +24,6 @@ public class MenuHolder extends RecyclerView.ViewHolder {
     Button subtractButton = null;
     TextView foodItemNumber;
     Button submitBButton;
-    int position = 0;
     public final int MAX_ORDER_ITEMS = 100; // The maximum number of each item the user could order
 
     public MenuHolder(@NonNull View itemView) {
@@ -50,7 +49,6 @@ public class MenuHolder extends RecyclerView.ViewHolder {
                         ErrorPopUp.errorMsg(textView.getContext(), "Enter value between 0 and 100");
                     }
 
-                    //foods.get(temp).setNumItems(Integer.parseInt(holder.foodItemNumber.getText().toString()));
                     return true;
                 }
 
@@ -67,8 +65,8 @@ public class MenuHolder extends RecyclerView.ViewHolder {
                 if (Integer.parseInt(foodItemNumber.getText().toString()) < MAX_ORDER_ITEMS) {
 
                     int temp = Integer.parseInt(foodItemNumber.getText().toString());
-                    foodItemNumber.setText(String.valueOf(temp++));
-                    //foods.get(position).setNumItems(Integer.parseInt(holder.foodItemNumber.getText().toString()));
+                    temp++;
+                    foodItemNumber.setText(String.valueOf(temp));
                 } else {
                     ErrorPopUp.errorMsg(view.getContext(), "Max item number reached");
                 }
@@ -88,7 +86,6 @@ public class MenuHolder extends RecyclerView.ViewHolder {
                         temp--;
 
                     foodItemNumber.setText(String.valueOf(temp));
-                    //foods.get(position).setNumItems(Integer.parseInt(holder.foodItemNumber.getText().toString()));
                 } else
                     ErrorPopUp.errorMsg(view.getContext(), "Minimum item number reached");
             }

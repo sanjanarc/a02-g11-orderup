@@ -1,14 +1,17 @@
 package com.example.orderup.Objects;
+
 import com.example.orderup.logic.RestaurantServices;
+import com.example.orderup.logic.Services;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * This class holds a single Restaurant object.
  */
-
 public class Restaurant {
 
+    // Restaurant attributes.
     private final int restaurantID;
     private final String restaurantName;
     private final String cityName;
@@ -22,7 +25,6 @@ public class Restaurant {
     private int num_menu_items;
     private final String location;
     private List<String> userComments;
-
 
     /**
      * Constructor.
@@ -41,23 +43,23 @@ public class Restaurant {
         item3 = null;
         num_menu_items = 0;
         location = null;
-        userComments=null;
+        userComments = null;
     }
 
     /**
      * Constructor.
      *
-     * @param newID the new restaurant's ID.
+     * @param newID             the new restaurant's ID.
      * @param newRestaurantName the new restaurant's name.
-     * @param newCategory the new restaurant's food category.
-     * @param cityName the new restaurant's city.
-     * @param description the new restaurant's description.
-     * @param item1 the first item in the menu list.
-     * @param item2 the second item in the menu list.
-     * @param item3 the third item in the menu list.
-     * @param num_menu_items the amount of menu items.
-     * @param location the new restaurant's location.
-     * @param image the new restaurant's image.
+     * @param newCategory       the new restaurant's food category.
+     * @param cityName          the new restaurant's city.
+     * @param description       the new restaurant's description.
+     * @param item1             the first item in the menu list.
+     * @param item2             the second item in the menu list.
+     * @param item3             the third item in the menu list.
+     * @param num_menu_items    the amount of menu items.
+     * @param location          the new restaurant's location.
+     * @param image             the new restaurant's image.
      */
     public Restaurant(int newID, String newRestaurantName, String newCategory,
                       String cityName, String description,
@@ -65,7 +67,7 @@ public class Restaurant {
                       final FoodItem item3, final int num_menu_items,
                       final String location, final String image) {
         this.menu = new ArrayList<>();
-        this.userComments= new ArrayList<>();
+        this.userComments = new ArrayList<>();
 
         restaurantID = newID;
         restaurantName = newRestaurantName;
@@ -87,59 +89,63 @@ public class Restaurant {
         menu.add(item3);
 
     }
-    /*
-    Accessor and mutator methods
-     */
+
     public String getRestaurantCategory() {
         return (newCategory);
     }
+
     public String getRestaurantDescription() {
         return (description);
     }
-    public List<FoodItem> getMenuItems() {
-        return (menu);
-    }
-    public FoodItem getItem1() {
-        return item1;
-    }
-    public FoodItem getItem2() {
-        return item2;
-    }
-    public FoodItem getItem3() {
-        return item3;
-    }
+
     public String getRestaurant_location() {
         return (location);
     }
+
     public String getCityName() {
         return (cityName);
+    }
+
+    public String getRestaurantName() {
+        return (restaurantName);
+    }
+
+    public String getImagesURL() {
+        return imagesURL;
+    }
+
+    public List<FoodItem> getMenuItems() {
+        return (menu);
+    }
+
+    public FoodItem getItem1() {
+        return item1;
+    }
+
+    public FoodItem getItem2() {
+        return item2;
+    }
+
+    public FoodItem getItem3() {
+        return item3;
     }
 
     public int getRestaurantID() {
         return (restaurantID);
     }
-    public String getRestaurantName() {
-        return (restaurantName);
-    }
-    public String getImagesURL() {
-        return imagesURL;
-    }
-    public int getNum_menuItem(){
-        return num_menu_items;
-    }
 
     /**
-     *  Method adds a user's comment left on the restaurant
+     * Method adds a user's comment left on the restaurant
      */
-    public void updateComment(){
-        RestaurantServices temp = new RestaurantServices();
+    public void updateComment() {
+        RestaurantServices temp = new RestaurantServices(Services.getRestaurantPersistence());
         userComments = temp.getComments(restaurantID);
     }
 
     /**
-     *  Method returns list of Users' comments on the restaurant
+     * Method returns list of Users' comments on the restaurant
      */
-    public List<String> getUserComment(){
+    public List<String> getUserComment() {
         return userComments;
     }
 }

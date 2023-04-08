@@ -24,11 +24,10 @@ public interface RestaurantPersistence {
      */
     Restaurant getRest(int id);
 
-    //Insert new user comment to database.
     /**
      * Insert new user comment to database.
      *
-     * @param restID the restaurant id.
+     * @param restID  the restaurant id.
      * @param comment the comment string.
      */
     void insertComment(int restID, String comment);
