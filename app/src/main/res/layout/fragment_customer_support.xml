@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.CustomerSupportFragment"
+    android:background="@drawable/customerbg"
     android:orientation="vertical"
-    android:background="@drawable/customerbg">
+    tools:context=".presentation.CustomerSupportFragment">
 
     <TextView
         android:id="@+id/infoBox"
@@ -20,27 +20,28 @@
                     \nThursday: 10 am ~ 6 pm\n
                     \nFriday: 12 pm ~ 6 pm\n
                     \n Saturday and Sunday: Off\n"
-        android:textColor="@color/black"
-        android:textStyle="italic|bold"
         android:textAlignment="center"
-        android:textSize="20dp"/>
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="italic|bold" />
 
     <Button
         android:id="@+id/liveChat"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="Live Chat"
-        android:textColor="@color/white"
         android:layout_marginTop="50dp"
-        android:backgroundTint="#660f52ba"/>
+        android:backgroundTint="#660f52ba"
+        android:text="Live Chat"
+        android:textColor="@color/white" />
+
     <Button
         android:id="@+id/emailUs"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
+        android:backgroundTint="#660f52ba"
         android:text="Email Us"
-        android:textColor="@color/white"
-        android:backgroundTint="#660f52ba"/>
+        android:textColor="@color/white" />
 </LinearLayout>

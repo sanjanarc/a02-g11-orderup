@@ -154,6 +154,7 @@ public class Restaurant {
      * Method returns list of Users' comments on the restaurant
      */
     public List<String> getUserComment() {
+        updateComment();
         return userComments;
     }
 }

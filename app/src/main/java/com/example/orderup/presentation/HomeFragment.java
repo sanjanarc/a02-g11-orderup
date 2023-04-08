@@ -5,21 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.R;
 import com.example.orderup.logic.MyException;
 import com.example.orderup.logic.RestaurantServices;
 import com.example.orderup.logic.Search_algorithm;
 import com.example.orderup.logic.Services;
-
-import java.util.List;
 
 /**
  * This is the home page UI class.
@@ -40,7 +37,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(new RestaurantAdapter(temp.getRestList()));
 
         // Cart button event listener.
-        Button button = (Button) view.findViewById(R.id.ViewCartHomeButton);
+        ImageButton button = (ImageButton) view.findViewById(R.id.ViewCartHomeButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +57,7 @@ public class HomeFragment extends Fragment {
 
                     // Set the new restaurant list to home page.
                     recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(s)));
+
                 } catch (Exception e) {
 
                     String msg;
@@ -76,7 +74,6 @@ public class HomeFragment extends Fragment {
 
                     ErrorPopUp.errorMsg(getActivity(), msg);
                 }
-
 
                 return false;
             }

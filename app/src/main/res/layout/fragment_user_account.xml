@@ -13,16 +13,16 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/infoContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:textSize="20dp"
+            android:background="#55ffffff"
             android:text="Info"
-            android:background="#55ffffff"/>
+            android:textColor="@color/black"
+            android:textSize="20dp" />
     </RelativeLayout>
 
     <FrameLayout
@@ -30,49 +30,49 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/backpack"
+            android:id="@+id/cartButton"
             android:layout_width="250dp"
             android:layout_height="100dp"
+            android:layout_gravity="top|start"
             android:layout_margin="20dp"
-            android:text="backpack"
-            android:textSize="30dp"
-            android:layout_gravity="top|start"/>
+            android:text="My cart"
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/redeemCardButton"
             android:layout_width="250dp"
             android:layout_height="100dp"
+            android:layout_gravity="top|end"
             android:layout_margin="20dp"
-            android:text="Redeem"
-            android:textSize="30dp"
-            android:layout_gravity="top|end"/>
+            android:text="Gift card"
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/addCardButton"
             android:layout_width="250dp"
             android:layout_height="100dp"
+            android:layout_gravity="center|start"
             android:layout_margin="20dp"
             android:text="Add Credit Card"
-            android:textSize="30dp"
-            android:layout_gravity="center|start"/>
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/addAddressButton"
             android:layout_width="250dp"
             android:layout_height="100dp"
+            android:layout_gravity="center|end"
             android:layout_margin="20dp"
             android:text="Add address"
-            android:textSize="30dp"
-            android:layout_gravity="center|end"/>
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="250dp"
             android:layout_height="100dp"
+            android:layout_gravity="bottom|center"
             android:layout_margin="20dp"
             android:text="Logout"
-            android:textSize="30dp"
-            android:layout_gravity="bottom|center"/>
+            android:textSize="30dp" />
     </FrameLayout>
 
 </LinearLayout>

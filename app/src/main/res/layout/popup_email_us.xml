@@ -9,6 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:hint="Write something...."
-        android:maxLength="200"/>
+        android:maxLength="200" />
 
 </RelativeLayout>

@@ -11,37 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        android:paddingBottom="8dp">
+        android:padding="10dp">
 
         <SearchView
             android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:paddingStart="2dp"
-            android:paddingTop="4dp"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:background="@drawable/searchview_rounded_background"
             android:iconifiedByDefault="false"
-            android:queryHint="Search for restaurants.."
             android:layoutDirection="ltr"
+            android:queryHint="Search for restaurants.."
             android:textAlignment="viewEnd"
-            app:iconifiedByDefault="false"/>
+            app:iconifiedByDefault="false" />
 
-        <Button
+        <ImageButton
             android:id="@+id/ViewCartHomeButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:paddingStart="6dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="7dp"
-            android:background="#00FFFFFF"
-            android:foreground="@drawable/cart"
-            android:elevation="4dp"
-            android:layout_toEndOf="@+id/searchView"
-            android:layout_alignParentTop="true"/>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/cart" />
 
     </LinearLayout>
 
@@ -49,10 +36,6 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/searchLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@+id/searchLayout" />
+
 </RelativeLayout>
