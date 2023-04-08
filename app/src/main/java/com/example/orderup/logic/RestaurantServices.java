@@ -12,6 +12,8 @@ public class RestaurantServices {
 
     private final RestaurantPersistence restaurantPersistence;
     private Restaurant restaurant;
+    private List<Restaurant> restaurants;
+    private int currentRestaurant;
 
     /**
      * Constructor.
@@ -21,6 +23,8 @@ public class RestaurantServices {
     public RestaurantServices(RestaurantPersistence restaurantPersistence) {
         this.restaurantPersistence = restaurantPersistence;
         restaurant=null;
+        restaurants=null;
+        currentRestaurant=0;
     }
 
     /**
@@ -32,9 +36,28 @@ public class RestaurantServices {
         return restaurantPersistence.getRestaurantSequential();
     }
 
+    /**
+     * method is used to retrieve restaurant one at a time from Restaurant List in RestaurantPersistence
+     * Starting from the first restaurant in the list, the method returns the next restaurant each time it is called
+     * until end of list is reached.
+     * Once, end of list is reached, currentRestaurant is set to 0 again.
+     * @return Restaurant at int currentRestaurant position in the list of restaurants
+     */
     public Restaurant getSequential(){
         String result=null;
-        if()
+        if(restaurants==null){
+            restaurants= restaurantPersistence.getRestaurantSequential();
+            currentRestaurant=0;
+        }
+        if(currentRestaurant<restaurants.size()){
+            restaurant= (Restaurant) restaurants.get(currentRestaurant);
+            currentRestaurant++;
+        }else{
+            restaurant=null;
+            restaurant=null;
+            currentRestaurant=0;
+        }
+        return restaurant;
     }
 
     /**
