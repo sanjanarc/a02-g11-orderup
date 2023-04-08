@@ -15,23 +15,39 @@ import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.persistance.RestaurantPersistence;
 
+/**
+ * This class implements the restaurant database using HSQLDB
+ */
 public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
 
     private final String dbPath;
 
+    /**
+     * Constructor.
+     *
+     * @param dbPath the string containing the file path for the database.
+     */
     public RestaurantPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
     }
 
-
+    /**
+     * Get the connection from program to database.
+     *
+     * @return connection the connection of the database.
+     * @throws SQLException will throw exception when connection to the database failed.
+     */
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    /*
-  called in getRestaurantSequential()
-  returns a Restaurant object
-   */
+    /**
+     * Get the user info from the input result set.
+     *
+     * @param rs the result of the sql query.
+     * @return Restaurant object
+     * @throws SQLException will throw sql exception if the result set is incorrect.
+     */
     private Restaurant fromResultSet(final ResultSet rs) throws SQLException {
         final int id = rs.getInt("ID");
         final String name = rs.getString("NAME");
@@ -77,10 +93,13 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         return restaurant;
     }
 
-    /*
-   called in fromResultSet() method
-   returns FoodItem associated with specific restaurantID and fooditem ID
-    */
+    /**
+     * Gets a food item from the food item database by ID
+     *
+     * @param id the restaurant ID.
+     * @param itemID the food item ID.
+     * @return FoodItem associated with specific restaurantID and fooditem ID.
+     */
     private FoodItem getFoodById(int id, int itemID) {
 
         try (final Connection c = connection()) {
@@ -101,6 +120,14 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
     called by getFoodByID() method
     returns FoodItem from specified query
      */
+
+    /**
+     * Gets a FoodItem from the database
+     *
+     * @param rs the result of the sql query.
+     * @return FoodItem from specified query.
+     * @throws SQLException will throw sql exception if the result set is incorrect.
+     */
     private FoodItem fromMenuResultSet(final ResultSet rs) throws SQLException {
 
         final int rest_id= rs.getInt("ID");
@@ -112,10 +139,12 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
 
         return new FoodItem(rest_id,item_id,item_name,item_price,item_image_url,item_desc);
     }
-    /*
-    method returns a list of comments left of the restaurant that has the restaurant id
-    Parameters: "int restaurantID" id of the restaurant
-    return: List of comments
+
+    /**
+     * Aggregates a list of all comments left on a restaurant given it's ID
+     *
+     * @param restaurantID the ID of the restaurant.
+     * @return a list of comments left of the restaurant that has the restaurant id.
      */
     public List<String> getComments(int restaurantID){
         final List<String> comments = new ArrayList<>();
@@ -135,12 +164,11 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
         return null;
     }
 
-
-
-    /*
-    method returns a list of Restaurant objects in the database
+    /**
+     * Aggregates a list of all restaurants.
+     *
+     * @return a list of Restaurant objects in the database.
      */
-
     public List<Restaurant> getRestaurantSequential() {
         final List<Restaurant> restaurants = new ArrayList<>();
         try (final Connection c = connection()) {
@@ -159,8 +187,12 @@ public class RestaurantPersistenceHSQLDB implements RestaurantPersistence{
             throw new PersistenceException(e);
         }
     }
-    /*
-    Method adds a comment left on a restaurant's place to the DB.script
+
+    /**
+     * Adds a comment left on a restaurant's place to the DB.script
+     *
+     * @param restaurantID the ID of the restaurant.
+     * @param comment the comment to be left on the restaurant.
      */
     public void insertComment(int restaurantID, String comment)
     {

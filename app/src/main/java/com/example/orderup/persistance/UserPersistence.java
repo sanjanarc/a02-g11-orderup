@@ -6,7 +6,7 @@ import com.example.orderup.Objects.User;
 import java.util.List;
 
 /**
- * The interface for user persistence.
+ * This class is an interface for the user database
  */
 public interface UserPersistence {
 
