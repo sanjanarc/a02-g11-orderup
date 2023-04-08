@@ -40,13 +40,22 @@ public class RestaurantServices {
         return restaurantPersistence.getRest(pos);
     }
 
-    //Insert new user comment to database and ask restaurant to retrieve the newest user comments.
+    /**
+     * Insert new user comment to database and ask restaurant to retrieve the newest user comments.
+     *
+     * @param rest the restaurant object.
+     * @param comment the comment string.
+     */
     public static void insertComment(Restaurant rest, String comment) {
         restaurantPersistence.insertComment(rest.getRestaurantID(), comment);
         rest.updateComment();
     }
 
-    //Restaurant call this method to get the newest user comments.
+    /**
+     * Restaurant call this method to get the newest user comments.
+     *
+     * @param restID the restaurant id.
+     */
     public static List<String> getComments(int restID) {
         return restaurantPersistence.getComments(restID);
     }

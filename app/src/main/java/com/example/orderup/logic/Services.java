@@ -48,7 +48,6 @@ public class Services
      * Tell the system which account is using the system.
      *
      * @param email current user's email.
-     * @return none.
      */
     public static void setCurrentUser(String email)
     {
@@ -68,7 +67,6 @@ public class Services
     /**
      * Set the DBPathName.
      *
-     * @return none.
      */
     public static void setDBPathName(final String name)
     {
