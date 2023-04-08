@@ -220,6 +220,6 @@ public class User extends FoodItem {
      * Update the user cart item to database.
      */
     private void updateCart() {
-        new UserServices(Services.getUserPersistence(), this.email).updateCart(this.email, this.cart);
+        new UserServices(Services.getUserPersistence()).updateCart(this.email, this.cart);
     }
 }

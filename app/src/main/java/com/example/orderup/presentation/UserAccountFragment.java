@@ -33,7 +33,7 @@ public class UserAccountFragment extends Fragment {
     UserVerification userVerification = new UserVerification(Services.getUserPersistence());
 
     // Create user services object and passing the database and the user email.
-    UserServices userServices = new UserServices(Services.getUserPersistence(), userEmail);
+    UserServices userServices = new UserServices(Services.getUserPersistence());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -279,7 +279,7 @@ public class UserAccountFragment extends Fragment {
 
         try {
 
-            User user = userServices.getUser();
+            User user = userServices.getUser(Services.getCurrentUser());
 
             // Formatting the message.
             String display = String.format("First name: %s\n" +
