@@ -1,12 +1,12 @@
 package com.example.orderup.logic;
 
-import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
 import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
-
-//Class that holds most the static variables.
+/**
+ * This class holds most of the static variables.
+ */
 public class Services
 {
     private static String currentUser = null;
@@ -14,7 +14,11 @@ public class Services
     private static UserPersistence userPersistence= null;
     private static RestaurantPersistence restaurantPersistence= null;
 
-    //Get the User database setup and ready to use.
+    /**
+     * Get the User database setup and ready to use.
+     *
+     * @return user persistence object.
+     */
     public static synchronized UserPersistence getUserPersistence()
     {
         if(userPersistence== null)
@@ -25,7 +29,11 @@ public class Services
         return userPersistence;
     }
 
-    //Get the Restaurant database setup and ready for use.
+    /**
+     * Get the Restaurant database setup and ready for use.
+     *
+     * @return restaurant persistence object.
+     */
     public static synchronized RestaurantPersistence getRestaurantPersistence()
     {
         if (restaurantPersistence == null)
@@ -36,18 +44,32 @@ public class Services
         return restaurantPersistence;
     }
 
-    //Tell the system which account is using the system.
+    /**
+     * Tell the system which account is using the system.
+     *
+     * @param email current user's email.
+     * @return none.
+     */
     public static void setCurrentUser(String email)
     {
         currentUser = email;
     }
 
-    //Return the current account email.
+    /**
+     * Return the current account email.
+     *
+     * @return string containing current user's email.
+     */
     public static String getCurrentUser()
     {
         return currentUser;
     }
 
+    /**
+     * Set the DBPathName.
+     *
+     * @return none.
+     */
     public static void setDBPathName(final String name)
     {
         try
@@ -61,7 +83,11 @@ public class Services
         dbPath = name;
     }
 
-    //Return the database path.
+    /**
+     * Return the database path.
+     *
+     * @return string containing the dbPath.
+     */
     public static String getDBPathName()
     {
         return dbPath;
