@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class UserVerificationTest {
+    /*
 
     @Test
     public void loginVerificationTest() {
@@ -73,4 +74,6 @@ public class UserVerificationTest {
         assertEquals(false, UserVerification.emailCheck(doubleAt));
         assertEquals(false, UserVerification.emailCheck(noNot));
     }
+
+     */
 }

@@ -133,6 +133,9 @@ public class Restaurant {
     public int getRestaurantID() {
         return (restaurantID);
     }
+    public int getNum_menu_items(){
+        return num_menu_items;
+    }
 
     /**
      * Method adds a user's comment left on the restaurant
