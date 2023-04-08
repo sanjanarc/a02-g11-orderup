@@ -25,8 +25,8 @@ public class MyCartsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_carts);
 
-        UserServices userServices = new UserServices(Services.getUserPersistence(), Services.getCurrentUser());
-        User user = userServices.getUser();
+        UserServices userServices = new UserServices(Services.getUserPersistence());
+        User user = userServices.getUser(Services.getCurrentUser());
 
         // Display the food list.
         updateCartInfo(user.getFoodCart());

@@ -57,7 +57,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
             @Override
             public void onClick(View view) {
 
-                User user = new UserServices(Services.getUserPersistence(), Services.getCurrentUser()).getUser();
+                User user = new UserServices(Services.getUserPersistence()).getUser(Services.getCurrentUser());
                 user.removeFoodFromCart(foodItem, Integer.parseInt(holder.foodItemNumber.getText().toString()));
 
                 ErrorPopUp.errorMsg(view.getContext(), "Item Removed");
