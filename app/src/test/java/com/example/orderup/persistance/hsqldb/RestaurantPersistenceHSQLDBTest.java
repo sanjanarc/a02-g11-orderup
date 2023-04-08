@@ -27,22 +27,15 @@ import com.example.orderup.Objects.Restaurant;
 import com.example.orderup.persistance.RestaurantPersistence;
 
 public class RestaurantPersistenceHSQLDBTest {
-    /*
-    private Connection connection;
-    private Statement statement;
-    private ResultSet resultSet;
-
-     */
 
     private RestaurantServices restaurantServices;
     private RestaurantPersistence restaurantPersistence;
 
     @Before
     public void setUp() throws SQLException {
-        // Mock the database connection, statement, and result set
+        //mock of Restaurant Persistence created
         restaurantPersistence= mock(RestaurantPersistence.class);
         restaurantServices= new RestaurantServices(restaurantPersistence);
-
     }
 
     @Test
@@ -66,12 +59,15 @@ public class RestaurantPersistenceHSQLDBTest {
         assertTrue("Oreo Cookie Cheesecake".equals(restaurant.getItem3().getItemName()));
 
     }
-
     @Test
-    public void testRestaurantInsertion() {
-        RestaurantPersistence restaurantPersistence = new RestaurantPersistenceHSQLDB(Services.getDBPathName());
-        Assert.assertNotNull("Successful datapath established.", restaurantPersistence);
+    public void testGetRestaurant(){
+        assertTrue("Restaurant List should not be empty.",!restaurantServices.getRestList().isEmpty());
     }
+    @Test
+    public void testGetRestaurantID(){
+        assertTrue("Restaurant at position 2 should return 2 as its ID", 2 == restaurantServices.getRest(2).getRestaurantID());
+    }
+
 
 
 }

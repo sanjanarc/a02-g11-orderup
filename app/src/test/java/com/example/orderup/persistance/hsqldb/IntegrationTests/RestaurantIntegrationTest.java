@@ -7,7 +7,6 @@ import org.junit.After;
 
 import java.io.File;
 import java.io.IOException;
-import com.example.orderup.logic.Services;
 
 import com.example.orderup.logic.RestaurantServices;
 import com.example.orderup.Objects.Restaurant;
@@ -50,6 +49,15 @@ public class RestaurantIntegrationTest {
         assertTrue("Oreo Cookie Cheesecake".equals(restaurant.getItem3().getItemName()));
 
     }
+    @Test
+    public void testGetRestaurant(){
+        assertTrue("Restaurant List should not be empty.",!restaurantServices.getRestList().isEmpty());
+    }
+    @Test
+    public void testGetRestaurantID(){
+        assertTrue("Restaurant at position 2 should return 2 as its ID", 2 == restaurantServices.getRest(2).getRestaurantID());
+    }
+
     @After
     public void tearDown() {
         // reset DB
