@@ -63,7 +63,7 @@ public class Restaurant {
      * @param num_menu_items    the amount of menu items.
      * @param location          the new restaurant's location.
      * @param image             the new restaurant's image.
-     * @param hours             the restaurant services haour.
+     * @param hours             the restaurant services hour.
      */
     public Restaurant(int newID, String newRestaurantName, String newCategory,
                       String cityName, String description,

@@ -300,15 +300,33 @@ public class UserAccountFragment extends Fragment {
 
                 if (confirm.equals("Yes")) {
 
-                    //Verify and add credit card to database.
-                    String result = UserVerification.verifyMembershipPurchase(userEmail);
+                    try {
 
-                    //Display the result to user.
-                    if (result != "") {
-                        ErrorPopUp.errorMsg(getActivity(), result);
+                        //Verify and add credit card to database.
+                        userVerification.verifyMembershipPurchase(userEmail);
+                        updateInfo();
+
+                    } catch (Exception e) {
+
+                        String msg;
+
+                        if (e instanceof MyException.EXCEPTION_ITEM_ALREADY_EXIST) {
+
+                            msg = "Error: You are already a member!.";
+
+                        } else if (e instanceof MyException.EXCEPTION_TOO_POOR) {
+
+                            msg = "Error: Insufficient balance to purchase membership.";
+
+                        } else {
+
+                            msg = e.getMessage();
+
+                        }
+
+                        //Display the result to user.
+                        ErrorPopUp.errorMsg(getActivity(), msg);
                     }
-
-                    updateInfo();
                 }
             }
         });
@@ -327,10 +345,10 @@ public class UserAccountFragment extends Fragment {
 
             String membershipStatus;
 
-            if(true == user.getMembership()) {
-                membershipStatus =  "Enabled";
+            if (true == user.getMembership()) {
+                membershipStatus = "Enabled";
             } else {
-                membershipStatus =  "Disabled";
+                membershipStatus = "Disabled";
             }
 
             // Formatting the message.

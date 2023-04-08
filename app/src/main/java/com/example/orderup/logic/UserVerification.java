@@ -319,18 +319,28 @@ public class UserVerification {
         return flag && checkPeriod && !multiplesAts;
     }
 
-    public static String verifyMembershipPurchase(String email) {
-    String msg = "";
-    float user_balance = Float.valueOf(UserServices.getBalance(email));
+    public String verifyMembershipPurchase(String email) throws Exception {
+
+        User user = userPersistence.getUser(email);
+        String msg = "";
+        float user_balance = user.getBalance();
+
         // If user can afford membership, deduct the cost from their balance and set them as a member
-        if(user_balance >= 25.00 && false == UserServices.getMembership(email)) {
+        if (user_balance >= 25.00 && !user.getMembership()) {
+
             userPersistence.modifyBalance(email, -25.00F);
             userPersistence.setMembership(email);
-        } else if(user_balance < 25.00) {
-            msg = "Error: Insufficient balance to purchase membership.";
-        } else if(true == UserServices.getMembership(email)) {
-            msg = "Error: You are already a member!.";
+
+        } else if (user_balance < 25.00) {
+
+            throw new MyException.EXCEPTION_TOO_POOR();
+
+        } else if (user.getMembership()) {
+
+            throw new MyException.EXCEPTION_ITEM_ALREADY_EXIST();
+
         }
+
         return msg;
     }
 }
