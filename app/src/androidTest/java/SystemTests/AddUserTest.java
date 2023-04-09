@@ -56,7 +56,7 @@ public class AddUserTest {
         onView(withId(R.id.registerButton1)).perform(click());
 
 
-        //IDEA: Confirm the user account was created by loggin in with the above account information
+        //IDEA: Confirm the user account was created by logging in with the above account information
         // but the current back button doesnt take back to the login screen, it exists the user out of the app
 
         /*
