@@ -22,6 +22,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.example.orderup.presentation.LoginActivity;
+import com.example.orderup.presentation.HomeFragment;
+import com.example.orderup.presentation.UserAccountFragment;
 import com.example.orderup.R;
 
 /*
@@ -45,7 +47,10 @@ public class LoginTest {
         onView(withId(R.id.signInButton)).perform(click());
         closeSoftKeyboard();
 
-        //verify sign in was successful
+        //verify sign in was successful: If the user can logout then the login was succesful
+        onView(withId(R.id.user_account)).perform(click()); //click the user account fragment
+        onView(withId(R.id.logoutButton)).perform(click());//click log out
+
 
 
     }
