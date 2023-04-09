@@ -44,7 +44,6 @@ public class LoginTest {
         //click on sign in
         onView(withId(R.id.signInButton)).perform(click());
         closeSoftKeyboard();
-        pressBack();
 
         //verify sign in was successful
 
