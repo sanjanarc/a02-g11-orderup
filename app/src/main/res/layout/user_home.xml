@@ -20,15 +20,24 @@
             android:background="@drawable/searchview_rounded_background"
             android:iconifiedByDefault="false"
             android:layoutDirection="ltr"
+            android:layout_marginRight="16dp"
             android:queryHint="Search for restaurants.."
             android:textAlignment="viewEnd"
             app:iconifiedByDefault="false" />
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/ViewCartHomeButton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/cart" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginStart="@dimen/cardview_default_radius"
+            android:layout_marginTop="@dimen/cardview_default_radius"
+            android:layout_marginEnd="@dimen/cardview_default_radius"
+            android:layout_marginBottom="@dimen/cardview_default_radius"
+            android:src="@drawable/cart"
+            app:fabSize="normal"
+            app:maxImageSize="35dp" />
+
 
     </LinearLayout>
 
