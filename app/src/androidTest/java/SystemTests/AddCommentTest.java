@@ -33,7 +33,7 @@ public class AddCommentTest {
     @Rule
     public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
     //public ActivityScenarioRule<RestaurantActivity> restaurantActivity = new ActivityScenarioRule<RestaurantActivity>(RestaurantActivity.class);
-    /*
+
     public void testComment(){
 
         //login
@@ -42,11 +42,9 @@ public class AddCommentTest {
 
         //click on sign in
         onView(withId(R.id.signInButton)).perform(click());
-        onView(withId(R.id.))
+        //onView(withId(R.id.))
 
     }
-
-     */
 
 }
 

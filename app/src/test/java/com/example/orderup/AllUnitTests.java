@@ -14,7 +14,6 @@ import com.example.orderup.Objects.UserTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 
-
         RestaurantPersistenceHSQLDBTest.class,
         UserPersistenceHSQLDBTest.class,
         FoodItemTest.class,
