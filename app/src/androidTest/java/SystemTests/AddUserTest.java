@@ -27,9 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.example.orderup.R;
 import com.example.orderup.presentation.RegisterActivity;
-import com.example.orderup.logic.MyException;
-import com.example.orderup.logic.Services;
-import com.example.orderup.logic.UserVerification;
 
 /*
         Purpose: This class tests Registering a User's account.

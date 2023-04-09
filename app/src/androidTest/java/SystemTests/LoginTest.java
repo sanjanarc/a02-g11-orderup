@@ -19,6 +19,10 @@ import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.example.orderup.presentation.LoginActivity;
+import com.example.orderup.R;
+
 /*
         Purpose: This class tests login into an existing account
 
@@ -27,4 +31,21 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class LoginTest {
+
+    @Rule
+    public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
+    @Test
+    public void testUserLogin(){
+        //enter user's email and password
+        onView(withId(R.id.emailInput)).perform(typeText("admin2@email.com"));
+        onView(withId(R.id.passwordInput)).perform(typeText("admin123"));
+
+        //click on sign in
+        onView(withId(R.id.signInButton)).perform(click());
+
+        //verify sign in was successful
+
+
+    }
+
 }
