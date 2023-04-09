@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import SystemTests.AddCommentTest;
 import SystemTests.AddUserTest;
 import SystemTests.LoginTest;
+import SystemTests.SearchRestaurantTest;
 
 
 /*
@@ -15,7 +16,7 @@ import SystemTests.LoginTest;
 
         LoginTest.class,
         AddUserTest.class,
-        AddCommentTest.class,
+        SearchRestaurantTest.class,
 
 
 
