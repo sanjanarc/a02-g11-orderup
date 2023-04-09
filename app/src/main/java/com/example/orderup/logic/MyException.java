@@ -54,6 +54,11 @@ public class MyException extends Exception {
     }
 
     public static class EXCEPTION_TOO_POOR extends Exception {
+
+    }
+
+    public static class EXCEPTION_NO_CARD extends Exception {
+
     }
 
 }

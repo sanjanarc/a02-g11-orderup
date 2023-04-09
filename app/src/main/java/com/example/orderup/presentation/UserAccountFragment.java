@@ -314,9 +314,9 @@ public class UserAccountFragment extends Fragment {
 
                             msg = "Error: You are already a member!.";
 
-                        } else if (e instanceof MyException.EXCEPTION_TOO_POOR) {
+                        } else if (e instanceof MyException.EXCEPTION_NO_CARD) {
 
-                            msg = "Error: Insufficient balance to purchase membership.";
+                            msg = "Error: You do not have a credit card / Insufficient Funds.";
 
                         } else {
 
