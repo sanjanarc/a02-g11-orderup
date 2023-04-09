@@ -18,10 +18,36 @@ import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.example.orderup.R;
+import com.example.orderup.presentation.LoginActivity;
+import com.example.orderup.presentation.RestaurantActivity;
+
 /*
     Purpose: Test adding a comment in a restaurant's comment section
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class AddCommentTest {
+
+    @Rule
+    public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
+    //public ActivityScenarioRule<RestaurantActivity> restaurantActivity = new ActivityScenarioRule<RestaurantActivity>(RestaurantActivity.class);
+    /*
+    public void testComment(){
+
+        //login
+        onView(withId(R.id.emailInput)).perform(typeText("admin2@email.com"));
+        onView(withId(R.id.passwordInput)).perform(typeText("admin123"));
+
+        //click on sign in
+        onView(withId(R.id.signInButton)).perform(click());
+        onView(withId(R.id.))
+
+    }
+
+     */
+
 }
+
+
