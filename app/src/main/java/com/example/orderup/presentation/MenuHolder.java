@@ -4,6 +4,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,8 +21,8 @@ public class MenuHolder extends RecyclerView.ViewHolder {
     //All the necessary button that are used in the adapter (names are self explanatory)
     ImageView imageview;
     TextView nameView;
-    Button addButton = null;
-    Button subtractButton = null;
+    ImageButton addButton = null;
+    ImageButton subtractButton = null;
     TextView foodItemNumber;
     Button submitBButton;
     public final int MAX_ORDER_ITEMS = 100; // The maximum number of each item the user could order

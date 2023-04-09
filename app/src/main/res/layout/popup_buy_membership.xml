@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/postalInput"
+        android:id="@+id/confirmationInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="Write something...."
-        android:maxLength="200" />
+        android:hint="Type &quot;Yes&quot; or &quot;No&quot;"
+        android:inputType="text"
+        android:maxLength="20" />
 
 </RelativeLayout>

@@ -32,7 +32,7 @@ public class RestaurantHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), RestaurantActivity.class);
-                intent.putExtra("position", position);
+                intent.putExtra("position", position+1);
                 view.getContext().startActivity(intent);
 
             }

@@ -52,4 +52,8 @@ public class MyException extends Exception {
 
     public static class EXCEPTION_INVALID_POSTAL_CODE_FORMAT extends Exception {
     }
+
+    public static class EXCEPTION_TOO_POOR extends Exception {
+    }
+
 }

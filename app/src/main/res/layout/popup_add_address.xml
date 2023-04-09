@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <EditText
         android:id="@+id/postalInput"
         android:layout_width="match_parent"
@@ -36,4 +35,5 @@
         android:layout_height="wrap_content"
         android:hint="Street:"
         android:maxLength="20" />
+
 </RelativeLayout>
