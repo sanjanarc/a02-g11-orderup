@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                     Services.setCurrentUser(email); // Tell the system who is the current user.
                     startActivity(intent); // Start the main activity.
-                    finish(); // Remove current activity.
+                    finish(); // Remove current activity
 
                 } catch (Exception e) {
 
