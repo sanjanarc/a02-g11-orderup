@@ -31,7 +31,12 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
         double subTotal = 10.50; // filler temporary get from cart table
-        double deliveryFee = 3;   // filler get membership discount if member
+        double deliveryFee = 0.00;
+        if(user.getMembership()) {
+            deliveryFee = 2.99;
+        } else {
+            deliveryFee = 3.60;
+        }
         double tax = subTotal * 0.07;
         double total = subTotal + deliveryFee + tax;
 

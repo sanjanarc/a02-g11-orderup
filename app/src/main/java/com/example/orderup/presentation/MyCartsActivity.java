@@ -72,54 +72,17 @@ public class MyCartsActivity extends AppCompatActivity {
 
 
 
-//        int selectedButtonId = toggleGroup.getCheckedButtonId();
-//
-//        MaterialButton  deliveryButton = (MaterialButton) findViewById(R.id.deliveryButton);
-//
-//        deliveryButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("hhhhhhhhhhhhhhhhhh","de");
-//                if(user.getAddress() == null) {
-//                    ErrorPopUp.errorMsg(getBaseContext(), "No address found. Please add an address to your account");
-//                }else {
-//                    ErrorPopUp.errorMsg(getBaseContext(), "Order will be delivered at" + user.getAddress());
-//                }
-//
-//            }
-//        });
-//
-//
-//
-//        MaterialButton pickupButton = (MaterialButton) findViewById(R.id.deliveryButton);
-//
-//        pickupButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String RestaurantAddress = "";
-//
-//                for(int i=0; i<user.getFoodCart().size();i++) {
-//                    FoodItem food = user.getFoodCart().get(i);
-//                    int id = food.getRestaurant_id();
-//                    RestaurantServices restaurantServices = new RestaurantServices(Services.getRestaurantPersistence());
-//                    Restaurant rest = restaurantServices.getRest(id);
-//                    RestaurantAddress += rest.getRestaurant_location() + "\n";
-//                }
-//
-//
-//                ErrorPopUp.errorMsg(getBaseContext(), "You can pick up your order " + RestaurantAddress );
-//
-//            }
-//        });
-
-
-
         TextView subTotalTextView = findViewById(R.id.SubTotal);
         TextView DeliveryFeeView = findViewById(R.id.Delivery);
         TextView TaxView = findViewById(R.id.Tax);
 
         double subTotal = 10.50; // filler temporary get from cart table
-        double deliveryFee = 3; // filler temporary check if member
+        double deliveryFee = 0.00;
+        if(user.getMembership()) {
+             deliveryFee = 2.99;
+        } else {
+             deliveryFee = 3.60;
+        }
         double tax = subTotal*0.07;
         double total = subTotal + deliveryFee + tax;
 
