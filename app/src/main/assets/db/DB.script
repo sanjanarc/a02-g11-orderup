@@ -66,13 +66,12 @@ INSERT INTO RESTAURANTS VALUES(38,'Juvians Restaurant','Filipino,Philipines','Wi
 INSERT INTO RESTAURANTS VALUES(39,'Les Saj Restaurant','Shawarma,Middle Eastern','Winnipeg','Les Saj is a fast-casual restaurant that serves Middle Eastern cuisine.',3,'1038 St James St Winnipeg MB R3H 0K5','saj_home','Monday to Sunday: 2pm-10pm')
 INSERT INTO RESTAURANTS VALUES(40,'Sushi Hon','Sushi,Japanese','Winnipeg','An authentic Japanese experience.',3,'120-1570 Kenaston Blvd Winnipeg MB R3P 0Y4','sushi_hon_home','Monday to Sunday: 11am-6pm')
 INSERT INTO RESTAURANTS VALUES(41,'Little Korea','Korean','Winnipeg','We have a wide range of Korean foods, from bulgogi to bibimbob, and japchae to toppoki,enjoy big taste with Little Korea.',3,'519 Ellice Avenue Winnipeg MB R3B 1Z1','little_korea_home','Monday to Friday: 1pm-8pm')
-INSERT INTO RESTAURANTS VALUES(42,'Smoke''s Poutinerie','Poutine,Smoke,Local','Winnipeg','Smoke\u2019s Poutinerie is the World's Largest & Original Poutinerie offering a broad menu exclusive to Poutine.',3,'131 Albert St Winnipeg MB R3B 1G6','smokes_home','Monday to Sunday: 12pm-7pm')
-INSERT INTO RESTAURANTS VALUES(43,'Kawaii Crepe','Crepes,Dessert,Sweet','Winnipeg','Om Nom Nom. We lovingly hand-craft, customizable, sweet & savoury, delicately folded, crispy goodness.',3,'99 Osborne St #201 Winnipeg MB R3L 2R4','kawaii_home','Monday to Sunday: 2pm-11pm')
-INSERT INTO RESTAURANTS VALUES(44,'Cilantro''s Modern Indian Cuisine','Indian,Spicy','Winnipeg','We serve breakfast, lunch and dinner with Authentic and some Modern Indian dishes. We also serve vegan friendly and Gluten free menu.',3, '1132 Portage Ave Winnipeg MB R3G 0S7','cilantro_home','Monday to Sunday: 11am-9pm')
-INSERT INTO RESTAURANTS VALUES(45,'Sargent Taco Shop','Tacos,Mexican','Winnipeg','Down-to-earth Mexican counter-serve specializing in tacos, plus flautas, quesadillas & churros.',3,'698 Sargent Ave Winnipeg MB R3E 0A9','sargent_home','Monday to Sunday: 11am-5pm')
-INSERT INTO RESTAURANTS VALUES(46,'Siam Authentic Thai Cuisine','Noodles,Thai','Winnipeg','At Siam Thai, every dish is created using only the freshest, finest ingredients. We serve only the choicest meats and seafood, freshest rice and noodles, and sauces that are made fresh daily.',3,'587 St Anne''s Rd Winnipeg MB R2M 2S3','siam_home','Monday to Sunday: 12pm-8pm')
-INSERT INTO RESTAURANTS VALUES(47,'Clay Oven','Biryani,Indian','Winnipeg','Founded in 2005 by the Ahluwalia Family, Clay Oven offers a vast menu of chicken, lamb, goat, seafood, vegetarian and vegan dishes, as well as a selection of sweets and desserts all prepared from authentic Indian recipes.',3, '1600 Kenaston Blvd #240 Winnipeg MB R3P 2M6','clay_oven_home','Monday to Sunday: 12pm-8pm')
-INSERT INTO RESTAURANTS VALUES(48,'Kimbaek Restaurant','Korean','Winnipeg','We are a west end affordable korean restaurant with resonable servings.',3,'193 Isabel St Winnipeg MB R3A 1G8','kimbaek_home','Monday to Friday: 1pm-8pm')
+INSERT INTO RESTAURANTS VALUES(42,'Kawaii Crepe','Crepes,Dessert,Sweet','Winnipeg','Om Nom Nom. We lovingly hand-craft, customizable, sweet & savoury, delicately folded, crispy goodness.',3,'99 Osborne St #201 Winnipeg MB R3L 2R4','kawaii_home','Monday to Sunday: 2pm-11pm')
+INSERT INTO RESTAURANTS VALUES(43,'Cilantro''s Modern Indian Cuisine','Indian,Spicy','Winnipeg','We serve breakfast, lunch and dinner with Authentic and some Modern Indian dishes. We also serve vegan friendly and Gluten free menu.',3, '1132 Portage Ave Winnipeg MB R3G 0S7','cilantro_home','Monday to Sunday: 11am-9pm')
+INSERT INTO RESTAURANTS VALUES(44,'Sargent Taco Shop','Tacos,Mexican','Winnipeg','Down-to-earth Mexican counter-serve specializing in tacos, plus flautas, quesadillas & churros.',3,'698 Sargent Ave Winnipeg MB R3E 0A9','sargent_home','Monday to Sunday: 11am-5pm')
+INSERT INTO RESTAURANTS VALUES(45,'Siam Authentic Thai Cuisine','Noodles,Thai','Winnipeg','At Siam Thai, every dish is created using only the freshest, finest ingredients. We serve only the choicest meats and seafood, freshest rice and noodles, and sauces that are made fresh daily.',3,'587 St Anne''s Rd Winnipeg MB R2M 2S3','siam_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(46,'Clay Oven','Biryani,Indian','Winnipeg','Founded in 2005 by the Ahluwalia Family, Clay Oven offers a vast menu of chicken, lamb, goat, seafood, vegetarian and vegan dishes, as well as a selection of sweets and desserts all prepared from authentic Indian recipes.',3, '1600 Kenaston Blvd #240 Winnipeg MB R3P 2M6','clay_oven_home','Monday to Sunday: 12pm-8pm')
+INSERT INTO RESTAURANTS VALUES(47,'Kimbaek Restaurant','Korean','Winnipeg','We are a west end affordable korean restaurant with resonable servings.',3,'193 Isabel St Winnipeg MB R3A 1G8','kimbaek_home','Monday to Friday: 1pm-8pm')
 INSERT INTO FOODITEM VALUES(5, 1, 'Individually Baked Apple Pie - Maple', 11.50, 'food_5_1', 'Hand-folded pastry, toasted almonds, Canadian maple ice cream.');
 INSERT INTO FOODITEM VALUES (5, 2, 'California Chicken', 21.50, 'food_5_2', 'Spicy mayo, aged cheddar, smoky bacon');
 INSERT INTO FOODITEM VALUES (5, 3, 'Hand-Pressed Burger', 19.25, 'food_5_3', 'Brioche bun, all the groceries, secret sauce.');
@@ -184,27 +183,24 @@ INSERT INTO FOODITEM VALUES (40, 3, 'Chicken Katsu', 10.35, 'food_40_3', 'Deep f
 INSERT INTO FOODITEM VALUES (41, 1, 'Chicken, Pork, or Vegetable Dumpling (6 Pieces)', 5.95, 'food_41_1', 'Six traditional Korean dumplings, filled with your choice of chicken, pork or vegetables.');
 INSERT INTO FOODITEM VALUES (41, 2, 'Bibimbap', 15.95, 'food_41_2', 'Mixed rice with vegetables, beef and egg.');
 INSERT INTO FOODITEM VALUES (41, 3, 'Beef Bulgogi', 15.95, 'food_41_3', 'Marinated thinly sliced beef & vegetables.');
-INSERT INTO FOODITEM VALUES (42, 1, 'BBQ Steak Deluxe', 16.99, 'food_42_1', 'Fresh Hand-Cut Fries, Smoke's Signature Gravy, Quebec Cheese Curds. Topped with Flat-Iron Steak, 40 Creek BBQ Sauce, Sautéed Mushrooms, and Caramelized Onions.');
-INSERT INTO FOODITEM VALUES (42, 2, 'Boneless Wings (Large)', 11.29, 'food_42_2', 'Juicy deep-fried boneless chicken wings.');
-INSERT INTO FOODITEM VALUES (42, 3, 'Country Style', 16.99, 'food_42_3', 'Fresh Hand-Cut Fries, Smoke's Signature Gravy, Quebec Cheese Curds. Topped with Grilled Chicken, Double-Smoked Bacon, Caramelized Onions, Sautéed Mushrooms, and Green Peas.');
-INSERT INTO FOODITEM VALUES (43, 1, 'The Early Bird ', 10.95, 'food_43_1', 'Your choice of 3 veggies, cheese, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
-INSERT INTO FOODITEM VALUES (43, 2, 'Jalapeno Poppers', 11.50, 'food_43_2', 'Sriracha infused cream cheese, candied jalapeno peppers, cheese, bacon, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
-INSERT INTO FOODITEM VALUES (43, 3, 'Morning Sunshine', 10.95, 'food_43_3', 'Bacon, cheese, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
-INSERT INTO FOODITEM VALUES (44, 1, 'Falooda', 6.99, 'food_44_1', 'Rose flavored milkshake with basil seeds, falooda sev, and vermicelli');
-INSERT INTO FOODITEM VALUES (44, 2, 'Kesar Thandai', 6.99, 'food_44_2', 'Refreshing and fragrant milk-based drink flavored with saffron, almonds, and cardamom');
-INSERT INTO FOODITEM VALUES (44, 3, 'Kesar Ginger Tea', 4.99, 'food_44_3', 'A hot and soothing beverage made with tea, ginger, saffron, and milk');
-INSERT INTO FOODITEM VALUES (45, 1, 'Pork (3)', 8.75, 'food_45_1', 'Pastor style, pineapple, cilantro-onions.');
-INSERT INTO FOODITEM VALUES (45, 2, 'Chicken (3)', 8.75, 'food_45_2', 'Grilled chicken, pico de gallo, cream, panela cheese.');
-INSERT INTO FOODITEM VALUES (45, 3, 'Chicken Mushroom (3)', 8.75, 'food_45_3', 'Grilled. Cream, panela cheese.');
-INSERT INTO FOODITEM VALUES (46, 1, 'Thai Fried Rice', 14.99, 'food_46_1', 'Stir-fried with tomatoes, onions, and garnished with coriander leaves and sliced cucumbers.');
-INSERT INTO FOODITEM VALUES (46, 2, 'Pad Thai', 14.99, 'food_46_2', 'Your choice of meat is stir fried with tofu, ground roasted peanuts, bean sprouts, and spring onions.');
-INSERT INTO FOODITEM VALUES (46, 3, 'Green Curry', 15.99, 'food_46_3', 'Simmered in coconut milk and green curry paste. Includes bamboo shoots, zucchini, snow peas, red and green bell peppers, Thai eggplant (seasonal) and garnished with Thai basil.');
-INSERT INTO FOODITEM VALUES (47, 1, 'Assorted Naan Basket (4 Pieces)', 13.99, 'food_47_1', 'Includes regular naan, garlic naan, Mozzarella cheese naan, and whole wheat naan.');
-INSERT INTO FOODITEM VALUES (47, 2, 'Garlic Naan (1 Piece)', 3.19, 'food_47_2', 'Plain flour naan bread with garlic. One order comes with one naan.');
-INSERT INTO FOODITEM VALUES (47, 3, 'Tandoori Paneer Veggie Sizzler', 17.99, 'food_47_3', 'Vegetarian and gluten friendly. Homemade Indian dish with cheese and seasonal mixed vegetables, grilled in the tandoor.');
-INSERT INTO FOODITEM VALUES (48, 1, 'Spicy Beef Soup', 13.99,'food_48_1', 'Spicy soup with beef, vegetables and glass noodles.');
-INSERT INTO FOODITEM VALUES (48, 2, 'Beef Bulgogi', 14.99, 'food_48_2', 'Stir fried beef slices with teriyaki sauce and vegetables.');
-INSERT INTO FOODITEM VALUES (48, 3, 'Chicken Bulgogi', 14.99, 'food_48_3','Stir fried chicken with spicy sauce and vegetables.');
+INSERT INTO FOODITEM VALUES (42, 1, 'The Early Bird ', 10.95, 'food_43_1', 'Your choice of 3 veggies, cheese, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
+INSERT INTO FOODITEM VALUES (42, 2, 'Jalapeno Poppers', 11.50, 'food_43_2', 'Sriracha infused cream cheese, candied jalapeno peppers, cheese, bacon, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
+INSERT INTO FOODITEM VALUES (42, 3, 'Morning Sunshine', 10.95, 'food_43_3', 'Bacon, cheese, and eggs (scrambled or over hard) *CAN BE MADE GLUTEN FREE');
+INSERT INTO FOODITEM VALUES (43, 1, 'Falooda', 6.99, 'food_44_1', 'Rose flavored milkshake with basil seeds, falooda sev, and vermicelli');
+INSERT INTO FOODITEM VALUES (43, 2, 'Kesar Thandai', 6.99, 'food_44_2', 'Refreshing and fragrant milk-based drink flavored with saffron, almonds, and cardamom');
+INSERT INTO FOODITEM VALUES (43, 3, 'Kesar Ginger Tea', 4.99, 'food_44_3', 'A hot and soothing beverage made with tea, ginger, saffron, and milk');
+INSERT INTO FOODITEM VALUES (44, 1, 'Pork (3)', 8.75, 'food_45_1', 'Pastor style, pineapple, cilantro-onions.');
+INSERT INTO FOODITEM VALUES (44, 2, 'Chicken (3)', 8.75, 'food_45_2', 'Grilled chicken, pico de gallo, cream, panela cheese.');
+INSERT INTO FOODITEM VALUES (44, 3, 'Chicken Mushroom (3)', 8.75, 'food_45_3', 'Grilled. Cream, panela cheese.');
+INSERT INTO FOODITEM VALUES (45, 1, 'Thai Fried Rice', 14.99, 'food_46_1', 'Stir-fried with tomatoes, onions, and garnished with coriander leaves and sliced cucumbers.');
+INSERT INTO FOODITEM VALUES (45, 2, 'Pad Thai', 14.99, 'food_46_2', 'Your choice of meat is stir fried with tofu, ground roasted peanuts, bean sprouts, and spring onions.');
+INSERT INTO FOODITEM VALUES (45, 3, 'Green Curry', 15.99, 'food_46_3', 'Simmered in coconut milk and green curry paste. Includes bamboo shoots, zucchini, snow peas, red and green bell peppers, Thai eggplant (seasonal) and garnished with Thai basil.');
+INSERT INTO FOODITEM VALUES (46, 1, 'Assorted Naan Basket (4 Pieces)', 13.99, 'food_47_1', 'Includes regular naan, garlic naan, Mozzarella cheese naan, and whole wheat naan.');
+INSERT INTO FOODITEM VALUES (46, 2, 'Garlic Naan (1 Piece)', 3.19, 'food_47_2', 'Plain flour naan bread with garlic. One order comes with one naan.');
+INSERT INTO FOODITEM VALUES (46, 3, 'Tandoori Paneer Veggie Sizzler', 17.99, 'food_47_3', 'Vegetarian and gluten friendly. Homemade Indian dish with cheese and seasonal mixed vegetables, grilled in the tandoor.');
+INSERT INTO FOODITEM VALUES (47, 1, 'Spicy Beef Soup', 13.99,'food_48_1', 'Spicy soup with beef, vegetables and glass noodles.');
+INSERT INTO FOODITEM VALUES (47, 2, 'Beef Bulgogi', 14.99, 'food_48_2', 'Stir fried beef slices with teriyaki sauce and vegetables.');
+INSERT INTO FOODITEM VALUES (47, 3, 'Chicken Bulgogi', 14.99, 'food_48_3','Stir fried chicken with spicy sauce and vegetables.');
 INSERT INTO GIFTCARD VALUES('6748369873539860',5.0)
 INSERT INTO GIFTCARD VALUES('0086811568571859',10.0)
 INSERT INTO GIFTCARD VALUES('8081831768969802',20.0)

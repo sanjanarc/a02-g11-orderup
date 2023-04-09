@@ -1,5 +1,6 @@
 package com.example.orderup.presentation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -33,6 +34,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder> {
         Restaurant restaurant = restaurants.get(position);
         holder.nameview.setText(restaurant.getRestaurantName()); // Get the restaurant name.
         holder.descriptionview.setText(restaurant.getRestaurantDescription()); // Get restaurant description.
+
+        Log.d("Printing Restaurant name",restaurant.getRestaurantName());
+        Log.d("Printing image name",restaurant.getImagesURL());
         int url = holder.imageview.getResources().getIdentifier(restaurant.getImagesURL(), "drawable", MainActivity.PACKAGE_NAME); // Get image url.
         holder.imageview.setBackgroundResource(url); // Set the restaurant background image.
         holder.position = holder.getAdapterPosition(); // Pass current position back to super class and knowing that which restaurant get clicked.
