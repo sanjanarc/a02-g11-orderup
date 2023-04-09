@@ -42,7 +42,7 @@ public class AddCommentTest {
 
         //click on sign in
         onView(withId(R.id.signInButton)).perform(click());
-        //onView(withId(R.id.))
+       // onView(withId(R.id.))
 
     }
 

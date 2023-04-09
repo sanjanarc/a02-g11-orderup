@@ -49,6 +49,11 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
 
+    //user for Fragment testing
+    androidTestImplementation 'androidx.test:core:1.4.0'
+    androidTestImplementation 'androidx.fragment:fragment-testing:1.4.0'
+
+
 }
 
 task prepareKotlinBuildScriptModel {

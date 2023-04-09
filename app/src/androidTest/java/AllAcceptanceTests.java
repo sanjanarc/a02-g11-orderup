@@ -14,10 +14,11 @@ import SystemTests.LoginTest;
 @Suite.SuiteClasses({
 
         LoginTest.class,
-        AddCommentTest.class,
         AddUserTest.class,
+        AddCommentTest.class,
+
 
 
 })
-public class AllSystemTests {
+public class AllAcceptanceTests {
 }
