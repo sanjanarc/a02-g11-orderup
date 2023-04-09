@@ -64,8 +64,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartViewRecycler"
-        android:layout_width="495dp"
-        android:layout_height="438dp"
+        android:layout_width="571dp"
+        android:layout_height="482dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"

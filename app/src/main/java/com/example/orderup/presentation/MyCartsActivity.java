@@ -112,13 +112,13 @@ public class MyCartsActivity extends AppCompatActivity {
         ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //UNCOMMENT OUT ONCE CART IS WORKING
-//                if(user.getFoodCart().size() == 0) {
-//                    ErrorPopUp.errorMsg(MyCartsActivity.this, "Cart is empty");
-//                } else {
+
+                if(user.getFoodCart().size() == 0) {
+                    ErrorPopUp.errorMsg(MyCartsActivity.this, "Cart is empty");
+               } else {
                     Intent intent = new Intent(getBaseContext(), CheckoutActivity.class);
                     startActivity(intent); // Start the cart activity class.
- //               }
+                }
             }
         });
 

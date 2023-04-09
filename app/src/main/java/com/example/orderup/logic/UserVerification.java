@@ -274,7 +274,7 @@ public class UserVerification {
      * @throws Exception will throw error location exception.
      */
     private void provinceVerification(String province) throws Exception {
-        if (!province.equalsIgnoreCase("Manitoba")) {
+        if (!province.equalsIgnoreCase("Manitoba") || !province.equalsIgnoreCase("MB")) {
 
             throw new MyException.EXCEPTION_LOCATION_OUT_OF_BOUND2();
 
