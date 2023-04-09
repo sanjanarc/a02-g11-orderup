@@ -331,14 +331,14 @@ public class UserVerification {
             userPersistence.modifyBalance(email, -25.00F);
             userPersistence.setMembership(email);
 
-        } else if (user_balance < 25.00) {
+        } else if (("" != user.getCreditCard() && null != user.getCreditCard()) && !user.getMembership())  {
 
-            throw new MyException.EXCEPTION_TOO_POOR();
+            userPersistence.setMembership(email);
 
+        } else if (("" == user.getCreditCard() || null == user.getCreditCard())) {
+            throw new MyException.EXCEPTION_NO_CARD();
         } else if (user.getMembership()) {
-
             throw new MyException.EXCEPTION_ITEM_ALREADY_EXIST();
-
         }
 
         return msg;
