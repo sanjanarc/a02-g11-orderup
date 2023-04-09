@@ -2,29 +2,15 @@ package SystemTests;
 
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.pressBack;
-import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.pressKey;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import android.view.KeyEvent;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-
-
-import androidx.fragment.app.testing.FragmentScenario;
-
-
-import static org.hamcrest.CoreMatchers.anything;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -40,10 +26,10 @@ import org.junit.runner.RunWith;
 
 import com.example.orderup.R;
 import com.example.orderup.presentation.LoginActivity;
-import com.example.orderup.presentation.HomeFragment;
 
 /*
-        Purpose: This class tests searching for a Restaurant in the search bar on the Home page (HomeFragment)
+        Purpose: This class tests searching for a Restaurant in the search bar on the Home page after Logging in
+        Test: Search either a restaurant or a cuisine
  */
 
 @RunWith(AndroidJUnit4.class)
@@ -51,9 +37,6 @@ import com.example.orderup.presentation.HomeFragment;
 public class SearchRestaurantTest {
     @Rule
     public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
-
-    //public FragmentScenarioRule<HomeFragment> fragmentScenarioRule = FragmentScenarioRule.<HomeFragment>newBuilder().setFragmentFactory(new MyFragmentFactory()).build();
-    //public FragmentScenario<HomeFragment> homeFragment = FragmentScenario.launchInContainer(HomeFragment.class);
 
     @Test
     public void searchRestaurant(){
@@ -64,16 +47,28 @@ public class SearchRestaurantTest {
         //click on sign in
         onView(withId(R.id.signInButton)).perform(click());
 
+        //search for a restaurant keyword in the search bar and press Enter
+        onView(withId(R.id.searchView)).perform(typeText("Korean Garden"),pressKey(KeyEvent.KEYCODE_ENTER));
+        //confirm at lease one search result is displayed
+        onView(withId(R.id.searchLayout)).check(matches(minRestaurantDisplay(1)));
 
-        //search for a keyword in the search bar and press Enter
+        //clear search before next test
+        for(int i=0; i<"Korean Garden".length(); i++){
+            onView(withId(R.id.searchView)).perform(pressKey(KeyEvent.KEYCODE_DEL));
+        }
+        //search for a cuisine in the search bar and press Enter
         onView(withId(R.id.searchView)).perform(typeText("Korean"),pressKey(KeyEvent.KEYCODE_ENTER));
         //confirm at lease one search result is displayed
         onView(withId(R.id.searchLayout)).check(matches(minRestaurantDisplay(1)));
 
-        //complete the test by exiting
-        closeSoftKeyboard();
-        pressBack();
-        pressBack();
+        //clear search before next test
+        for(int i=0; i<"Korean".length(); i++){
+            onView(withId(R.id.searchView)).perform(pressKey(KeyEvent.KEYCODE_DEL));
+        }
+        //search with an empty search bar
+        onView(withId(R.id.searchView)).perform(typeText(""),pressKey(KeyEvent.KEYCODE_ENTER));
+        //expected result =0
+        onView(withId(R.id.searchLayout)).check(matches(minRestaurantDisplay(0)));
 
     }
 
@@ -86,13 +81,9 @@ public class SearchRestaurantTest {
             public boolean matchesSafely(View view) {
                 return view instanceof ViewGroup && ((ViewGroup) view).getChildCount() >= count;
             }
-
             @Override
             public void describeTo(Description description) {
-
             }
         };
     }
-
-
 }
