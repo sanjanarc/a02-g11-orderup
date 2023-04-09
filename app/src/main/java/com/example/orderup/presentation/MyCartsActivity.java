@@ -76,8 +76,15 @@ public class MyCartsActivity extends AppCompatActivity {
         TextView DeliveryFeeView = findViewById(R.id.Delivery);
         TextView TaxView = findViewById(R.id.Tax);
 
-        double subTotal = 10.50; // filler temporary get from cart table
+        double subTotal = 0.00;
         double deliveryFee = 0.00;
+        //get subtotal
+        for(int i=0; i<user.getFoodCart().size();i++) {
+            FoodItem food = user.getFoodCart().get(i);
+            double price = food.getItemPrice();
+            subTotal +=price;
+        }
+        //check if user gets membership discount
         if(user.getMembership()) {
              deliveryFee = 2.99;
         } else {
@@ -105,9 +112,13 @@ public class MyCartsActivity extends AppCompatActivity {
         ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(getBaseContext(), CheckoutActivity.class);
-                startActivity(intent); // Start the cart activity class.
+                //UNCOMMENT OUT ONCE CART IS WORKING
+//                if(user.getFoodCart().size() == 0) {
+//                    ErrorPopUp.errorMsg(MyCartsActivity.this, "Cart is empty");
+//                } else {
+                    Intent intent = new Intent(getBaseContext(), CheckoutActivity.class);
+                    startActivity(intent); // Start the cart activity class.
+ //               }
             }
         });
 

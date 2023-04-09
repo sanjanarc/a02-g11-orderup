@@ -59,6 +59,7 @@ public class MenuHolder extends RecyclerView.ViewHolder {
 
         // Add button listener increments the number of the particular food item that could be ordered.
         addButton = itemView.findViewById(R.id.addButton);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

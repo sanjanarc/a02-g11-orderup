@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
@@ -30,14 +31,21 @@ public class CheckoutActivity extends AppCompatActivity {
         TextView TotalView = findViewById(R.id.Total);
 
 
-        double subTotal = 10.50; // filler temporary get from cart table
+        double subTotal = 0.00;
         double deliveryFee = 0.00;
+        //get subtotal
+        for(int i=0; i<user.getFoodCart().size();i++) {
+            FoodItem food = user.getFoodCart().get(i);
+            double price = food.getItemPrice();
+            subTotal +=price;
+        }
+        //check if user gets membership discount
         if(user.getMembership()) {
             deliveryFee = 2.99;
         } else {
             deliveryFee = 3.60;
         }
-        double tax = subTotal * 0.07;
+        double tax = subTotal*0.07;
         double total = subTotal + deliveryFee + tax;
 
 
