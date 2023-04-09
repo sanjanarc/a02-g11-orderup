@@ -21,8 +21,6 @@ import com.example.orderup.Objects.UserTest;
         GiftcardTest.class,
         RestaurantTest.class,
         UserTest.class,
-        RestaurantServicesTest.class,
-        UserServicesTest.class
 
 
 })

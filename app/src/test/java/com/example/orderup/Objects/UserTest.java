@@ -21,7 +21,7 @@ public class UserTest {
         String address = "123 Main St";
         String balance = "50.00F";
 
-        User user = new User(email, password, firstName, lastName, creditCard, cvc, expiry, address, balance);
+        User user = new User(email, password, firstName, lastName, creditCard, cvc, expiry, address, balance, Boolean.TRUE);
 
         assertEquals(email, user.getEmail());
         assertEquals(password, user.getPassword());

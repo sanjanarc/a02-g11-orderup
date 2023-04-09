@@ -1,7 +1,4 @@
 package SystemTests;
-
-
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
@@ -21,25 +18,10 @@ import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 /*
-        Purpose: This class tests Registering a User's account
+    Purpose: Test adding a comment in a restaurant's comment section
  */
-
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class AddUserTest {
-
-    @Test
-    public void registrationTest(){
-
-        //find and click the registration button
-
-
-
-
-        
-    }
-
-
+public class AddCommentTest {
 }
