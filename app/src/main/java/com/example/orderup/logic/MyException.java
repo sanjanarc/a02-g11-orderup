@@ -61,4 +61,8 @@ public class MyException extends Exception {
 
     }
 
+    public static class EXCEPTION_ILLEGAL_FULL_NAME_FORMAT extends Exception {
+
+    }
+
 }
