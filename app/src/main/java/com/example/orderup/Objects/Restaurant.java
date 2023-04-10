@@ -153,4 +153,8 @@ public class Restaurant {
         updateComment();
         return userComments;
     }
+
+    public int getNum_menu_items() {
+        return num_menu_items;
+    }
 }
