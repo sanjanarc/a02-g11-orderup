@@ -54,9 +54,28 @@ public class UserPersistenceHSQLDBTest {
     }
 
     @Test
-    public void addUser() {
+    public void addUser() throws Exception {
+            // Add a new user
+            final String email = "johndoe@example.com";
+            final String password = "password";
+            final String firstName = "John";
+            final String lastName = "Doe";
+            userPersistence.addUser(email, password, firstName, lastName);
 
-    }
+            // Verify that the user was added to the database
+            final User retrievedUser = userPersistence.getUser(email);
+            assertNotNull(retrievedUser);
+            assertEquals(email, retrievedUser.getEmail());
+            assertEquals(password, retrievedUser.getPassword());
+            assertEquals(firstName, retrievedUser.getFirstName());
+            assertEquals(lastName, retrievedUser.getLastName());
+            assertEquals(null, retrievedUser.getCreditCard());
+            assertEquals(null, retrievedUser.getExpiry());
+            assertEquals(null, retrievedUser.getAddress());
+            assertEquals(0.00F, retrievedUser.getBalance(), 0.001);
+
+        }
+
 
     @Test
     public void addCreditCard() {

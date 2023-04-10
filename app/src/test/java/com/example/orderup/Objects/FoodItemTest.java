@@ -64,4 +64,44 @@ public class FoodItemTest {
         String actualDescription = item.getItemDescription();
         assertEquals(expectedDescription, actualDescription);
     }
+
+    @Test
+    public void getItem_id() {
+        FoodItem foodItem = new FoodItem(1, 2, "Pizza", 9.99, "https://example.com/pizza.jpg", "Delicious pizza");
+        int itemId = foodItem.getItem_id();
+        assertEquals(2, itemId);
+    }
+
+    @Test
+    public void getRestaurant_id() {
+        FoodItem foodItem = new FoodItem(1, 2, "Pizza", 9.99, "https://example.com/pizza.jpg", "Delicious pizza");
+        int restaurantId = foodItem.getRestaurant_id();
+        assertEquals(1, restaurantId);
+    }
+
+    @Test
+    public void getNumItems() {
+        FoodItem foodItem = new FoodItem(1, 1, "Pizza", 10.99, "https://example.com/pizza.jpg", "Delicious pizza");
+        assertEquals(0, foodItem.getNumItems());
+    }
+
+    @Test
+    public void setNumItems() {
+        FoodItem foodItem = new FoodItem(1, 1, "Pizza", 10.99, "https://example.com/pizza.jpg", "Delicious pizza");
+        foodItem.setNumItems(2);
+        assertEquals(2, foodItem.getNumItems());
+    }
+
+
+    @Test
+    public void testDefaultConstructor() {
+        FoodItem item = new FoodItem();
+        assertEquals(0, item.getRestaurant_id());
+        assertEquals(0, item.getItem_id());
+        assertEquals("Default Name", item.getItemName());
+        assertEquals("Default Description", item.getItemDescription());
+        assertEquals(0.0, item.getItemPrice(), 0.001);
+        assertEquals("", item.getImageUrl());
+        assertEquals(0, item.getNumItems());
+    }
 }
