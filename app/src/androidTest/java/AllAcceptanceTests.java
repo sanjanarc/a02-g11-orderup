@@ -6,6 +6,7 @@ import SystemTests.AddCommentTest;
 import SystemTests.AddUserTest;
 import SystemTests.LoginTest;
 import SystemTests.SearchRestaurantTest;
+import SystemTests.BuyMembershipTest;
 
 
 /*
@@ -17,7 +18,8 @@ import SystemTests.SearchRestaurantTest;
         LoginTest.class,
         AddUserTest.class,
         SearchRestaurantTest.class,
-        AddCommentTest.class
+        AddCommentTest.class,
+        BuyMembershipTest.class
 
 })
 public class AllAcceptanceTests {
