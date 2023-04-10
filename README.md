@@ -1,4 +1,5 @@
 **The Purpose of OrderUp:**
+
 Our app is designed to streamline the food ordering and delivery process for our customers. 
 
 
