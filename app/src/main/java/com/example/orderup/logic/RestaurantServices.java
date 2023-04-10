@@ -35,7 +35,8 @@ public class RestaurantServices {
     public List getRestList() {
         return restaurantPersistence.getRestaurantSequential();
     }
-
+    //--------------------------------------------------------------------------------------------
+    // Too lazy to write comment
     /**
      * method is used to retrieve restaurant one at a time from Restaurant List in RestaurantPersistence
      * Starting from the first restaurant in the list, the method returns the next restaurant each time it is called
@@ -59,7 +60,7 @@ public class RestaurantServices {
         }
         return restaurant;
     }
-
+    //----------------------------------------------------------------------------------------------
     /**
      * Get the specific restaurant object.
      *
