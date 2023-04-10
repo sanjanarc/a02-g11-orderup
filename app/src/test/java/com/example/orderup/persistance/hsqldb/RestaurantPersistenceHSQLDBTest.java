@@ -57,7 +57,6 @@ public class RestaurantPersistenceHSQLDBTest {
         assertTrue("Fresh Strawberry Cheesecake".equals(restaurant.getItem1().getItemName()));
         assertTrue("Cherry Royale Cheesecake".equals(restaurant.getItem2().getItemName()));
         assertTrue("Oreo Cookie Cheesecake".equals(restaurant.getItem3().getItemName()));
-
     }
     @Test
     public void testGetRestaurant(){

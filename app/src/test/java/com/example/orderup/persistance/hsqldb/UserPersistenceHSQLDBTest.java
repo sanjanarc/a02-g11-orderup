@@ -94,7 +94,6 @@ public class UserPersistenceHSQLDBTest {
     @Test
     public void addCreditCard() {
 
-
         /*
 
         //    public void addCreditCard(String email, String cardNum, String cvc, String expiry) {
