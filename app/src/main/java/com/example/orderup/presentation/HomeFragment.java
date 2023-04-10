@@ -56,10 +56,12 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
+                Search_algorithm search_algorithm = new Search_algorithm(s);
+
                 try {
 
                     // Set the new restaurant list to home page.
-                    recyclerView.setAdapter(new RestaurantAdapter(Search_algorithm.searchRestaurant(s)));
+                    recyclerView.setAdapter(new RestaurantAdapter(search_algorithm.searchRestaurant(s)));
 
                 } catch (Exception e) {
 

@@ -28,7 +28,7 @@ public class Search_algorithm {
      * @param userInput the user input data.
      * @return an ArrayList<Restaurant> of  restaurant recommendation based on user's search
      */
-    public static List<Restaurant> searchRestaurant(String userInput) throws Exception {
+    public List<Restaurant> searchRestaurant(String userInput) throws Exception {
 
         RestaurantServices restaurantServices = new RestaurantServices(Services.getRestaurantPersistence());
         List<Restaurant> restaurants = restaurantServices.getRestList(); // access restaurants from script
@@ -72,7 +72,7 @@ public class Search_algorithm {
      * @param str a string variable.
      * @return a string variable with all lower case and not extra symbol.
      */
-    public static String reFormat(String str) {
+    public String reFormat(String str) {
         str = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
         return str;
     }
@@ -85,7 +85,7 @@ public class Search_algorithm {
      * @param categories  an array of category names
      * @return an ArrayList of relevant restaurant's row number
      */
-    public static List<Integer> searchRestaurantKey(String user_input, String[] restaurants, String[] categories) {
+    public List<Integer> searchRestaurantKey(String user_input, String[] restaurants, String[] categories) {
 
         ArrayList<Integer> restaurantFound = new ArrayList<>(); //an array list of restaurant's row number relevant to the user input
 
