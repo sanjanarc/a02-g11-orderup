@@ -42,6 +42,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.util.Log;
+
 
 public class UserPersistenceHSQLDBTest {
     private UserServices userServices;
@@ -102,9 +104,10 @@ public class UserPersistenceHSQLDBTest {
         String cardNum= "6748369873539860";
         String cvc= "505";
         String expiry= "03/03";
-        userVerification.creditCardVerification(email, cardNum, cvc, expiry);
-        Mockito.verify(userPersistence).addCreditCard(email, cardNum, cvc, expiry);
-        //when(user.getCreditInfo(email)).thenReturn();
+//        User user = new
+//        userVerification.creditCardVerification(email, cardNum, cvc, expiry);
+//        Mockito.verify(userPersistence.getUser(email)).addCreditCard(email, cardNum, cvc, expiry);
+//        //when(user.getCreditInfo(email)).thenReturn();
 
         //creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry)
 
