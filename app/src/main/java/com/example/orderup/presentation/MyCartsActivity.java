@@ -96,7 +96,7 @@ public class MyCartsActivity extends AppCompatActivity {
         for (int i = 0; i < user.getFoodCart().size(); i++) {
 
             foodItem = user.getFoodCart().get(i);
-            double price = foodItem.getNumItems() * foodItem.getItemPrice();
+            double price = foodItem.getNumItems() * foodItem.getItemPrice()-user.getBalance();
             subTotal += price;
 
         }
