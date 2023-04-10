@@ -305,6 +305,8 @@ public class UserAccountFragment extends Fragment {
                         //Verify and add credit card to database.
                         userVerification.verifyMembershipPurchase(userEmail);
                         updateInfo();
+                        membershipButton.setEnabled(false);
+
 
                     } catch (Exception e) {
 
