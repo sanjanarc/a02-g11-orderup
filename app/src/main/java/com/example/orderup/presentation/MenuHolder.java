@@ -27,11 +27,19 @@ public class MenuHolder extends RecyclerView.ViewHolder {
     Button submitBButton;
     public final int MAX_ORDER_ITEMS = 100; // The maximum number of each item the user could order
 
+    /**
+     * Constructor.
+     *
+     * @param itemView the context view of the parent activity.
+     */
     public MenuHolder(@NonNull View itemView) {
 
         super(itemView);
+
+        // Get the reference from .xml file.
         imageview = itemView.findViewById(R.id.foodImage);
         nameView = itemView.findViewById(R.id.foodInfo);
+        //submitBButton = (Button) itemView.findViewById(R.id.Submit);
 
         // TextView listener that will save the number of food items the user wants to order( could be typed using the keyboard)
         foodItemNumber = (TextView) itemView.findViewById(R.id.NumberOfFood);
@@ -48,6 +56,7 @@ public class MenuHolder extends RecyclerView.ViewHolder {
 
                         foodItemNumber.setText(String.valueOf(1));
                         ErrorPopUp.errorMsg(textView.getContext(), "Enter value between 0 and 100");
+
                     }
 
                     return true;
@@ -59,7 +68,6 @@ public class MenuHolder extends RecyclerView.ViewHolder {
 
         // Add button listener increments the number of the particular food item that could be ordered.
         addButton = itemView.findViewById(R.id.addButton);
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,8 +77,11 @@ public class MenuHolder extends RecyclerView.ViewHolder {
                     int temp = Integer.parseInt(foodItemNumber.getText().toString());
                     temp++;
                     foodItemNumber.setText(String.valueOf(temp));
-                } else {
+
+                } else { // Cannot add too much food to cart.
+
                     ErrorPopUp.errorMsg(view.getContext(), "Max item number reached");
+
                 }
             }
         });
@@ -82,18 +93,20 @@ public class MenuHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
 
                 if (Integer.parseInt(foodItemNumber.getText().toString()) < MAX_ORDER_ITEMS && Integer.parseInt(foodItemNumber.getText().toString()) > 0) {
+
                     int temp = Integer.parseInt(foodItemNumber.getText().toString());
 
                     if (Integer.parseInt(foodItemNumber.getText().toString()) != 1)
                         temp--;
 
                     foodItemNumber.setText(String.valueOf(temp));
-                } else
+
+                } else { // Cannot go to negative number.
+
                     ErrorPopUp.errorMsg(view.getContext(), "Minimum item number reached");
+
+                }
             }
         });
-
-        // Submit button will make action based on the adapter.
-        submitBButton = (Button) itemView.findViewById(R.id.Submit);
     }
 }

@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -42,16 +43,23 @@ public class RegisterActivity extends AppCompatActivity {
                 password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
                 rePassword = ((EditText) findViewById(R.id.rePasswordInput)).getText().toString();
 
-                try { // Verify the input data with databases. Will add the account to databases and login the application if input data are correct.
+                try {
 
+                    // Verify the input data with databases. Will add the account to databases and login the application if input data are correct.
                     userVerification.registrationVerification(email, firstName, lastName, password, rePassword);
 
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    Services.setCurrentUser(email); // Tell the system who is the current user.
-                    startActivity(intent); // Start the main activity.
-                    finish(); // Remove current activity.
+                    // Tell the system who is the current user.
+                    Services.setCurrentUser(email);
 
-                } catch (Exception e) {
+                    // Move to the home page.
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+                    // Remove current activity.
+                    finish();
+
+                } catch (
+                        Exception e) { // Catch the specific error from verification and display to user.
 
                     String msg;
 
@@ -101,8 +109,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class)); // Close this activity and back to login activity.
-                finish(); // Remove current activity.
+                // Close this activity and back to login activity.
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
+                // Remove current activity.
+                finish();
+
             }
         });
     }

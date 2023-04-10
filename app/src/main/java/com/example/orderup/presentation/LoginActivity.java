@@ -26,14 +26,16 @@ import java.io.InputStreamReader;
 public class LoginActivity extends AppCompatActivity {
 
     private Button signInButton, registerButton;
-    private String email, password;
     private EditText emailInput, passwordInput;
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Load the script to the phone database.
         copyDatabaseToDevice();
 
         // Build connection with xml file.
@@ -53,13 +55,20 @@ public class LoginActivity extends AppCompatActivity {
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                try { // Verify the input data and throw exception if input data is incorrect.
+                try {
 
+                    // Verify the input data and throw exception if input data is incorrect.
                     userVerification.loginVerification(email, password);
+
+                    // Tell the system who is the current user.
+                    Services.setCurrentUser(email);
+
+                    // Go to the home page of the app.
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    Services.setCurrentUser(email); // Tell the system who is the current user.
-                    startActivity(intent); // Start the main activity class.
-                    finish(); // Remove current activity.
+                    startActivity(intent);
+
+                    // Remove current activity.
+                    finish();
 
                 } catch (Exception e) { // Catch error thrown from login verification.
 
@@ -101,12 +110,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Start the register page activity.
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish(); // Remove current activity.
+
+                // Remove current activity.
+                finish();
             }
         });
     }
 
+    /**
+     * This method will create a file in the phone and create a correct path for creating database.
+     */
     private void copyDatabaseToDevice() {
+
+        // The script folder name.
         final String DB_PATH = "db";
 
         String[] assetNames;
@@ -115,22 +131,38 @@ public class LoginActivity extends AppCompatActivity {
         AssetManager assetManager = getAssets();
 
         try {
+
             assetNames = assetManager.list(DB_PATH);
+
             for (int i = 0; i < assetNames.length; i++) {
+
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
+
             }
+
             copyAssetsToDirectory(assetNames, dataDirectory);
             Services.setDBPathName(dataDirectory.toString() + "/" + Services.getDBPathName());
 
         } catch (final IOException ioe) {
+
             ErrorPopUp.errorMsg(this, "Unable to access application data: " + ioe.getMessage());
+
         }
     }
 
+    /**
+     * Copy and assets from app to phone.
+     *
+     * @param assets    the assets from app.
+     * @param directory the phone file.
+     * @throws IOException will throw an error if the file is incorrect.
+     */
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {
+
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
 
@@ -138,14 +170,19 @@ public class LoginActivity extends AppCompatActivity {
             int count;
 
             File outFile = new File(copyPath);
-            if (true) {
+
+            if (!outFile.exists()) {
+
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
                 count = in.read(buffer);
+
                 while (count != -1) {
+
                     out.write(buffer, 0, count);
                     count = in.read(buffer);
+
                 }
 
                 out.close();
