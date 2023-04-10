@@ -187,6 +187,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
+
     /**
      * Adds food item to cart in the DB.script
      *
@@ -395,5 +396,8 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             throw new PersistenceException(e);
 
         }
+    }
+    public void getMembership(String email){
+
     }
 }

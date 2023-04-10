@@ -82,4 +82,16 @@ public class UserServices {
     public List getFoodCart(String email) {
         return userPersistence.getFoodCart(email);
     }
+
+    public Boolean getMembership(String email)
+    {
+        User user = userPersistence.getUser(email);
+        return user.getMembership();
+
+    }
+    public void setMember(String email){
+        userPersistence.setMembership(email);
+
+    }
+
 }
