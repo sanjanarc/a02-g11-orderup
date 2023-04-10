@@ -171,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
 
             File outFile = new File(copyPath);
 
-            if (true) {
+            if (!outFile.exist()) {
 
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
