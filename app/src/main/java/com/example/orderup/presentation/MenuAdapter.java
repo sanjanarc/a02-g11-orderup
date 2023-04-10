@@ -1,8 +1,10 @@
 package com.example.orderup.presentation;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +22,15 @@ import java.util.List;
  */
 public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
-    List<FoodItem> foods; // The list of food items that will be presented in the menu view
+    // The list of food items that will be presented in the menu view
+    List<FoodItem> foods;
+    View view;
 
+    /**
+     * Constructor.
+     *
+     * @param foods the food list of this specific restaurant.
+     */
     MenuAdapter(List<FoodItem> foods) {
         this.foods = foods;
     }
@@ -30,8 +39,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
     @NonNull
     @Override
     public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.menu_view, parent, false);
+        this.view = parent;
 
         return new MenuHolder(itemView);
     }
@@ -40,11 +51,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
 
+        // Create the food object to get the food info.
         FoodItem foodItem = foods.get(position);
         String foodName = foodItem.getItemName();
         String foodDes = foodItem.getItemDescription();
         String foodPrice = String.valueOf(foodItem.getItemPrice());
         String info = foodName + "\n" + foodDes + "\nPrice: " + foodPrice;
+
+        // Display the foods info to user.
         holder.nameView.setText(info);
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url);
@@ -55,14 +69,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
             @Override
             public void onClick(View view) {
 
+                // Add the selected food to the database with the user email.
                 User user = new UserServices(Services.getUserPersistence()).getUser(Services.getCurrentUser());
-//                if(user.getFoodCart().contains(foodItem));
-//                {
-//                    foodItem.setNumItems(foodItem.getNumItems()+Integer.parseInt(String.valueOf(holder.foodItemNumber)));
-//                }
                 user.addToFoodCart(foodItem, Integer.parseInt(holder.foodItemNumber.getText().toString()));
+
                 //Display message to user that Item has been added to cart.
                 ErrorPopUp.errorMsg(view.getContext(), "Item added");
+
             }
         });
     }

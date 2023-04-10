@@ -29,8 +29,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.user_home, container, false);
-
         RestaurantServices temp = new RestaurantServices(Services.getRestaurantPersistence());
+
+        // Setup the restaurant list view.
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -42,8 +43,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getContext(), MyCartsActivity.class); // Open the cart activity.
-                startActivity(intent); //Start the cart activity class.
+                //Start the cart activity class.
+                Intent intent = new Intent(getContext(), MyCartsActivity.class);
+                startActivity(intent);
+
             }
         });
 

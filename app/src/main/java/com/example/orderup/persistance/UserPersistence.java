@@ -1,10 +1,7 @@
 package com.example.orderup.persistance;
 
-import com.example.orderup.Objects.FoodItem;
-import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +58,7 @@ public interface UserPersistence {
      *
      * @return List of gift card object.
      */
-    List<Giftcard> getGiftCards();
+    List getGiftCards();
 
     /**
      * Change the membership status of the user.
@@ -74,30 +71,28 @@ public interface UserPersistence {
     /**
      * Adds food item to cart.
      *
-     * @param email        the user's email.
-     * @param rest_id      the restaurant id.
-     * @param food_id      the food item id.
-     * @param quantity     the quantity of food item.
-     *
+     * @param email    the user's email.
+     * @param rest_id  the restaurant id.
+     * @param food_id  the food item id.
+     * @param quantity the quantity of food item.
      */
-    void updateCart(String email,int rest_id, int food_id, int quantity);
+    void updateCart(String email, int rest_id, int food_id, int quantity);
 
 
     /**
      * Clears all items from cart in the database.
      *
-     * @param email   the user's email.
+     * @param email the user's email.
      */
     void clearCart(String email);
 
     /**
      * Removes food item from cart.
      *
-     * @param email        the user's email.
-     * @param rest_id      the restaurant id.
-     * @param food_id      the food item id.
-     * @param quantity     the quantity of food item.
-     *
+     * @param email    the user's email.
+     * @param rest_id  the restaurant id.
+     * @param food_id  the food item id.
+     * @param quantity the quantity of food item.
      */
     void removeFromCart(String email, int rest_id, int food_id, int quantity);
 
@@ -107,7 +102,5 @@ public interface UserPersistence {
      * @param email the user's email.
      * @return a list of food items in cart.
      */
-    List<FoodItem> getFoodCart(String email);
-
-
+    List getFoodCart(String email);
 }

@@ -24,9 +24,6 @@ public class ErrorPopUp {
             }
         });
 
-//        AlertDialog al = builder.create();
-//        al.show();
-////        al.getWindow().setLayout(500, 5000);
         builder.show();
     }
 }

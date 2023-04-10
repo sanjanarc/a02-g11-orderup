@@ -24,8 +24,9 @@ import com.example.orderup.logic.UserVerification;
  * This is the User page class.
  */
 public class UserAccountFragment extends Fragment {
+
     TextView infoContainer;
-    Button addCardButton, logoutButton, addAddressButton, redeemCardButton, membershipButton;
+    Button addCardButton, logoutButton, addAddressButton, redeemCardButton, membershipButton, cartButton;
 
     String userEmail = Services.getCurrentUser();
 
@@ -38,10 +39,24 @@ public class UserAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_user_account, container, false);
 
         infoContainer = (TextView) view.findViewById(R.id.infoContainer);
         updateInfo(); // Display the user info.
+
+        // Event listener of the cart button.
+        cartButton = (Button) view.findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Start the cart activity class.
+                Intent intent = new Intent(getContext(), MyCartsActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //Event listener of the add credit card button.
         addCardButton = (Button) view.findViewById(R.id.addCardButton);
@@ -85,9 +100,14 @@ public class UserAccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getActivity(), LoginActivity.class)); // Change the activity to login page.
-                Services.setCurrentUser(null); // Tell the system that the current user is logged out.
-                getActivity().finish(); // Remove current activity.
+                // Go back to the login page.
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+
+                // Tell the system that the current user is logged out.
+                Services.setCurrentUser(null);
+
+                // Remove current activity.
+                getActivity().finish();
             }
         });
 
@@ -116,6 +136,8 @@ public class UserAccountFragment extends Fragment {
 
                     // Verify and add gift card amount to user account.
                     userVerification.giftCardVerification(userEmail, cardNum);
+
+                    // Refresh and display the user info.
                     updateInfo();
 
                 } catch (Exception e) {
@@ -136,6 +158,7 @@ public class UserAccountFragment extends Fragment {
 
                     }
 
+                    // Display error message to user if the user entered an incorrect input.
                     ErrorPopUp.errorMsg(getActivity(), msg);
                 }
             }
@@ -236,7 +259,9 @@ public class UserAccountFragment extends Fragment {
 
                     // Verify the input date and add to database.
                     userVerification.addressVerification(street, city, province, postal, userEmail, address);
-                    updateInfo(); // Update the info and display it.
+
+                    // Update the info and display it.
+                    updateInfo();
 
                 } catch (Exception e) {
 
@@ -285,13 +310,16 @@ public class UserAccountFragment extends Fragment {
      * This method will pop up and prompt user for become a membership.
      */
     private void memberPopUp() {
+
+        View v = getLayoutInflater().inflate(R.layout.popup_buy_membership, null);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Are you sure you want to purchase membership for 25$?: ");
-        View v = getLayoutInflater().inflate(R.layout.popup_buy_membership, null);
         builder.setView(v);
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 //Connect to xml file.
                 EditText confirmationInput = (EditText) v.findViewById(R.id.confirmationInput);
 
@@ -304,9 +332,12 @@ public class UserAccountFragment extends Fragment {
 
                         //Verify and add credit card to database.
                         userVerification.verifyMembershipPurchase(userEmail);
-                        updateInfo();
-                        membershipButton.setEnabled(false);
 
+                        // Refresh and display the user info.
+                        updateInfo();
+
+                        // Change the user membership status.
+                        membershipButton.setEnabled(false);
 
                     } catch (Exception e) {
 
@@ -344,13 +375,16 @@ public class UserAccountFragment extends Fragment {
         try {
 
             User user = userServices.getUser(Services.getCurrentUser());
-
             String membershipStatus;
 
-            if (true == user.getMembership()) {
+            if (user.getMembership()) {
+
                 membershipStatus = "Enabled";
+
             } else {
+
                 membershipStatus = "Disabled";
+
             }
 
             // Formatting the message.
@@ -360,10 +394,14 @@ public class UserAccountFragment extends Fragment {
                     "Address: %s\n" +
                     "Account balance: $ %s\n" +
                     "Membership status: %s", user.getFirstName(), user.getLastName(), userEmail, user.getAddress(), user.getBalance(), membershipStatus);
+
+            // Display the message.
             infoContainer.setText(display);
 
         } catch (Exception e) {
+
             throw new NullPointerException();
+
         }
     }
 }

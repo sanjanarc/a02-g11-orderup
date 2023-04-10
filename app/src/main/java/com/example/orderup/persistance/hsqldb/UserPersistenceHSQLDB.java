@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class UserPersistenceHSQLDB implements UserPersistence {
 
-    private final String dbPath; // The database path.
+    // The database path.
+    private final String dbPath;
 
     /**
      * Constructor.
@@ -37,7 +38,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      * @throws SQLException will throw exception when connection to the database failed.
      */
     private Connection connection() throws SQLException {
+
         String path = "jdbc:hsqldb:file:" + dbPath + ";shutdown=true";
+
         return DriverManager.getConnection(path, "SA", "");
     }
 
@@ -78,19 +81,24 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         User user = null;
 
         try (final Connection c = connection()) {
+
             final PreparedStatement st = c.prepareStatement("SELECT * FROM USERS WHERE EMAIL=?");
             st.setString(1, email);
             final ResultSet rs = st.executeQuery();
 
             if (rs.next()) { // Check if the result set is empty or not.
+
                 user = fromResultSet(rs);
+
             }
 
             rs.close();
             st.close();
 
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
 
         return user;
@@ -106,7 +114,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      */
     @Override
     public void addUser(String email, String password, String firstName, String lastName) {
+
         try (Connection c = connection()) {
+
             PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, email);
             st.setString(2, password);
@@ -119,8 +129,11 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             st.setFloat(9, 0.00F);
             st.setBoolean(10, false);
             st.executeUpdate();
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
 
@@ -134,15 +147,20 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      */
     @Override
     public void addCreditCard(String email, String cardNum, String cvc, String expiry) {
+
         try (Connection c = connection()) {
+
             PreparedStatement st = c.prepareStatement("UPDATE USERS SET CREDITCARD = ?, CVC = ?, EXPIRY = ? WHERE EMAIL = ?");
             st.setString(1, cardNum);
             st.setString(2, cvc);
             st.setString(3, expiry);
             st.setString(4, email);
             st.executeUpdate();
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
 
@@ -154,69 +172,85 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      */
     @Override
     public void updateAddress(String email, String address) {
+
         try (Connection c = connection()) {
+
             PreparedStatement ps = c.prepareStatement("UPDATE USERS SET ADDRESS = ? WHERE EMAIL = ?");
             ps.setString(1, address);
             ps.setString(2, email);
             ps.executeUpdate();
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
+
     /**
      * Adds food item to cart in the DB.script
      *
-     * @param email        the user's email.
-     * @param rest_id      the restaurant id of the food item.
-     * @param food_id      the id of the food item.
-     * @param quantity     the amount of the food item added to cart.
-     *
+     * @param email    the user's email.
+     * @param rest_id  the restaurant id of the food item.
+     * @param food_id  the id of the food item.
+     * @param quantity the amount of the food item added to cart.
      */
-
     @Override
-    public void updateCart(String email,int rest_id, int food_id, int quantity) {
+    public void updateCart(String email, int rest_id, int food_id, int quantity) {
+
         int tempquantity = quantity;
-        for(int i = 0; i < getFoodCart(email).size(); i++)
-        {
-            if(getFoodCart(email).get(i).getItem_id() == food_id && getFoodCart(email).get(i).getRestaurant_id() == rest_id)
-            {
+
+        // Combine duplicate food object into one.
+        for (int i = 0; i < getFoodCart(email).size(); i++) {
+
+            if (getFoodCart(email).get(i).getItem_id() == food_id && getFoodCart(email).get(i).getRestaurant_id() == rest_id) {
+
                 tempquantity += getFoodCart(email).get(i).getNumItems();
-                removeFromCart(email,getFoodCart(email).get(i).getRestaurant_id(),getFoodCart(email).get(i).getItem_id(),getFoodCart(email).get(i).getNumItems());
+                removeFromCart(email, getFoodCart(email).get(i).getRestaurant_id(), getFoodCart(email).get(i).getItem_id(), getFoodCart(email).get(i).getNumItems());
+
             }
         }
 
         try (Connection c = connection()) {
+
             PreparedStatement ps = c.prepareStatement("INSERT INTO cart VALUES (?, ?, ?, ?)");
             ps.setString(1, email);
             ps.setInt(2, rest_id);
             ps.setInt(3, food_id);
-            ps.setInt(4,tempquantity);
+            ps.setInt(4, tempquantity);
             ps.executeUpdate();
-       } catch (SQLException e) {
+
+        } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
-
 
     /**
      * Removes food item from cart in the DB.
      *
-     * @param email        the user's email.
-     * @param rest_id      the restaurant id of the food item.
-     * @param food_id      the id of the food item.
-     * @param quantity     the amount of the food item to remove from the cart.
+     * @param email    the user's email.
+     * @param rest_id  the restaurant id of the food item.
+     * @param food_id  the id of the food item.
+     * @param quantity the amount of the food item to remove from the cart.
      */
     @Override
     public void removeFromCart(String email, int rest_id, int food_id, int quantity) {
+
         try (Connection c = connection()) {
+
             PreparedStatement ps = c.prepareStatement("DELETE FROM CART WHERE EMAIL = ? AND ID = ? AND ITEM_ID = ? AND QUANTITY = ?");
             ps.setString(1, email);
             ps.setInt(2, rest_id);
             ps.setInt(3, food_id);
             ps.setInt(4, quantity);
             ps.executeUpdate();
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
 
@@ -228,9 +262,11 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      */
     @Override
     public List<FoodItem> getFoodCart(String email) {
+
         List<FoodItem> foodCart = new ArrayList<>();
 
         try (Connection c = connection()) {
+
             String query = "SELECT f.*, c.QUANTITY " +
                     "FROM CART c " +
                     "INNER JOIN FOODITEM f ON c.ID = f.ID AND c.ITEM_ID = f.ITEM_ID " +
@@ -240,6 +276,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+
                 int restId = rs.getInt("ID");
                 int itemId = rs.getInt("ITEM_ID");
                 String itemName = rs.getString("ITEM_NAME");
@@ -250,35 +287,37 @@ public class UserPersistenceHSQLDB implements UserPersistence {
                 FoodItem food = new FoodItem(restId, itemId, itemName, itemPrice, itemImageUrl, itemDesc);
                 food.setNumItems(quantity);
                 foodCart.add(food);
+
             }
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
 
         return foodCart;
     }
 
-
     /**
      * Clears all items from cart in the database.
      *
-     * @param email   the user's email.
+     * @param email the user's email.
      */
     public void clearCart(String email) {
+
         try (Connection c = connection()) {
+
             PreparedStatement ps = c.prepareStatement("DELETE FROM CART WHERE EMAIL = ?");
             ps.setString(1, email);
             ps.executeUpdate();
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
-
-
-
-
-
-
 
     /**
      * Add or Reduce the balance from database.
@@ -288,13 +327,18 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      */
     @Override
     public void modifyBalance(String email, float balance) {
+
         try (Connection c = connection()) {
+
             PreparedStatement ps = c.prepareStatement("UPDATE USERS SET BALANCE = BALANCE + ? WHERE EMAIL = ?");
             ps.setDouble(1, balance);
             ps.setString(2, email);
             ps.executeUpdate();
+
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
 
@@ -305,6 +349,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
      */
     @Override
     public List getGiftCards() {
+
         List<Giftcard> cardList = new ArrayList<>();
 
         try (final Connection c = connection()) {
@@ -313,14 +358,18 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             final ResultSet rs = st.executeQuery("SELECT * FROM GIFTCARD");
 
             while (rs.next()) {
+
                 cardList.add(new Giftcard(rs.getString("NUMBER"), rs.getFloat("AMOUNT")));
+
             }
 
             rs.close();
             st.close();
 
         } catch (final SQLException e) {
+
             throw new PersistenceException(e);
+
         }
 
         return cardList;
@@ -342,7 +391,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             ps.executeUpdate();
 
         } catch (SQLException e) {
+
             throw new PersistenceException(e);
+
         }
     }
 }

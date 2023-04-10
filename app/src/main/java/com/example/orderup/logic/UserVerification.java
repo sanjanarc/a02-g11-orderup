@@ -164,11 +164,10 @@ public class UserVerification {
         }
     }
 
-
     /**
      * Verify the input credit card format.
      *
-     * @param fullName      the user's full name on card.
+     * @param fullName   the user's full name on card.
      * @param cardNum    the user credit card number.
      * @param cardCvc    the user credit card cvc.
      * @param cardExpiry the user credit card expiry date.
@@ -213,17 +212,15 @@ public class UserVerification {
         }
     }
 
-
-
     /**
      * Verity the input address format and return the message to user.
      *
-     * @param street
-     * @param city
-     * @param province
-     * @param postal
-     * @param email
-     * @param address
+     * @param street   the street that the user want to delivery the food to.
+     * @param city     the city that the user lived.
+     * @param province the province that user lived on.
+     * @param postal   the postal code of the user currently lived on.
+     * @param email    the email of the user.
+     * @param address  the whole address of the user.
      * @throws Exception will throw exception when input data is incorrect.
      */
     public void addressVerification(String street, String city, String province, String postal, String email,
@@ -313,14 +310,18 @@ public class UserVerification {
      * @throws Exception will throw exception when gift card is incorrect.
      */
     public void giftCardVerification(String email, String card) throws Exception {
+
         List<Giftcard> cardList = userPersistence.getGiftCards();
         Float amount = 0.00F;
         boolean found = false;
 
         for (int i = 0; i < cardList.size(); i++) {
+
             if (card.equals(cardList.get(i).getNumber())) {
+
                 amount = cardList.get(i).getAmount();
                 found = true;
+
             }
         }
 
@@ -370,10 +371,15 @@ public class UserVerification {
         return flag && checkPeriod && !multiplesAts;
     }
 
-    public String verifyMembershipPurchase(String email) throws Exception {
+    /**
+     * Verify the user have enough money to pay for the membership.
+     *
+     * @param email the email of the user.
+     * @throws Exception will throw error when user do not meet the requirement of become a membership.
+     */
+    public void verifyMembershipPurchase(String email) throws Exception {
 
         User user = userPersistence.getUser(email);
-        String msg = "";
         float user_balance = user.getBalance();
 
         // If user can afford membership, deduct the cost from their balance and set them as a member
@@ -382,16 +388,18 @@ public class UserVerification {
             userPersistence.modifyBalance(email, -25.00F);
             userPersistence.setMembership(email);
 
-        } else if (("" != user.getCreditCard() && null != user.getCreditCard()) && !user.getMembership())  {
+        } else if ((!"".equals(user.getCreditCard()) && null != user.getCreditCard()) && !user.getMembership()) {
 
             userPersistence.setMembership(email);
 
-        } else if (("" == user.getCreditCard() || null == user.getCreditCard())) {
-            throw new MyException.EXCEPTION_NO_CARD();
-        } else if (user.getMembership()) {
-            throw new MyException.EXCEPTION_ITEM_ALREADY_EXIST();
-        }
+        } else if (("".equals(user.getCreditCard()) || null == user.getCreditCard())) {
 
-        return msg;
+            throw new MyException.EXCEPTION_NO_CARD();
+
+        } else {
+
+            throw new MyException.EXCEPTION_ITEM_ALREADY_EXIST();
+
+        }
     }
 }

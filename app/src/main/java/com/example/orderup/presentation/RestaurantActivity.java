@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -66,8 +65,11 @@ public class RestaurantActivity extends AppCompatActivity {
         ViewCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Go to the cart page.
                 Intent intent = new Intent(getBaseContext(), MyCartsActivity.class);
-                startActivity(intent); // Start the cart activity class.
+                startActivity(intent);
+
             }
         });
 
@@ -77,19 +79,25 @@ public class RestaurantActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                FrameLayout frameLayout = findViewById(R.id.commentContainer); // Get the comment box.
-                loadComment(restaurant); // Update or retrieve data from comment's database to the comment section.
-                boolean moveable; // Flag to disable or able the activity of the background when the comment box is turn on.
+                // Get the comment box.
+                FrameLayout frameLayout = findViewById(R.id.commentContainer);
 
-                if (frameLayout.getHeight() == 0) {
+                // Update or retrieve data from comment's database to the comment section.
+                loadComment(restaurant);
+
+                // Flag to disable or able the activity of the background when the comment box is turn on.
+                boolean moveable;
+
+                if (frameLayout.getHeight() == 0) { // Pull up the comment section.
 
                     frameLayout.getLayoutParams().height = 700;
                     moveable = true; // Deactivation of the background activity.
 
-                } else {
+                } else { // Drop down the comment section.
 
                     frameLayout.getLayoutParams().height = 0;
                     moveable = false;
+
                 }
 
                 frameLayout.setLayoutParams(frameLayout.getLayoutParams()); // Set the comment box size.
@@ -118,6 +126,8 @@ public class RestaurantActivity extends AppCompatActivity {
                     loadComment(restaurant); // Update the comment section.
 
                 } else {
+
+                    // Display to user that comment cannot be empty.
                     ErrorPopUp.errorMsg(view.getContext(), "Input comment cannot be empty.");
                 }
             }
@@ -137,7 +147,9 @@ public class RestaurantActivity extends AppCompatActivity {
 
         // Build up the comments.
         for (String i : commentList) {
+
             comments += i + "\n\n";
+
         }
 
         //Display the comments.

@@ -44,12 +44,12 @@ public class Search_algorithm {
 
             restNames[i] = name;
             restCategories[i] = category;
-
         }
 
         List<Restaurant> restaurantResults = new ArrayList<>();
         List<Integer> results = searchRestaurantKey(reFormat(userInput), restNames, restCategories); //korean, sushi, nagiri, apple
 
+        // Check if the restaurant exists or not.
         if (results.isEmpty()) {
 
             throw new MyException.EXCEPTION_ITEM_DOES_NOT_EXIST();
@@ -57,9 +57,10 @@ public class Search_algorithm {
         } else {
 
             for (int j = 0; j < results.size(); j++) {
-                restaurantResults.add(restaurants.get(results.get(j)));
-            }
 
+                restaurantResults.add(restaurants.get(results.get(j)));
+
+            }
         }
 
         return restaurantResults;
@@ -90,13 +91,14 @@ public class Search_algorithm {
 
         //start iteration from 1, as first row is Headings
         for (int i = 0; i < categories.length; i++) { //iterating through the category and restaurants list to find match for "user input"
+
             if (reFormat(categories[i]).contains(user_input) || reFormat(restaurants[i]).contains(user_input)) {
-                //Log.d("error checked restaurant names",errorCheck(restaurants[i]));
+
                 restaurantFound.add(i);
+
             }
         }
+
         return restaurantFound;
     }
 }
-
-

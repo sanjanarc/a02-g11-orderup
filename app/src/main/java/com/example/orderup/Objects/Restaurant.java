@@ -18,9 +18,7 @@ public class Restaurant {
     private final String newCategory;
     private final String description;
     private String imagesURL;
-
     private String serviceHours;
-
     private final List<FoodItem> menu; //menu List
     private final FoodItem item1; //FoodItems in a menu List
     private final FoodItem item2;
@@ -72,7 +70,6 @@ public class Restaurant {
                       final String location, final String image, final String hours) {
         this.menu = new ArrayList<>();
         this.userComments = new ArrayList<>();
-
         restaurantID = newID;
         restaurantName = newRestaurantName;
         this.newCategory = newCategory;
@@ -82,9 +79,7 @@ public class Restaurant {
         this.item1 = item1;
         this.item2 = item2;
         this.item3 = item3;
-
         this.num_menu_items = num_menu_items;
-
         this.location = location;
         this.serviceHours = hours;
 

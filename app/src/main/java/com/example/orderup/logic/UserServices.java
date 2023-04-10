@@ -1,10 +1,8 @@
 package com.example.orderup.logic;
 
-import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +18,6 @@ public class UserServices {
      * @param userPersistence the user database.
      */
     public UserServices(UserPersistence userPersistence) {
-
         //Dependency injection.
         this.userPersistence = userPersistence;
     }
@@ -55,7 +52,6 @@ public class UserServices {
         userPersistence.updateCart(email, rest_id,food_id,quantity);
     }
 
-
     /**
      * Removes user cart info from database
      *
@@ -78,13 +74,12 @@ public class UserServices {
         userPersistence.clearCart(email);
     }
 
-
     /**
      * User calls this method to get their cart
      *
      * @param email the user's email.
      */
-    public List<FoodItem> getFoodCart(String email) {
+    public List getFoodCart(String email) {
         return userPersistence.getFoodCart(email);
     }
 }

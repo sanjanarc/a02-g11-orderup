@@ -2,7 +2,6 @@ package com.example.orderup.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,10 +17,8 @@ import com.example.orderup.R;
 import com.example.orderup.logic.RestaurantServices;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserServices;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
-import java.security.AccessController;
 import java.util.List;
 
 /**
@@ -31,6 +28,7 @@ public class MyCartsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_carts);
 
@@ -40,59 +38,85 @@ public class MyCartsActivity extends AppCompatActivity {
         // Display the food list.
         updateCartInfo(user.getFoodCart());
 
+        // Bottom event listener.
         MaterialButtonToggleGroup toggleGroup = findViewById(R.id.toggleGroup);
-
-        toggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener()  {
+        toggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+
+                // Detect which delivery pattern does the user choose.
                 if (isChecked && checkedId == R.id.deliveryButton) {
-                    if(user.getAddress() == null) {
+
+                    if (user.getAddress() == null) {
+
                         ErrorPopUp.errorMsg(MyCartsActivity.this, "No address found. Please add an address to your account");
-                    }else {
-                        ErrorPopUp.errorMsg(MyCartsActivity.this, "Order will be delivered at  " + user.getAddress());
+
+                    } else {
+
+                        ErrorPopUp.errorMsg(MyCartsActivity.this, "Order will be delivered at " + user.getAddress());
+
                     }
+
                 } else if (isChecked && checkedId == R.id.pickupButton) {
 
+                    // Get the food info.
+                    int id;
+                    RestaurantServices restaurantServices = new RestaurantServices(Services.getRestaurantPersistence());
+                    Restaurant restaurant;
+                    FoodItem foodItem;
                     String RestaurantAddress = "";
+                    List<FoodItem> foodItemList = user.getFoodCart();
 
-                    for(int i=0; i<user.getFoodCart().size();i++) {
-                        FoodItem food = user.getFoodCart().get(i);
-                        int id = food.getRestaurant_id();
-                        RestaurantServices restaurantServices = new RestaurantServices(Services.getRestaurantPersistence());
-                        Restaurant rest = restaurantServices.getRest(id);
-                        RestaurantAddress += rest.getRestaurant_location() + "\n";
+                    // Loop through the food list and get all the restaurant address.
+                    for (int i = 0; i < user.getFoodCart().size(); i++) {
+
+                        foodItem = foodItemList.get(i);
+                        id = foodItem.getRestaurant_id();
+                        restaurant = restaurantServices.getRest(id);
+                        RestaurantAddress += restaurant.getRestaurant_location() + "\n";
+
                     }
 
-                    ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at \n" + RestaurantAddress );
+                    // Display address to user.
+                    ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at \n" + RestaurantAddress);
                 }
             }
         });
 
-
+        // Get reference from .xml file.
         TextView subTotalTextView = findViewById(R.id.SubTotal);
         TextView DeliveryFeeView = findViewById(R.id.Delivery);
         TextView TaxView = findViewById(R.id.Tax);
 
         double subTotal = 0.00;
         double deliveryFee = 0.00;
-        //get subtotal
-        for(int i=0; i<user.getFoodCart().size();i++) {
-            FoodItem food = user.getFoodCart().get(i);
-            double price = food.getNumItems()*food.getItemPrice();
-            subTotal +=price;
+        FoodItem foodItem;
+
+        // Get subtotal
+        for (int i = 0; i < user.getFoodCart().size(); i++) {
+
+            foodItem = user.getFoodCart().get(i);
+            double price = foodItem.getNumItems() * foodItem.getItemPrice();
+            subTotal += price;
+
         }
-        //check if user gets membership discount
-        if(user.getFoodCart().size() != 0) {
+
+        // Check if user gets membership discount
+        if (user.getFoodCart().size() != 0) {
 
             if (user.getMembership()) {
+
                 deliveryFee = 2.99;
+
             } else {
+
                 deliveryFee = 3.60;
+
             }
         }
-        double tax = subTotal*0.07;
-        double total = subTotal + deliveryFee + tax;
 
+        double tax = subTotal * 0.07;
+        double total = subTotal + deliveryFee + tax;
 
         // Set the text of the SubTotal TextView to the value of the subTotal variable
         subTotalTextView.setText(String.format("SubTotal             $%.2f", subTotal));
@@ -101,18 +125,25 @@ public class MyCartsActivity extends AppCompatActivity {
 
         // Continue Button event listener.
         Button ContinueButton = (Button) findViewById(R.id.toPaymentButton);
-
         ContinueButton.setText(String.format("Continue $%.2f", total));
         ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(user.getFoodCart().size() == 0) {
+                if (user.getFoodCart().size() == 0) {
+
+                    // Display to user that cart is already empty.
                     ErrorPopUp.errorMsg(MyCartsActivity.this, "Cart is empty");
-               } else {
+
+                } else {
+
+                    // Go to the checkout page.
                     Intent intent = new Intent(getBaseContext(), CheckoutActivity.class);
-                    startActivity(intent); // Start the cart activity class.
+                    startActivity(intent);
+
+                    // Re
                     finish();
+
                 }
             }
         });
@@ -124,10 +155,12 @@ public class MyCartsActivity extends AppCompatActivity {
      * @param list a list of food item.
      */
     public void updateCartInfo(List list) {
+
         // Display the food list.
         RecyclerView recyclerView = findViewById(R.id.cartViewRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyCartAdapter(list));
+
     }
 }
