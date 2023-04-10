@@ -117,7 +117,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
 
         try (Connection c = connection()) {
 
-            PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO USERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, email);
             st.setString(2, password);
             st.setString(3, firstName);

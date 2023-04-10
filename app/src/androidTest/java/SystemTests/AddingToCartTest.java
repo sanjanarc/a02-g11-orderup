@@ -13,6 +13,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -79,13 +80,9 @@ public class AddingToCartTest {
         onView(withId(R.id.recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         //add the second menu item to cart
-        //onView(withId(R.id.MenuRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(1,RecyclerViewActions.actionOnItem(withId(R.id.Submit),click())));
+        onView(withTagValue(equalTo("Submit1"))).perform(click());
 
-        //onView(withId(R.id.MenuRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(1,click()));
-        //onData(anything()).inAdapterView(withId(R.id.MenuRecyclerView)).atPosition(1).perform(click());
-        //onView(withId(R.id.Submit)).perform(click());
 
-        //onView(allOf(withId(R.id.Submit), withParent(withId(R.id.MenuRecyclerView)))).perform(click());
 
 
 
