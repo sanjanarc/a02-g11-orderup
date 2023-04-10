@@ -63,6 +63,7 @@ public class MyCartsActivity extends AppCompatActivity {
                         RestaurantServices restaurantServices = new RestaurantServices(Services.getRestaurantPersistence());
                         Restaurant rest = restaurantServices.getRest(id);
                         RestaurantAddress += rest.getRestaurant_location() + "\n";
+                        Log.d("Restaurant address of the cart item",rest.getRestaurant_location());
                     }
 
                     ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at" + RestaurantAddress );
@@ -81,7 +82,7 @@ public class MyCartsActivity extends AppCompatActivity {
         //get subtotal
         for(int i=0; i<user.getFoodCart().size();i++) {
             FoodItem food = user.getFoodCart().get(i);
-            double price = food.getItemPrice();
+            double price = food.getNumItems()*food.getItemPrice();
             subTotal +=price;
         }
         //check if user gets membership discount

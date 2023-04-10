@@ -223,7 +223,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         List<FoodItem> foodCart = new ArrayList<>();
 
         try (Connection c = connection()) {
-            String query = "SELECT f.* " +
+            String query = "SELECT f.*, c.QUANTITY " +
                     "FROM CART c " +
                     "INNER JOIN FOODITEM f ON c.ID = f.ID AND c.ITEM_ID = f.ITEM_ID " +
                     "WHERE c.EMAIL = ?";
@@ -238,7 +238,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
                 double itemPrice = rs.getDouble("ITEM_PRICE");
                 String itemImageUrl = rs.getString("ITEM_IMAGE_URL");
                 String itemDesc = rs.getString("ITEM_DESC");
+                int quantity = rs.getInt("QUANTITY");
                 FoodItem food = new FoodItem(restId, itemId, itemName, itemPrice, itemImageUrl, itemDesc);
+                food.setNumItems(quantity);
                 foodCart.add(food);
             }
         } catch (SQLException e) {
