@@ -267,11 +267,11 @@ public class UserVerification {
     /**
      * Check the province is Manitoba or other province.
      *
-     * @param province
+     * @param province the province the user lived on.
      * @throws Exception will throw error location exception.
      */
     private void provinceVerification(String province) throws Exception {
-        if (!province.equalsIgnoreCase("Manitoba") || !province.equalsIgnoreCase("MB")) {
+        if (!province.equalsIgnoreCase("Manitoba")) {
 
             throw new MyException.EXCEPTION_LOCATION_OUT_OF_BOUND2();
 
@@ -281,7 +281,7 @@ public class UserVerification {
     /**
      * Check the format of the postal code.
      *
-     * @param postal
+     * @param postal the postal code that the user lived on.
      * @throws Exception will throw error exception related to postal code.
      */
     private void postalVerification(String postal) throws Exception {
