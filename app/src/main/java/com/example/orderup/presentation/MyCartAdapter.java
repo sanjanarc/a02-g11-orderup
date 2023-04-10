@@ -47,7 +47,6 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
 
         FoodItem foodItem = foods.get(position);
         holder.nameView.setText(foodItem.getItemName()); // Set the food name.
-        Log.d("----------------------",String.valueOf(foodItem.getItem_id()));
 //        holder.imageview.setImageResource(foodItem.getItem_id());
         int url = holder.imageview.getResources().getIdentifier(foodItem.getImageUrl(), "drawable", MainActivity.PACKAGE_NAME);
         holder.imageview.setBackgroundResource(url); // Set the background image.

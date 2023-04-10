@@ -49,14 +49,17 @@ public class CheckoutActivity extends AppCompatActivity {
         //get subtotal
         for(int i=0; i<user.getFoodCart().size();i++) {
             FoodItem food = user.getFoodCart().get(i);
-            double price = food.getItemPrice();
+            double price = food.getNumItems()*food.getItemPrice();
             subTotal +=price;
         }
         //check if user gets membership discount
-        if(user.getMembership()) {
-            deliveryFee = 2.99;
-        } else {
-            deliveryFee = 3.60;
+        if(user.getFoodCart().size() != 0) {
+
+            if (user.getMembership()) {
+                deliveryFee = 2.99;
+            } else {
+                deliveryFee = 3.60;
+            }
         }
         double tax = subTotal*0.07;
         double total = subTotal + deliveryFee + tax;

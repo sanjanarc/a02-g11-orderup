@@ -86,10 +86,13 @@ public class MyCartsActivity extends AppCompatActivity {
             subTotal +=price;
         }
         //check if user gets membership discount
-        if(user.getMembership()) {
-             deliveryFee = 2.99;
-        } else {
-             deliveryFee = 3.60;
+        if(user.getFoodCart().size() != 0) {
+
+            if (user.getMembership()) {
+                deliveryFee = 2.99;
+            } else {
+                deliveryFee = 3.60;
+            }
         }
         double tax = subTotal*0.07;
         double total = subTotal + deliveryFee + tax;
