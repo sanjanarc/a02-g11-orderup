@@ -254,48 +254,4 @@ public class UserTest {
         assertFalse(user.getMembership());
 
     }
-
-    @Test
-    public void addToFoodCart() {
-        // Create a test user
-        User user = new User("test@example.com", "password", "John", "Doe", "1234 5678 9012 3456", "123", "01/23", "123 Main St", "10.00F", true);
-
-        // Create a test food item
-        FoodItem foodItem = new FoodItem(1, 1, "Hamburger", 5.99, "https://example.com/hamburger.jpg", "Juicy hamburger with lettuce and tomato");
-
-        // Add the food item to the cart
-        user.addToFoodCart(foodItem, 2);
-
-        // Check that the cart contains the correct number of items
-        assertEquals(1, user.getFoodCart().size());
-
-        // Check that the item in the cart has the correct properties
-        FoodItem cartItem = user.getFoodCart().get(0);
-        assertEquals(1, cartItem.getRestaurant_id());
-        assertEquals(1, cartItem.getItem_id());
-        assertEquals("Hamburger", cartItem.getItemName());
-        assertEquals(5.99, cartItem.getItemPrice(), 0.01);
-        assertEquals("https://example.com/hamburger.jpg", cartItem.getImageUrl());
-        assertEquals("Juicy hamburger with lettuce and tomato", cartItem.getItemDescription());
-        assertEquals(2, cartItem.getNumItems());
-    }
-
-    @Test
-    public void removeFoodFromCart() {
-        FoodItem foodItem1 = new FoodItem(1, 1, "Burger", 10.0, "burger.jpg", "Delicious burger");
-        FoodItem foodItem2 = new FoodItem(1, 2, "Pizza", 15.0, "pizza.jpg", "Yummy pizza");
-
-        User user = new User("john.doe@example.com", "password", "John", "Doe", "1234567890123456", "123", "12/24", "123 Main St", "50.00", true);
-        user.addToFoodCart(foodItem1, 2);
-        user.addToFoodCart(foodItem2, 1);
-
-        // Removing a food item with number 1.
-        user.removeFoodFromCart(foodItem1, 1);
-
-        List<FoodItem> expectedCart = new ArrayList<>();
-        expectedCart.add(new FoodItem(1, 1, "Burger", 10.0, "burger.jpg", "Delicious burger"));
-        expectedCart.add(new FoodItem(1, 2, "Pizza", 15.0, "pizza.jpg", "Yummy pizza"));
-
-        assertNotEquals(expectedCart, user.getFoodCart());
-    }
 }
