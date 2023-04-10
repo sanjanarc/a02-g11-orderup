@@ -69,6 +69,15 @@ public class UserServices {
         userPersistence.removeFromCart(email,rest_id,food_id,quantity);
     }
 
+    /**
+     * Clears all items from cart in the database.
+     *
+     * @param email   the user's email.
+     */
+    public void clearCart(String email) {
+        userPersistence.clearCart(email);
+    }
+
 
     /**
      * User calls this method to get their cart

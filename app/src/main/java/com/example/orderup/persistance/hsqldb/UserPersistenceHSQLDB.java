@@ -220,8 +220,6 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
-
-
     /**
      * Retrieves a list of food items in a user's cart.
      *
@@ -259,6 +257,23 @@ public class UserPersistenceHSQLDB implements UserPersistence {
 
         return foodCart;
     }
+
+
+    /**
+     * Clears all items from cart in the database.
+     *
+     * @param email   the user's email.
+     */
+    public void clearCart(String email) {
+        try (Connection c = connection()) {
+            PreparedStatement ps = c.prepareStatement("DELETE FROM CART WHERE EMAIL = ?");
+            ps.setString(1, email);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
 
 
 

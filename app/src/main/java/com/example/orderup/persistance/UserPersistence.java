@@ -82,6 +82,14 @@ public interface UserPersistence {
      */
     void updateCart(String email,int rest_id, int food_id, int quantity);
 
+
+    /**
+     * Clears all items from cart in the database.
+     *
+     * @param email   the user's email.
+     */
+    void clearCart(String email);
+
     /**
      * Removes food item from cart.
      *
@@ -100,4 +108,6 @@ public interface UserPersistence {
      * @return a list of food items in cart.
      */
     List<FoodItem> getFoodCart(String email);
+
+
 }

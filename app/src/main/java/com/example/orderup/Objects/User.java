@@ -176,6 +176,7 @@ public class User extends FoodItem {
      */
     public void clearFoodCart() {
         cart.clear();
+        new UserServices(Services.getUserPersistence()).clearCart(this.email);
     }
 
     /**
