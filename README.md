@@ -5,11 +5,16 @@ Our app is designed to streamline the food ordering and delivery process for our
 
 **How to Run Our App:**
 
-Either create a new account by registering or sign in using our existing account:
+How to download our app:
 
-    - The credentials are: email: admin2@email.com, password: admin123
-    - The account already has a linked credit card and an address
+    - You can download our app from this download link: 
+    - OrderUp is compatible with Nexus 7 and Nexus 7 (2012) devices
+    - Ensure that you have popup blockers disabled, as OrderUp is not functional without them enabled
 
+To get to our home page either create a new account by registering or sign in using our existing account:
+
+    - Existing user credentials are: email: admin2@email.com, password: admin123
+    - admin2@email.com already has a linked credit card and an address
 
 We have existing credit card codes that that work for adding account balance:
 
