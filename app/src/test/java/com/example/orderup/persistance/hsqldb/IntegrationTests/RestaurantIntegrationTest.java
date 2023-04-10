@@ -43,10 +43,10 @@ public class RestaurantIntegrationTest {
         assertNotNull("next sequential restaurant should also not be null", restaurant);
         assertNotNull("restaurant should have 3 menu items", 3== restaurant.getNum_menu_items());
         assertTrue("Baked Expectations".equals(restaurant.getRestaurantName()));
-        assertNotNull("restaurant's first menu item should not be null", restaurant.getItem1());
-        assertTrue("Fresh Strawberry Cheesecake".equals(restaurant.getItem1().getItemName()));
-        assertTrue("Cherry Royale Cheesecake".equals(restaurant.getItem2().getItemName()));
-        assertTrue("Oreo Cookie Cheesecake".equals(restaurant.getItem3().getItemName()));
+        assertNotNull("restaurant's first menu item should not be null", restaurant.getItem(1));
+        assertTrue("Fresh Strawberry Cheesecake".equals(restaurant.getItem(1).getItemName()));
+        assertTrue("Cherry Royale Cheesecake".equals(restaurant.getItem(2).getItemName()));
+        assertTrue("Oreo Cookie Cheesecake".equals(restaurant.getItem(3).getItemName()));
 
     }
     @Test

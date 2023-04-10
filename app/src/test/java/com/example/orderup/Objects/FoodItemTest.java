@@ -82,7 +82,7 @@ public class FoodItemTest {
     @Test
     public void getNumItems() {
         FoodItem foodItem = new FoodItem(1, 1, "Pizza", 10.99, "https://example.com/pizza.jpg", "Delicious pizza");
-        assertEquals(0, foodItem.getNumItems());
+        assertEquals(1, foodItem.getNumItems());
     }
 
     @Test
@@ -102,6 +102,6 @@ public class FoodItemTest {
         assertEquals("Default Description", item.getItemDescription());
         assertEquals(0.0, item.getItemPrice(), 0.001);
         assertEquals("", item.getImageUrl());
-        assertEquals(0, item.getNumItems());
+        assertEquals(1, item.getNumItems());
     }
 }

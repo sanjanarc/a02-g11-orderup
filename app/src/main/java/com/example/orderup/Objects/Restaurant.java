@@ -104,7 +104,12 @@ public class Restaurant {
     }
 
     public FoodItem getItem(int i) {
-        return menu.get(i);
+        if(menu!=null){
+            return menu.get(i-1);
+        }else{
+            return null;
+        }
+
     }
 
     public int getRestaurantID() {
