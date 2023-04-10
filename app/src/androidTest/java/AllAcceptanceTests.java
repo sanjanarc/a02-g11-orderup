@@ -9,6 +9,7 @@ import SystemTests.AddUserAddress;
 import SystemTests.AddUserTest;
 import SystemTests.AddingToCartTest;
 import SystemTests.CheckoutTest;
+import SystemTests.DeliveryPickupTest;
 import SystemTests.LoginTest;
 import SystemTests.SearchRestaurantTest;
 import SystemTests.BuyMembershipTest;
@@ -29,7 +30,8 @@ import SystemTests.BuyMembershipTest;
         AddUserAddress.class,
         AddingToCartTest.class,
         AddGiftCard.class,
-        CheckoutTest.class
+        CheckoutTest.class,
+        DeliveryPickupTest.class
 
 })
 public class AllAcceptanceTests {
