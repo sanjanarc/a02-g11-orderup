@@ -32,8 +32,6 @@
                 android:layout_width="375dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="top"
-                android:maxWidth="250dp"
-                android:maxLength="20"
                 android:text="TextView"
                 android:textColor="@color/black" />
 
