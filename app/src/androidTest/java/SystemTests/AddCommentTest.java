@@ -51,6 +51,8 @@ public class AddCommentTest {
         onView(withId(R.id.recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.comment_Button)).perform(click());
         onView(withId(R.id.commentSection)).check(matches(withText(containsString("10/10"))));
+
+
     }
 
 }
