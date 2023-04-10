@@ -62,18 +62,18 @@ import com.example.orderup.presentation.MenuAdapter;
 
 
 /*
-        Purpose: This class tests adding a food item to Cart
+        Purpose: This class adds a food item to Cart and tests Checkout
  */
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class AddingToCartTest {
+public class CheckoutTest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
 
     @Test
-    public void addToCart(){
+    public void addToCart() {
 
         //login to account
         onView(withId(R.id.emailInput)).perform(typeText("admin2@email.com"));
@@ -82,7 +82,7 @@ public class AddingToCartTest {
 
         //search for a specified restaurant
         //search for a restaurant keyword in the search bar and press Enter
-        onView(withId(R.id.searchView)).perform(typeText("Korean Garden"),pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchView)).perform(typeText("Korean Garden"), pressKey(KeyEvent.KEYCODE_ENTER));
         //click the restaurant
         onView(withId(R.id.recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         //add the second menu item to cart
@@ -90,19 +90,21 @@ public class AddingToCartTest {
         onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click()); // Perform the click action on "OK"
         onView(withId(R.id.ViewCartButtonXML)).perform(click());
 
-        //Confirm by removing item from card
-        onView(withId(R.id.Submit)).perform((click()));
+        //checkout
+        onView(withId(R.id.deliveryButton)).perform(click());
+        onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click()); // Perform the click action on "OK"
+        onView(withId(R.id.toPaymentButton)).perform(click());
+        closeSoftKeyboard();
+        onView(withId(R.id.placeOrder)).perform(click());//place order
 
-
-
-
-
-
+        //Confirm Checkout was completed:
+        // Find the popup message with the given text
+        onView(withText("Order Placed!")).check(matches(isDisplayed()));
+        // Find the OK button and click it
+        onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click()); // Perform the click action on "OK"
 
 
 
 
     }
-
-
 }

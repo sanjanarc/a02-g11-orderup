@@ -108,5 +108,8 @@ public class MenuHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
+
+        // Submit button will make action based on the adapter.
+        submitBButton = (Button) itemView.findViewById(R.id.Submit);
     }
 }

@@ -1,0 +1,65 @@
+package SystemTests;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
+import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.pressKey;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+
+import android.view.KeyEvent;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.After;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.example.orderup.presentation.LoginActivity;
+import com.example.orderup.R;
+
+/*
+        Purpose: This class tests changing a User's credit card information.
+        note: Changed Credit information is confirmed during Checkout
+
+ */
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class AddCreditCard {
+    @Rule
+    public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
+
+    @Test
+    public void changeCreditCard() {
+        //enter user's email and password
+        onView(withId(R.id.emailInput)).perform(typeText("admin2@email.com"));
+        onView(withId(R.id.passwordInput)).perform(typeText("admin123"));
+        //click on sign in
+        onView(withId(R.id.signInButton)).perform(click());
+        closeSoftKeyboard();
+        //go to User account
+        onView(withId(R.id.user_account)).perform(click()); //click the user account fragment
+
+        onView(withId(R.id.addCardButton)).perform(click());
+        onView(withId(R.id.cardNumberInput)).perform(typeText("4716271891327890"));
+        onView(withId(R.id.cardCvcInput)).perform(typeText("505"));
+        onView(withId(R.id.cardExpiryInput)).perform(typeText("03/03"));
+
+        onView(withText("Done")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click()); // Perform the click action on "Done"
+
+        //Credit card information is confirmed in Check-out
+    }
+}

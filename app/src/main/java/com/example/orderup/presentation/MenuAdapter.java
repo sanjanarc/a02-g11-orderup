@@ -50,7 +50,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
     // the viewbindholder that will set the texts, images and the prices for the food items
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
-
         // Create the food object to get the food info.
         FoodItem foodItem = foods.get(position);
         String foodName = foodItem.getItemName();
@@ -65,7 +64,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
 
         //Event listener of the submit button.
         holder.submitBButton.setText("Add");
+        String uniqueTag = "Submit" + position;
+        holder.submitBButton.setTag(uniqueTag);
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
 

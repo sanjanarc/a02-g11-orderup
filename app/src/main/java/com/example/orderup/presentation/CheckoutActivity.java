@@ -48,7 +48,7 @@ public class CheckoutActivity extends AppCompatActivity {
         for (int i = 0; i < user.getFoodCart().size(); i++) {
 
             FoodItem food = user.getFoodCart().get(i);
-            double price = food.getNumItems() * food.getItemPrice();
+            double price = food.getNumItems() * food.getItemPrice()-user.getBalance();
             subTotal += price;
 
         }

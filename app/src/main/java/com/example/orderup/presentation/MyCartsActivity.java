@@ -96,7 +96,7 @@ public class MyCartsActivity extends AppCompatActivity {
         for (int i = 0; i < user.getFoodCart().size(); i++) {
 
             foodItem = user.getFoodCart().get(i);
-            double price = foodItem.getNumItems() * foodItem.getItemPrice();
+            double price = foodItem.getNumItems() * foodItem.getItemPrice()-user.getBalance();
             subTotal += price;
 
         }
@@ -134,6 +134,9 @@ public class MyCartsActivity extends AppCompatActivity {
 
                     // Display to user that cart is already empty.
                     ErrorPopUp.errorMsg(MyCartsActivity.this, "Cart is empty");
+
+                } else if (toggleGroup.getCheckedButtonId() == -1) {
+                    ErrorPopUp.errorMsg(MyCartsActivity.this, "Must select either delivery or pickup option");
 
                 } else {
 
