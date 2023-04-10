@@ -18,6 +18,7 @@ import static junit.framework.TestCase.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
+import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class UserPersistenceHSQLDBTest {
     @Before
     public void setUp() throws SQLException {
         //mock of Restaurant Persistence created
-        userPersistence= mock(UserPersistence.class);
+        userPersistence= Mockito.mock(UserPersistence.class);
         userServices= new UserServices(userPersistence);
     }
 
