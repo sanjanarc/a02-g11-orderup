@@ -9,7 +9,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="300dp"
+        android:id="@+id/userInfoBox">
+
 
         <ImageView
             android:layout_width="match_parent"
