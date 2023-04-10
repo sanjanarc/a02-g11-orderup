@@ -92,19 +92,24 @@ public class UserPersistenceHSQLDBTest {
     }
 
     @Test
-    public void addCreditCard() {
+    public void addCreditCard() throws Exception {
 
-        /*
+        //when(userPersistence.getUser(email)).thenReturn(user);
+
 
         //    public void addCreditCard(String email, String cardNum, String cvc, String expiry) {
         String email= "johndoe@example.com";
         String cardNum= "6748369873539860";
         String cvc= "505";
         String expiry= "03/03";
-        userVerification.addCreditInfo(email, cardNum, cvc, expiry);
-        when(userServices.getCreditInfo(email)).thenReturn()
+        userVerification.creditCardVerification(email, cardNum, cvc, expiry);
+        Mockito.verify(userPersistence).addCreditCard(email, cardNum, cvc, expiry);
+        //when(user.getCreditInfo(email)).thenReturn();
 
-         */
+        //creditCardVerification(String email, String cardNum, String cardCvc, String cardExpiry)
+
+
+
     }
 
     @Test
