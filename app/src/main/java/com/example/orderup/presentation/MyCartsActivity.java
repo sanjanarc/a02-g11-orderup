@@ -135,6 +135,9 @@ public class MyCartsActivity extends AppCompatActivity {
                     // Display to user that cart is already empty.
                     ErrorPopUp.errorMsg(MyCartsActivity.this, "Cart is empty");
 
+                } else if (toggleGroup.getCheckedButtonId() == -1) {
+                    ErrorPopUp.errorMsg(MyCartsActivity.this, "Must select either delivery or pickup option");
+
                 } else {
 
                     // Go to the checkout page.
