@@ -178,7 +178,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         int tempquantity = quantity;
         for(int i = 0; i < getFoodCart(email).size(); i++)
         {
-            if(getFoodCart(email).get(i).getItem_id() == food_id)
+            if(getFoodCart(email).get(i).getItem_id() == food_id && getFoodCart(email).get(i).getRestaurant_id() == rest_id)
             {
                 tempquantity += getFoodCart(email).get(i).getNumItems();
                 removeFromCart(email,getFoodCart(email).get(i).getRestaurant_id(),getFoodCart(email).get(i).getItem_id(),getFoodCart(email).get(i).getNumItems());

@@ -1,6 +1,8 @@
 package com.example.orderup.presentation;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.example.orderup.Objects.User;
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserServices;
+import com.example.orderup.presentation.MyCartsActivity;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ import java.util.List;
 public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
 
     List<FoodItem> foods; // The list of food items that will be presented in the cart view.
-
+    Context context;
     /**
      * Constructor.
      *
@@ -39,6 +42,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View itemView = inflater.inflate(R.layout.menu_view, parent, false);
+
+        this.context = context;
         return new MenuHolder(itemView);
     }
 
@@ -62,6 +67,11 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
                 user.removeFoodFromCart(foodItem, Integer.parseInt(holder.foodItemNumber.getText().toString()));
 
                 ErrorPopUp.errorMsg(view.getContext(), "Item Removed");
+                context.startActivity(new Intent(context, MyCartsActivity.class));
+                ((Activity)context).finish();
+
+
+
             }
         });
     }

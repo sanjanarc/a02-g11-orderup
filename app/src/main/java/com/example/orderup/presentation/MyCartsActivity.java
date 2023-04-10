@@ -42,8 +42,6 @@ public class MyCartsActivity extends AppCompatActivity {
 
         MaterialButtonToggleGroup toggleGroup = findViewById(R.id.toggleGroup);
 
-
-
         toggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener()  {
             @Override
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
@@ -63,14 +61,12 @@ public class MyCartsActivity extends AppCompatActivity {
                         RestaurantServices restaurantServices = new RestaurantServices(Services.getRestaurantPersistence());
                         Restaurant rest = restaurantServices.getRest(id);
                         RestaurantAddress += rest.getRestaurant_location() + "\n";
-                        Log.d("Restaurant address of the cart item",rest.getRestaurant_location());
                     }
 
-                    ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at" + RestaurantAddress );
+                    ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at " + RestaurantAddress );
                 }
             }
         });
-
 
 
         TextView subTotalTextView = findViewById(R.id.SubTotal);
@@ -103,12 +99,6 @@ public class MyCartsActivity extends AppCompatActivity {
         DeliveryFeeView.setText(String.format("Delivery Fee         $%.2f", deliveryFee));
         TaxView.setText(String.format("Tax                         $%.2f", tax));
 
-
-
-
-
-
-
         // Continue Button event listener.
         Button ContinueButton = (Button) findViewById(R.id.toPaymentButton);
 
@@ -125,25 +115,6 @@ public class MyCartsActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-//               if (!user.getFoodCart().isEmpty()) { //Check the food list is empty or not.
-//                   user.clearFoodCart(); // Empty the food list.
-//                    ErrorPopUp.errorMsg(view.getContext(), "Order Placed!"); // Display message that order placed.
-//                    updateCartInfo(user.getFoodCart()); // Display the food card.
-//
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                       public void run() {
-//                            Intent intent = getIntent();
-//                            finish();
-//                            startActivity(intent);
-//                        }
-//                    }, 3000);
-//                } else
-//                   ErrorPopUp.errorMsg(view.getContext(), "Cart is empty");
-//            }
-//        });
     }
 
     /**
