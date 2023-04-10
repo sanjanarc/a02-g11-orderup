@@ -175,12 +175,22 @@ public class UserPersistenceHSQLDB implements UserPersistence {
 
     @Override
     public void updateCart(String email,int rest_id, int food_id, int quantity) {
+        int tempquantity = quantity;
+        for(int i = 0; i < getFoodCart(email).size(); i++)
+        {
+            if(getFoodCart(email).get(i).getItem_id() == food_id)
+            {
+                tempquantity += getFoodCart(email).get(i).getNumItems();
+                removeFromCart(email,getFoodCart(email).get(i).getRestaurant_id(),getFoodCart(email).get(i).getItem_id(),getFoodCart(email).get(i).getNumItems());
+            }
+        }
+
         try (Connection c = connection()) {
             PreparedStatement ps = c.prepareStatement("INSERT INTO cart VALUES (?, ?, ?, ?)");
             ps.setString(1, email);
             ps.setInt(2, rest_id);
             ps.setInt(3, food_id);
-            ps.setInt(4,quantity);
+            ps.setInt(4,tempquantity);
             ps.executeUpdate();
        } catch (SQLException e) {
             throw new PersistenceException(e);
