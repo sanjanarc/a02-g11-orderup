@@ -43,7 +43,6 @@ public class UserAccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_account, container, false);
 
         infoContainer = (TextView) view.findViewById(R.id.infoContainer);
-        updateInfo(); // Display the user info.
 
         // Event listener of the cart button.
         cartButton = (Button) view.findViewById(R.id.cartButton);
@@ -93,6 +92,8 @@ public class UserAccountFragment extends Fragment {
                 memberPopUp();
             }
         });
+
+        updateInfo(); // Display the user info.
 
         //Event listener of the logout button.
         logoutButton = (Button) view.findViewById(R.id.logoutButton);
@@ -377,13 +378,16 @@ public class UserAccountFragment extends Fragment {
             User user = userServices.getUser(Services.getCurrentUser());
             String membershipStatus;
 
-            if (user.getMembership()) {
+            if (user.getMembership()==true) {
 
                 membershipStatus = "Enabled";
+                membershipButton.setEnabled(false);
 
             } else {
 
                 membershipStatus = "Disabled";
+                membershipButton.setEnabled(true);
+
 
             }
 
