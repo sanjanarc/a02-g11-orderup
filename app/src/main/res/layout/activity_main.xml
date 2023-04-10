@@ -20,7 +20,7 @@
         android:layout_alignParentBottom="true"
         android:background="#c4f5f1"
         app:itemIconTint="@drawable/nav_selected_color"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

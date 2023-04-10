@@ -16,6 +16,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.Matchers.not;
+import static android.os.SystemClock.sleep;
+
 
 
 import android.view.KeyEvent;
@@ -47,7 +49,7 @@ public class BuyMembershipTest {
     public ActivityScenarioRule<LoginActivity> loginActivity = new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
 
     @Test
-    public void purchaseMembership(){
+    public void purchaseMembership() {
         //enter user's email and password
         onView(withId(R.id.emailInput)).perform(typeText("admin2@email.com"));
         onView(withId(R.id.passwordInput)).perform(typeText("admin123"));
@@ -68,8 +70,7 @@ public class BuyMembershipTest {
         onView(withId(R.id.confirmationInput)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
 
         closeSoftKeyboard();
-        //Membership is enabled if button can not be clicked anymore
-        onView(withId(R.id.membershipButton)).check(matches(not(isClickable())));
+        //Membership is enabled if button to buy membership is not disabled
+        onView(withId(R.id.membershipButton)).check(matches(not(isEnabled())));
     }
-
 }
