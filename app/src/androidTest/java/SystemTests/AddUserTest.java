@@ -14,6 +14,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static android.os.SystemClock.sleep;
+
+
+
 
 import static org.hamcrest.CoreMatchers.anything;
 
@@ -29,6 +33,8 @@ import org.junit.runner.RunWith;
 
 import com.example.orderup.R;
 import com.example.orderup.presentation.RegisterActivity;
+import com.example.orderup.presentation.HomeFragment;
+import com.example.orderup.presentation.UserAccountFragment;
 
 /*
         Purpose: This class tests Registering a User's account.
@@ -46,36 +52,37 @@ public class AddUserTest {
         //Register for an Account: First name, last name, email address, enter password, re-enter password
         onView(withId(R.id.firstNameInput)).perform(typeText("first"));
         onView(withId(R.id.lastNameInput)).perform(typeText("last"));
-        onView(withId(R.id.emailInput)).perform(typeText("firstlast@email.com"));
-        onView(withId(R.id.passwordInput)).perform(typeText("firstLast1!"));
-        onView(withId(R.id.rePasswordInput)).perform(typeText("firstLast1!"));
+        onView(withId(R.id.emailInput)).perform(typeText("firstla@email.com"));
+        onView(withId(R.id.passwordInput)).perform(typeText("first1"));
+        onView(withId(R.id.rePasswordInput)).perform(typeText("first1"));
 
-        onView(withId(R.id.rePasswordInput)).perform(pressImeActionButton());
+        closeSoftKeyboard();
 
         //click register
         onView(withId(R.id.registerButton1)).perform(click());
 
 
-        //IDEA: Confirm the user account was created by logging in with the above account information
-        // but the current back button doesnt take back to the login screen, it exists the user out of the app
+        // verify that it was added, Is the home screen displayed
+        //sleep(10000); // sleep for 5 seconds
 
+        //onView(withId(R.id.home)).check(matches(isDisplayed()));
         /*
-        //enter username and password
-        onView(withId(R.id.emailInput)).perform(typeText("firstlast@email.com"));
+
+        //Verify Registration was Successful: Log out and then login with the new account
+        onView(withId(R.id.user_account)).perform(click()); //click the user account fragment
+        onView(withId(R.id.logoutButton)).perform(click());//click log out
+        onView(withId(R.id.emailInput)).perform(typeText("firstlast@email.com")); //sign in
         onView(withId(R.id.passwordInput)).perform(typeText("firstLast1!"));
         //click on sign in
         onView(withId(R.id.signInButton)).perform(click());
-        closeSoftKeyboard();
-        Espresso.pressBack();
 
          */
+
 
     }
 
     @After
     public void cleanup(){
-
-
     }
 
 }
