@@ -15,10 +15,17 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.contrib.RecyclerViewActions.*;
+
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.espresso.ViewInteraction;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+
 
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 
@@ -78,9 +85,16 @@ public class AddingToCartTest {
         onView(withId(R.id.searchView)).perform(typeText("Korean Garden"),pressKey(KeyEvent.KEYCODE_ENTER));
         //click the restaurant
         onView(withId(R.id.recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-
         //add the second menu item to cart
         onView(withTagValue(equalTo("Submit1"))).perform(click());
+        onView(withText("Ok")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click()); // Perform the click action on "OK"
+        onView(withId(R.id.ViewCartButtonXML)).perform(click());
+
+        //Confirm by removing item from card
+        onView(withId(R.id.Submit)).perform((click()));
+
+
+
 
 
 
