@@ -6,3 +6,4 @@ For us as a team we have determined that our time management was not as successf
 
 **Also include a chart (as an image) showing the 2 data points of project velocity from the last two iterations.**
 
+![Our Project Velocity](orderupvel.png "Velocity")
