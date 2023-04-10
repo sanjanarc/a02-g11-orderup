@@ -4,9 +4,11 @@ import org.junit.runners.Suite;
 
 import SystemTests.AddCommentTest;
 import SystemTests.AddCreditCard;
+import SystemTests.AddGiftCard;
 import SystemTests.AddUserAddress;
 import SystemTests.AddUserTest;
 import SystemTests.AddingToCartTest;
+import SystemTests.CheckoutTest;
 import SystemTests.LoginTest;
 import SystemTests.SearchRestaurantTest;
 import SystemTests.BuyMembershipTest;
@@ -25,7 +27,9 @@ import SystemTests.BuyMembershipTest;
         BuyMembershipTest.class,
         AddCreditCard.class,
         AddUserAddress.class,
-        AddingToCartTest.class
+        AddingToCartTest.class,
+        AddGiftCard.class,
+        CheckoutTest.class
 
 })
 public class AllAcceptanceTests {
