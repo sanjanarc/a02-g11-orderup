@@ -17,13 +17,16 @@ public class ErrorPopUp {
      */
     public static void errorMsg(Context context, String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(msg);
+        builder.setMessage(msg);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
 
+//        AlertDialog al = builder.create();
+//        al.show();
+////        al.getWindow().setLayout(500, 5000);
         builder.show();
     }
 }

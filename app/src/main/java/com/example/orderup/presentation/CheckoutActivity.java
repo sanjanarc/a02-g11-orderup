@@ -1,6 +1,9 @@
 package com.example.orderup.presentation;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -105,6 +108,13 @@ public class CheckoutActivity extends AppCompatActivity {
                     user.clearFoodCart();
                     ErrorPopUp.errorMsg(view.getContext(), "Order Placed!"); // Display message that order placed.
 
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish(); // Finish the activity after 3 seconds.
+                        }
+                    }, 4000); // Delay for 4 seconds.
+
                 } catch (Exception e) {
 
                     String msg;
@@ -145,12 +155,19 @@ public class CheckoutActivity extends AppCompatActivity {
 
                     // Display the error message.
                     ErrorPopUp.errorMsg(CheckoutActivity.this, msg);
+
                 }
 
             }
 
         });
 
+
+    }
+
+    public void jacksonfunction()
+    {
+        finish();
     }
 
 }

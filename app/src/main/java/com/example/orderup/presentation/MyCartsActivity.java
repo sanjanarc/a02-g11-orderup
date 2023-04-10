@@ -63,7 +63,7 @@ public class MyCartsActivity extends AppCompatActivity {
                         RestaurantAddress += rest.getRestaurant_location() + "\n";
                     }
 
-                    ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at " + RestaurantAddress );
+                    ErrorPopUp.errorMsg(MyCartsActivity.this, "You can pick up your order at \n" + RestaurantAddress );
                 }
             }
         });
@@ -112,6 +112,7 @@ public class MyCartsActivity extends AppCompatActivity {
                } else {
                     Intent intent = new Intent(getBaseContext(), CheckoutActivity.class);
                     startActivity(intent); // Start the cart activity class.
+                    finish();
                 }
             }
         });
