@@ -1,5 +1,6 @@
 package com.example.orderup.persistance;
 
+import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 
@@ -48,14 +49,6 @@ public interface UserPersistence {
     void updateAddress(String email, String address);
 
     /**
-     * Add the user cart info to database.
-     *
-     * @param email the user email.
-     * @param cart  the user cart info.
-     */
-    void updateCart(String email, ArrayList cart);
-
-    /**
      * Add or Reduce the balance from database.
      *
      * @param email   the user email.
@@ -76,4 +69,45 @@ public interface UserPersistence {
      * @param email the email of the user.
      */
     void setMembership(String email);
+
+
+    /**
+     * Adds food item to cart.
+     *
+     * @param email        the user's email.
+     * @param rest_id      the restaurant id.
+     * @param food_id      the food item id.
+     * @param quantity     the quantity of food item.
+     *
+     */
+    void updateCart(String email,int rest_id, int food_id, int quantity);
+
+
+    /**
+     * Clears all items from cart in the database.
+     *
+     * @param email   the user's email.
+     */
+    void clearCart(String email);
+
+    /**
+     * Removes food item from cart.
+     *
+     * @param email        the user's email.
+     * @param rest_id      the restaurant id.
+     * @param food_id      the food item id.
+     * @param quantity     the quantity of food item.
+     *
+     */
+    void removeFromCart(String email, int rest_id, int food_id, int quantity);
+
+    /**
+     * Get the food cart.
+     *
+     * @param email the user's email.
+     * @return a list of food items in cart.
+     */
+    List<FoodItem> getFoodCart(String email);
+
+
 }

@@ -4,6 +4,7 @@ import com.example.orderup.logic.Services;
 import com.example.orderup.logic.UserServices;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,7 +24,7 @@ public class User extends FoodItem {
     private float balance;
     private Boolean member;
 
-    private ArrayList<FoodItem> cart;
+    private List<FoodItem> cart;
 
     /**
      * Constructor.
@@ -164,12 +165,18 @@ public class User extends FoodItem {
         return equals;
     }
 
-    public ArrayList<FoodItem> getFoodCart() {
+    public List<FoodItem>  getFoodCart() {
+        cart = new UserServices(Services.getUserPersistence()).getFoodCart(this.email);
         return cart;
     }
 
+
+    /**
+     * Clears Food Cart.
+     */
     public void clearFoodCart() {
         cart.clear();
+        new UserServices(Services.getUserPersistence()).clearCart(this.email);
     }
 
     /**
@@ -179,19 +186,11 @@ public class User extends FoodItem {
      * @param number   the amount of that item to add.
      */
     public void addToFoodCart(FoodItem foodItem, int number) {
+        int rest_id = foodItem.getRestaurant_id();
+        int food_id = foodItem.getItem_id();
 
-        if (this.cart.contains(foodItem)) { // increase the number if food is already in the cart.
+        new UserServices(Services.getUserPersistence()).updateCart(this.email,rest_id,food_id,number);
 
-            int before = this.cart.get(this.cart.indexOf(foodItem)).getNumItems();
-            int after = before + number;
-            this.cart.get(this.cart.indexOf(foodItem)).setNumItems(after);
-
-        } else { // Add the food to cart.
-            foodItem.setNumItems(number);
-            cart.add(foodItem);
-        }
-
-        updateCart();
     }
 
     /**
@@ -201,33 +200,11 @@ public class User extends FoodItem {
      * @param num      number of food to remove.
      */
     public void removeFoodFromCart(FoodItem foodItem, int num) {
+        int rest_id = foodItem.getRestaurant_id();
+        int food_id = foodItem.getItem_id();
 
-        if (num >= 1) { // Valid number of item to remove.
-
-            String foodName = foodItem.getItemName();
-
-            for (FoodItem f : this.cart) {
-
-                if (f.getItemName().equals(foodName)) { // Find the same food in cart.
-
-                    if (f.getNumItems() <= num) { // Remove the food if require number is more than the number in cart.
-                        this.cart.remove(f);
-                    } else { // Reset the number of food in cart.
-                        f.setNumItems(f.getNumItems() - num);
-                    }
-
-                    break;
-                }
-            }
-        }
-
-        updateCart();
+        new UserServices(Services.getUserPersistence()).removeFromCart(this.email,rest_id,food_id,num);
     }
 
-    /**
-     * Update the user cart item to database.
-     */
-    private void updateCart() {
-        new UserServices(Services.getUserPersistence()).updateCart(this.email, this.cart);
-    }
+
 }

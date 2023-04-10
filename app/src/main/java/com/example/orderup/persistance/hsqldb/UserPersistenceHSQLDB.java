@@ -1,5 +1,6 @@
 package com.example.orderup.persistance.hsqldb;
 
+import com.example.orderup.Objects.FoodItem;
 import com.example.orderup.Objects.Giftcard;
 import com.example.orderup.Objects.User;
 import com.example.orderup.persistance.UserPersistence;
@@ -162,18 +163,122 @@ public class UserPersistenceHSQLDB implements UserPersistence {
             throw new PersistenceException(e);
         }
     }
+    /**
+     * Adds food item to cart in the DB.script
+     *
+     * @param email        the user's email.
+     * @param rest_id      the restaurant id of the food item.
+     * @param food_id      the id of the food item.
+     * @param quantity     the amount of the food item added to cart.
+     *
+     */
 
     @Override
-    public void updateCart(String email, ArrayList cart) {
-//        try (Connection c = connection()) {
-//            PreparedStatement ps = c.prepareStatement("UPDATE USERS SET ADDRESS = ? WHERE EMAIL = ?");
-//            ps.setString(1, address);
-//            ps.setString(2, email);
-//            ps.executeUpdate();
-//        } catch (SQLException e) {
-//            throw new PersistenceException(e);
-//        }
+    public void updateCart(String email,int rest_id, int food_id, int quantity) {
+        int tempquantity = quantity;
+        for(int i = 0; i < getFoodCart(email).size(); i++)
+        {
+            if(getFoodCart(email).get(i).getItem_id() == food_id && getFoodCart(email).get(i).getRestaurant_id() == rest_id)
+            {
+                tempquantity += getFoodCart(email).get(i).getNumItems();
+                removeFromCart(email,getFoodCart(email).get(i).getRestaurant_id(),getFoodCart(email).get(i).getItem_id(),getFoodCart(email).get(i).getNumItems());
+            }
+        }
+
+        try (Connection c = connection()) {
+            PreparedStatement ps = c.prepareStatement("INSERT INTO cart VALUES (?, ?, ?, ?)");
+            ps.setString(1, email);
+            ps.setInt(2, rest_id);
+            ps.setInt(3, food_id);
+            ps.setInt(4,tempquantity);
+            ps.executeUpdate();
+       } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
+
+
+    /**
+     * Removes food item from cart in the DB.
+     *
+     * @param email        the user's email.
+     * @param rest_id      the restaurant id of the food item.
+     * @param food_id      the id of the food item.
+     * @param quantity     the amount of the food item to remove from the cart.
+     */
+    @Override
+    public void removeFromCart(String email, int rest_id, int food_id, int quantity) {
+        try (Connection c = connection()) {
+            PreparedStatement ps = c.prepareStatement("DELETE FROM CART WHERE EMAIL = ? AND ID = ? AND ITEM_ID = ? AND QUANTITY = ?");
+            ps.setString(1, email);
+            ps.setInt(2, rest_id);
+            ps.setInt(3, food_id);
+            ps.setInt(4, quantity);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    /**
+     * Retrieves a list of food items in a user's cart.
+     *
+     * @param email the email address of the user
+     * @return list of food items in the user's cart
+     */
+    @Override
+    public List<FoodItem> getFoodCart(String email) {
+        List<FoodItem> foodCart = new ArrayList<>();
+
+        try (Connection c = connection()) {
+            String query = "SELECT f.*, c.QUANTITY " +
+                    "FROM CART c " +
+                    "INNER JOIN FOODITEM f ON c.ID = f.ID AND c.ITEM_ID = f.ITEM_ID " +
+                    "WHERE c.EMAIL = ?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int restId = rs.getInt("ID");
+                int itemId = rs.getInt("ITEM_ID");
+                String itemName = rs.getString("ITEM_NAME");
+                double itemPrice = rs.getDouble("ITEM_PRICE");
+                String itemImageUrl = rs.getString("ITEM_IMAGE_URL");
+                String itemDesc = rs.getString("ITEM_DESC");
+                int quantity = rs.getInt("QUANTITY");
+                FoodItem food = new FoodItem(restId, itemId, itemName, itemPrice, itemImageUrl, itemDesc);
+                food.setNumItems(quantity);
+                foodCart.add(food);
+            }
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return foodCart;
+    }
+
+
+    /**
+     * Clears all items from cart in the database.
+     *
+     * @param email   the user's email.
+     */
+    public void clearCart(String email) {
+        try (Connection c = connection()) {
+            PreparedStatement ps = c.prepareStatement("DELETE FROM CART WHERE EMAIL = ?");
+            ps.setString(1, email);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+
+
+
+
+
 
     /**
      * Add or Reduce the balance from database.

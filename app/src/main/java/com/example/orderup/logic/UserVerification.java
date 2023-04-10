@@ -164,6 +164,57 @@ public class UserVerification {
         }
     }
 
+
+    /**
+     * Verify the input credit card format.
+     *
+     * @param fullName      the user's full name on card.
+     * @param cardNum    the user credit card number.
+     * @param cardCvc    the user credit card cvc.
+     * @param cardExpiry the user credit card expiry date.
+     * @throws Exception will throw exception when the input data is incorrect.
+     */
+    public void paymentVerification(String fullName, String cardNum, String cardCvc, String cardExpiry) throws Exception {
+
+        if (!(cardNum.equals("") || cardCvc.equals("") || cardExpiry.equals("") || fullName.equals(""))) { // Inputs cannot be empty.
+
+            if (cardNum.length() != 16) { // Credit card number must equal to 16.
+
+                throw new MyException.EXCEPTION_ILLEGAL_FORMAT();
+
+            } else if (cardNum.charAt(0) != '2' && cardNum.charAt(0) != '3'
+                    && cardNum.charAt(0) != '4' && cardNum.charAt(0) != '5') { // Credit card type does not match.
+
+                throw new MyException.EXCEPTION_TYPE_MISMATCH();
+
+            } else if (cardCvc.length() != 3 && cardCvc.length() != 4) { // CVC length must between 3 or 4.
+
+                throw new MyException.EXCEPTION_CVC_LENGTH_DOES_NOT_MATCH();
+
+            } else if (cardExpiry.length() != 5) { // Expiry data length.
+
+                throw new MyException.EXCEPTION_ILLEGAL_DATE_FORMAT();
+
+            } else if (cardExpiry.charAt(2) != '/' || (cardExpiry.charAt(0) != '0' && cardExpiry.charAt(0) != '1')
+                    || (cardExpiry.charAt(0) == '1' && Character.getNumericValue(cardExpiry.charAt(1)) >= 3)) { // Expiry date format.
+
+                throw new MyException.EXCEPTION_ILLEGAL_DATE_FORMAT2();
+
+            } else if (fullName.split(" ").length < 2) { // Full name on card should contain at least two words separated by a space.
+
+                throw new MyException.EXCEPTION_ILLEGAL_FULL_NAME_FORMAT();
+
+            }
+
+        } else {
+
+            throw new MyException.EXCEPTION_EMPTY_INPUT();
+
+        }
+    }
+
+
+
     /**
      * Verity the input address format and return the message to user.
      *
@@ -223,7 +274,7 @@ public class UserVerification {
      * @throws Exception will throw error location exception.
      */
     private void provinceVerification(String province) throws Exception {
-        if (!province.equalsIgnoreCase("Manitoba")) {
+        if (!province.equalsIgnoreCase("Manitoba") || !province.equalsIgnoreCase("MB")) {
 
             throw new MyException.EXCEPTION_LOCATION_OUT_OF_BOUND2();
 
@@ -331,14 +382,14 @@ public class UserVerification {
             userPersistence.modifyBalance(email, -25.00F);
             userPersistence.setMembership(email);
 
-        } else if (user_balance < 25.00) {
+        } else if (("" != user.getCreditCard() && null != user.getCreditCard()) && !user.getMembership())  {
 
-            throw new MyException.EXCEPTION_TOO_POOR();
+            userPersistence.setMembership(email);
 
+        } else if (("" == user.getCreditCard() || null == user.getCreditCard())) {
+            throw new MyException.EXCEPTION_NO_CARD();
         } else if (user.getMembership()) {
-
             throw new MyException.EXCEPTION_ITEM_ALREADY_EXIST();
-
         }
 
         return msg;

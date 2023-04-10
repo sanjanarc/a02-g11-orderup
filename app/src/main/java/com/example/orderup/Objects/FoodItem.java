@@ -23,7 +23,7 @@ public class FoodItem {
         item_description = "Default Description";
         price = 0;
         image_url = "";
-        numItems = 0;
+        numItems = 1;
     }
 
     /**
@@ -43,7 +43,7 @@ public class FoodItem {
         price = itemPrice;
         image_url = itemImageURL;
         item_description = itemDescription;
-        numItems = 0;
+        numItems = 1;
     }
 
     public int getRestaurant_id() {

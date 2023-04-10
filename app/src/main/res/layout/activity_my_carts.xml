@@ -29,6 +29,7 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="128dp"
         android:layout_marginRight="100dp"
+        android:layout_marginBottom="20dp"
         android:checkedButton="@id/deliveryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,7 @@
         app:singleSelection="true">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/pickupButton"
+            android:id="@+id/deliveryButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
@@ -49,7 +50,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/deliveryButton"
+            android:id="@+id/pickupButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="102dp"
             android:layout_height="wrap_content"
@@ -64,12 +65,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartViewRecycler"
-        android:layout_width="495dp"
-        android:layout_height="438dp"
+        android:layout_width="576dp"
+        android:layout_height="426dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleGroup"
         app:layout_constraintTop_toTopOf="@+id/titleTextView"
         app:layout_constraintVertical_bias="0.868" />
 

@@ -305,6 +305,8 @@ public class UserAccountFragment extends Fragment {
                         //Verify and add credit card to database.
                         userVerification.verifyMembershipPurchase(userEmail);
                         updateInfo();
+                        membershipButton.setEnabled(false);
+
 
                     } catch (Exception e) {
 
@@ -314,9 +316,9 @@ public class UserAccountFragment extends Fragment {
 
                             msg = "Error: You are already a member!.";
 
-                        } else if (e instanceof MyException.EXCEPTION_TOO_POOR) {
+                        } else if (e instanceof MyException.EXCEPTION_NO_CARD) {
 
-                            msg = "Error: Insufficient balance to purchase membership.";
+                            msg = "Error: You do not have a credit card / Insufficient Funds.";
 
                         } else {
 

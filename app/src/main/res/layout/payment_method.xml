@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:hint="Enter your full name"
+            android:hint="Enter Full Name"
             android:maxLines="1" />
 
         <TextView
@@ -141,14 +141,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
-            android:hint="Enter your card number"
-            android:inputType="number"
+            android:hint="Enter Card Number"
             android:maxLines="1" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Expiration Date                                        CVV"
+            android:text="Expiration Date                                        CVC"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -164,8 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
                 android:layout_weight="1"
-                android:hint="MM/YY"
-                android:inputType="number"
+                android:hint="Enter MM/YY"
                 android:maxLines="1" />
 
             <EditText
@@ -174,29 +172,27 @@
                 android:layout_marginBottom="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Enter CVV"
-                android:inputType="number"
+                android:hint="Enter CVC"
                 android:maxLines="1" />
         </LinearLayout>
 
     </LinearLayout>
 
 
-
-
-
     <TextView
         android:id="@+id/thankYou"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="772dp"
+        android:layout_marginBottom="60dp"
         android:text="Thank you for using OrderUp! "
         android:textColor="@android:color/black"
         android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.417" />
 
     <Button
         android:id="@+id/placeOrder"

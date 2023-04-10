@@ -56,8 +56,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
             public void onClick(View view) {
 
                 User user = new UserServices(Services.getUserPersistence()).getUser(Services.getCurrentUser());
+//                if(user.getFoodCart().contains(foodItem));
+//                {
+//                    foodItem.setNumItems(foodItem.getNumItems()+Integer.parseInt(String.valueOf(holder.foodItemNumber)));
+//                }
                 user.addToFoodCart(foodItem, Integer.parseInt(holder.foodItemNumber.getText().toString()));
-
                 //Display message to user that Item has been added to cart.
                 ErrorPopUp.errorMsg(view.getContext(), "Item added");
             }
