@@ -26,7 +26,7 @@ import com.example.orderup.logic.UserVerification;
 public class UserAccountFragment extends Fragment {
 
     TextView infoContainer;
-    Button addCardButton, logoutButton, addAddressButton, redeemCardButton, membershipButton;
+    Button addCardButton, logoutButton, addAddressButton, redeemCardButton, membershipButton, cartButton;
 
     String userEmail = Services.getCurrentUser();
 
@@ -44,6 +44,19 @@ public class UserAccountFragment extends Fragment {
 
         infoContainer = (TextView) view.findViewById(R.id.infoContainer);
         updateInfo(); // Display the user info.
+
+        // Event listener of the cart button.
+        cartButton = (Button) view.findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Start the cart activity class.
+                Intent intent = new Intent(getContext(), MyCartsActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //Event listener of the add credit card button.
         addCardButton = (Button) view.findViewById(R.id.addCardButton);

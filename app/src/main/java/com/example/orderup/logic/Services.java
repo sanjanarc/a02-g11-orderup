@@ -9,6 +9,7 @@ import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
  * This class holds most of the static variables.
  */
 public class Services {
+
     private static String currentUser = null;
     private static String dbPath = "DB";
     private static UserPersistence userPersistence = null;
@@ -66,9 +67,13 @@ public class Services {
     public static void setDBPathName(final String name) {
 
         try {
+
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
+
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+
             e.printStackTrace();
+
         }
 
         dbPath = name;

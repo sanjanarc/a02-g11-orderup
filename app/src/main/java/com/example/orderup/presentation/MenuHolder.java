@@ -39,7 +39,7 @@ public class MenuHolder extends RecyclerView.ViewHolder {
         // Get the reference from .xml file.
         imageview = itemView.findViewById(R.id.foodImage);
         nameView = itemView.findViewById(R.id.foodInfo);
-        //submitBButton = (Button) itemView.findViewById(R.id.Submit);
+        submitBButton = (Button) itemView.findViewById(R.id.Submit);
 
         // TextView listener that will save the number of food items the user wants to order( could be typed using the keyboard)
         foodItemNumber = (TextView) itemView.findViewById(R.id.NumberOfFood);

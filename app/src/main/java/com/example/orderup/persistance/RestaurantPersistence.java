@@ -14,7 +14,7 @@ public interface RestaurantPersistence {
      *
      * @return a list of Restaurant objects.
      */
-    List<Restaurant> getRestaurantSequential();
+    List getRestaurantSequential();
 
     /**
      * Get restaurant object by id.
@@ -38,5 +38,5 @@ public interface RestaurantPersistence {
      * @param id the restaurant id.
      * @return a list of comment strings.
      */
-    List<String> getComments(int id);
+    List getComments(int id);
 }

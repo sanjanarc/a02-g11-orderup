@@ -64,7 +64,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.imageview.setBackgroundResource(url);
 
         //Event listener of the submit button.
-        holder.submitBButton = (Button) view.findViewById(R.id.Submit);
         holder.submitBButton.setText("Add");
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override

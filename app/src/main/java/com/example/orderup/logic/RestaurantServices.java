@@ -26,7 +26,7 @@ public class RestaurantServices {
      *
      * @return list of restaurant object.
      */
-    public List<Restaurant> getRestList() {
+    public List getRestList() {
         return restaurantPersistence.getRestaurantSequential();
     }
 
@@ -56,7 +56,7 @@ public class RestaurantServices {
      *
      * @param restID the restaurant id.
      */
-    public List<String> getComments(int restID) {
+    public List getComments(int restID) {
         return restaurantPersistence.getComments(restID);
     }
 }

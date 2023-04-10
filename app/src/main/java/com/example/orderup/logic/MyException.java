@@ -1,5 +1,8 @@
 package com.example.orderup.logic;
 
+/**
+ * Classes that contains exceptions used in this app.
+ */
 public class MyException extends Exception {
 
     public static class EXCEPTION_EMPTY_INPUT extends Exception {
@@ -53,16 +56,9 @@ public class MyException extends Exception {
     public static class EXCEPTION_INVALID_POSTAL_CODE_FORMAT extends Exception {
     }
 
-    public static class EXCEPTION_TOO_POOR extends Exception {
-
-    }
-
     public static class EXCEPTION_NO_CARD extends Exception {
-
     }
 
     public static class EXCEPTION_ILLEGAL_FULL_NAME_FORMAT extends Exception {
-
     }
-
 }

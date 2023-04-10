@@ -35,6 +35,7 @@ public class User extends FoodItem {
      * @param password  the new user's password.
      */
     public User(String firstName, String lastName, String email, String password) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -45,6 +46,7 @@ public class User extends FoodItem {
         this.balance = 0.00F;
         this.member = false;
         cart = new ArrayList<>();
+
     }
 
     /**
@@ -62,6 +64,7 @@ public class User extends FoodItem {
      * @param member     the status of membership.
      */
     public User(String email, String password, String firstName, String lastName, String creditCard, String cvc, String expiry, String address, String balance, Boolean member) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -77,6 +80,7 @@ public class User extends FoodItem {
         this.balance = Float.parseFloat(balance);
 
         this.cart = new ArrayList<>();
+
     }
 
     public String getEmail() {
@@ -156,27 +160,39 @@ public class User extends FoodItem {
      * @return true if they are the same, false if not.
      */
     public boolean equals(Object other) {
+
         boolean equals = false;
+
         if (other instanceof User) {
+
             final User otherStudent = (User) other;
             equals = Objects.equals(this.email, otherStudent.email);
+
         }
 
         return equals;
     }
 
-    public List<FoodItem>  getFoodCart() {
+    /**
+     * Get the food list from database.
+     *
+     * @return a list of food order.
+     */
+    public List<FoodItem> getFoodCart() {
+
         cart = new UserServices(Services.getUserPersistence()).getFoodCart(this.email);
         return cart;
-    }
 
+    }
 
     /**
      * Clears Food Cart.
      */
     public void clearFoodCart() {
+
         cart.clear();
         new UserServices(Services.getUserPersistence()).clearCart(this.email);
+
     }
 
     /**
@@ -186,10 +202,11 @@ public class User extends FoodItem {
      * @param number   the amount of that item to add.
      */
     public void addToFoodCart(FoodItem foodItem, int number) {
+
         int rest_id = foodItem.getRestaurant_id();
         int food_id = foodItem.getItem_id();
 
-        new UserServices(Services.getUserPersistence()).updateCart(this.email,rest_id,food_id,number);
+        new UserServices(Services.getUserPersistence()).updateCart(this.email, rest_id, food_id, number);
 
     }
 
@@ -203,8 +220,6 @@ public class User extends FoodItem {
         int rest_id = foodItem.getRestaurant_id();
         int food_id = foodItem.getItem_id();
 
-        new UserServices(Services.getUserPersistence()).removeFromCart(this.email,rest_id,food_id,num);
+        new UserServices(Services.getUserPersistence()).removeFromCart(this.email, rest_id, food_id, num);
     }
-
-
 }

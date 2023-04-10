@@ -68,7 +68,6 @@ public class MyCartAdapter extends RecyclerView.Adapter<MenuHolder> {
         holder.foodItemNumber.setText(String.valueOf(foodItem.getNumItems()));
 
         // Submit button listener.
-        holder.submitBButton = (Button) view.findViewById(R.id.Submit);
         holder.submitBButton.setText("Remove");
         holder.submitBButton.setOnClickListener(new View.OnClickListener() {
             @Override
