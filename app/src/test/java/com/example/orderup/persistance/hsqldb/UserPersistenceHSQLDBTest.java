@@ -77,7 +77,6 @@ public class UserPersistenceHSQLDBTest {
     @Test
     public void updateAddress() {
     }
-
     @Test
     public void modifyBalance() {
     }

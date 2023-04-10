@@ -9,7 +9,7 @@ import SystemTests.SearchRestaurantTest;
 
 
 /*
-    Purpose: This class runs to test every System Test
+    Purpose: This class tests every acceptance test
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -17,8 +17,7 @@ import SystemTests.SearchRestaurantTest;
         LoginTest.class,
         AddUserTest.class,
         SearchRestaurantTest.class,
-
-
+        AddCommentTest.class
 
 })
 public class AllAcceptanceTests {

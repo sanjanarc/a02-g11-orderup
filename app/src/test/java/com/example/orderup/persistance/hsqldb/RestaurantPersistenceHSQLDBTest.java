@@ -89,7 +89,4 @@ public class RestaurantPersistenceHSQLDBTest {
 
         assertTrue("Restaurant at 1 should return 1 as its ID",1  == restaurantServices.getRest(1).getRestaurantID());
     }
-
-
-
 }

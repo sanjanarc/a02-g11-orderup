@@ -47,12 +47,9 @@ public class LoginTest {
         onView(withId(R.id.signInButton)).perform(click());
         closeSoftKeyboard();
 
-        //verify sign in was successful: If the user can logout then the login was succesful
+        //verify sign in was successful: If the user can logout then the login was successful
         onView(withId(R.id.user_account)).perform(click()); //click the user account fragment
         onView(withId(R.id.logoutButton)).perform(click());//click log out
-
-
-
     }
 
 }
