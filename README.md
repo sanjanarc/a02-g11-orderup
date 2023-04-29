@@ -24,7 +24,7 @@ We have existing credit card codes that that work for adding account balance:
     - "1785555962791673" is a code for 50.00$
     - "7923457638237639" is a code for 100.00$
 
-Contributors: Jackson Kao, Harsimran Dhillon, Vaughn Gregory, Sanjana RoyChowdhury and Krupal Patel. 
+**Contributors:** Jackson Kao, Harsimran Dhillon, Vaughn Gregory, Sanjana RoyChowdhury and Krupal Patel. 
 
 [Vision Statement](VISION.md)
 
