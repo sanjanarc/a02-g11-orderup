@@ -35,5 +35,3 @@ We have existing credit card codes that that work for adding account balance:
 
 [Website](https://gregoryvm.github.io/)
 
-
-[The APK link](https://drive.google.com/drive/folders/1EWpCQ9TLJLmAsGFfwy0GaRHUex8k5pKS?usp=sharing)
