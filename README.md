@@ -5,9 +5,6 @@ Our app is designed to streamline the food ordering and delivery process for our
 
 **How to Run Our App:**
 
-How to download our app:
-
-    - You can download our app from this download link: 
     - OrderUp is compatible with Nexus 7 and Nexus 7 (2012) devices
     - Ensure that you have popup blockers disabled, as OrderUp is not functional without them enabled
 
